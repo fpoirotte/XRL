@@ -1,0 +1,34 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+    datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <start>
+        <ref name="request"/>
+    </start>
+
+    <define name="request">
+        <element name="methodCall">
+            <element name="methodName">
+                <!-- @TODO: use a pattern to make this stricter. -->
+                <data type="string"/>
+            </element>
+
+            <optional>
+                <ref name="params"/>
+            </optional>
+        </element>
+    </define>
+
+    <define name="params">
+        <element name="params">
+            <zeroOrMore>
+                <element name="param">
+                    <element name="value">
+                        <externalRef href="common.rng">
+                            <ref name="types"/>
+                        </externalRef>
+                    </element>
+                </element>
+            </zeroOrMore>
+        </element>
+    </define>
+</grammar>
+

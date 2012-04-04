@@ -1,0 +1,71 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+    datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <start>
+        <ref name="response"/>
+    </start>
+
+    <define name="response">
+        <element name="methodResponse">
+            <choice>
+                <ref name="success"/>
+                <ref name="failure"/>
+            </choice>
+        </element>
+    </define>
+
+    <define name="success">
+        <element name="params">
+            <element name="param">
+                <element name="value">
+                    <externalRef href="common.rng">
+                        <ref name="types"/>
+                    </externalRef>
+                </element>
+            </element>
+        </element>
+    </define>
+
+    <define name="failure">
+        <element name="fault">
+            <element name="value">
+                <ref name="fault"/>
+            </element>
+        </element>
+    </define>
+
+    <define name="fault">
+        <element name="struct">
+            <interleave>
+                <ref name="faultCode"/>
+                <ref name="faultString"/>
+            </interleave>
+        </element>
+    </define>
+
+    <define name="faultCode">
+        <element name="member">
+            <element name="name">
+                <value>faultCode</value>
+            </element>
+            <element name="value">
+                <element name="int">
+                    <data type="integer"/>
+                </element>
+            </element>
+        </element>
+    </define>
+
+    <define name="faultString">
+        <element name="member">
+            <element name="name">
+                <value>faultString</value>
+            </element>
+            <element name="value">
+                <element name="string">
+                    <data type="string"/>
+                </element>
+            </element>
+        </element>
+    </define>
+</grammar>
+

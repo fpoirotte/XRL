@@ -1,0 +1,92 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+    datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+
+    <define name="types">
+        <choice>
+            <ref name="int"/>
+            <ref name="boolean"/>
+            <ref name="string"/>
+            <ref name="double"/>
+            <ref name="dateTime.iso8601"/>
+            <ref name="base65"/>
+            <ref name="struct"/>
+            <ref name="array"/>
+            <text/>
+        </choice>
+    </define>
+
+    <define name="int">
+        <choice>
+            <element name="i4">
+                <data type="integer"/>
+            </element>
+
+            <element name="int">
+                <data type="integer"/>
+            </element>
+        </choice>
+    </define>
+
+    <define name="boolean">
+        <element name="boolean">
+            <choice>
+                <value>0</value>
+                <value>1</value>
+            </choice>
+        </element>
+    </define>
+
+    <define name="string">
+        <element name="string">
+            <data type="string"/>
+        </element>
+    </define>
+
+    <define name="double">
+        <element name="double">
+            <!-- @TODO: make this stricter (disable scientific notation, INF and NaN). -->
+            <data type="double"/>
+        </element>
+    </define>
+
+    <define name="dateTime.iso8601">
+        <element name="dateTime.iso8601">
+            <data type="dateTime"/>
+        </element>
+    </define>
+
+    <define name="base64">
+        <element name="base64">
+            <data type="base64Binary"/>
+        </element>
+    </define>
+
+    <define name="struct">
+        <element name="struct">
+            <zeroOrMore>
+                <element name="member">
+                    <element name="name">
+                        <data type="string"/>
+                    </element>
+
+                    <element name="value">
+                        <ref name="types"/>
+                    </element>
+                </element>
+            </zeroOrMore>
+        </element>
+    </define>
+
+    <define name="array">
+        <element name="array">
+            <element name="data">
+                <zeroOrMore>
+                    <element name="value">
+                        <ref name="types"/>
+                    </element>
+                </zeroOrMore>
+            </element>
+        </element>
+    </define>
+</grammar>
+
