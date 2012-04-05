@@ -44,7 +44,7 @@ extends PHPUnit_Framework_TestCase
     {
         $this->_server = new XRL_Server();
         foreach (get_class_methods('ServerTestMethods') as $func)
-            $this->_server->register($func, array('ServerTestMethods', $func));
+            $this->_server[$func] = array('ServerTestMethods', $func);
     }
 
     public function testCountProcedures()

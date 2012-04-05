@@ -6,6 +6,7 @@
  */
 class       XRL_Server
 implements  Countable,
+            ArrayAccess,
             IteratorAggregate
 {
     /// Registered "procedures".
@@ -46,10 +47,25 @@ implements  Countable,
      *      http://php.net/language.pseudo-types.php#language.types.callback
      *      for the full list of supported constructs.
      */
-    public function register($func, $callback)
+    public function offsetSet($func, $callback)
     {
         $cls = $this->_callableWrapper;
         $this->_funcs[$func] = new $cls($callback);
+    }
+
+    public function offsetGet($func)
+    {
+        return $this->_funcs[$func];
+    }
+
+    public function offsetExists($func)
+    {
+        return isset($this->_funcs[$func]);
+    }
+
+    public function offsetUnset($func)
+    {
+        unset($this->_funcs[$func]);
     }
 
     public function count()

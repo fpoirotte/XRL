@@ -13,7 +13,7 @@ $server = new XRL_Server();
 
 // Any request for the "qux" XML-RPC procedure
 // will call foo().
-$server->register('qux', 'foo');
+$server['qux'] = 'foo';
 
 // Let the server handle the current request.
 $server->handle()->publish();
