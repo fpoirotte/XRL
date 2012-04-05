@@ -2,16 +2,25 @@
 <package version="2.1" xmlns="http://pear.php.net/dtd/package-2.1" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.1     http://pear.php.net/dtd/package-2.1.xsd">
  <name>XRL</name>
  <channel>pear.erebot.net</channel>
- <summary>Package XRL summary.\n\n&quot; . &quot;Package detailed description here (found in README)</summary>
- <description/>
+ <summary>Package XRL summary.
+</summary>
+ <description>
+Package detailed description here (found in README)
+</description>
  <lead>
   <name>Your Name</name>
   <user>handle</user>
   <email>handle@php.net</email>
   <active>yes</active>
  </lead>
- <date>2012-04-03</date>
- <time>19:59:27</time>
+ <lead>
+  <name>François Poirotte</name>
+  <user>Clicky</user>
+  <email>clicky@erebot.net</email>
+  <active>yes</active>
+ </lead>
+ <date>2012-04-06</date>
+ <time>00:04:48</time>
  <version>
   <release>0.1.0</release>
   <api>0.1.0</api>
@@ -26,10 +35,55 @@
 Package XRL API release notes for version 0.1.0.</notes>
  <contents>
   <dir name="/">
+   <dir name="data" baseinstalldir="/">
+    <file role="data" name="common.rng"/>
+    <file role="data" name="request.rng"/>
+    <file role="data" name="response.rng"/>
+   </dir>
    <dir name="src" baseinstalldir="/">
     <dir name="XRL">
-     <file role="php" name="Main.php"/>
+     <file role="php" name="Autoload.php"/>
+     <file role="php" name="Callable.php"/>
+     <file role="php" name="Client.php"/>
+     <file role="php" name="Decoder.php"/>
+     <file role="php" name="DecoderInterface.php"/>
+     <file role="php" name="Encoder.php"/>
+     <file role="php" name="EncoderInterface.php"/>
+     <file role="php" name="Exception.php"/>
+     <file role="php" name="Node.php"/>
+     <file role="php" name="Request.php"/>
+     <file role="php" name="Response.php"/>
+     <file role="php" name="Server.php"/>
     </dir>
+   </dir>
+   <dir name="tests" baseinstalldir="/">
+    <dir name="testdata">
+     <dir name="requests">
+      <file role="test" name="assoc_array.xml"/>
+      <file role="test" name="assoc_array2.xml"/>
+      <file role="test" name="assoc_array3.xml"/>
+      <file role="test" name="bool.xml"/>
+      <file role="test" name="bool2.xml"/>
+      <file role="test" name="double.xml"/>
+      <file role="test" name="empty.xml"/>
+      <file role="test" name="int.xml"/>
+      <file role="test" name="multi.xml"/>
+      <file role="test" name="num_array.xml"/>
+      <file role="test" name="num_array2.xml"/>
+      <file role="test" name="string.xml"/>
+      <file role="test" name="string2.xml"/>
+     </dir>
+     <dir name="responses">
+      <file role="test" name="failure.xml"/>
+      <file role="test" name="success.xml"/>
+     </dir>
+    </dir>
+    <file role="test" name="CompactEncoderTest.php"/>
+    <file role="test" name="DecoderTest.php"/>
+    <file role="test" name="EncoderTestCase.php"/>
+    <file role="test" name="helpers.php"/>
+    <file role="test" name="PrettyEncoderTest.php"/>
+    <file role="test" name="ServerTest.php"/>
    </dir>
   </dir>
  </contents>

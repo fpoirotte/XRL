@@ -2,16 +2,19 @@
 <package version="2.1" xmlns="http://pear.php.net/dtd/package-2.1" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.1     http://pear.php.net/dtd/package-2.1.xsd">
  <name>XRL</name>
  <channel>pear.erebot.net</channel>
- <summary>Package XRL summary.\n\n&quot; . &quot;Package detailed description here (found in README)</summary>
- <description/>
+ <summary>Package XRL summary.
+</summary>
+ <description>
+Package detailed description here (found in README)
+</description>
  <lead>
-  <name>Your Name</name>
-  <user>handle</user>
-  <email>handle@php.net</email>
+  <name>François Poirotte</name>
+  <user>Clicky</user>
+  <email>clicky@erebot.net</email>
   <active>yes</active>
  </lead>
- <date>2012-04-03</date>
- <time>19:59:27</time>
+ <date>2012-04-06</date>
+ <time>00:04:48</time>
  <version>
   <release>0.1.0</release>
   <api>0.1.0</api>
@@ -26,7 +29,42 @@
 Package XRL API release notes for version 0.1.0.</notes>
  <contents>
   <dir name="/">
-   <file role="php" name="php/XRL/Main.php"/>
+   <file role="test" name="test/pear.erebot.net/XRL/testdata/responses/testdata/responses/success.xml"/>
+   <file role="test" name="test/pear.erebot.net/XRL/testdata/responses/testdata/responses/failure.xml"/>
+   <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/string2.xml"/>
+   <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/string.xml"/>
+   <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/num_array2.xml"/>
+   <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/num_array.xml"/>
+   <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/multi.xml"/>
+   <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/int.xml"/>
+   <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/empty.xml"/>
+   <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/double.xml"/>
+   <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/bool2.xml"/>
+   <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/bool.xml"/>
+   <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/assoc_array3.xml"/>
+   <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/assoc_array2.xml"/>
+   <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/assoc_array.xml"/>
+   <file role="test" name="test/pear.erebot.net/XRL/ServerTest.php"/>
+   <file role="test" name="test/pear.erebot.net/XRL/PrettyEncoderTest.php"/>
+   <file role="test" name="test/pear.erebot.net/XRL/helpers.php"/>
+   <file role="test" name="test/pear.erebot.net/XRL/EncoderTestCase.php"/>
+   <file role="test" name="test/pear.erebot.net/XRL/DecoderTest.php"/>
+   <file role="test" name="test/pear.erebot.net/XRL/CompactEncoderTest.php"/>
+   <file role="php" name="php/XRL/Server.php"/>
+   <file role="php" name="php/XRL/Response.php"/>
+   <file role="php" name="php/XRL/Request.php"/>
+   <file role="php" name="php/XRL/Node.php"/>
+   <file role="php" name="php/XRL/Exception.php"/>
+   <file role="php" name="php/XRL/EncoderInterface.php"/>
+   <file role="php" name="php/XRL/Encoder.php"/>
+   <file role="php" name="php/XRL/DecoderInterface.php"/>
+   <file role="php" name="php/XRL/Decoder.php"/>
+   <file role="php" name="php/XRL/Client.php"/>
+   <file role="php" name="php/XRL/Callable.php"/>
+   <file role="php" name="php/XRL/Autoload.php"/>
+   <file role="data" name="data/pear.erebot.net/XRL/response.rng"/>
+   <file role="data" name="data/pear.erebot.net/XRL/request.rng"/>
+   <file role="data" name="data/pear.erebot.net/XRL/common.rng"/>
   </dir>
  </contents>
  <dependencies>
@@ -41,7 +79,42 @@ Package XRL API release notes for version 0.1.0.</notes>
  </dependencies>
  <phprelease>
   <filelist>
-   <install name="php/XRL/Main.php" as="XRL/Main.php"/>
+   <install name="data/pear.erebot.net/XRL/common.rng" as="XRL/common.rng"/>
+   <install name="data/pear.erebot.net/XRL/request.rng" as="XRL/request.rng"/>
+   <install name="data/pear.erebot.net/XRL/response.rng" as="XRL/response.rng"/>
+   <install name="php/XRL/Autoload.php" as="XRL/Autoload.php"/>
+   <install name="php/XRL/Callable.php" as="XRL/Callable.php"/>
+   <install name="php/XRL/Client.php" as="XRL/Client.php"/>
+   <install name="php/XRL/Decoder.php" as="XRL/Decoder.php"/>
+   <install name="php/XRL/DecoderInterface.php" as="XRL/DecoderInterface.php"/>
+   <install name="php/XRL/Encoder.php" as="XRL/Encoder.php"/>
+   <install name="php/XRL/EncoderInterface.php" as="XRL/EncoderInterface.php"/>
+   <install name="php/XRL/Exception.php" as="XRL/Exception.php"/>
+   <install name="php/XRL/Node.php" as="XRL/Node.php"/>
+   <install name="php/XRL/Request.php" as="XRL/Request.php"/>
+   <install name="php/XRL/Response.php" as="XRL/Response.php"/>
+   <install name="php/XRL/Server.php" as="XRL/Server.php"/>
+   <install name="test/pear.erebot.net/XRL/CompactEncoderTest.php" as="XRL/CompactEncoderTest.php"/>
+   <install name="test/pear.erebot.net/XRL/DecoderTest.php" as="XRL/DecoderTest.php"/>
+   <install name="test/pear.erebot.net/XRL/EncoderTestCase.php" as="XRL/EncoderTestCase.php"/>
+   <install name="test/pear.erebot.net/XRL/helpers.php" as="XRL/helpers.php"/>
+   <install name="test/pear.erebot.net/XRL/PrettyEncoderTest.php" as="XRL/PrettyEncoderTest.php"/>
+   <install name="test/pear.erebot.net/XRL/ServerTest.php" as="XRL/ServerTest.php"/>
+   <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/assoc_array.xml" as="XRL/testdata/requests/testdata/requests/assoc_array.xml"/>
+   <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/assoc_array2.xml" as="XRL/testdata/requests/testdata/requests/assoc_array2.xml"/>
+   <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/assoc_array3.xml" as="XRL/testdata/requests/testdata/requests/assoc_array3.xml"/>
+   <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/bool.xml" as="XRL/testdata/requests/testdata/requests/bool.xml"/>
+   <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/bool2.xml" as="XRL/testdata/requests/testdata/requests/bool2.xml"/>
+   <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/double.xml" as="XRL/testdata/requests/testdata/requests/double.xml"/>
+   <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/empty.xml" as="XRL/testdata/requests/testdata/requests/empty.xml"/>
+   <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/int.xml" as="XRL/testdata/requests/testdata/requests/int.xml"/>
+   <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/multi.xml" as="XRL/testdata/requests/testdata/requests/multi.xml"/>
+   <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/num_array.xml" as="XRL/testdata/requests/testdata/requests/num_array.xml"/>
+   <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/num_array2.xml" as="XRL/testdata/requests/testdata/requests/num_array2.xml"/>
+   <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/string.xml" as="XRL/testdata/requests/testdata/requests/string.xml"/>
+   <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/string2.xml" as="XRL/testdata/requests/testdata/requests/string2.xml"/>
+   <install name="test/pear.erebot.net/XRL/testdata/responses/testdata/responses/failure.xml" as="XRL/testdata/responses/testdata/responses/failure.xml"/>
+   <install name="test/pear.erebot.net/XRL/testdata/responses/testdata/responses/success.xml" as="XRL/testdata/responses/testdata/responses/success.xml"/>
   </filelist>
  </phprelease>
 </package>

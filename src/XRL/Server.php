@@ -106,7 +106,8 @@ implements  Countable,
             }
 
             $callable   = $this->_funcs[$procedure];
-            $result     = $callable->invokeArgs($request->getParams());
+            $params     = $request->getParams();
+            $result     = $callable->invokeArgs($params);
             $response   = $encoder->encodeResponse($result);
         }
         catch (Exception $result) {

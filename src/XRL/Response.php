@@ -18,7 +18,7 @@ class XRL_Response
      *      (integer, boolean, float, string), an array,
      *      an exception or a DateTime object.
      */
-    protected function __construct($xmlResult)
+    public function __construct($xmlResult)
     {
         $this->_result  = $xmlResult;
     }
