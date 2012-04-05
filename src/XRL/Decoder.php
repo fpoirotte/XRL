@@ -22,10 +22,10 @@ implements  XRL_DecoderInterface
 
         $this->_currentNode = NULL;
         $reader = new XMLReader();
-        $reader->setParserProperty(XMLReader::LOADDTD, FALSE);
-        $reader->setParserProperty(XMLReader::DEFAULTATTRS, FALSE);
-        $reader->setParserProperty(XMLReader::VALIDATE, FALSE);
-        $reader->setParserProperty(XMLReader::SUBST_ENTITIES, TRUE);
+#        $reader->setParserProperty(XMLReader::LOADDTD, FALSE);
+#        $reader->setParserProperty(XMLReader::DEFAULTATTRS, FALSE);
+#        $reader->setParserProperty(XMLReader::VALIDATE, FALSE);
+#        $reader->setParserProperty(XMLReader::SUBST_ENTITIES, TRUE);
         $reader->xml($data, NULL, LIBXML_NONET | LIBXML_NOENT);
 //        $reader->setRelaxNGSchema();
         return $reader;
@@ -38,6 +38,12 @@ implements  XRL_DecoderInterface
 
         $this->_currentNode = new XRL_Node($reader);
         return $this->_currentNode;
+    }
+
+    protected function _prepareNextNode()
+    {
+        if (!$this->_currentNode->emptyNodeExpansionWorked())
+            $this->_currentNode = NULL;
     }
 
     protected function _expectStartTag($reader, $expectedTag)
@@ -55,11 +61,11 @@ implements  XRL_DecoderInterface
         $readTag = $node->name;
         if ($readTag != $expectedTag) {
             throw new InvalidArgumentException(
-                "Got opening $readTag tag instead of $expectedTag"
+                "Got opening tag for $readTag instead of $expectedTag"
             );
         }
 
-        $this->_currentNode = NULL;
+        $this->_prepareNextNode();
     }
 
     protected function _expectEndTag($reader, $expectedTag)
@@ -77,11 +83,11 @@ implements  XRL_DecoderInterface
         $readTag = $node->name;
         if ($readTag != $expectedTag) {
             throw new InvalidArgumentException(
-                "Got closing $readTag tag instead of $expectedTag"
+                "Got closing tag for $readTag instead of $expectedTag"
             );
         }
 
-        $this->_currentNode = NULL;
+        $this->_prepareNextNode();
     }
 
     protected function _parseText($reader)
@@ -97,13 +103,13 @@ implements  XRL_DecoderInterface
         }
 
         $value              = $node->value;
-        $this->_currentNode = NULL;
+        $this->_prepareNextNode();
         return $value;
     }
 
     static protected function _checkType(array $allowedTypes, $type, $value)
     {
-        if (!count($allowedTypes) && !in_array($type, $allowedTypes)) {
+        if (count($allowedTypes) && !in_array($type, $allowedTypes)) {
             $allowed = implode(', ', $allowedTypes);
             throw new InvalidArgumentException(
                 "Expected one of: $allowed, but got $type"
@@ -191,7 +197,7 @@ implements  XRL_DecoderInterface
 
                 // Read key.
                 $this->_expectStartTag($reader, 'name');
-                $key = $this->_decodeValue($reader, array('string'));
+                $key = $this->_decodeValue($reader, array('string', 'int'));
                 $this->_expectEndTag($reader, 'name');
 
                 $this->_expectStartTag($reader, 'value');
@@ -235,7 +241,12 @@ implements  XRL_DecoderInterface
         }
 
         // Default type (string).
-        $value = $this->_parseText($reader);
+        try {
+            $value = $this->_parseText($reader);
+        }
+        catch (InvalidArgumentException $e) {
+            $value = '';
+        }
         return self::_checkType($allowedTypes, 'string', $value);
     }
 
@@ -250,30 +261,45 @@ implements  XRL_DecoderInterface
         $methodName = $this->_parseText($reader);
         $this->_expectEndTag($reader, 'methodName');
 
-        $params = array();
+        $params         = array();
+        $emptyParams    = NULL;
         try {
             $this->_expectStartTag($reader, 'params');
-            try {
-                $this->_expectStartTag($reader, 'param');
+        }
+        catch (InvalidArgumentException $emptyParams) {
+            // Nothing to do here (no arguments given).
+        }
+
+        if (!$emptyParams) {
+            $endOfParams = NULL;
+            while (TRUE) {
+                try {
+                    $this->_expectStartTag($reader, 'param');
+                }
+                catch (InvalidArgumentException $endOfParams) {
+                    // Nothing to do here (end of arguments).
+                }
+
+                if ($endOfParams)
+                    break;
+
                 $this->_expectStartTag($reader, 'value');
-                $params[] = $this->_parseValue($reader);
+                $params[] = $this->_decodeValue($reader);
                 $this->_expectEndTag($reader, 'value');
                 $this->_expectEndTag($reader, 'param');
             }
             $this->_expectEndTag($reader, 'params');
         }
-        catch (InvalidArgumentException $e) {
-        }
         $this->_expectEndTag($reader, 'methodCall');
 
-        $eof = NULL;
+        $endOfFile = NULL;
         try {
             $this->_readNode($reader);
         }
-        catch (InvalidArgumentException $eof) {
+        catch (InvalidArgumentException $endOfFile) {
         }
 
-        if (!$eof)
+        if (!$endOfFile)
             throw new InvalidArgumentException('Expected end of document');
 
         $request = new XRL_Request($methodName, $params);
@@ -293,7 +319,7 @@ implements  XRL_DecoderInterface
             $this->_expectStartTag($reader, 'params');
             $this->_expectStartTag($reader, 'param');
             $this->_expectStartTag($reader, 'value');
-            $response = $this->_parseValue($reader);
+            $response = $this->_decodeValue($reader);
             $this->_expectEndTag($reader, 'value');
             $this->_expectEndTag($reader, 'param');
             $this->_expectEndTag($reader, 'params');
@@ -303,7 +329,7 @@ implements  XRL_DecoderInterface
             $this->_expectStartTag($reader, 'fault');
             $this->_expectStartTag($reader, 'value');
 
-            $response = $this->_parseValue($reader);
+            $response = $this->_decodeValue($reader);
             if (!is_array($response) || count($response) != 2) {
                 throw new UnexpectedValueException(
                     'An associative array with exactly '.
@@ -322,14 +348,14 @@ implements  XRL_DecoderInterface
         }
         $this->_expectEndTag($reader, 'methodResponse');
 
-        $eof = NULL;
+        $endOfFile = NULL;
         try {
             $this->_readNode($reader);
         }
-        catch (InvalidArgumentException $eof) {
+        catch (InvalidArgumentException $endOfFile) {
         }
 
-        if (!$eof)
+        if (!$endOfFile)
             throw new InvalidArgumentException('Expected end of document');
 
         if ($error) {

@@ -5,10 +5,10 @@ implements  XRL_EncoderInterface
 {
     protected $_format;
 
-    public function __construct($format = XRL_EncoderInterface::FORMAT_COMPACT)
+    public function __construct($format = XRL_EncoderInterface::OUTPUT_COMPACT)
     {
-        if ($format != XRL_EncoderInterface::FORMAT_PRETTY &&
-            $format != XRL_DecoderInterface::FORMAT_COMPACT)
+        if ($format != XRL_EncoderInterface::OUTPUT_PRETTY &&
+            $format != XRL_EncoderInterface::OUTPUT_COMPACT)
             throw new InvalidArgumentException('Invalid format');
 
         $this->_format = $format;
@@ -18,11 +18,14 @@ implements  XRL_EncoderInterface
     {
         $writer = new XMLWriter();
         $writer->openMemory();
-        if ($this->_format == XRL_EncoderInterface::FORMAT_PRETTY)
+        if ($this->_format == XRL_EncoderInterface::OUTPUT_PRETTY) {
             $writer->setIndent(TRUE);
-        else
+            $writer->startDocument('1.0', 'UTF-8');
+        }
+        else {
             $writer->setIndent(FALSE);
-        $writer->startDocument('1.0', 'UTF-8');
+            $writer->startDocument();
+        }
         return $writer;
     }
 
@@ -60,25 +63,28 @@ implements  XRL_EncoderInterface
                 foreach ($value as $key => $val) {
                     $writer->startElement('member');
                     $writer->startElement('name');
-                    $this->_writeValue($writer, $key);
-                    $writer->endElement('name');
+                    self::_writeValue($writer, $key);
+                    $writer->endElement();
 
                     $writer->startElement('value');
-                    $this->_writeValue($writer, $val);
-                    $writer->endElement('value');
-                    $writer->endElement('member');
+                    self::_writeValue($writer, $val);
+                    $writer->endElement();
+                    $writer->endElement();
                 }
-                $writer->endElement('struct');
+                $writer->endElement();
                 return;
             }
 
             // List / numerically-indexed array.
             $writer->startElement('array');
             $writer->startElement('data');
-            foreach ($value as $val)
-                $this->_writeValue($writer, $val);
-            $writer->endElement('data');
-            $writer->endElement('array');
+            foreach ($value as $val) {
+                $writer->startElement('value');
+                self::_writeValue($writer, $val);
+                $writer->endElement();
+            }
+            $writer->endElement();
+            $writer->endElement();
             return;
         }
 

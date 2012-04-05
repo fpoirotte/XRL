@@ -21,6 +21,15 @@ class XRL_Client
     /// Decoder to use to parse XML-RPC responses.
     protected $_decoder;
 
+    /// Callable used to fetch the response.
+    protected $_fetcher;
+
+    protected $_requestCls = 'XRL_Request';
+
+    protected $_defaultEncoderCls   = 'XRL_Encoder';
+
+    protected $_defaultDecoderCls   = 'XRL_Decoder';
+
     /**
      * Create a new XML-RPC client.
      *
@@ -55,17 +64,21 @@ class XRL_Client
                                 $timezone   = NULL,
                                 $context    = NULL,
         XRL_EncoderInterface    $encoder    = NULL,
-        XRL_DecoderInterface    $decoder    = NULL;
+        XRL_DecoderInterface    $decoder    = NULL
     )
     {
         if ($timezone === NULL)
             $timezone = date_default_timezone_get();
         if ($context === NULL)
             $context = stream_context_get_default();
-        if ($encoder === NULL)
-            $encoder = new XRL_Encoder();
-        if ($decoder === NULL)
-            $decoder = new XRL_Decoder();
+        if ($encoder === NULL) {
+            $cls        = $this->_defaultEncoderCls;
+            $encoder    = new $cls();
+        }
+        if ($decoder === NULL) {
+            $cls        = $this->_defaultDecoderCls;
+            $decoder    = new $cls();
+        }
 
         if (!is_resource($context))
             throw new InvalidArgumentException('Invalid context');
@@ -81,6 +94,7 @@ class XRL_Client
         $this->_context = $context;
         $this->_encoder = $encoder;
         $this->_decoder = $decoder;
+        $this->_fetcher = 'file_get_contents';
     }
 
     /**
@@ -114,7 +128,8 @@ class XRL_Client
      */
     public function __call($method, $args)
     {
-        $request    = new XRL_Request($method, $args);
+        $requestCls = $this->_requestCls;
+        $request    = new $requestCls($method, $args);
         $xml        = $this->_encoder->encodeRequest($request);
         $options    = array(
             'http' => array(
@@ -124,7 +139,13 @@ class XRL_Client
             ),
         );
         stream_context_set_option($this->_context, $options);
-        $data   = file_get_contents($this->_baseURL, FALSE, $this->_context);
+
+        $data = call_user_func(
+            $this->_fetcher,
+            $this->_baseURL,
+            FALSE,
+            $this->_context
+        );
         $result = $this->_decoder->decodeResponse($data);
         return $result;
     }

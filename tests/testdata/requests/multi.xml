@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<methodCall>
+ <methodName>multiParams</methodName>
+ <params>
+  <param>
+   <value>
+    <int>42</int>
+   </value>
+  </param>
+  <param>
+   <value>test</value>
+  </param>
+ </params>
+</methodCall>

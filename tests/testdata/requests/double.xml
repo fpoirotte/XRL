@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<methodCall>
+ <methodName>doubleParam</methodName>
+ <params>
+  <param>
+   <value>
+    <double>3.14</double>
+   </value>
+  </param>
+ </params>
+</methodCall>

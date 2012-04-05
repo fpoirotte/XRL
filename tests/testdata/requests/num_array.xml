@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<methodCall>
+ <methodName>numArray</methodName>
+ <params>
+  <param>
+   <value>
+    <array>
+     <data>
+      <value>test</value>
+      <value>
+       <int>42</int>
+      </value>
+     </data>
+    </array>
+   </value>
+  </param>
+ </params>
+</methodCall>

@@ -1,0 +1,18 @@
+
+language: php
+
+php:
+    - 5.2
+    - 5.3.2
+    - 5.3
+    - 5.4
+
+branches:
+    only: master
+
+notifications:
+    email: false
+    irc: "irc.iiens.net#Erebot"
+
+script: phpunit tests/
+

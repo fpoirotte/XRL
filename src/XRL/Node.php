@@ -6,13 +6,17 @@ class XRL_Node
 
     public function __construct(XMLReader $reader)
     {
-        if (!$reader->read())
-            throw new InvalidArgumentException('Unexpected end of document');
+        $skipNodes = array(XMLReader::SIGNIFICANT_WHITESPACE);
+        do {
+            if (!$reader->read())
+                throw new InvalidArgumentException('Unexpected end of document');
+        } while (in_array($reader->nodeType, $skipNodes));
 
         $fields = array(
             'name',
             'nodeType',
             'value',
+            'isEmptyElement',
         );
 
         $this->_properties = array();
@@ -26,6 +30,17 @@ class XRL_Node
             throw new UnexpectedValueException("Unknown property '$field'");
 
         return $this->_properties[$field];
+    }
+
+    public function emptyNodeExpansionWorked()
+    {
+        if ($this->_properties['nodeType'] == XMLReader::ELEMENT &&
+            $this->_properties['isEmptyElement'] == TRUE) {
+            $this->_properties['nodeType'] = XMLReader::END_ELEMENT;
+            $this->_properties['isEmptyElement'] = FALSE;
+            return TRUE;
+        }
+        return FALSE;
     }
 }
 

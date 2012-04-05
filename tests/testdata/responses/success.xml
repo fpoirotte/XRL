@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<methodResponse>
+ <params>
+  <param>
+   <value>
+    <array>
+     <data>
+      <value>
+       <int>42</int>
+      </value>
+      <value>test</value>
+     </data>
+    </array>
+   </value>
+  </param>
+ </params>
+</methodResponse>

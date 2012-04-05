@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<methodCall>
+ <methodName>assocArray</methodName>
+ <params>
+  <param>
+   <value>
+    <struct>
+     <member>
+      <name>foo</name>
+      <value>test</value>
+     </member>
+     <member>
+      <name>bar</name>
+      <value>
+       <int>42</int>
+      </value>
+     </member>
+    </struct>
+   </value>
+  </param>
+ </params>
+</methodCall>

@@ -1,19 +1,30 @@
 <?php
 
 /**
- * A simple XML-RPC server.
+ * \brief
+ *      A simple XML-RPC server.
  */
-class XRL_Server
+class       XRL_Server
+implements  Countable,
+            IteratorAggregate
 {
     /// Registered "procedures".
     protected $_funcs;
+
+    protected $_callableWrapper     = 'XRL_Callable';
+
+    protected $_responseCls         = 'XRL_Response';
+
+    protected $_defaultEncoderCls   = 'XRL_Encoder';
+
+    protected $_defaultDecoderCls   = 'XRL_Decoder';
 
     /**
      * Create a new XML-RPC server.
      */
     public function __construct()
     {
-        $this->_funcs   = array();
+        $this->_funcs           = array();
     }
 
     /**
@@ -37,7 +48,18 @@ class XRL_Server
      */
     public function register($func, $callback)
     {
-        $this->_funcs[$func] = new XRL_Callable($callback);
+        $cls = $this->_callableWrapper;
+        $this->_funcs[$func] = new $cls($callback);
+    }
+
+    public function count()
+    {
+        return count($this->_funcs);
+    }
+
+    public function getIterator()
+    {
+        return new ArrayIterator($this->_funcs);
     }
 
     /**
@@ -61,11 +83,14 @@ class XRL_Server
         XRL_DecoderInterface    $decoder    = NULL
     )
     {
-        if ($encoder === NULL)
-            $encoder = new XRL_Encoder();
-        if ($decoder === NULL)
-            $decoder = new XRL_Decoder();
-
+        if ($encoder === NULL) {
+            $cls        = $this->_defaultEncoderCls;
+            $encoder    = new $cls();
+        }
+        if ($decoder === NULL) {
+            $cls        = $this->_defaultDecoderCls;
+            $decoder    = new $cls();
+        }
         if ($data === NULL)
             $data = file_get_contents('php://input');
 
@@ -88,7 +113,8 @@ class XRL_Server
             $response   = $encoder->encodeError($result);
         }
 
-        $returnValue = new XRL_Response($response);
+        $responseCls = $this->_responseCls;
+        $returnValue = new $responseCls($response);
         return $returnValue;
     }
 }
