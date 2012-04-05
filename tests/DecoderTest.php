@@ -310,7 +310,7 @@ extends PHPUnit_Framework_TestCase
         if (!$response)
             $this->fail('An exception was expected');
 
-        $this->assertInstanceOf('Exception', $response);
+        $this->assertInstanceOf('XRL_Exception', $response);
         $this->assertEquals(42, $response->getCode());
         $this->assertEquals('Test_failure', $response->getMessage());
     }
