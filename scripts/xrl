@@ -220,6 +220,10 @@ class XRL_CLI
         }
 
         // Then let's do it!
+        $timezone = $options['t'];
+        if ($timezone === NULL)
+            $timezone = date_default_timezone_get();
+        $timezone   = new DateTimeZone($timezone);
         $encoder    = new XRL_Encoder(XRL_Encoder::OUTPUT_PRETTY);
         $decoder    = new XRL_Decoder($options['x']);
         $request    = new XRL_Request(
