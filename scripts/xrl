@@ -1,0 +1,270 @@
+#!/usr/bin/env php
+<?php
+/*
+    This file is part of XRL.
+
+    XRL is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    XRL is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with XRL.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+if ('@php_dir@' == '@'.'php_dir'.'@') {
+    require_once(
+        dirname(dirname(__FILE__)) .
+        DIRECTORY_SEPARATOR . 'src' .
+        DIRECTORY_SEPARATOR . 'XRL' .
+        DIRECTORY_SEPARATOR . 'Autoload.php'
+    );
+}
+else {
+    require_once(
+        '@php_dir@' .
+        DIRECTORY_SEPARATOR . 'XRL' .
+        DIRECTORY_SEPARATOR . 'Autoload.php'
+    );
+}
+
+class XRL_CLI
+{
+    public function __construct()
+    {
+    }
+
+    protected function _toStdErr($format, array $args = array())
+    {
+        vfprintf(STDERR, $format . PHP_EOL, $args);
+    }
+
+    public function printUsage($prog)
+    {
+        $this->_toStdErr(
+            'Usage: %s [options] <server URL> <procedure> [args...]',
+            array($prog)
+        );
+        $url = 'http://xmlrpc.example.com/';
+        $this->_toStdErr('');
+        $this->_toStdErr('Options:');
+        $this->_toStdErr(' -d               Debug mode. Display all XML exchanges');
+        $this->_toStdErr('                  between the XML-RPC client and server.');
+        $this->_toStdErr(' -t <timezone>    Use this timezone to convert dates.');
+        $this->_toStdErr('                  Eg. "Europe/Paris".');
+        $this->_toStdErr(' -x               Perform XML validation on received messages.');
+        $this->_toStdErr(' -v               Show this program\'s version and exit.');
+        $this->_toStdErr(' -h               Show this program\'s help.');
+        $this->_toStdErr('');
+        $this->_toStdErr('Additional parameters for the procedure must be passed as a list');
+        $this->_toStdErr('of types & values, where the following types may be used:');
+        $this->_toStdErr('bool      The next argument is a boolean. ');
+        $this->_toStdErr('          Use "0",  "off" or "false" for FALSE ');
+        $this->_toStdErr('          or "1", "on" or "true" for TRUE.');
+        $this->_toStdErr('double    The next argument is a floating-point number.');
+        $this->_toStdErr('int       The next argument is a 32 bits signed integer.');
+        $this->_toStdErr('string    The next argument is a string (possibly');
+        $this->_toStdErr('          containing binary data).');
+        $this->_toStdErr('');
+        $this->_toStdErr('Example:');
+        $this->_toStdErr('  %s %s foo int 42 bool on', array($prog, $url));
+        $this->_toStdErr('is the same as:');
+        $this->_toStdErr('  <'.'?php');
+        $this->_toStdErr('      $client = new XRL_Client("%s");', array($url));
+        $this->_toStdErr('      var_dump($client->foo(42, TRUE));');
+        $this->_toStdErr('  ?'.'>');
+    }
+
+    protected function _parseBool($value)
+    {
+        $value = strtolower($value);
+        if (in_array($value, array('0', 'off', 'false')))
+            return FALSE;
+        if (in_array($value, array('1', 'on', 'true')))
+            return TRUE;
+        return NULL;
+    }
+
+    protected function _parse($prog, array $args)
+    {
+        $params     = array(
+            "serverURL"     => NULL,
+            "procedure"     => NULL,
+            "additional"    => array(),
+        );
+        $options    = array(
+            "d" => FALSE,
+            "h" => FALSE,
+            "t" => NULL,
+            "v" => FALSE,
+            "x" => FALSE,
+        );
+
+        while (count($args)) {
+            $v = array_shift($args);
+
+            if ($params['serverURL'] === NULL) {
+                if (substr($v, 0, 1) == '-') {
+                    $p = array();
+                    $v = (string) substr($v, 1);
+                    foreach (str_split($v) as $o) {
+                        if (!array_key_exists($o, $options)) {
+                            $this->_toStdErr(
+                                '%s: Unknown option "%s"',
+                                array($prog, $o)
+                            );
+                            return array(2, NULL, NULL);
+                        }
+
+                        if (is_bool($options[$o]))
+                            $options[$o] = TRUE;
+                        else
+                            $p[] = $o;
+                    }
+
+                    foreach ($p as $o) {
+                        if (!count($args)) {
+                            $this->_toStdErr(
+                                '%s: Not enough arguments for option "%s"',
+                                array($prog, $o)
+                            );
+                            return array(2, NULL, NULL);
+                        }
+                        $options[$o] = array_shift($args);
+                    }
+                }
+                else
+                    $params['serverURL'] = $v;
+                continue;
+            }
+
+            if ($params['procedure'] === NULL) {
+                $params['procedure'] = $v;
+                continue;
+            }
+
+            $type = strtolower($v);
+            $parseFunc = NULL;
+            switch ($type) {
+                case 'boolean':
+                case 'bool':
+                case 'b':
+                    $parseFunc = array($this, '_parseBool');
+                    break;
+                case 'integer':
+                case 'int':
+                case 'i':
+                    $parseFunc = 'intval';
+                    continue;
+                case 'double':
+                case 'float':
+                case 'f':
+                    $parseFunc = 'floatval';
+                    continue;
+                case 'string':
+                case 'str':
+                case 's':
+                    $parseFunc = 'strval';
+                    continue;
+                default:
+                    $this->_toStdErr(
+                        '%s: Unknown type "%s"',
+                        array($prog, $v)
+                    );
+                    return array(2, NULL, NULL);
+            }
+
+            if (!count($args)) {
+                $this->_toStdErr('%s: Not enough arguments', array($prog));
+                return array(2, NULL, NULL);
+            }
+
+            $v = array_shift($args);
+            $params['additional'][] = call_user_func($parseFunc, $v);
+        }
+
+        return array(0, $options, $params);
+    }
+
+    public function run(array $args)
+    {
+        $prog = array_shift($args);
+        list($code, $options, $params) = $this->_parse($prog, $args);
+
+        if ($code != 0)
+            return $code;
+
+        // Show help.
+        if ($options["h"]) {
+            $this->printUsage($prog);
+            return 0;
+        }
+
+        // Show version.
+        if ($options["v"]) {
+            /// @TODO
+            echo 'XRL v3.14 -- copyright the XRL Team'.PHP_EOL;
+            echo 'https://github.com/fpoirotte/XRL'.PHP_EOL;
+            return 0;
+        }
+
+        // Do we have enough arguments to do something?
+        if ($params['serverURL'] === NULL || $params['procedure'] === NULL) {
+            $this->printUsage($prog);
+            return 2;
+        }
+
+        // Then let's do it!
+        $encoder    = new XRL_Encoder(XRL_Encoder::OUTPUT_PRETTY);
+        $decoder    = new XRL_Decoder($options['x']);
+        $request    = new XRL_Request(
+            $params['procedure'],
+            $params['additional']
+        );
+
+        $xml = $encoder->encodeRequest($request);
+        if ($options['d']) {
+            echo "Sent:".PHP_EOL;
+            echo trim($xml).PHP_EOL.PHP_EOL;
+        }
+        $context    = stream_context_get_default();
+        $ctxOptions = array(
+            'http' => array(
+                'method'    => 'POST',
+                'content'   => $xml,
+                'header'    => 'Content-Type: text/xml',
+            ),
+        );
+        stream_context_set_option($context, $ctxOptions);
+
+        $data = file_get_contents($params['serverURL'], FALSE, $context);
+        if ($data === FALSE) {
+            $this->_toStdErr('Could not query "%s"', $params['serverURL']);
+            return 1;
+        }
+
+        if ($options['d']) {
+            echo "Received:".PHP_EOL;
+            echo trim($data).PHP_EOL.PHP_EOL;
+        }
+        try {
+            $result = $decoder->decodeResponse($data);
+        }
+        catch (Exception $result) {
+            // Nothing to do.
+        }
+
+        echo "Result:".PHP_EOL;
+        var_dump($result);
+        return 0;
+    }
+}
+
+$cli = new XRL_CLI();
+die($cli->run($_SERVER['argv']));
+
