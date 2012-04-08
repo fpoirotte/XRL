@@ -11,7 +11,7 @@
     </member>
     <member>
      <name>faultString</name>
-     <value>Test_failure</value>
+     <value>Exception: Test_failure</value>
     </member>
    </struct>
   </value>

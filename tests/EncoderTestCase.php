@@ -1,4 +1,21 @@
 <?php
+// © copyright XRL Team, 2012. All rights reserved.
+/*
+    This file is part of XRL.
+
+    XRL is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    XRL is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with XRL.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 include(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'helpers.php');
 
@@ -84,12 +101,14 @@ extends         PHPUnit_Framework_TestCase
 #        $this->assertEquals($this->METHOD_DATETIME_PARAM, $received);
 #    }
 
-#    public function testEncodeRequestWithBinaryParameter()
-#    {
-#        $request    = new XRL_Request('binaryParameter', array());
-#        $received   = $this->_encoder->encodeRequest($request);
-#        $this->assertEquals($this->METHOD_BINARY_PARAM, $received);
-#    }
+    public function testEncodeRequestWithBinaryParameter()
+    {
+        // An invalid UTF-8 sequence.
+        $request    = new XRL_Request('binaryParam', array("\xE8\xE9\xE0"));
+        $received   = $this->_encoder->encodeRequest($request);
+        $expected   = $this->_getXML('requests', 'binary');
+        $this->assertEquals($expected, $received);
+    }
 
     public function testEncodeRequestWithNumericArray()
     {

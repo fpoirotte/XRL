@@ -16,9 +16,12 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-interface XRL_DecoderInterface
+class       XRL_ValidatingDecoderFactory
+implements  XRL_DecoderFactoryInterface
 {
-    public function decodeRequest($data);
-    public function decodeResponse($data);
+    public function createDecoder()
+    {
+        return new XRL_Decoder(TRUE);
+    }
 }
 

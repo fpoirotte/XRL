@@ -1,4 +1,21 @@
 <?php
+// © copyright XRL Team, 2012. All rights reserved.
+/*
+    This file is part of XRL.
+
+    XRL is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    XRL is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with XRL.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 include(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'helpers.php');
 
@@ -21,23 +38,19 @@ extends PHPUnit_Framework_TestCase
             DIRECTORY_SEPARATOR . $filename . '.xml'
         );
 
-        $result = array(array($content));
+        $result = array(array($content, TRUE));
 
-        // Remote all whitespaces.
+        // Remove all whitespaces.
         $content = str_replace(array(' ', "\n", "\r", "\t"), '', $content);
 
-        // Use a bare XML declaration.
+        // Remove the XML declaration.
         $content = str_replace(
             '<'.'?xmlversion="1.0"encoding="UTF-8"?'.'>',
-            '<'.'?xml version="1.0"?'.">\n",
+            '',
             $content
         );
 
-        // Add a trailing newline (this is what
-        // libxml2 does when indent is disabled).
-        $content .= "\n";
-
-        $result[] = array($content);
+        $result[] = array($content, FALSE);
         return $result;
     }
 
@@ -66,6 +79,7 @@ extends PHPUnit_Framework_TestCase
             'Double'        => 'double',
             'Numeric'       => 'num_array',
             'Associative'   => 'assoc_array',
+            'Binary'        => 'binary',
         );
 
         if (isset($mapping[$prefix]))
@@ -206,12 +220,19 @@ extends PHPUnit_Framework_TestCase
 #        $this->assertEquals($this->METHOD_DATETIME_PARAM, $received);
 #    }
 
-#    public function testDecodeRequestWithBinaryParameter()
-#    {
-#        $request    = new XRL_Request('binaryParameter', array());
-#        $received   = $this->_decoder->decodeRequest($request);
-#        $this->assertEquals($this->METHOD_BINARY_PARAM, $received);
-#    }
+    /**
+     * @dataProvider requestProvider
+     */
+    public function testDecodeRequestWithBinaryParameter($xml)
+    {
+        $request = $this->_decoder->decodeRequest($xml);
+        $this->assertInstanceOf('XRL_Request', $request);
+
+        $params = $request->getParams();
+        $this->assertEquals('binaryParam', $request->getProcedure());
+        $this->assertEquals(1, count($params));
+        $this->assertSame("\xE8\xE9\xE0", $params[0]);
+    }
 
     /**
      * @dataProvider requestProvider
@@ -298,7 +319,7 @@ extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider responseProvider
      */
-    public function testDecodeFailure($xml)
+    public function testDecodeFailure($xml, $indented)
     {
         $response = NULL;
         try {
@@ -312,7 +333,11 @@ extends PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('XRL_Exception', $response);
         $this->assertEquals(42, $response->getCode());
-        $this->assertEquals('Test_failure', $response->getMessage());
+        if ($indented)
+            $expected = 'Exception: Test_failure';
+        else
+            $expected = 'Exception:Test_failure';
+        $this->assertEquals($expected, $response->getMessage());
     }
 
     /**

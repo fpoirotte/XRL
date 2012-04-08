@@ -1,3 +1,20 @@
+<!-- © copyright XRL Team, 2012. All rights reserved. -->
+<!--
+    This file is part of XRL.
+
+    XRL is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    XRL is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with XRL.  If not, see <http://www.gnu.org/licenses/>.
+-->
 <grammar xmlns="http://relaxng.org/ns/structure/1.0"
     datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
     <start>
@@ -35,10 +52,21 @@
 
     <define name="fault">
         <element name="struct">
-            <interleave>
-                <ref name="faultCode"/>
-                <ref name="faultString"/>
-            </interleave>
+            <!--
+                libxml2 chokes if we use an interleave element here.
+                So we do the interleaving ourselves, given that there
+                are only two possible orders.
+            -->
+            <choice>
+                <group>
+                    <ref name="faultCode"/>
+                    <ref name="faultString"/>
+                </group>
+                <group>
+                    <ref name="faultString"/>
+                    <ref name="faultCode"/>
+                </group>
+            </choice>
         </element>
     </define>
 
@@ -61,9 +89,12 @@
                 <value>faultString</value>
             </element>
             <element name="value">
-                <element name="string">
-                    <data type="string"/>
-                </element>
+                <choice>
+                    <element name="string">
+                        <data type="string"/>
+                    </element>
+                    <text/>
+                </choice>
             </element>
         </element>
     </define>

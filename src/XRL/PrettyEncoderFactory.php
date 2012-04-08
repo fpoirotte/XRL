@@ -16,9 +16,12 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-interface XRL_DecoderInterface
+class       XRL_PrettyEncoderFactory
+implements  XRL_EncoderFactoryInterface
 {
-    public function decodeRequest($data);
-    public function decodeResponse($data);
+    public function createEncoder()
+    {
+        return new XRL_Encoder(XRL_Encoder::OUTPUT_PRETTY);
+    }
 }
 

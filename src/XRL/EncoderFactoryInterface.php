@@ -16,9 +16,8 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-interface XRL_DecoderInterface
+interface XRL_EncoderFactoryInterface
 {
-    public function decodeRequest($data);
-    public function decodeResponse($data);
+    public function createEncoder();
 }
 

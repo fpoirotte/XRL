@@ -1,25 +1,20 @@
 <?php
-/**
- * This file is used to provide extra files/packages outside package.xml
- * More information: http://pear.php.net/manual/en/pyrus.commands.package.php#pyrus.commands.package.extrasetup
- */
-$extrafiles = array();
+// © copyright XRL Team, 2012. All rights reserved.
+/*
+    This file is part of XRL.
 
-/**
- * for example:
-if (basename(__DIR__) == 'trunk') {
-    $extrafiles = array(
-        new \Pyrus\Package(__DIR__ . '/../../HTTP_Request/trunk/package.xml'),
-        new \Pyrus\Package(__DIR__ . '/../../sandbox/Console_CommandLine/trunk/package.xml'),
-        new \Pyrus\Package(__DIR__ . '/../../MultiErrors/trunk/package.xml'),
-        new \Pyrus\Package(__DIR__ . '/../../Exception/trunk/package.xml'),
-    );
-} else {
-    $extrafiles = array(
-        new \Pyrus\Package(__DIR__ . '/../HTTP_Request/package.xml'),
-        new \Pyrus\Package(__DIR__ . '/../sandbox/Console_CommandLine/package.xml'),
-        new \Pyrus\Package(__DIR__ . '/../MultiErrors/package.xml'),
-        new \Pyrus\Package(__DIR__ . '/../Exception/package.xml'),
-    );
-}
+    XRL is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    XRL is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+$extrafiles = array();

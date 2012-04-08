@@ -1,4 +1,5 @@
 <?php
+// © copyright XRL Team, 2012. All rights reserved.
 /*
     This file is part of XRL.
 
@@ -16,9 +17,12 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-interface XRL_DecoderInterface
+class       XRL_CallableFactory
+implements  XRL_CallableFactoryInterface
 {
-    public function decodeRequest($data);
-    public function decodeResponse($data);
+    public function fromPHP($callable)
+    {
+        return new XRL_Callable($callable);
+    }
 }
 

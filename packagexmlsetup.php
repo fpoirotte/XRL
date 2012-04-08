@@ -1,22 +1,24 @@
 <?php
-/**
- * Extra package.xml settings such as dependencies.
- * More information: http://pear.php.net/manual/en/pyrus.commands.make.php#pyrus.commands.make.packagexmlsetup
- */
-/**
- * for example:
-$package->dependencies['required']->package['pear2.php.net/PEAR2_Autoload']->save();
-$package->dependencies['required']->package['pear2.php.net/PEAR2_Exception']->save();
-$package->dependencies['required']->package['pear2.php.net/PEAR2_MultiErrors']->save();
-$package->dependencies['required']->package['pear2.php.net/PEAR2_HTTP_Request']->save();
+// © copyright XRL Team, 2012. All rights reserved.
+/*
+    This file is part of XRL.
 
-$compatible->dependencies['required']->package['pear2.php.net/PEAR2_Autoload']->save();
-$compatible->dependencies['required']->package['pear2.php.net/PEAR2_Exception']->save();
-$compatible->dependencies['required']->package['pear2.php.net/PEAR2_MultiErrors']->save();
-$compatible->dependencies['required']->package['pear2.php.net/PEAR2_HTTP_Request']->save();
+    XRL is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
-// ignore files
-unset($package->files['www/config.inc.php']);
-unset($package->files['www/.htaccess']);
+    XRL is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+foreach (array($package, $compatible) as $pkg) {
+    $pkg->dependencies['required']->extension['XMLReader']->save();
+    $pkg->dependencies['required']->extension['XMLWriter']->save();
+}
 

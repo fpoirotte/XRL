@@ -1,4 +1,21 @@
 <?php
+// © copyright XRL Team, 2012. All rights reserved.
+/*
+    This file is part of XRL.
+
+    XRL is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    XRL is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with XRL.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 class       XRL_Decoder
 implements  XRL_DecoderInterface
@@ -22,12 +39,21 @@ implements  XRL_DecoderInterface
 
         $this->_currentNode = NULL;
         $reader = new XMLReader();
-#        $reader->setParserProperty(XMLReader::LOADDTD, FALSE);
-#        $reader->setParserProperty(XMLReader::DEFAULTATTRS, FALSE);
-#        $reader->setParserProperty(XMLReader::VALIDATE, FALSE);
-#        $reader->setParserProperty(XMLReader::SUBST_ENTITIES, TRUE);
         $reader->xml($data, NULL, LIBXML_NONET | LIBXML_NOENT);
-//        $reader->setRelaxNGSchema();
+        if ($this->_validate) {
+            if ('@data_dir@' != '@'.'data_dir'.'@') {
+                $schema = '@data_dir@' .
+                    DIRECTORY_SEPARATOR . 'pear.erebot.net' .
+                    DIRECTORY_SEPARATOR . 'XRL';
+            }
+            else
+                $schema = dirname(dirname(dirname(__FILE__))) .
+                    DIRECTORY_SEPARATOR . 'data';
+
+            $schema .= DIRECTORY_SEPARATOR;
+            $schema .= $request ? 'request.rng' : 'response.rng';
+            $reader->setRelaxNGSchema($schema);
+        }
         return $reader;
     }
 
@@ -36,7 +62,7 @@ implements  XRL_DecoderInterface
         if ($this->_currentNode !== NULL)
             return $this->_currentNode;
 
-        $this->_currentNode = new XRL_Node($reader);
+        $this->_currentNode = new XRL_Node($reader, $this->_validate);
         return $this->_currentNode;
     }
 
@@ -121,6 +147,21 @@ implements  XRL_DecoderInterface
 
     protected function _decodeValue($reader, array $allowedTypes = array())
     {
+        // Support for the <nil> extension
+        // (http://ontosys.com/xml-rpc/extensions.php)
+        $error = NULL;
+        try {
+            $this->_expectStartTag($reader, 'nil');
+        }
+        catch (InvalidArgumentException $error) {
+        }
+
+        if (!$error) {
+            $this->_expectEndTag($reader, 'nil');
+            return self::_checkType($allowedTypes, 'nil', NULL);
+        }
+
+        // Other basic types.
         $types = array(
             'i4',
             'int',
@@ -162,7 +203,7 @@ implements  XRL_DecoderInterface
                     break;
 
                 case 'dateTime.iso8601':
-                    $value = NULL;
+                    $value = NULL; /// @TODO
                     break;
 
                 case 'base64':
@@ -312,7 +353,7 @@ implements  XRL_DecoderInterface
             ; /// @TODO
 
         $error  = NULL;
-        $reader = $this->_getReader($data, TRUE);
+        $reader = $this->_getReader($data, FALSE);
         $this->_expectStartTag($reader, 'methodResponse');
         try {
             // Try to parse a successful response first.

@@ -1,10 +1,49 @@
 <?php
+// © copyright XRL Team, 2012. All rights reserved.
+/*
+    This file is part of XRL.
+
+    XRL is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    XRL is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with XRL.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 /**
  * \brief
  *      A simple XML-RPC client.
+ *
+ * To call a remote XML procedure, create a new instance
+ * of this class (pass the server's URL to the constructor)
+ * and then simply call the procedure as if it was a method
+ * of the object returned:
+ *
+ * \code
+ *      $client = new XRL_Client("http://xmlrpc.example.com/");
+ *      // This calls the remote procedure "foo"
+ *      // and prints the result of that call.
+ *      var_dump($client->foo(42));
+ * \endcode
+ *
+ * In case the remote procedure's name is not a valid
+ * PHP identifier, you may still call it using the
+ * curly braces notation:
+ *
+ * \code
+ *      // Calls the remote procedure named "foo.bar.baz".
+ *      $client->{"foo.bar.baz"}(42);
+ * \endcode
  */
-class XRL_Client
+class   XRL_Client
+extends XRL_FactoryRegistry
 {
     /// The remote XML-RPC server's base URL.
     protected $_baseURL;
@@ -15,20 +54,8 @@ class XRL_Client
     /// A stream context to use when querying the server.
     protected $_context;
 
-    /// Encoder to use to produce XML-RPC requests.
-    protected $_encoder;
-
-    /// Decoder to use to parse XML-RPC responses.
-    protected $_decoder;
-
     /// Callable used to fetch the response.
     protected $_fetcher;
-
-    protected $_requestCls = 'XRL_Request';
-
-    protected $_defaultEncoderCls   = 'XRL_Encoder';
-
-    protected $_defaultDecoderCls   = 'XRL_Decoder';
 
     /**
      * Create a new XML-RPC client.
@@ -62,23 +89,13 @@ class XRL_Client
     public function __construct(
                                 $baseURL,
                                 $timezone   = NULL,
-                                $context    = NULL,
-        XRL_EncoderInterface    $encoder    = NULL,
-        XRL_DecoderInterface    $decoder    = NULL
+                                $context    = NULL
     )
     {
         if ($timezone === NULL)
             $timezone = date_default_timezone_get();
         if ($context === NULL)
             $context = stream_context_get_default();
-        if ($encoder === NULL) {
-            $cls        = $this->_defaultEncoderCls;
-            $encoder    = new $cls();
-        }
-        if ($decoder === NULL) {
-            $cls        = $this->_defaultDecoderCls;
-            $decoder    = new $cls();
-        }
 
         if (!is_resource($context))
             throw new InvalidArgumentException('Invalid context');
@@ -91,10 +108,18 @@ class XRL_Client
             throw new InvalidArgumentException($e->getMessage(), $e->getCode());
         }
 
-        $this->_context = $context;
-        $this->_encoder = $encoder;
-        $this->_decoder = $decoder;
-        $this->_fetcher = 'file_get_contents';
+        $this->_context     = $context;
+        $this->_fetcher     = 'file_get_contents';
+        $this->_interfaces  = array(
+            'xrl_encoderfactoryinterface'   =>
+                new XRL_CompactEncoderFactory(),
+
+            'xrl_decoderfactoryinterface'   =>
+                new XRL_ValidatingDecoderFactory(),
+
+            'xrl_requestfactoryinterface'   =>
+                new XRL_RequestFactory(),
+        );
     }
 
     /**
@@ -126,11 +151,21 @@ class XRL_Client
      *      the remote server (such as when no connection
      *      could be established to it).
      */
-    public function __call($method, $args)
+    public function __call($method, array $args)
     {
-        $requestCls = $this->_requestCls;
-        $request    = new $requestCls($method, $args);
-        $xml        = $this->_encoder->encodeRequest($request);
+        $factory    = $this['XRL_RequestFactoryInterface'];
+        $request    = $factory->createRequest($method, $args);
+        assert($request instanceof XRL_RequestInterface);
+
+        $factory    = $this['XRL_EncoderFactoryInterface'];
+        $encoder    = $factory->createEncoder();
+        assert($encoder instanceof XRL_EncoderInterface);
+
+        $factory    = $this['XRL_DecoderFactoryInterface'];
+        $decoder    = $factory->createDecoder();
+        assert($decoder instanceof XRL_DecoderInterface);
+
+        $xml        = $encoder->encodeRequest($request);
         $options    = array(
             'http' => array(
                 'method'    => 'POST',
@@ -146,7 +181,7 @@ class XRL_Client
             FALSE,
             $this->_context
         );
-        $result = $this->_decoder->decodeResponse($data);
+        $result = $decoder->decodeResponse($data);
         return $result;
     }
 }
