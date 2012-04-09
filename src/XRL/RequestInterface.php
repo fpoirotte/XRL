@@ -17,11 +17,30 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      Interface for an object representing an XML-RPC
+ *      request.
+ */
 interface XRL_RequestInterface
 {
-    public function __construct($procedure, array $params);
-
+    /**
+     * Return the name of the procedure this request
+     * refers to.
+     *
+     * \retval string
+     *      Name of the XML-RPC procedure this request
+     *      refers to.
+     */
     public function getProcedure();
 
+    /**
+     * Return the parameters that will be passed
+     * to that request's procedure.
+     *
+     * \retval array
+     *      Parameters for the XML-RPC procedure,
+     *      using native PHP types.
+     */
     public function getParams();
 }

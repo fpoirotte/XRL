@@ -16,9 +16,15 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      Factory for an XML-RPC decoder that
+ *      validates its input.
+ */
 class       XRL_ValidatingDecoderFactory
 implements  XRL_DecoderFactoryInterface
 {
+    /// \copydoc XRL_DecoderFactoryInterface::createDecoder()
     public function createDecoder()
     {
         return new XRL_Decoder(TRUE);

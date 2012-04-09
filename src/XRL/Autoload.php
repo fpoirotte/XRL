@@ -17,6 +17,27 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * Autoloader for XRL's classes and interfaces.
+ *
+ * \param string $class
+ *      Name of the class/interface to load.
+ *
+ * \note
+ *      The autoloader will only try to load classes/interfaces
+ *      whose name starts with "XRL_" (case-insensitive).
+ *
+ * \warning
+ *      The autoloader will throw an exception (which will
+ *      most likely result in a fatal error in your application)
+ *      in case the class or interface's name contains a colon.
+ *      This is a protection against a possible remote inclusion
+ *      vulnerability introduced in PHP 5.3.8 using is_a().
+ *
+ * \retval bool
+ *      \c TRUE if the class or interface could be loaded,
+ *      \c FALSE otherwise.
+ */
 function XRL_autoload($class)
 {
     if (strpos($class, ':') !== FALSE)
@@ -29,6 +50,8 @@ function XRL_autoload($class)
     $class = substr($class, 4);
     $class = str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, $class);
     require(dirname(__FILE__) . DIRECTORY_SEPARATOR . $class . '.php');
+    $res = (class_exists($class, FALSE) || interface_exists($class, FALSE));
+    return $res;
 }
 spl_autoload_register("XRL_autoload");
 

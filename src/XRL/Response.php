@@ -25,7 +25,7 @@
 class       XRL_Response
 implements  XRL_ResponseInterface
 {
-    /// The result of an XML-RPC request, as serialized XML.
+    /// The response to an XML-RPC request, as serialized XML.
     protected $_result;
 
     /**
@@ -34,31 +34,20 @@ implements  XRL_ResponseInterface
      * \param mixed $xmlResult
      *      The result of the request. This may be a scalar
      *      (integer, boolean, float, string), an array,
-     *      an exception or a DateTime object.
+     *      an exception or a \c DateTime object.
      */
     public function __construct($xmlResult)
     {
         $this->_result  = $xmlResult;
     }
 
-    /**
-     * Returns the response for an XML-RPC request,
-     * as serialized XML.
-     *
-     * \retval string
-     *      An XML-RPC response, as a string.
-     */
-    public function __string()
+    /// \copydoc XRL_ResponseInterface::__toString()
+    public function __toString()
     {
         return $this->_result;
     }
 
-    /**
-     * Send this XML-RPC response back to a browser.
-     *
-     * \warning
-     *      This method never returns.
-     */
+    /// \copydoc XRL_ResponseInterface::publish()
     public function publish()
     {
         header('Content-Type: text/xml');

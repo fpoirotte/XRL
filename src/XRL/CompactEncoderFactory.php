@@ -16,9 +16,19 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      A factory that returns compact encoders.
+ *
+ * A compact encoder is one that uses the bare minimum
+ * of text to represent an XML document. In particular,
+ * the resulting document does not contain any extra
+ * whitespace and does not start with an XML declaration.
+ */
 class       XRL_CompactEncoderFactory
 implements  XRL_EncoderFactoryInterface
 {
+    /// \copydoc XRL_EncoderFactoryInterface::createEncoder()
     public function createEncoder()
     {
         return new XRL_Encoder(XRL_Encoder::OUTPUT_COMPACT);

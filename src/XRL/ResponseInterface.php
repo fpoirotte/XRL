@@ -16,8 +16,35 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      Interface for the response to an XML-RPC
+ *      request, as produced by an XML-RPC server.
+ *
+ * \note
+ *      This interfaces is never used by XML-RPC
+ *      clients.
+ */
 interface XRL_ResponseInterface
 {
-    public function __string();
+    /**
+     * Return the XML-RPC response this object
+     * represents, as serialized XML.
+     *
+     * \retval string
+     *      This XML-RPC response, as serialized XML.
+     */
+    public function __toString();
+
+    /**
+     * Publish this XML-RPC response to a browser.
+     *
+     * This method sets the proper HTTP headers
+     * and then sends the XML-RPC response to a
+     * browser.
+     *
+     * \warning
+     *      This method never returns.
+     */
     public function publish();
 }

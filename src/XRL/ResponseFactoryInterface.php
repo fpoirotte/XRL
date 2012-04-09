@@ -16,8 +16,24 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      Interface for a factory that produces
+ *      XML-RPC responses.
+ */
 interface XRL_ResponseFactoryInterface
 {
+    /**
+     * Create an XML-RPC response.
+     *
+     * \param string $response
+     *      The content of the XML-RPC response,
+     *      as serialized XML.
+     *
+     * \retval XRL_ResponseInterface
+     *      An object wrapping the XML-RPC response
+     *      with simple publishing features.
+     */
     public function createResponse($response);
 }
 

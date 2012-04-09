@@ -17,17 +17,42 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      An XML-RPC encoder that can produce either
+ *      compact documents or pretty documents.
+ *
+ * A compact document is one where the bare minimum
+ * of text is used to represent the document, whereas
+ * a pretty document contains extra whitespace and
+ * indications to make it easier to read.
+ */
 class       XRL_Encoder
 implements  XRL_EncoderInterface
 {
-    /// Make the output compact.
+    /// Make the output compact, ie. use as few text as required.
     const OUTPUT_COMPACT    = 0;
 
-    /// Make the output pretty.
+    /// Make the output pretty, ie. add extra indentation for readibility.
     const OUTPUT_PRETTY     = 1;
 
+    /// Output format (OUTPUT_COMPACT or OUTPUT_PRETTY).
     protected $_format;
 
+    /**
+     * Create a new XML-RPC encoder.
+     *
+     * \param opaque $format
+     *      Either XRL_Encoder::OUTPUT_COMPACT
+     *      or XRL_Encoder::OUTPUT_PRETTY.
+     *
+     * \note
+     *      Both the compact and pretty format create
+     *      valid XML-RPC requests and responses.
+     *      The pretty format just add extra indentation
+     *      to make it easier for a human being to read
+     *      the generated output.
+     */
     public function __construct($format = self::OUTPUT_COMPACT)
     {
         if ($format != self::OUTPUT_PRETTY &&
@@ -37,6 +62,13 @@ implements  XRL_EncoderInterface
         $this->_format = $format;
     }
 
+    /**
+     * Return an XML writer that will be used
+     * to produce XML-RPC requests and responses.
+     *
+     * \retval XMLWriter
+     *      XML writer to use to produce documents.
+     */
     protected function _getWriter()
     {
         $writer = new XMLWriter();
@@ -60,8 +92,8 @@ implements  XRL_EncoderInterface
      *      Some text to test for UTF-8 correctness.
      *
      * \retval bool
-     *      TRUE if the $text contains a valid UTF-8 sequence,
-     *      FALSE otherwise.
+     *      \c TRUE if the $text contains a valid UTF-8 sequence,
+     *      \c FALSE otherwise.
      */
     static protected function _isUTF8($text)
     {
@@ -81,6 +113,48 @@ implements  XRL_EncoderInterface
         );
     }
 
+    /**
+     * Encode the given PHP value as an XML-RPC one
+     * and write the result into a buffer.
+     *
+     * \param XMLWriter $writer
+     *      A writer object that acts as a buffer and
+     *      where the encoded value will be written.
+     *
+     * \param mixed $value
+     *      The PHP value to write.
+     *
+     * \return
+     *      The value returned by this methid is meaningless.
+     *
+     * \note
+     *      This implementation supports the "nil" XML-RPC extension
+     *      (http://ontosys.com/xml-rpc/extensions.php).
+     *
+     * \note
+     *      An empty PHP array will always be encoded as an empty
+     *      XML-RPC array.
+     *
+     * \note
+     *      The following PHP types are currently supported:
+     *      -   NULL (encoded using the "nil" XML-RPC type).
+     *      -   integer (encoded using the "int" XML-RPC type).
+     *      -   boolean (encoded using the "boolean" XML-RPC type).
+     *      -   string (encoded using either the default type
+     *          of XML-RPC [string] or "base64" if the string
+     *          contains invalid UTF-8 sequences, such as when
+     *          encoding binary data).
+     *      -   double (encoded using the "double" XML-RPC type).
+     *      -   array (encoded using either the "array" or "struct"
+     *          XML-RPC type). "array" is used for numerically-indexed
+     *          arrays where the keys are [0..len(array)-1] (aka "list").
+     *          "struct" is used for all other arrays (aka "hash").
+     *      --  DateTime objects (encoded using the "dateTime.iso8601"
+     *          XML-RPC type).
+     *      -   objects that support serialization (encoded as an XML-RPC
+     *          "string", where the content of the string is the object's
+     *          representation in serialized form).
+     */
     static protected function _writeValue(XMLWriter $writer, $value)
     {
         // Support for the <nil> extension
@@ -152,6 +226,9 @@ implements  XRL_EncoderInterface
             throw new InvalidArgumentException('Unsupported type');
 
         /// @TODO: special support for DateTime objects.
+        if ($value instanceof DateTime) {
+            
+        }
 
         if (($value instanceof Serializable) ||
             method_exists($value, '__sleep'))
@@ -160,6 +237,17 @@ implements  XRL_EncoderInterface
         throw new InvalidArgumentException('Could not serialize object');
     }
 
+    /**
+     * This method must be called when the document
+     * is complete and returns the document.
+     *
+     * \param XMLWriter $writer
+     *      XML writer used to produce the document.
+     *
+     * \retval string
+     *      The XML document that was generated,
+     *      as serialized XML.
+     */
     protected function _finalizeWrite(XMLWriter $writer)
     {
         $writer->endDocument();
@@ -180,6 +268,7 @@ implements  XRL_EncoderInterface
         return $result;
     }
 
+    /// \copydoc XRL_EncoderInterface::encodeRequest()
     public function encodeRequest(XRL_Request $request)
     {
         $writer = $this->_getWriter();
@@ -201,6 +290,7 @@ implements  XRL_EncoderInterface
         return $result;
     }
 
+    /// \copydoc XRL_EncoderInterface::encodeError()
     public function encodeError(Exception $error)
     {
         $writer = $this->_getWriter();
@@ -221,6 +311,7 @@ implements  XRL_EncoderInterface
         return $result;
     }
 
+    /// \copydoc XRL_EncoderInterface::encodeResponse()
     public function encodeResponse($response)
     {
         $writer = $this->_getWriter();

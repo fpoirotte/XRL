@@ -17,8 +17,22 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      Interface for a factory that produces objects
+ *      representing XML-RPC requests.
+ */
 interface XRL_RequestFactoryInterface
 {
+    /**
+     * Create an XML-RPC request.
+     *
+     * \param string $method
+     *      Name of the XML-RPC procedure to call.
+     *
+     * \param array $params
+     *      Parameters to pass to the remote procedure.
+     */
     public function createRequest($method, array $params);
 }
 

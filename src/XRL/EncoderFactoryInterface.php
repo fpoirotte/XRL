@@ -16,8 +16,19 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      Interface for a factory that produces
+ *      XML-RPC encoders.
+ */
 interface XRL_EncoderFactoryInterface
 {
+    /**
+     * Create and return an XML-RPC encoder.
+     *
+     * \retval XRL_EncoderInterface
+     *      An XML-RPC encoder.
+     */
     public function createEncoder();
 }
 

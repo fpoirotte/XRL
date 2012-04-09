@@ -16,9 +16,39 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      Interface for an XML-RPC decoder.
+ */
 interface XRL_DecoderInterface
 {
+    /**
+     * Decode an XML-RPC request.
+     *
+     * \param string $data
+     *      An XML-RPC request as serialized XML.
+     *
+     * \retval XRL_Request
+     */
     public function decodeRequest($data);
+
+    /**
+     * Decode an XML-RPC response.
+     *
+     * \param string $data
+     *      An XML-RPC response as serialized XML.
+     *
+     * \retval mixed
+     *      The return value represented by the
+     *      XML-RPC response, using native PHP types.
+     *
+     * \throw XRL_Exception
+     *      Thrown whenever the response described
+     *      a failure. This exception's \c getCode()
+     *      and \c getMessage() methods can be used
+     *      to retrieve the original failure's code
+     *      and description, respectively.
+     */
     public function decodeResponse($data);
 }
 

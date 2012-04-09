@@ -41,6 +41,9 @@
  *      // Calls the remote procedure named "foo.bar.baz".
  *      $client->{"foo.bar.baz"}(42);
  * \endcode
+ *
+ * Complete example (located in example/client.php):
+ * \include client.php
  */
 class   XRL_Client
 extends XRL_FactoryRegistry

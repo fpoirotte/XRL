@@ -16,9 +16,18 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      A factory that returns pretty encoders.
+ *
+ * A pretty encoder is one that adds extra characters
+ * to an XML document (such as indentation) to make it
+ * easier to read.
+ */
 class       XRL_PrettyEncoderFactory
 implements  XRL_EncoderFactoryInterface
 {
+    /// \copydoc XRL_EncoderFactoryInterface::createEncoder()
     public function createEncoder()
     {
         return new XRL_Encoder(XRL_Encoder::OUTPUT_PRETTY);

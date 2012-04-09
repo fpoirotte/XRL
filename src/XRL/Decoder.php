@@ -17,12 +17,27 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      A decoder that can process XML-RPC requests
+ *      and responses, with optional XML validation.
+ */
 class       XRL_Decoder
 implements  XRL_DecoderInterface
 {
+    /// Whether the documents should be validated or not.
     protected $_validate;
+
+    /// The XRL_Node currently being processed.
     protected $_currentNode;
 
+    /**
+     * Creates a new decoder.
+     *
+     * \param bool $validate
+     *      Whether the decoder should validate
+     *      its input (\c TRUE) or not (\c FALSE).
+     */
     public function __construct($validate = TRUE)
     {
         if (!is_bool($validate))
@@ -32,6 +47,24 @@ implements  XRL_DecoderInterface
         $this->_currentNode = NULL;
     }
 
+    /**
+     * Returns an XML reader for some data.
+     *
+     * \param string $data
+     *      XML data to process.
+     *
+     * \param bool $request
+     *      Whether the data refers to an XML-RPC
+     *      request (\c TRUE) or a response (\c FALSE).
+     *
+     * \retval XMLReader
+     *      An XML reader for the given data.
+     *
+     * \note
+     *      The reader is set to validate the document
+     *      on the fly if that's what this decoder was
+     *      configured to do during construction.
+     */
     protected function _getReader($data, $request)
     {
         if (!is_bool($request))
@@ -57,6 +90,16 @@ implements  XRL_DecoderInterface
         return $reader;
     }
 
+    /**
+     * Read a node from the XML reader
+     * and return it.
+     *
+     * \param XMLReader $reader
+     *      Reader to read the node from.
+     *
+     * \retval XRL_Node
+     *      The XML node that's been read.
+     */
     protected function _readNode($reader)
     {
         if ($this->_currentNode !== NULL)
@@ -66,12 +109,36 @@ implements  XRL_DecoderInterface
         return $this->_currentNode;
     }
 
+    /**
+     * Prepare for the next XML node read.
+     * This method should be called after each
+     * successful node parsing.
+     */
     protected function _prepareNextNode()
     {
         if (!$this->_currentNode->emptyNodeExpansionWorked())
             $this->_currentNode = NULL;
     }
 
+    /**
+     * Read a node from the document and throw
+     * an exception if it is not an opening tag
+     * with the given name.
+     *
+     * \param XMLReader $reader
+     *      Reader object the node will be read from.
+     *
+     * \param string $expectedTag
+     *      Name of the tag we're expecting.
+     *
+     * \throw InvalidArgumentException
+     *      Thrown whenever one of the following
+     *      conditions is met:
+     *      - We reached the end of the document.
+     *      - The next node was not an opening tag.
+     *      - The next node was an opening tag, but
+     *        its name was not the one we expected.
+     */
     protected function _expectStartTag($reader, $expectedTag)
     {
         $node = $this->_readNode($reader);
@@ -94,6 +161,25 @@ implements  XRL_DecoderInterface
         $this->_prepareNextNode();
     }
 
+    /**
+     * Read a node from the document and throw
+     * an exception if it is not a closing tag
+     * with the given name.
+     *
+     * \param XMLReader $reader
+     *      Reader object the node will be read from.
+     *
+     * \param string $expectedTag
+     *      Name of the tag we're expecting.
+     *
+     * \throw InvalidArgumentException
+     *      Thrown whenever one of the following
+     *      conditions is met:
+     *      - We reached the end of the document.
+     *      - The next node was not a closing tag.
+     *      - The next node was a closing tag, but
+     *        its name was not the one we expected.
+     */
     protected function _expectEndTag($reader, $expectedTag)
     {
         $node = $this->_readNode($reader);
@@ -116,6 +202,23 @@ implements  XRL_DecoderInterface
         $this->_prepareNextNode();
     }
 
+    /**
+     * Read a node from the document and throw
+     * an exception if it is not a text node.
+     * Otherwise, return its content.
+     *
+     * \param XMLReader $reader
+     *      Reader object the node will be read from.
+     *
+     * \retval string
+     *      The value of the text node.
+     *
+     * \throw InvalidArgumentException
+     *      Thrown whenever one of the following
+     *      conditions is met:
+     *      - We reached the end of the document.
+     *      - The next node was not a text node.
+     */
     protected function _parseText($reader)
     {
         $node = $this->_readNode($reader);
@@ -133,6 +236,28 @@ implements  XRL_DecoderInterface
         return $value;
     }
 
+    /**
+     * Check the type of a value.
+     *
+     * \param array $allowedTypes
+     *      Whitelist of allowed types.
+     *      If empty, any type is allowed.
+     *
+     * \param string $type
+     *      The actual type of the value
+     *      being tested.
+     *
+     * \param mixed $value
+     *      The value being tested.
+     *
+     * \retval mixed
+     *      The original value that was passed
+     *      to this method, if type allows.
+     *
+     * \throw InvalidArgumentException
+     *      The given type cannot be used
+     *      in this context (disallowed).
+     */
     static protected function _checkType(array $allowedTypes, $type, $value)
     {
         if (count($allowedTypes) && !in_array($type, $allowedTypes)) {
@@ -145,6 +270,26 @@ implements  XRL_DecoderInterface
         return $value;
     }
 
+    /**
+     * Decodes a value encoded using XML-RPC types.
+     *
+     * \param XMLReader $reader
+     *      Reader the value will be read from.
+     *
+     * \param array $allowedTypes
+     *      Whitelist will the names of the types
+     *      that are allowed in this context.
+     *
+     * \retval mixed
+     *      The value that was decoded, if any,
+     *      with the appropriate PHP type.
+     *
+     * \throw InvalidArgumentException
+     *      No value could be decoded (probably because
+     *      the input document was invalid) or the decoded
+     *      value was of a type that is not allowed in this
+     *      context.
+     */
     protected function _decodeValue($reader, array $allowedTypes = array())
     {
         // Support for the <nil> extension
@@ -291,6 +436,7 @@ implements  XRL_DecoderInterface
         return self::_checkType($allowedTypes, 'string', $value);
     }
 
+    /// \copydoc XRL_DecoderInterface::decodeRequest()
     public function decodeRequest($data)
     {
         if (!is_string($data))
@@ -347,6 +493,7 @@ implements  XRL_DecoderInterface
         return $request;
     }
 
+    /// \copydoc XRL_DecoderInterface::decodeResponse()
     public function decodeResponse($data)
     {
         if (!is_string($data))

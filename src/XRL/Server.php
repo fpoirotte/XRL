@@ -21,7 +21,8 @@
  * \brief
  *      A simple XML-RPC server.
  *
- * Instances of this class can be used as an array:
+ * This class uses dynamic properties to manager
+ * XML-RPC procedures:
  * \code
  *      // This registers the procedure "foo"
  *      // on this XML-RPC server. The function
@@ -59,6 +60,9 @@
  *          ...
  *      }
  * \endcode
+ *
+ * Complete example (located in example/server.php):
+ * \include server.php
  */
 class       XRL_Server
 extends     XRL_FactoryRegistry
@@ -124,13 +128,13 @@ implements  Countable,
      *      The name of the registered XML-RPC procedure
      *      to return.
      *
-     * \retval XRL_CallableInterface
+     * \retval mixed
      *      The callable responsible for the XML-RPC
-     *      procedure registered with the given name.
-     *
-     * \retval NULL
-     *      The given $func does not refer to an XML-RPC
-     *      procedure registered with this server.
+     *      procedure registered with the given name,
+     *      as an object implementing the
+     *      XRL_CallableInterface interface,
+     *      or \c NULL if the given name does not refer
+     *      to an XML-RPC procedure known to this server.
      *
      * \note
      *      In case the given procedure has not been
@@ -150,8 +154,8 @@ implements  Countable,
      *      must be verified.
      *
      * \retval bool
-     *      TRUE if the procedure exists,
-     *      FALSE otherwise.
+     *      \c TRUE if the procedure exists,
+     *      \c FALSE otherwise.
      */
     public function __isset($func)
     {
@@ -203,6 +207,12 @@ implements  Countable,
     /**
      * Handles an XML-RPC request and returns a response
      * for that request.
+     *
+     * \param string $data
+     *      (optional) An XML-RPC request to process,
+     *      as serialized XML. If omitted, this method
+     *      will try to retrieve the request directly
+     *      from the POST data sent to this PHP script.
      *
      * \retval XRL_ResponseInterface
      *      The response for that request. This response

@@ -16,9 +16,16 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      A factory that produces objects wrapping
+ *      XML-RPC responses in a way that makes it
+ *      easy to publish them.
+ */
 class       XRL_ResponseFactory
 implements  XRL_ResponseFactoryInterface
 {
+    /// \copydoc XRL_ResponseFactoryInterface::createResponse()
     public function createResponse($response)
     {
         return new XRL_Response($response);

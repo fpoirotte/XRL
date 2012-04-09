@@ -64,11 +64,6 @@ implements  XRL_CallableInterface
         $this->_representation  = $representation;
     }
 
-    static public function fromPHP($callable)
-    {
-        return new self($callable);
-    }
-
     /// \copydoc XRL_CallableInterface::getCallable()
     public function getCallable()
     {

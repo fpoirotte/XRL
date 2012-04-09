@@ -17,9 +17,14 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      A factory that creates new callable objects.
+ */
 class       XRL_CallableFactory
 implements  XRL_CallableFactoryInterface
 {
+    /// \copydoc XRL_CallableFactoryInterface::fromPHP()
     public function fromPHP($callable)
     {
         return new XRL_Callable($callable);

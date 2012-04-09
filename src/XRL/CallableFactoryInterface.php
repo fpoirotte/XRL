@@ -16,6 +16,11 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      Interface for a factory meant to create
+ *      callable objects.
+ */
 interface XRL_CallableFactoryInterface
 {
     /**
@@ -25,6 +30,9 @@ interface XRL_CallableFactoryInterface
      * \param mixed $callable
      *      A callable item. It must be compatible
      *      with the PHP callback pseudo-type.
+     *
+     * \retval XRL_CallableInterface
+     *      A callable object wrapping the PHP callback.
      *
      * \throw InvalidArgumentException
      *      The given item is not compatible

@@ -51,26 +51,13 @@ implements  XRL_RequestInterface
         $this->_params      = $params;
     }
 
-    /**
-     * Returns the remote procedure's name.
-     *
-     * \retval string
-     *      The name of the remote procedure this request
-     *      is meant to call.
-     */
+    /// \copydoc XRL_RequestInterface::getProcedure()
     public function getProcedure()
     {
         return $this->_procedure;
     }
 
-    /**
-     * Returns the parameters to pass
-     * to the remote procedure.
-     *
-     * \retval array
-     *      Parameters to pass to the
-     *      remote procedure.
-     */
+    /// \copydoc XRL_RequestInterface::getParams()
     public function getParams()
     {
         return $this->_params;
