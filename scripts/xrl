@@ -187,10 +187,10 @@ class XRL_CLI
         $o->_('          binary data).');
         $o->_('');
         $o->_('Example:');
-        $o->_('  %s %s foo int 42 bool on', array($prog, $url));
+        $o->_('  %s %s foo int 42 bool on', $prog, $url);
         $o->_('is the same as:');
         $o->_('  <'.'?php');
-        $o->_('      $client = new XRL_Client("%s");', array($url));
+        $o->_('      $client = new XRL_Client("%s");', $url);
         $o->_('      var_dump($client->foo(42, TRUE));');
         $o->_('  ?'.'>');
     }
