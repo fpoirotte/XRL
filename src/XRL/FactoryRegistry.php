@@ -111,7 +111,7 @@ implements      ArrayAccess
      * \param object $obj
      *      A factory implementing the $interface.
      *
-     * \throw /// @TODO
+     * \throw InvalidArgumentException
      *      Thrown when the given interface is not a string,
      *      \c $obj is not an object or it does not implement
      *      that interface, or the given interface was not
@@ -119,18 +119,32 @@ implements      ArrayAccess
      */
     public function offsetSet($interface, $obj)
     {
-        if (!is_string($interface))
-            ; /// @TODO
+        if (!is_string($interface)) {
+            throw new InvalidArgumentException(
+                'The interface name should be a string, not '.
+                gettype($interface)
+            );
+        }
 
-        if (!is_object($obj))
-            ; /// @TODO
+        if (!is_object($obj)) {
+            throw new InvalidArgumentException(
+                'The factory should be an object, not '.gettype($obj)
+            );
+        }
 
         $interface = strtolower($interface);
-        if (!isset($this->_interfaces[$interface]))
-            ; /// @TODO
+        if (!isset($this->_interfaces[$interface])) {
+            throw new InvalidArgumentException(
+                'No such interface "'.$interface.'"'
+            );
+        }
 
-        if (!($obj instanceof $interface))
-            ; /// @TODO
+        if (!($obj instanceof $interface)) {
+            throw new InvalidArgumentException(
+                'Instance of '.get_class($obj).
+                " does not implement ".$interface
+            );
+        }
 
         $this->_interfaces[$interface] = $obj;
     }
@@ -147,11 +161,18 @@ implements      ArrayAccess
      *      A factory implementing the given interface,
      *      or \c NULL if that interface was not registered
      *      as a dependency of this class.
+     *
+     * \throw InvalidArgumentException
+     *      The given interface name was not a string.
      */
     public function offsetGet($interface)
     {
-        if (!is_string($interface))
-            ; /// @TODO
+        if (!is_string($interface)) {
+            throw new InvalidArgumentException(
+                'The interface name should be a string, not '.
+                gettype($interface)
+            );
+        }
 
         $interface = strtolower($interface);
         return $this->_interfaces[$interface];
@@ -167,11 +188,18 @@ implements      ArrayAccess
      * \retval bool
      *      \c TRUE if this class depends on that factory
      *      interface, \c FALSE otherwise.
+     *
+     * \throw InvalidArgumentException
+     *      The given interface name was not a string.
      */
     public function offsetExists($interface)
     {
-        if (!is_string($interface))
-            return FALSE;
+        if (!is_string($interface)) {
+            throw new InvalidArgumentException(
+                'The interface name should be a string, not '.
+                gettype($interface)
+            );
+        }
 
         $interface = strtolower($interface);
         return isset($this->_interfaces[$interface]);
@@ -183,13 +211,15 @@ implements      ArrayAccess
      * \param string $interface
      *      (unused)
      *
-     * \throw /// @TODO
+     * \throw LogicException
      *      This exception is thrown for any attempt
      *      to undeclare a factory interface.
      */
     public function offsetUnset($interface)
     {
-        /// @TODO
+        throw new LogicException(
+            'Cannot undeclare factory for "'.$interface.'"'
+        );
     }
 }
 

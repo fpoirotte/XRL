@@ -149,7 +149,7 @@ extends XRL_FactoryRegistry
      *      this exception's getCode() and getMessage()
      *      methods to find out more about the error.
      *
-     * \throw @TODO: decide on what exception must be raised here.
+     * \throw RuntimeException
      *      Raised when this client wasn't able to query
      *      the remote server (such as when no connection
      *      could be established to it).
@@ -178,12 +178,15 @@ extends XRL_FactoryRegistry
         );
         stream_context_set_option($this->_context, $options);
 
-        $data = call_user_func(
+        $data = @call_user_func(
             $this->_fetcher,
             $this->_baseURL,
             FALSE,
             $this->_context
         );
+        if ($data === FALSE)
+            throw new RuntimeException('The server could not be queried');
+
         $result = $decoder->decodeResponse($data);
         return $result;
     }

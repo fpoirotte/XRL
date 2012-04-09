@@ -37,11 +37,15 @@ implements  XRL_DecoderInterface
      * \param bool $validate
      *      Whether the decoder should validate
      *      its input (\c TRUE) or not (\c FALSE).
+     *
+     * \throw InvalidArgumentException
+     *      The value passed for \c $validate was
+     *      not a boolean.
      */
     public function __construct($validate = TRUE)
     {
         if (!is_bool($validate))
-            ; /// @TODO
+            throw new InvalidArgumentException('Not a boolean');
 
         $this->_validate    = $validate;
         $this->_currentNode = NULL;
@@ -60,6 +64,10 @@ implements  XRL_DecoderInterface
      * \retval XMLReader
      *      An XML reader for the given data.
      *
+     * \throw InvalidArgumentException
+     *      You tried to pass something that is not
+     *      a boolean as the \c $request parameter.
+     *
      * \note
      *      The reader is set to validate the document
      *      on the fly if that's what this decoder was
@@ -68,7 +76,7 @@ implements  XRL_DecoderInterface
     protected function _getReader($data, $request)
     {
         if (!is_bool($request))
-            ; /// @TODO
+            throw new InvalidArgumentException('Not a boolean');
 
         $this->_currentNode = NULL;
         $reader = new XMLReader();
@@ -440,7 +448,7 @@ implements  XRL_DecoderInterface
     public function decodeRequest($data)
     {
         if (!is_string($data))
-            ; /// @TODO
+            throw new InvalidArgumentException('A string was expected');
 
         $reader = $this->_getReader($data, TRUE);
         $this->_expectStartTag($reader, 'methodCall');
@@ -497,7 +505,7 @@ implements  XRL_DecoderInterface
     public function decodeResponse($data)
     {
         if (!is_string($data))
-            ; /// @TODO
+            throw new InvalidArgumentException('A string was expected');
 
         $error  = NULL;
         $reader = $this->_getReader($data, FALSE);

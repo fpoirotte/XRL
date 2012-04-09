@@ -29,6 +29,12 @@ interface XRL_DecoderInterface
      *      An XML-RPC request as serialized XML.
      *
      * \retval XRL_Request
+     *      An object representing an XML-RPC request.
+     *
+     * \throw InvalidArgumentException
+     *      The given \c $data was invalid. For example,
+     *      it wasn't a string, it didn"t contain any XML
+     *      or the request was malformed.
      */
     public function decodeRequest($data);
 
@@ -48,6 +54,11 @@ interface XRL_DecoderInterface
      *      and \c getMessage() methods can be used
      *      to retrieve the original failure's code
      *      and description, respectively.
+     *
+     * \throw InvalidArgumentException
+     *      The given \c $data was invalid. For example,
+     *      it wasn't a string, it didn"t contain any XML
+     *      or the request was malformed.
      */
     public function decodeResponse($data);
 }
