@@ -150,7 +150,7 @@ class XRL_CLI
         $o->_('Options:');
         $o->_(' -d               Debug mode. Display all XML exchanges');
         $o->_('                  between the XML-RPC client and server.');
-        $o->_(' -n               Dry run. Don\'t send the actual query');
+        $o->_(' -n               Dry run. Don\'t send the actual query.');
         $o->_('                  Use with -d to debug encoder issues.');
         $o->_(' -t <timezone>    Use this timezone to convert dates.');
         $o->_('                  Eg. "Europe/Paris".');
@@ -540,7 +540,7 @@ class XRL_CLI
 
         $xml = $encoder->encodeRequest($request);
         if ($options['d']) {
-            echo "Sent:".PHP_EOL;
+            echo "Request:".PHP_EOL;
             echo trim($xml).PHP_EOL.PHP_EOL;
         }
 
@@ -570,7 +570,7 @@ class XRL_CLI
         }
 
         if ($options['d']) {
-            echo 'Received:'.PHP_EOL;
+            echo 'Response:'.PHP_EOL;
             echo trim($data).PHP_EOL.PHP_EOL;
         }
         try {
