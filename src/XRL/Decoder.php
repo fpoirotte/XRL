@@ -333,7 +333,16 @@ implements  XRL_DecoderInterface
                 continue;
             }
 
-            $value = $this->_parseText($reader);
+            try {
+                $value = $this->_parseText($reader);
+            }
+            catch (InvalidArgumentException $e) {
+                // Both "string" & "base64" may refer
+                // to an empty string.
+                if ($type != 'string' && $type != 'base64')
+                    throw $e;
+                $value = '';
+            }
             $this->_expectEndTag($reader, $type);
 
             switch ($type) {

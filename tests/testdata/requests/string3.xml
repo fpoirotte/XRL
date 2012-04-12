@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<methodCall>
+ <methodName>stringParam</methodName>
+ <params>
+  <param>
+   <value><string>test</string></value>
+  </param>
+ </params>
+</methodCall>
