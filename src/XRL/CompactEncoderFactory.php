@@ -28,10 +28,25 @@
 class       XRL_CompactEncoderFactory
 implements  XRL_EncoderFactoryInterface
 {
+    /// Timezone used to encode date/times.
+    protected $_timezone;
+
+    /**
+     * Creates a new factory for compact encoders.
+     *
+     * \param DateTimeZone $timezone
+     *      Information on the timezone for which
+     *      date/times should be encoded.
+     */
+    public function __construct(DateTimeZone $timezone)
+    {
+        $this->_timezone = $timezone;
+    }
+
     /// \copydoc XRL_EncoderFactoryInterface::createEncoder()
     public function createEncoder()
     {
-        return new XRL_Encoder(FALSE);
+        return new XRL_Encoder($this->_timezone, FALSE);
     }
 }
 

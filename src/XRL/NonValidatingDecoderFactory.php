@@ -24,10 +24,26 @@
 class       XRL_NonValidatingDecoderFactory
 implements  XRL_DecoderFactoryInterface
 {
+    /// Timezone used to decode date/times.
+    protected $_timezone;
+
+    /**
+     * Creates a new factory for a decoder that
+     * does not validate its input.
+     *
+     * \param DateTimeZone $timezone
+     *      Information on the timezone incoming
+     *      date/times come from.
+     */
+    public function __construct(DateTimeZone $timezone)
+    {
+        $this->_timezone = $timezone;
+    }
+
     /// \copydoc XRL_DecoderFactoryInterface::createDecoder()
     public function createDecoder()
     {
-        return new XRL_Decoder(FALSE);
+        return new XRL_Decoder($this->_timezone, FALSE);
     }
 }
 
