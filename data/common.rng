@@ -87,10 +87,7 @@
             <zeroOrMore>
                 <element name="member">
                     <element name="name">
-                        <choice>
-                            <ref name="int"/>
-                            <data type="string"/>
-                        </choice>
+                        <data type="string"/>
                     </element>
 
                     <element name="value">

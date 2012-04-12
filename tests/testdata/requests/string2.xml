@@ -3,7 +3,9 @@
  <methodName>stringParam</methodName>
  <params>
   <param>
-   <value>test</value>
+   <value>
+    <string>test</string>
+   </value>
   </param>
  </params>
 </methodCall>

@@ -8,7 +8,9 @@
    </value>
   </param>
   <param>
-   <value>test</value>
+   <value>
+    <string>test</string>
+   </value>
   </param>
  </params>
 </methodCall>

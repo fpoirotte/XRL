@@ -21,45 +21,36 @@
  * \brief
  *      An XML-RPC encoder that can produce either
  *      compact documents or pretty documents.
- *
- * A compact document is one where the bare minimum
- * of text is used to represent the document, whereas
- * a pretty document contains extra whitespace and
- * indications to make it easier to read.
  */
 class       XRL_Encoder
 implements  XRL_EncoderInterface
 {
-    /// Make the output compact, ie. use as few text as required.
-    const OUTPUT_COMPACT    = 0;
+    /// Whether the output should be indented (\c TRUE) or not (\c FALSE).
+    protected $_indent;
 
-    /// Make the output pretty, ie. add extra indentation for readibility.
-    const OUTPUT_PRETTY     = 1;
-
-    /// Output format (OUTPUT_COMPACT or OUTPUT_PRETTY).
-    protected $_format;
+    /// Whether the "\<string\>" tag should be used (\c TRUE) or not (\c FALSE).
+    protected $_stringTag;
 
     /**
      * Create a new XML-RPC encoder.
      *
-     * \param opaque $format
-     *      Either XRL_Encoder::OUTPUT_COMPACT
-     *      or XRL_Encoder::OUTPUT_PRETTY.
+     * \param bool $indent
+     *      Whether the XML produced should be indented (\c TRUE)
+     *      or not (\c FALSE).
      *
-     * \note
-     *      Both the compact and pretty format create
-     *      valid XML-RPC requests and responses.
-     *      The pretty format just add extra indentation
-     *      to make it easier for a human being to read
-     *      the generated output.
+     * \param bool $stringTag
+     *      Whether strings should be encoded using the \<string\>
+     *      tag (\c TRUE) or using the defaut type (\c FALSE).
      */
-    public function __construct($format = self::OUTPUT_COMPACT)
+    public function __construct($indent = FALSE, $stringTag = FALSE)
     {
-        if ($format != self::OUTPUT_PRETTY &&
-            $format != self::OUTPUT_COMPACT)
-            throw new InvalidArgumentException('Invalid format');
+        if (!is_bool($indent))
+            throw new InvalidArgumentException('$indent must be a boolean');
+        if (!is_bool($stringTag))
+            throw new InvalidArgumentException('$stringTag must be a boolean');
 
-        $this->_format = $format;
+        $this->_indent      = $indent;
+        $this->_stringTag   = $stringTag;
     }
 
     /**
@@ -73,8 +64,8 @@ implements  XRL_EncoderInterface
     {
         $writer = new XMLWriter();
         $writer->openMemory();
-        if ($this->_format == self::OUTPUT_PRETTY) {
-             $writer->setIndent(TRUE);
+        if ($this->_indent) {
+            $writer->setIndent(TRUE);
             $writer->startDocument('1.0', 'UTF-8');
         }
         else {
@@ -155,7 +146,7 @@ implements  XRL_EncoderInterface
      *          "string", where the content of the string is the object's
      *          representation in serialized form).
      */
-    static protected function _writeValue(XMLWriter $writer, $value)
+    protected function _writeValue(XMLWriter $writer, $value)
     {
         // Support for the <nil> extension
         // (http://ontosys.com/xml-rpc/extensions.php)
@@ -170,8 +161,13 @@ implements  XRL_EncoderInterface
 
         if (is_string($value)) {
             // Encode as a regular string if possible.
-            if (self::_isUTF8($value))
+            if (self::_isUTF8($value)) {
+                // Use a <string> tag if this is what should be done.
+                if ($this->_stringTag)
+                    return $writer->writeElement('string', $value);
+                // Otherwise, rely on "string" being the default type.
                 return $writer->text($value);
+            }
             // Otherwise, use a base64-encoded string.
             return $writer->writeElement('base64', base64_encode($value));
         }
@@ -197,11 +193,11 @@ implements  XRL_EncoderInterface
                 foreach ($value as $key => $val) {
                     $writer->startElement('member');
                     $writer->startElement('name');
-                    self::_writeValue($writer, $key);
+                    $writer->text((string) $key);
                     $writer->endElement();
 
                     $writer->startElement('value');
-                    self::_writeValue($writer, $val);
+                    $this->_writeValue($writer, $val);
                     $writer->endElement();
                     $writer->endElement();
                 }
@@ -214,7 +210,7 @@ implements  XRL_EncoderInterface
             $writer->startElement('data');
             foreach ($value as $val) {
                 $writer->startElement('value');
-                self::_writeValue($writer, $val);
+                $this->_writeValue($writer, $val);
                 $writer->endElement();
             }
             $writer->endElement();
@@ -253,7 +249,7 @@ implements  XRL_EncoderInterface
         $writer->endDocument();
         $result = $writer->outputMemory(TRUE);
 
-        if ($this->_format == self::OUTPUT_COMPACT) {
+        if (!$this->_indent) {
             // Remove the XML declaration for an even
             // more compact result.
             if (!strncmp($result, '<'.'?xml', 5)) {
@@ -279,7 +275,7 @@ implements  XRL_EncoderInterface
             foreach ($request->getParams() as $param) {
                 $writer->startElement('param');
                 $writer->startElement('value');
-                self::_writeValue($writer, $param);
+                $this->_writeValue($writer, $param);
                 $writer->endElement();
                 $writer->endElement();
             }
@@ -297,7 +293,7 @@ implements  XRL_EncoderInterface
         $writer->startElement('methodResponse');
         $writer->startElement('fault');
         $writer->startElement('value');
-        self::_writeValue(
+        $this->_writeValue(
             $writer,
             array(
                 'faultCode'     => $error->getCode(),
@@ -319,7 +315,7 @@ implements  XRL_EncoderInterface
         $writer->startElement('params');
         $writer->startElement('param');
         $writer->startElement('value');
-        self::_writeValue($writer, $response);
+        $this->_writeValue($writer, $response);
         $writer->endElement();
         $writer->endElement();
         $writer->endElement();

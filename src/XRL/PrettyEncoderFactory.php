@@ -20,9 +20,8 @@
  * \brief
  *      A factory that returns pretty encoders.
  *
- * A pretty encoder is one that adds extra characters
- * to an XML document (such as indentation) to make it
- * easier to read.
+ * A pretty encoder is one that adds extra indentation
+ * to an XML document to make it easier to read.
  */
 class       XRL_PrettyEncoderFactory
 implements  XRL_EncoderFactoryInterface
@@ -30,7 +29,7 @@ implements  XRL_EncoderFactoryInterface
     /// \copydoc XRL_EncoderFactoryInterface::createEncoder()
     public function createEncoder()
     {
-        return new XRL_Encoder(XRL_Encoder::OUTPUT_PRETTY);
+        return new XRL_Encoder(TRUE);
     }
 }
 

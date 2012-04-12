@@ -6,16 +6,16 @@
    <value>
     <struct>
      <member>
-      <name>
-       <int>42</int>
-      </name>
-      <value>foo</value>
+      <name>42</name>
+      <value>
+       <string>foo</string>
+      </value>
      </member>
      <member>
-      <name>
-       <int>43</int>
-      </name>
-      <value>bar</value>
+      <name>43</name>
+      <value>
+       <string>bar</string>
+      </value>
      </member>
     </struct>
    </value>

@@ -8,7 +8,9 @@
       <value>
        <int>42</int>
       </value>
-      <value>test</value>
+      <value>
+       <string>test</string>
+      </value>
      </data>
     </array>
    </value>

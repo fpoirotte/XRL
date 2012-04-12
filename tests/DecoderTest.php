@@ -202,20 +202,6 @@ extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider requestProvider
      */
-    public function testDecodeRequestWithStringParameter3($xml)
-    {
-        $request = $this->_decoder->decodeRequest($xml);
-        $this->assertInstanceOf('XRL_Request', $request);
-
-        $params = $request->getParams();
-        $this->assertEquals('stringParam', $request->getProcedure());
-        $this->assertEquals(1, count($params));
-        $this->assertSame('test', $params[0]);
-    }
-
-    /**
-     * @dataProvider requestProvider
-     */
     public function testDecodeRequestWithDoubleParameter($xml)
     {
         $request = $this->_decoder->decodeRequest($xml);

@@ -23,7 +23,7 @@
  * A compact encoder is one that uses the bare minimum
  * of text to represent an XML document. In particular,
  * the resulting document does not contain any extra
- * whitespace and does not start with an XML declaration.
+ * indentation and does not start with an XML declaration.
  */
 class       XRL_CompactEncoderFactory
 implements  XRL_EncoderFactoryInterface
@@ -31,7 +31,7 @@ implements  XRL_EncoderFactoryInterface
     /// \copydoc XRL_EncoderFactoryInterface::createEncoder()
     public function createEncoder()
     {
-        return new XRL_Encoder(XRL_Encoder::OUTPUT_COMPACT);
+        return new XRL_Encoder(FALSE);
     }
 }
 

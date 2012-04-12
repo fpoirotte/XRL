@@ -7,7 +7,9 @@
     <struct>
      <member>
       <name>foo</name>
-      <value>test</value>
+      <value>
+       <string>test</string>
+      </value>
      </member>
      <member>
       <name>bar</name>
