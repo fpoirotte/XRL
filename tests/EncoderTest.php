@@ -24,6 +24,9 @@ extends PHPUnit_Framework_TestCase
 {
     protected function _getXML($folder, $filename)
     {
+        // Emulate a server located in Ireland.
+        $tz = new DateTimeZone("Europe/Dublin");
+
         $content = file_get_contents(
             dirname(__FILE__) .
             DIRECTORY_SEPARATOR . 'testdata' .
@@ -32,12 +35,12 @@ extends PHPUnit_Framework_TestCase
         );
 
         // Indent, use <string>.
-        $result = array(array(new XRL_Encoder(TRUE, TRUE), $content, TRUE));
+        $result = array(array(new XRL_Encoder($tz, TRUE, TRUE), $content, TRUE));
 
         // Stripped indented.
         $stripped = preg_replace('#\\s*<string>|</string>\\s*#', '', $content);
         // Indent, don't use <string>
-        $result[] = array(new XRL_Encoder(TRUE, FALSE), $stripped, TRUE);
+        $result[] = array(new XRL_Encoder($tz, TRUE, FALSE), $stripped, TRUE);
 
         // Remove all whitespaces.
         $content = str_replace(array(' ', "\n", "\r", "\t"), '', $content);
@@ -50,12 +53,12 @@ extends PHPUnit_Framework_TestCase
         );
 
         // No indent, use <string>
-        $result[] = array(new XRL_Encoder(FALSE, TRUE), $content, FALSE);
+        $result[] = array(new XRL_Encoder($tz, FALSE, TRUE), $content, FALSE);
 
         // Stripped unindented.
         $stripped = str_replace(array('<string>', '</string>'), '', $content);
         // No indent, don't use <string>
-        $result[] = array(new XRL_Encoder(FALSE, FALSE), $stripped, FALSE);
+        $result[] = array(new XRL_Encoder($tz, FALSE, FALSE), $stripped, FALSE);
 
         return $result;
     }
@@ -86,6 +89,7 @@ extends PHPUnit_Framework_TestCase
             'Numeric'       => 'num_array',
             'Associative'   => 'assoc_array',
             'Binary'        => 'binary',
+            'DateTime'      => 'datetime',
         );
 
         if (isset($mapping[$prefix]))
@@ -187,12 +191,18 @@ extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $received, var_export($encoder, TRUE));
     }
 
-#    public function testEncodeRequestWithDateTimeParameter()
-#    {
-#        $request    = new XRL_Request('dateTimeParam', array());
-#        $received   = $encoder->encodeRequest($request);
-#        $this->assertEquals($this->METHOD_DATETIME_PARAM, $received);
-#    }
+    /**
+     * @dataProvider requestProvider
+     */
+    public function testEncodeRequestWithDateTimeParameter($encoder, $expected)
+    {
+        // Emulate a client located in Metropolitain France.
+        $tz         = new DateTimeZone('Europe/Paris');
+        $date       = new DateTime('1985-11-28T14:00:00', $tz);
+        $request    = new XRL_Request('dateTimeParam', array($date));
+        $received   = $encoder->encodeRequest($request);
+        $this->assertEquals($expected, $received, var_export($encoder, TRUE));
+    }
 
     /**
      * @dataProvider requestProvider

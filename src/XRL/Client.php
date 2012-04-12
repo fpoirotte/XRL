@@ -51,9 +51,6 @@ extends XRL_FactoryRegistry
     /// The remote XML-RPC server's base URL.
     protected $_baseURL;
 
-    /// A DateTimeZone object representing the server's timezone.
-    protected $_timezone;
-
     /// A stream context to use when querying the server.
     protected $_context;
 
@@ -96,7 +93,7 @@ extends XRL_FactoryRegistry
     )
     {
         if ($timezone === NULL)
-            $timezone = date_default_timezone_get();
+            $timezone = @date_default_timezone_get();
         if ($context === NULL)
             $context = stream_context_get_default();
 
@@ -105,7 +102,7 @@ extends XRL_FactoryRegistry
 
         $this->_baseURL = $baseURL;
         try {
-            $this->_timezone = new DateTimeZone($timezone);
+            $timezone = new DateTimeZone($timezone);
         }
         catch (Exception $e) {
             throw new InvalidArgumentException($e->getMessage(), $e->getCode());
@@ -115,10 +112,10 @@ extends XRL_FactoryRegistry
         $this->_fetcher     = 'file_get_contents';
         $this->_interfaces  = array(
             'xrl_encoderfactoryinterface'   =>
-                new XRL_CompactEncoderFactory(),
+                new XRL_CompactEncoderFactory($timezone),
 
             'xrl_decoderfactoryinterface'   =>
-                new XRL_ValidatingDecoderFactory(),
+                new XRL_ValidatingDecoderFactory($timezone),
 
             'xrl_requestfactoryinterface'   =>
                 new XRL_RequestFactory(),

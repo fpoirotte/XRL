@@ -22,15 +22,11 @@ include(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'helpers.php');
 class   DecoderTest
 extends PHPUnit_Framework_TestCase
 {
-    protected $_decoder;
-
-    public function setUp()
-    {
-        $this->_decoder = new XRL_Decoder(FALSE);
-    }
-
     protected function _getXML($folder, $filename)
     {
+        // Emulate a server located in Ireland.
+        $tz = new DateTimeZone("Europe/Dublin");
+
         $content = file_get_contents(
             dirname(__FILE__) .
             DIRECTORY_SEPARATOR . 'testdata' .
@@ -38,7 +34,10 @@ extends PHPUnit_Framework_TestCase
             DIRECTORY_SEPARATOR . $filename . '.xml'
         );
 
-        $result = array(array($content, TRUE));
+        $result = array(
+            array(new XRL_Decoder($tz, TRUE), $content, TRUE),
+            array(new XRL_Decoder($tz, FALSE), $content, TRUE),
+        );
 
         // Remove all whitespaces.
         $content = str_replace(array(' ', "\n", "\r", "\t"), '', $content);
@@ -50,7 +49,8 @@ extends PHPUnit_Framework_TestCase
             $content
         );
 
-        $result[] = array($content, FALSE);
+        $result[] = array(new XRL_Decoder($tz, TRUE), $content, FALSE);
+        $result[] = array(new XRL_Decoder($tz, FALSE), $content, FALSE);
         return $result;
     }
 
@@ -80,6 +80,7 @@ extends PHPUnit_Framework_TestCase
             'Numeric'       => 'num_array',
             'Associative'   => 'assoc_array',
             'Binary'        => 'binary',
+            'DateTime'      => 'datetime',
         );
 
         if (isset($mapping[$prefix]))
@@ -104,9 +105,9 @@ extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider requestProvider
      */
-    public function testDecodeRequestWithEmptyParameters($xml)
+    public function testDecodeRequestWithEmptyParameters($decoder, $xml)
     {
-        $request = $this->_decoder->decodeRequest($xml);
+        $request = $decoder->decodeRequest($xml);
         $this->assertInstanceOf('XRL_Request', $request);
 
         $params = $request->getParams();
@@ -117,9 +118,9 @@ extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider requestProvider
      */
-    public function testDecodeRequestWithMultipleParameters($xml)
+    public function testDecodeRequestWithMultipleParameters($decoder, $xml)
     {
-        $request = $this->_decoder->decodeRequest($xml);
+        $request = $decoder->decodeRequest($xml);
         $this->assertInstanceOf('XRL_Request', $request);
 
         $params = $request->getParams();
@@ -132,9 +133,9 @@ extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider requestProvider
      */
-    public function testDecodeRequestWithIntegerParameter($xml)
+    public function testDecodeRequestWithIntegerParameter($decoder, $xml)
     {
-        $request = $this->_decoder->decodeRequest($xml);
+        $request = $decoder->decodeRequest($xml);
         $this->assertInstanceOf('XRL_Request', $request);
 
         $params = $request->getParams();
@@ -146,9 +147,9 @@ extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider requestProvider
      */
-    public function testDecodeRequestWithBooleanParameter($xml)
+    public function testDecodeRequestWithBooleanParameter($decoder, $xml)
     {
-        $request = $this->_decoder->decodeRequest($xml);
+        $request = $decoder->decodeRequest($xml);
         $this->assertInstanceOf('XRL_Request', $request);
 
         $params = $request->getParams();
@@ -160,9 +161,9 @@ extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider requestProvider
      */
-    public function testDecodeRequestWithBooleanParameter2($xml)
+    public function testDecodeRequestWithBooleanParameter2($decoder, $xml)
     {
-        $request = $this->_decoder->decodeRequest($xml);
+        $request = $decoder->decodeRequest($xml);
         $this->assertInstanceOf('XRL_Request', $request);
 
         $params = $request->getParams();
@@ -174,9 +175,9 @@ extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider requestProvider
      */
-    public function testDecodeRequestWithStringParameter($xml)
+    public function testDecodeRequestWithStringParameter($decoder, $xml)
     {
-        $request = $this->_decoder->decodeRequest($xml);
+        $request = $decoder->decodeRequest($xml);
         $this->assertInstanceOf('XRL_Request', $request);
 
         $params = $request->getParams();
@@ -188,9 +189,9 @@ extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider requestProvider
      */
-    public function testDecodeRequestWithStringParameter2($xml)
+    public function testDecodeRequestWithStringParameter2($decoder, $xml)
     {
-        $request = $this->_decoder->decodeRequest($xml);
+        $request = $decoder->decodeRequest($xml);
         $this->assertInstanceOf('XRL_Request', $request);
 
         $params = $request->getParams();
@@ -202,9 +203,9 @@ extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider requestProvider
      */
-    public function testDecodeRequestWithDoubleParameter($xml)
+    public function testDecodeRequestWithDoubleParameter($decoder, $xml)
     {
-        $request = $this->_decoder->decodeRequest($xml);
+        $request = $decoder->decodeRequest($xml);
         $this->assertInstanceOf('XRL_Request', $request);
 
         $params = $request->getParams();
@@ -213,19 +214,29 @@ extends PHPUnit_Framework_TestCase
         $this->assertSame(3.14, $params[0]);
     }
 
-#    public function testDecodeRequestWithDateTimeParameter()
-#    {
-#        $request    = new XRL_Request('dateTimeParam', array());
-#        $received   = $this->_decoder->decodeRequest($request);
-#        $this->assertEquals($this->METHOD_DATETIME_PARAM, $received);
-#    }
+    /**
+     * @dataProvider requestProvider
+     */
+    public function testDecodeRequestWithDateTimeParameter($decoder, $xml)
+    {
+        $request = $decoder->decodeRequest($xml);
+        $this->assertInstanceOf('XRL_Request', $request);
+
+        $params = $request->getParams();
+        $this->assertEquals('dateTimeParam', $request->getProcedure());
+        $this->assertEquals(1, count($params));
+        // Emulate a client located in Metropolitain France.
+        $tz         = new DateTimeZone('Europe/Paris');
+        $reference  = new DateTime('1985-11-28T14:00:00+0100', $tz);
+        $this->assertEquals($reference->format('U'), $params[0]->format('U'));
+    }
 
     /**
      * @dataProvider requestProvider
      */
-    public function testDecodeRequestWithBinaryParameter($xml)
+    public function testDecodeRequestWithBinaryParameter($decoder, $xml)
     {
-        $request = $this->_decoder->decodeRequest($xml);
+        $request = $decoder->decodeRequest($xml);
         $this->assertInstanceOf('XRL_Request', $request);
 
         $params = $request->getParams();
@@ -237,10 +248,10 @@ extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider requestProvider
      */
-    public function testDecodeRequestWithNumericArray($xml)
+    public function testDecodeRequestWithNumericArray($decoder, $xml)
     {
         $array      = array('test', 42);
-        $request    = $this->_decoder->decodeRequest($xml);
+        $request    = $decoder->decodeRequest($xml);
         $this->assertInstanceOf('XRL_Request', $request);
 
         $params = $request->getParams();
@@ -252,10 +263,10 @@ extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider requestProvider
      */
-    public function testDecodeRequestWithNumericArray2($xml)
+    public function testDecodeRequestWithNumericArray2($decoder, $xml)
     {
         $array      = array();
-        $request    = $this->_decoder->decodeRequest($xml);
+        $request    = $decoder->decodeRequest($xml);
         $this->assertInstanceOf('XRL_Request', $request);
 
         $params = $request->getParams();
@@ -267,10 +278,10 @@ extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider requestProvider
      */
-    public function testDecodeRequestWithAssociativeArray($xml)
+    public function testDecodeRequestWithAssociativeArray($decoder, $xml)
     {
         $array      = array('foo' => 'test', 'bar' => 42);
-        $request    = $this->_decoder->decodeRequest($xml);
+        $request    = $decoder->decodeRequest($xml);
         $this->assertInstanceOf('XRL_Request', $request);
 
         $params = $request->getParams();
@@ -282,10 +293,10 @@ extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider requestProvider
      */
-    public function testDecodeRequestWithAssociativeArray2($xml)
+    public function testDecodeRequestWithAssociativeArray2($decoder, $xml)
     {
         $array      = array('foo', 42 => 'bar');
-        $request    = $this->_decoder->decodeRequest($xml);
+        $request    = $decoder->decodeRequest($xml);
         $this->assertInstanceOf('XRL_Request', $request);
 
         $params = $request->getParams();
@@ -297,10 +308,10 @@ extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider requestProvider
      */
-    public function testDecodeRequestWithAssociativeArray3($xml)
+    public function testDecodeRequestWithAssociativeArray3($decoder, $xml)
     {
         $array      = array(42 => 'foo', 'bar');
-        $request    = $this->_decoder->decodeRequest($xml);
+        $request    = $decoder->decodeRequest($xml);
         $this->assertInstanceOf('XRL_Request', $request);
 
         $params = $request->getParams();
@@ -312,18 +323,18 @@ extends PHPUnit_Framework_TestCase
 #    public function testDecodeRequestWithObject()
 #    {
 #        $request    = new XRL_Request('objParam', array());
-#        $received   = $this->_decoder->decodeRequest($request);
+#        $received   = $decoder->decodeRequest($request);
 #        $this->assertEquals($this->METHOD_OBJ_PARAM, $received);
 #    }
 
     /**
      * @dataProvider responseProvider
      */
-    public function testDecodeFailure($xml, $indented)
+    public function testDecodeFailure($decoder, $xml, $indented)
     {
         $response = NULL;
         try {
-            $this->_decoder->decodeResponse($xml);
+            $decoder->decodeResponse($xml);
         }
         catch (Exception $response) {
             // Nothing to do here.
@@ -343,10 +354,10 @@ extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider responseProvider
      */
-    public function testDecodeSuccessfulResponse($xml)
+    public function testDecodeSuccessfulResponse($decoder, $xml)
     {
         $expected = array(42, 'test');
-        $response = $this->_decoder->decodeResponse($xml);
+        $response = $decoder->decodeResponse($xml);
         $this->assertSame($expected, $response);
     }
 }

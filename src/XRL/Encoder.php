@@ -31,8 +31,15 @@ implements  XRL_EncoderInterface
     /// Whether the "\<string\>" tag should be used (\c TRUE) or not (\c FALSE).
     protected $_stringTag;
 
+    /// Timezone used to encode date/times.
+    protected $_timezone;
+
     /**
      * Create a new XML-RPC encoder.
+     *
+     * \param DateTimeZone $timezone
+     *      Information on the timezone for which
+     *      date/times should be encoded.
      *
      * \param bool $indent
      *      Whether the XML produced should be indented (\c TRUE)
@@ -41,8 +48,16 @@ implements  XRL_EncoderInterface
      * \param bool $stringTag
      *      Whether strings should be encoded using the \<string\>
      *      tag (\c TRUE) or using the defaut type (\c FALSE).
+     *
+     * \throw InvalidArgumentException
+     *      An invalid value was passed for either the \c $indent
+     *      or \c $stringTag argument.
      */
-    public function __construct($indent = FALSE, $stringTag = FALSE)
+    public function __construct(
+        DateTimeZone    $timezone,
+                        $indent     = FALSE,
+                        $stringTag  = FALSE
+    )
     {
         if (!is_bool($indent))
             throw new InvalidArgumentException('$indent must be a boolean');
@@ -51,6 +66,7 @@ implements  XRL_EncoderInterface
 
         $this->_indent      = $indent;
         $this->_stringTag   = $stringTag;
+        $this->_timezone    = $timezone;
     }
 
     /**
@@ -221,9 +237,14 @@ implements  XRL_EncoderInterface
         if (!is_object($value))
             throw new InvalidArgumentException('Unsupported type');
 
-        /// @TODO: special support for DateTime objects.
         if ($value instanceof DateTime) {
-            
+            // PHP has serious issues with timezone handling.
+            // Also, DateTime::getTimestamp() only exists since PHP 5.3.0.
+            // As a workaround, we use format(), specifying a UNIX timestamp
+            // as the format to use, which we then reinject in a new DateTime.
+            $value = new DateTime('@'.$value->format('U'), $this->_timezone);
+            $value = $value->format('Y-m-d\\TH:i:s');
+            return $writer->writeElement('dateTime.iso8601', $value);
         }
 
         if (($value instanceof Serializable) ||

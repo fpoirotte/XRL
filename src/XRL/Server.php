@@ -75,15 +75,25 @@ implements  Countable,
     /**
      * Create a new XML-RPC server.
      */
-    public function __construct()
+    public function __construct($timezone   = NULL)
     {
+        if ($timezone === NULL)
+            $timezone = @date_default_timezone_get();
+
+        try {
+            $timezone = new DateTimeZone($timezone);
+        }
+        catch (Exception $e) {
+            throw new InvalidArgumentException($e->getMessage(), $e->getCode());
+        }
+
         $this->_funcs           = array();
         $this->_interfaces      = array(
             'xrl_encoderfactoryinterface'   =>
-                new XRL_CompactEncoderFactory(),
+                new XRL_CompactEncoderFactory($timezone),
 
             'xrl_decoderfactoryinterface'   =>
-                new XRL_ValidatingDecoderFactory(),
+                new XRL_ValidatingDecoderFactory($timezone),
 
             'xrl_callablefactoryinterface'  =>
                 new XRL_CallableFactory(),

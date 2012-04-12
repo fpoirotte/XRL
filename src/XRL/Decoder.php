@@ -31,8 +31,15 @@ implements  XRL_DecoderInterface
     /// The XRL_Node currently being processed.
     protected $_currentNode;
 
+    /// Timezone used to decode date/times.
+    protected $_timezone;
+
     /**
      * Creates a new decoder.
+     *
+     * \param DateTimeZone $timezone
+     *      Information on the timezone incoming
+     *      date/times come from.
      *
      * \param bool $validate
      *      Whether the decoder should validate
@@ -42,13 +49,14 @@ implements  XRL_DecoderInterface
      *      The value passed for \c $validate was
      *      not a boolean.
      */
-    public function __construct($validate = TRUE)
+    public function __construct(DateTimeZone $timezone, $validate = TRUE)
     {
         if (!is_bool($validate))
             throw new InvalidArgumentException('Not a boolean');
 
         $this->_validate    = $validate;
         $this->_currentNode = NULL;
+        $this->_timezone    = $timezone;
     }
 
     /**
@@ -196,7 +204,8 @@ implements  XRL_DecoderInterface
         if ($type != XMLReader::END_ELEMENT) {
             throw new InvalidArgumentException(
                 "Expected a closing $expectedTag tag ".
-                "but got a node of type #$type instead"
+                "but got a node o        DateTimeZone    $timezone,
+f type #$type instead"
             );
         }
 
@@ -365,7 +374,10 @@ implements  XRL_DecoderInterface
                     break;
 
                 case 'dateTime.iso8601':
-                    $value = NULL; /// @TODO
+                    $result = new DateTime($value, $this->_timezone);
+                    if ($result->format('Y-m-d\\TH:i:s') != $value)
+                        throw new InvalidArgumentException('Invalid date/time');
+                    $value = $result;
                     break;
 
                 case 'base64':
