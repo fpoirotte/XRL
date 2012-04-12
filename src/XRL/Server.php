@@ -74,6 +74,20 @@ implements  Countable,
 
     /**
      * Create a new XML-RPC server.
+     *
+     * \param string $timezone
+     *      (optional) The name of the timezone the remote server
+     *      is in (eg. "Europe/Paris"). This parameter is used
+     *      to represent dates and times using the proper timezone
+     *      before sending them to the server.
+     *      If omitted, the client's current timezone is used.
+     *
+     * \note
+     *      See http://php.net/manual/en/timezones.php for a list
+     *      of valid timezone names supported by PHP.
+     *
+     * \throw InvalidArgumentException
+     *      The given timezone is invalid.
      */
     public function __construct($timezone   = NULL)
     {
