@@ -126,4 +126,14 @@ interface XRL_CallableInterface
      * \see XRL_CallableInterface::getRepresentation()
      */
     public function __toString();
+
+    /**
+     * Get a reflection objets for the function/method/object
+     * represented by this callable.
+     *
+     * \retval Reflector
+     *      Reflection object for this callable's inner
+     *      PHP callback.
+     */
+    public function getReflector();
 }

@@ -135,5 +135,22 @@ implements  XRL_CallableInterface
     {
         return $this->_representation;
     }
+
+    /// \copydoc XRL_CallableInterface::getReflector()
+    public function getReflector()
+    {
+        $parts = explode('::', $this->_representation);
+
+        // Did we wrap a function?
+        if (count($parts) == 1)
+            return new ReflectionFunction($this->_callable);
+
+        // Did we wrap a Closure or some invokable object?
+        if (!is_array($this->_callable))
+            $callable = array($this->_callable, $parts[1]);
+        else
+            $callable = $this->_callable;
+        return new ReflectionMethod($callable[0], $callable[1]);
+    }
 }
 
