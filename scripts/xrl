@@ -433,7 +433,7 @@ class XRL_CLI
             'd' => FALSE,
             'h' => FALSE,
             'n' => FALSE,
-            't' => new DateTimeZone(date_default_timezone_get()),
+            't' => new DateTimeZone(@date_default_timezone_get()),
             'v' => FALSE,
             'x' => FALSE,
         );
@@ -531,8 +531,8 @@ class XRL_CLI
         }
 
         // Then let's do it!
-        $encoder    = new XRL_Encoder(XRL_Encoder::OUTPUT_PRETTY);
-        $decoder    = new XRL_Decoder($options['x']);
+        $encoder    = new XRL_Encoder($options['t'], TRUE);
+        $decoder    = new XRL_Decoder($options['t'], $options['x']);
         $request    = new XRL_Request(
             $params['procedure'],
             $params['additional']
