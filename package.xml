@@ -19,67 +19,80 @@ XRL provides the following features:
     provided by the remote XML-RPC server.
 
 *   Intuitive XML-RPC calls, with automatic type conversion between
-    PHP types and their XML-RPC counterpart.
+    PHP types and their XML-RPC counterparts.
 
 *   Extensibility, using the array operator ``[]`` to manipulate
     the factories used by either the client or server.
 
-*   Optional validation of XML-RPC messages (requests or responses).
+*   Optional validation of XML-RPC messages (both requests and responses).
 
 *   Two XML output formats (compact or indented), making it easy
-    to debug potentiel issues.
+    to debug potential issues.
 
-*   A CLI script that can be used to query a remote XML-RPC server,
-    display traffic (for debugging purpose)
+*   Many different types of installations are possible
+    (sorted from easiest to most complex):
+
+    -   Using a PHAR archive.
+    -   Using our PEAR repository (https://pear.erebot.net/),
+        which is compatible with both the regular pear installer
+        and Pyrus (the next generation PEAR installer).
+    -   Using a git clone.
+    -   From the sources.
+
+*   A CLI script (only for PEAR/source installs, but see below)
+    that can be used to query a remote XML-RPC server,
+    display traffic (for debugging purpose), etc.
+
+*   A ``.phar`` archive that contains all of XRL's source code
+    and can also be used in place of the regular CLI script
+    for PHAR installs.
 
 *   Compatibility with PHP versions ranging from PHP 5.2.1 up to
     the latest PHP 5.4 releases.
 
 
-Useful resources
-----------------
+Installation
+------------
 
-*   http://fpoirotte.github.com/XRL/ |---| Complete documentation for XRL.
+Several types of installations are possible:
 
-*   https://pear.erebot.net/ |---| PEAR channel for the project.
+*   Using pear:
 
-*   http://travis-ci.org/#!/fpoirotte/XRL |---| XRL's status on
-    Travis Continuous Integration.
-    Current status:
-    ..  image:: https://secure.travis-ci.org/fpoirotte/xrl.png
-        :alt: unknown
-        :target: http://travis-ci.org/#!/fpoirotte/xrl
+        $ pear channel-discover pear.erebot.net
+        $ pear install erebot/XRL
 
-*   https://buildbot.erebot.net/ |---| Our Continuous Integration server.
+*   Using Pyrus:
 
+        $ pear channel-discover pear.erebot.net
+        $ pyrus install erebot/XRL
 
-License
--------
+*   Using a ``.phar`` archive:
 
-XRL is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+        $ wget --no-check-certificate https://pear.erebot.net/get/XRL-latest.phar
 
-XRL is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+*   From a git clone:
 
-You should have received a copy of the GNU General Public License
-along with XRL.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+        $ git clone git://github.com/fpoirotte/XRL.git
 
-A copy of the GNU General Public License is also available at
-https://raw.github.com/fpoirotte/XRL/master/LICENSE.
+*   From the sources:
+
+    -   As a `.tar.gz archive &lt;https://github.com/fpoirotte/XRL/tarball/master&gt;`:
+
+            $ wget -O XRL-sources.tar.gz https://github.com/fpoirotte/XRL/tarball/master
+
+    -   As a `.zip archive &lt;https://github.com/fpoirotte/XRL/zipball/master&gt;`:
+
+            $ wget -O XRL-sources.zip https://github.com/fpoirotte/XRL/zipball/master
+
 
 Contributions
 -------------
 
 If you want to contribute to this project:
 
-- `Fork it &lt;https://github.com/fpoirotte/XRL/fork_select&gt;`_.
-- Change the code.
-- Send us a pull request.
+* `Fork it &lt;https://github.com/fpoirotte/XRL/fork_select&gt;`.
+* Change the code.
+* Send us a pull request.
 
 Please note that we ask contributors to assign the copyright in their
 contributions to the collective name "The XRL Team".
@@ -110,6 +123,49 @@ paragraph:
         along with XRL.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
     */
 
+
+License
+-------
+
+XRL is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+XRL is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with XRL.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+
+A copy of the GNU General Public License is also available at
+https://raw.github.com/fpoirotte/XRL/master/LICENSE.
+
+
+Other resources
+---------------
+
+In addition to the information above, you may find the following
+resources useful:
+
+*   http://fpoirotte.github.com/XRL/ |---| Complete documentation for XRL.
+
+*   https://pear.erebot.net/ |---| PEAR channel for the project.
+
+*   http://travis-ci.org/#!/fpoirotte/XRL |---| XRL's status on
+    Travis Continuous Integration.
+
+    Current status:
+
+    ..  image:: https://secure.travis-ci.org/fpoirotte/xrl.png
+        :alt: unknown
+        :target: http://travis-ci.org/#!/fpoirotte/xrl
+
+*   https://buildbot.erebot.net/ |---| Our Continuous Integration server.
+
+
 ..  |---| unicode:: U+02014 .. em dash
     :trim:
 
@@ -122,7 +178,7 @@ paragraph:
     <active>yes</active>
   </lead>
   <date>2012-05-01</date>
-  <time>15:07:54</time>
+  <time>19:11:02</time>
   <version>
     <release>0.1.0</release>
     <api>0.1.0</api>
@@ -141,6 +197,7 @@ Package XRL API release notes for version 0.1.0.</notes>
         <file role="data" name="common.rng"/>
         <file role="data" name="request.rng"/>
         <file role="data" name="response.rng"/>
+        <file role="data" name="usage.txt"/>
       </dir>
       <dir name="docs" baseinstalldir="/">
         <dir name="api">
@@ -169,6 +226,9 @@ Package XRL API release notes for version 0.1.0.</notes>
             <file role="doc" name="classXRL__Callable__inherit__graph.map"/>
             <file role="doc" name="classXRL__Callable__inherit__graph.md5"/>
             <file role="doc" name="classXRL__Callable__inherit__graph.png"/>
+            <file role="doc" name="classXRL__CLI-members.html"/>
+            <file role="doc" name="classXRL__CLI.html"/>
+            <file role="doc" name="classXRL__CLI.js"/>
             <file role="doc" name="classXRL__Client-members.html"/>
             <file role="doc" name="classXRL__Client.html"/>
             <file role="doc" name="classXRL__Client.js"/>
@@ -209,6 +269,9 @@ Package XRL API release notes for version 0.1.0.</notes>
             <file role="doc" name="classXRL__NonValidatingDecoderFactory__inherit__graph.map"/>
             <file role="doc" name="classXRL__NonValidatingDecoderFactory__inherit__graph.md5"/>
             <file role="doc" name="classXRL__NonValidatingDecoderFactory__inherit__graph.png"/>
+            <file role="doc" name="classXRL__Output-members.html"/>
+            <file role="doc" name="classXRL__Output.html"/>
+            <file role="doc" name="classXRL__Output.js"/>
             <file role="doc" name="classXRL__PrettyEncoderFactory-members.html"/>
             <file role="doc" name="classXRL__PrettyEncoderFactory.html"/>
             <file role="doc" name="classXRL__PrettyEncoderFactory.js"/>
@@ -252,6 +315,7 @@ Package XRL API release notes for version 0.1.0.</notes>
             <file role="doc" name="classXRL__ValidatingDecoderFactory__inherit__graph.md5"/>
             <file role="doc" name="classXRL__ValidatingDecoderFactory__inherit__graph.png"/>
             <file role="doc" name="Client_8php_source.html"/>
+            <file role="doc" name="CLI_8php_source.html"/>
             <file role="doc" name="closed.png"/>
             <file role="doc" name="CompactEncoderFactory_8php_source.html"/>
             <file role="doc" name="DecoderFactoryInterface_8php_source.html"/>
@@ -344,6 +408,12 @@ Package XRL API release notes for version 0.1.0.</notes>
             <file role="doc" name="inherit_graph_13.map"/>
             <file role="doc" name="inherit_graph_13.md5"/>
             <file role="doc" name="inherit_graph_13.png"/>
+            <file role="doc" name="inherit_graph_14.map"/>
+            <file role="doc" name="inherit_graph_14.md5"/>
+            <file role="doc" name="inherit_graph_14.png"/>
+            <file role="doc" name="inherit_graph_15.map"/>
+            <file role="doc" name="inherit_graph_15.md5"/>
+            <file role="doc" name="inherit_graph_15.png"/>
             <file role="doc" name="installdox"/>
             <file role="doc" name="interfaceXRL__CallableFactoryInterface-members.html"/>
             <file role="doc" name="interfaceXRL__CallableFactoryInterface.html"/>
@@ -414,6 +484,7 @@ Package XRL API release notes for version 0.1.0.</notes>
             <file role="doc" name="Node_8php_source.html"/>
             <file role="doc" name="NonValidatingDecoderFactory_8php_source.html"/>
             <file role="doc" name="open.png"/>
+            <file role="doc" name="Output_8php_source.html"/>
             <file role="doc" name="pages.html"/>
             <file role="doc" name="pages.js"/>
             <file role="doc" name="PrettyEncoderFactory_8php_source.html"/>
