@@ -204,8 +204,7 @@ implements  XRL_DecoderInterface
         if ($type != XMLReader::END_ELEMENT) {
             throw new InvalidArgumentException(
                 "Expected a closing $expectedTag tag ".
-                "but got a node o        DateTimeZone    $timezone,
-f type #$type instead"
+                "but got a node of type #$type instead"
             );
         }
 

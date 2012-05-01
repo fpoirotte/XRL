@@ -48,12 +48,11 @@ class XRL_CLI
         $files  = array();
         $iter   = new RegexIterator(
             new DirectoryIterator($dir),
-           '/^RELEASE\-(.+)$/',
-           RegexIterator::GET_MATCH
+            '/^RELEASE\-(.+)$/',
+            RegexIterator::GET_MATCH
         );
-        foreach ($iter as $file) {
+        foreach ($iter as $file)
             $files[$file[1]] = $file;
-        }
 
         if (!count($files))
             return $version;
@@ -76,55 +75,24 @@ class XRL_CLI
      */
     public function printUsage($o, $prog)
     {
-        $o->_('Usage: %s [options] <server URL> <procedure> [args...]', $prog);
-        $url = 'http://xmlrpc.example.com/';
-        $o->_('');
-        $o->_('Options:');
-        $o->_(' -d               Debug mode. Display all XML exchanges');
-        $o->_('                  between the XML-RPC client and server.');
-        $o->_(' -n               Dry run. Don\'t send the actual query.');
-        $o->_('                  Use with -d to debug encoder issues.');
-        $o->_(' -t <timezone>    Use this timezone to convert dates.');
-        $o->_('                  Eg. "Europe/Paris".');
-        $o->_(' -x               Perform XML validation on received messages.');
-        $o->_(' -v               Show this program\'s version and exit.');
-        $o->_(' -h               Show this program\'s help.');
-        $o->_('');
-        $o->_('Additional parameters for the procedure must be passed as a list');
-        $o->_('of types & values, where the following types may be used:');
-        $o->_('bool      The next argument is a boolean. ');
-        $o->_('          Use "0",  "off" or "false" for FALSE ');
-        $o->_('          or "1", "on" or "true" for TRUE.');
-        $o->_('datetime  The next argument is a date with time information,');
-        $o->_('          using one of PHP\'s compound formats.');
-        $o->_('          Eg. "@1215282385" for a UNIX timestamp.');
-        $o->_('          See also http://php.net/datetime.formats.compound.php');
-        $o->_('file      Same as "string" but the next argument is a filename');
-        $o->_('          whose content should be used (useful for binary data).');
-        $o->_('float     The next argument is a floating-point number.');
-        $o->_('hash      Read all arguments until a matching "endhash" is found,');
-        $o->_('          then build a hash from the type & values in between.');
-        $o->_('          Nested constructs are supported.');
-        $o->_('          Eg. "hash int 42 hash int 23 float 3.14 endhash endhash"');
-        $o->_('              = array(42 => array(23 => 3.14))');
-        $o->_('int       The next argument is a 32 bits signed integer.');
-        $o->_('list      Read all arguments until a matching "endlist" is found,');
-        $o->_('          then build a list from the type & values in between.');
-        $o->_('          Nested constructs are supported.');
-        $o->_('          Eg. "list list int 42 endlist int 23 endlist"');
-        $o->_('              = array(array(42), 23)');
-        $o->_('null      Add NULL to the current list of arguments.');
-        $o->_('          This type does not require any additional argument.');
-        $o->_('string    The next argument is a string (possibly containing');
-        $o->_('          binary data).');
-        $o->_('');
-        $o->_('Example:');
-        $o->_('  %s %s foo int 42 bool on', $prog, $url);
-        $o->_('is the same as:');
-        $o->_('  <'.'?php');
-        $o->_('      $client = new XRL_Client("%s");', $url);
-        $o->_('      var_dump($client->foo(42, TRUE));');
-        $o->_('  ?'.'>');
+        $dataDir = '@data_dir@';
+        // Running from sources/clone.
+        if ($dataDir == '@'.'data_dir'.'@') {
+            $usageDir = dirname(dirname(dirname(__FILE__))) .
+                            DIRECTORY_SEPARATOR . 'data';
+        }
+        else
+            $usageDir = $dataDir;
+
+        $usageDir .= DIRECTORY_SEPARATOR;
+        if ($dataDir != '@'.'data_dir'.'@' || !strncmp(__FILE__, 'phar://', 7))
+            $usageDir .= 'pear.erebot.net' . DIRECTORY_SEPARATOR . 'XRL';
+
+        $usageFile  = $usageDir . DIRECTORY_SEPARATOR . 'usage.txt';
+        $usage      = @file_get_contents($usageFile);
+        $usage      = str_replace(array("\r\n", "\r"), "\n", $usage);
+        $usage      = trim($usage);
+        $o->_($usage, $prog, 'http://xmlrpc.example.com/');
     }
 
     /**
@@ -232,10 +200,8 @@ class XRL_CLI
         if (!count($args))
             throw new Exception('Not enough arguments.');
 
-        $params = array();
         $type = strtolower(array_shift($args));
         $parseFunc = NULL;
-
         switch ($type) {
             case 'null':
             case 'nil':
