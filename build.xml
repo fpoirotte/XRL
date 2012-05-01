@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="xrl" description="" default="all">
+<project name="XRL" description="" default="all">
     <property name="qa.coverage.force" value="false"/>
 
     <!--
