@@ -108,7 +108,7 @@ extends PHPUnit_Framework_TestCase
     public function testDecodeRequestWithEmptyParameters($decoder, $xml)
     {
         $request = $decoder->decodeRequest($xml);
-        $this->assertInstanceOf('XRL_Request', $request);
+        $this->assertTrue($request instanceof XRL_Request);
 
         $params = $request->getParams();
         $this->assertEquals('emptyParams', $request->getProcedure());
@@ -121,7 +121,7 @@ extends PHPUnit_Framework_TestCase
     public function testDecodeRequestWithMultipleParameters($decoder, $xml)
     {
         $request = $decoder->decodeRequest($xml);
-        $this->assertInstanceOf('XRL_Request', $request);
+        $this->assertTrue($request instanceof XRL_Request);
 
         $params = $request->getParams();
         $this->assertEquals('multiParams', $request->getProcedure());
@@ -136,7 +136,7 @@ extends PHPUnit_Framework_TestCase
     public function testDecodeRequestWithIntegerParameter($decoder, $xml)
     {
         $request = $decoder->decodeRequest($xml);
-        $this->assertInstanceOf('XRL_Request', $request);
+        $this->assertTrue($request instanceof XRL_Request);
 
         $params = $request->getParams();
         $this->assertEquals('intParam', $request->getProcedure());
@@ -150,7 +150,7 @@ extends PHPUnit_Framework_TestCase
     public function testDecodeRequestWithBooleanParameter($decoder, $xml)
     {
         $request = $decoder->decodeRequest($xml);
-        $this->assertInstanceOf('XRL_Request', $request);
+        $this->assertTrue($request instanceof XRL_Request);
 
         $params = $request->getParams();
         $this->assertEquals('boolParam', $request->getProcedure());
@@ -164,7 +164,7 @@ extends PHPUnit_Framework_TestCase
     public function testDecodeRequestWithBooleanParameter2($decoder, $xml)
     {
         $request = $decoder->decodeRequest($xml);
-        $this->assertInstanceOf('XRL_Request', $request);
+        $this->assertTrue($request instanceof XRL_Request);
 
         $params = $request->getParams();
         $this->assertEquals('boolParam', $request->getProcedure());
@@ -178,7 +178,7 @@ extends PHPUnit_Framework_TestCase
     public function testDecodeRequestWithStringParameter($decoder, $xml)
     {
         $request = $decoder->decodeRequest($xml);
-        $this->assertInstanceOf('XRL_Request', $request);
+        $this->assertTrue($request instanceof XRL_Request);
 
         $params = $request->getParams();
         $this->assertEquals('stringParam', $request->getProcedure());
@@ -192,7 +192,7 @@ extends PHPUnit_Framework_TestCase
     public function testDecodeRequestWithStringParameter2($decoder, $xml)
     {
         $request = $decoder->decodeRequest($xml);
-        $this->assertInstanceOf('XRL_Request', $request);
+        $this->assertTrue($request instanceof XRL_Request);
 
         $params = $request->getParams();
         $this->assertEquals('stringParam', $request->getProcedure());
@@ -206,7 +206,7 @@ extends PHPUnit_Framework_TestCase
     public function testDecodeRequestWithDoubleParameter($decoder, $xml)
     {
         $request = $decoder->decodeRequest($xml);
-        $this->assertInstanceOf('XRL_Request', $request);
+        $this->assertTrue($request instanceof XRL_Request);
 
         $params = $request->getParams();
         $this->assertEquals('doubleParam', $request->getProcedure());
@@ -220,7 +220,7 @@ extends PHPUnit_Framework_TestCase
     public function testDecodeRequestWithDateTimeParameter($decoder, $xml)
     {
         $request = $decoder->decodeRequest($xml);
-        $this->assertInstanceOf('XRL_Request', $request);
+        $this->assertTrue($request instanceof XRL_Request);
 
         $params = $request->getParams();
         $this->assertEquals('dateTimeParam', $request->getProcedure());
@@ -237,7 +237,7 @@ extends PHPUnit_Framework_TestCase
     public function testDecodeRequestWithBinaryParameter($decoder, $xml)
     {
         $request = $decoder->decodeRequest($xml);
-        $this->assertInstanceOf('XRL_Request', $request);
+        $this->assertTrue($request instanceof XRL_Request);
 
         $params = $request->getParams();
         $this->assertEquals('binaryParam', $request->getProcedure());
@@ -252,7 +252,7 @@ extends PHPUnit_Framework_TestCase
     {
         $array      = array('test', 42);
         $request    = $decoder->decodeRequest($xml);
-        $this->assertInstanceOf('XRL_Request', $request);
+        $this->assertTrue($request instanceof XRL_Request);
 
         $params = $request->getParams();
         $this->assertEquals('numArray', $request->getProcedure());
@@ -267,7 +267,7 @@ extends PHPUnit_Framework_TestCase
     {
         $array      = array();
         $request    = $decoder->decodeRequest($xml);
-        $this->assertInstanceOf('XRL_Request', $request);
+        $this->assertTrue($request instanceof XRL_Request);
 
         $params = $request->getParams();
         $this->assertEquals('numArray', $request->getProcedure());
@@ -282,7 +282,7 @@ extends PHPUnit_Framework_TestCase
     {
         $array      = array('foo' => 'test', 'bar' => 42);
         $request    = $decoder->decodeRequest($xml);
-        $this->assertInstanceOf('XRL_Request', $request);
+        $this->assertTrue($request instanceof XRL_Request);
 
         $params = $request->getParams();
         $this->assertEquals('assocArray', $request->getProcedure());
@@ -297,7 +297,7 @@ extends PHPUnit_Framework_TestCase
     {
         $array      = array('foo', 42 => 'bar');
         $request    = $decoder->decodeRequest($xml);
-        $this->assertInstanceOf('XRL_Request', $request);
+        $this->assertTrue($request instanceof XRL_Request);
 
         $params = $request->getParams();
         $this->assertEquals('assocArray', $request->getProcedure());
@@ -312,7 +312,7 @@ extends PHPUnit_Framework_TestCase
     {
         $array      = array(42 => 'foo', 'bar');
         $request    = $decoder->decodeRequest($xml);
-        $this->assertInstanceOf('XRL_Request', $request);
+        $this->assertTrue($request instanceof XRL_Request);
 
         $params = $request->getParams();
         $this->assertEquals('assocArray', $request->getProcedure());
@@ -342,7 +342,7 @@ extends PHPUnit_Framework_TestCase
         if (!$response)
             $this->fail('An exception was expected');
 
-        $this->assertInstanceOf('XRL_Exception', $response);
+        $this->assertTrue($response instanceof XRL_Exception);
         $this->assertEquals(42, $response->getCode());
         if ($indented)
             $expected = 'Exception: Test_failure';
