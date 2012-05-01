@@ -1,101 +1,583 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package version="2.1" xmlns="http://pear.php.net/dtd/package-2.1" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.1     http://pear.php.net/dtd/package-2.1.xsd">
- <name>XRL</name>
- <channel>pear.erebot.net</channel>
- <summary>Package XRL summary.
+<package xmlns="http://pear.php.net/dtd/package-2.1" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.1     http://pear.php.net/dtd/package-2.1.xsd">
+  <name>XRL</name>
+  <channel>pear.erebot.net</channel>
+  <summary>A simple XML-RPC client and server written in PHP
 </summary>
- <description>
-Package detailed description here (found in README)
+  <description>=================================================
+
+Features
+--------
+
+XRL provides the following features:
+
+*   Simple servers, using the property operator ``-&gt;`` to indicate
+    what methods the server provides.
+
+*   Simple clients, using the regular method call syntax
+    ``$client-&gt;procedure(42)`` to call a procedure
+    provided by the remote XML-RPC server.
+
+*   Intuitive XML-RPC calls, with automatic type conversion between
+    PHP types and their XML-RPC counterpart.
+
+*   Extensibility, using the array operator ``[]`` to manipulate
+    the factories used by either the client or server.
+
+*   Optional validation of XML-RPC messages (requests or responses).
+
+*   Two XML output formats (compact or indented), making it easy
+    to debug potentiel issues.
+
+*   A CLI script that can be used to query a remote XML-RPC server,
+    display traffic (for debugging purpose)
+
+*   Compatibility with PHP versions ranging from PHP 5.2.1 up to
+    the latest PHP 5.4 releases.
+
+
+Useful resources
+----------------
+
+*   http://fpoirotte.github.com/XRL/ |---| Complete documentation for XRL.
+
+*   https://pear.erebot.net/ |---| PEAR channel for the project.
+
+*   http://travis-ci.org/#!/fpoirotte/XRL |---| XRL's status on
+    Travis Continuous Integration.
+    Current status:
+    ..  image:: https://secure.travis-ci.org/fpoirotte/xrl.png
+        :alt: unknown
+        :target: http://travis-ci.org/#!/fpoirotte/xrl
+
+*   https://buildbot.erebot.net/ |---| Our Continuous Integration server.
+
+
+License
+-------
+
+XRL is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+XRL is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with XRL.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+
+A copy of the GNU General Public License is also available at
+https://raw.github.com/fpoirotte/XRL/master/LICENSE.
+
+Contributions
+-------------
+
+If you want to contribute to this project:
+
+- `Fork it &lt;https://github.com/fpoirotte/XRL/fork_select&gt;`_.
+- Change the code.
+- Send us a pull request.
+
+Please note that we ask contributors to assign the copyright in their
+contributions to the collective name "The XRL Team".
+To make things easier to maintain, we also ask that you keep the same license
+in your contributions as the global one (GPL v3+).
+
+The copyright and licensing information should be reproduced at the top of
+every new file (as a comment in case that file must be later processed).
+For example, every new PHP source file should begin with the following
+paragraph:
+
+    &lt;?php
+    // © copyright XRL Team, 2012. All rights reserved.
+    /*
+        This file is part of XRL.
+
+        XRL is free software: you can redistribute it and/or modify
+        it under the terms of the GNU General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version.
+
+        XRL is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+
+        You should have received a copy of the GNU General Public License
+        along with XRL.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+    */
+
+..  |---| unicode:: U+02014 .. em dash
+    :trim:
+
+.. vim: ts=4 et
 </description>
- <lead>
-  <name>Your Name</name>
-  <user>handle</user>
-  <email>handle@php.net</email>
-  <active>yes</active>
- </lead>
- <lead>
-  <name>François Poirotte</name>
-  <user>Clicky</user>
-  <email>clicky@erebot.net</email>
-  <active>yes</active>
- </lead>
- <date>2012-04-06</date>
- <time>00:04:48</time>
- <version>
-  <release>0.1.0</release>
-  <api>0.1.0</api>
- </version>
- <stability>
-  <release>alpha</release>
-  <api>alpha</api>
- </stability>
- <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>Package  XRL release notes for version 0.1.0.
+  <lead>
+    <name>François Poirotte</name>
+    <user>Clicky</user>
+    <email>clicky@erebot.net</email>
+    <active>yes</active>
+  </lead>
+  <date>2012-05-01</date>
+  <time>15:07:54</time>
+  <version>
+    <release>0.1.0</release>
+    <api>0.1.0</api>
+  </version>
+  <stability>
+    <release>stable</release>
+    <api>alpha</api>
+  </stability>
+  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+  <notes>Package  XRL release notes for version 0.1.0.
 
 Package XRL API release notes for version 0.1.0.</notes>
- <contents>
-  <dir name="/">
-   <dir name="data" baseinstalldir="/">
-    <file role="data" name="common.rng"/>
-    <file role="data" name="request.rng"/>
-    <file role="data" name="response.rng"/>
-   </dir>
-   <dir name="src" baseinstalldir="/">
-    <dir name="XRL">
-     <file role="php" name="Autoload.php"/>
-     <file role="php" name="Callable.php"/>
-     <file role="php" name="Client.php"/>
-     <file role="php" name="Decoder.php"/>
-     <file role="php" name="DecoderInterface.php"/>
-     <file role="php" name="Encoder.php"/>
-     <file role="php" name="EncoderInterface.php"/>
-     <file role="php" name="Exception.php"/>
-     <file role="php" name="Node.php"/>
-     <file role="php" name="Request.php"/>
-     <file role="php" name="Response.php"/>
-     <file role="php" name="Server.php"/>
+  <contents>
+    <dir name="/">
+      <dir name="data" baseinstalldir="/">
+        <file role="data" name="common.rng"/>
+        <file role="data" name="request.rng"/>
+        <file role="data" name="response.rng"/>
+      </dir>
+      <dir name="docs" baseinstalldir="/">
+        <dir name="api">
+          <dir name="html">
+            <file role="doc" name="annotated.html"/>
+            <file role="doc" name="annotated.js"/>
+            <file role="doc" name="Autoload_8php_source.html"/>
+            <file role="doc" name="bc_s.png"/>
+            <file role="doc" name="CallableFactoryInterface_8php_source.html"/>
+            <file role="doc" name="CallableFactory_8php_source.html"/>
+            <file role="doc" name="CallableInterface_8php_source.html"/>
+            <file role="doc" name="Callable_8php_source.html"/>
+            <file role="doc" name="classes.html"/>
+            <file role="doc" name="classXRL__Autoload-members.html"/>
+            <file role="doc" name="classXRL__Autoload.html"/>
+            <file role="doc" name="classXRL__Autoload.js"/>
+            <file role="doc" name="classXRL__Callable-members.html"/>
+            <file role="doc" name="classXRL__Callable.html"/>
+            <file role="doc" name="classXRL__Callable.js"/>
+            <file role="doc" name="classXRL__CallableFactory-members.html"/>
+            <file role="doc" name="classXRL__CallableFactory.html"/>
+            <file role="doc" name="classXRL__CallableFactory.js"/>
+            <file role="doc" name="classXRL__CallableFactory__inherit__graph.map"/>
+            <file role="doc" name="classXRL__CallableFactory__inherit__graph.md5"/>
+            <file role="doc" name="classXRL__CallableFactory__inherit__graph.png"/>
+            <file role="doc" name="classXRL__Callable__inherit__graph.map"/>
+            <file role="doc" name="classXRL__Callable__inherit__graph.md5"/>
+            <file role="doc" name="classXRL__Callable__inherit__graph.png"/>
+            <file role="doc" name="classXRL__Client-members.html"/>
+            <file role="doc" name="classXRL__Client.html"/>
+            <file role="doc" name="classXRL__Client.js"/>
+            <file role="doc" name="classXRL__Client__inherit__graph.map"/>
+            <file role="doc" name="classXRL__Client__inherit__graph.md5"/>
+            <file role="doc" name="classXRL__Client__inherit__graph.png"/>
+            <file role="doc" name="classXRL__CompactEncoderFactory-members.html"/>
+            <file role="doc" name="classXRL__CompactEncoderFactory.html"/>
+            <file role="doc" name="classXRL__CompactEncoderFactory.js"/>
+            <file role="doc" name="classXRL__CompactEncoderFactory__inherit__graph.map"/>
+            <file role="doc" name="classXRL__CompactEncoderFactory__inherit__graph.md5"/>
+            <file role="doc" name="classXRL__CompactEncoderFactory__inherit__graph.png"/>
+            <file role="doc" name="classXRL__Decoder-members.html"/>
+            <file role="doc" name="classXRL__Decoder.html"/>
+            <file role="doc" name="classXRL__Decoder.js"/>
+            <file role="doc" name="classXRL__Decoder__inherit__graph.map"/>
+            <file role="doc" name="classXRL__Decoder__inherit__graph.md5"/>
+            <file role="doc" name="classXRL__Decoder__inherit__graph.png"/>
+            <file role="doc" name="classXRL__Encoder-members.html"/>
+            <file role="doc" name="classXRL__Encoder.html"/>
+            <file role="doc" name="classXRL__Encoder.js"/>
+            <file role="doc" name="classXRL__Encoder__inherit__graph.map"/>
+            <file role="doc" name="classXRL__Encoder__inherit__graph.md5"/>
+            <file role="doc" name="classXRL__Encoder__inherit__graph.png"/>
+            <file role="doc" name="classXRL__Exception.html"/>
+            <file role="doc" name="classXRL__FactoryRegistry-members.html"/>
+            <file role="doc" name="classXRL__FactoryRegistry.html"/>
+            <file role="doc" name="classXRL__FactoryRegistry.js"/>
+            <file role="doc" name="classXRL__FactoryRegistry__inherit__graph.map"/>
+            <file role="doc" name="classXRL__FactoryRegistry__inherit__graph.md5"/>
+            <file role="doc" name="classXRL__FactoryRegistry__inherit__graph.png"/>
+            <file role="doc" name="classXRL__Node-members.html"/>
+            <file role="doc" name="classXRL__Node.html"/>
+            <file role="doc" name="classXRL__Node.js"/>
+            <file role="doc" name="classXRL__NonValidatingDecoderFactory-members.html"/>
+            <file role="doc" name="classXRL__NonValidatingDecoderFactory.html"/>
+            <file role="doc" name="classXRL__NonValidatingDecoderFactory.js"/>
+            <file role="doc" name="classXRL__NonValidatingDecoderFactory__inherit__graph.map"/>
+            <file role="doc" name="classXRL__NonValidatingDecoderFactory__inherit__graph.md5"/>
+            <file role="doc" name="classXRL__NonValidatingDecoderFactory__inherit__graph.png"/>
+            <file role="doc" name="classXRL__PrettyEncoderFactory-members.html"/>
+            <file role="doc" name="classXRL__PrettyEncoderFactory.html"/>
+            <file role="doc" name="classXRL__PrettyEncoderFactory.js"/>
+            <file role="doc" name="classXRL__PrettyEncoderFactory__inherit__graph.map"/>
+            <file role="doc" name="classXRL__PrettyEncoderFactory__inherit__graph.md5"/>
+            <file role="doc" name="classXRL__PrettyEncoderFactory__inherit__graph.png"/>
+            <file role="doc" name="classXRL__Request-members.html"/>
+            <file role="doc" name="classXRL__Request.html"/>
+            <file role="doc" name="classXRL__Request.js"/>
+            <file role="doc" name="classXRL__RequestFactory-members.html"/>
+            <file role="doc" name="classXRL__RequestFactory.html"/>
+            <file role="doc" name="classXRL__RequestFactory.js"/>
+            <file role="doc" name="classXRL__RequestFactory__inherit__graph.map"/>
+            <file role="doc" name="classXRL__RequestFactory__inherit__graph.md5"/>
+            <file role="doc" name="classXRL__RequestFactory__inherit__graph.png"/>
+            <file role="doc" name="classXRL__Request__inherit__graph.map"/>
+            <file role="doc" name="classXRL__Request__inherit__graph.md5"/>
+            <file role="doc" name="classXRL__Request__inherit__graph.png"/>
+            <file role="doc" name="classXRL__Response-members.html"/>
+            <file role="doc" name="classXRL__Response.html"/>
+            <file role="doc" name="classXRL__Response.js"/>
+            <file role="doc" name="classXRL__ResponseFactory-members.html"/>
+            <file role="doc" name="classXRL__ResponseFactory.html"/>
+            <file role="doc" name="classXRL__ResponseFactory.js"/>
+            <file role="doc" name="classXRL__ResponseFactory__inherit__graph.map"/>
+            <file role="doc" name="classXRL__ResponseFactory__inherit__graph.md5"/>
+            <file role="doc" name="classXRL__ResponseFactory__inherit__graph.png"/>
+            <file role="doc" name="classXRL__Response__inherit__graph.map"/>
+            <file role="doc" name="classXRL__Response__inherit__graph.md5"/>
+            <file role="doc" name="classXRL__Response__inherit__graph.png"/>
+            <file role="doc" name="classXRL__Server-members.html"/>
+            <file role="doc" name="classXRL__Server.html"/>
+            <file role="doc" name="classXRL__Server.js"/>
+            <file role="doc" name="classXRL__Server__inherit__graph.map"/>
+            <file role="doc" name="classXRL__Server__inherit__graph.md5"/>
+            <file role="doc" name="classXRL__Server__inherit__graph.png"/>
+            <file role="doc" name="classXRL__ValidatingDecoderFactory-members.html"/>
+            <file role="doc" name="classXRL__ValidatingDecoderFactory.html"/>
+            <file role="doc" name="classXRL__ValidatingDecoderFactory.js"/>
+            <file role="doc" name="classXRL__ValidatingDecoderFactory__inherit__graph.map"/>
+            <file role="doc" name="classXRL__ValidatingDecoderFactory__inherit__graph.md5"/>
+            <file role="doc" name="classXRL__ValidatingDecoderFactory__inherit__graph.png"/>
+            <file role="doc" name="Client_8php_source.html"/>
+            <file role="doc" name="closed.png"/>
+            <file role="doc" name="CompactEncoderFactory_8php_source.html"/>
+            <file role="doc" name="DecoderFactoryInterface_8php_source.html"/>
+            <file role="doc" name="DecoderInterface_8php_source.html"/>
+            <file role="doc" name="Decoder_8php_source.html"/>
+            <file role="doc" name="deprecated.html"/>
+            <file role="doc" name="dirs.html"/>
+            <file role="doc" name="dirs.js"/>
+            <file role="doc" name="dir_38ad550d3c0442eb5e631871feec247e.html"/>
+            <file role="doc" name="dir_38ad550d3c0442eb5e631871feec247e.js"/>
+            <file role="doc" name="dir_38ad550d3c0442eb5e631871feec247e_dep.map"/>
+            <file role="doc" name="dir_38ad550d3c0442eb5e631871feec247e_dep.md5"/>
+            <file role="doc" name="dir_38ad550d3c0442eb5e631871feec247e_dep.png"/>
+            <file role="doc" name="dir_440675789f384b1cdccb5fd799ad3caf.html"/>
+            <file role="doc" name="dir_440675789f384b1cdccb5fd799ad3caf_dep.map"/>
+            <file role="doc" name="dir_440675789f384b1cdccb5fd799ad3caf_dep.md5"/>
+            <file role="doc" name="dir_440675789f384b1cdccb5fd799ad3caf_dep.png"/>
+            <file role="doc" name="doxygen.css"/>
+            <file role="doc" name="doxygen.png"/>
+            <file role="doc" name="dynsections.js"/>
+            <file role="doc" name="EncoderFactoryInterface_8php_source.html"/>
+            <file role="doc" name="EncoderInterface_8php_source.html"/>
+            <file role="doc" name="Encoder_8php_source.html"/>
+            <file role="doc" name="Exception_8php_source.html"/>
+            <file role="doc" name="FactoryRegistry_8php_source.html"/>
+            <file role="doc" name="files.html"/>
+            <file role="doc" name="files.js"/>
+            <file role="doc" name="ftv2blank.png"/>
+            <file role="doc" name="ftv2doc.png"/>
+            <file role="doc" name="ftv2folderclosed.png"/>
+            <file role="doc" name="ftv2folderopen.png"/>
+            <file role="doc" name="ftv2lastnode.png"/>
+            <file role="doc" name="ftv2link.png"/>
+            <file role="doc" name="ftv2mlastnode.png"/>
+            <file role="doc" name="ftv2mnode.png"/>
+            <file role="doc" name="ftv2node.png"/>
+            <file role="doc" name="ftv2plastnode.png"/>
+            <file role="doc" name="ftv2pnode.png"/>
+            <file role="doc" name="ftv2splitbar.png"/>
+            <file role="doc" name="ftv2vertline.png"/>
+            <file role="doc" name="functions.html"/>
+            <file role="doc" name="functions_func.html"/>
+            <file role="doc" name="functions_vars.html"/>
+            <file role="doc" name="graph_legend.html"/>
+            <file role="doc" name="graph_legend.md5"/>
+            <file role="doc" name="graph_legend.png"/>
+            <file role="doc" name="hierarchy.html"/>
+            <file role="doc" name="hierarchy.js"/>
+            <file role="doc" name="index.html"/>
+            <file role="doc" name="inherits.html"/>
+            <file role="doc" name="inherit_graph_0.map"/>
+            <file role="doc" name="inherit_graph_0.md5"/>
+            <file role="doc" name="inherit_graph_0.png"/>
+            <file role="doc" name="inherit_graph_1.map"/>
+            <file role="doc" name="inherit_graph_1.md5"/>
+            <file role="doc" name="inherit_graph_1.png"/>
+            <file role="doc" name="inherit_graph_2.map"/>
+            <file role="doc" name="inherit_graph_2.md5"/>
+            <file role="doc" name="inherit_graph_2.png"/>
+            <file role="doc" name="inherit_graph_3.map"/>
+            <file role="doc" name="inherit_graph_3.md5"/>
+            <file role="doc" name="inherit_graph_3.png"/>
+            <file role="doc" name="inherit_graph_4.map"/>
+            <file role="doc" name="inherit_graph_4.md5"/>
+            <file role="doc" name="inherit_graph_4.png"/>
+            <file role="doc" name="inherit_graph_5.map"/>
+            <file role="doc" name="inherit_graph_5.md5"/>
+            <file role="doc" name="inherit_graph_5.png"/>
+            <file role="doc" name="inherit_graph_6.map"/>
+            <file role="doc" name="inherit_graph_6.md5"/>
+            <file role="doc" name="inherit_graph_6.png"/>
+            <file role="doc" name="inherit_graph_7.map"/>
+            <file role="doc" name="inherit_graph_7.md5"/>
+            <file role="doc" name="inherit_graph_7.png"/>
+            <file role="doc" name="inherit_graph_8.map"/>
+            <file role="doc" name="inherit_graph_8.md5"/>
+            <file role="doc" name="inherit_graph_8.png"/>
+            <file role="doc" name="inherit_graph_9.map"/>
+            <file role="doc" name="inherit_graph_9.md5"/>
+            <file role="doc" name="inherit_graph_9.png"/>
+            <file role="doc" name="inherit_graph_10.map"/>
+            <file role="doc" name="inherit_graph_10.md5"/>
+            <file role="doc" name="inherit_graph_10.png"/>
+            <file role="doc" name="inherit_graph_11.map"/>
+            <file role="doc" name="inherit_graph_11.md5"/>
+            <file role="doc" name="inherit_graph_11.png"/>
+            <file role="doc" name="inherit_graph_12.map"/>
+            <file role="doc" name="inherit_graph_12.md5"/>
+            <file role="doc" name="inherit_graph_12.png"/>
+            <file role="doc" name="inherit_graph_13.map"/>
+            <file role="doc" name="inherit_graph_13.md5"/>
+            <file role="doc" name="inherit_graph_13.png"/>
+            <file role="doc" name="installdox"/>
+            <file role="doc" name="interfaceXRL__CallableFactoryInterface-members.html"/>
+            <file role="doc" name="interfaceXRL__CallableFactoryInterface.html"/>
+            <file role="doc" name="interfaceXRL__CallableFactoryInterface.js"/>
+            <file role="doc" name="interfaceXRL__CallableFactoryInterface__inherit__graph.map"/>
+            <file role="doc" name="interfaceXRL__CallableFactoryInterface__inherit__graph.md5"/>
+            <file role="doc" name="interfaceXRL__CallableFactoryInterface__inherit__graph.png"/>
+            <file role="doc" name="interfaceXRL__CallableInterface-members.html"/>
+            <file role="doc" name="interfaceXRL__CallableInterface.html"/>
+            <file role="doc" name="interfaceXRL__CallableInterface.js"/>
+            <file role="doc" name="interfaceXRL__CallableInterface__inherit__graph.map"/>
+            <file role="doc" name="interfaceXRL__CallableInterface__inherit__graph.md5"/>
+            <file role="doc" name="interfaceXRL__CallableInterface__inherit__graph.png"/>
+            <file role="doc" name="interfaceXRL__DecoderFactoryInterface-members.html"/>
+            <file role="doc" name="interfaceXRL__DecoderFactoryInterface.html"/>
+            <file role="doc" name="interfaceXRL__DecoderFactoryInterface.js"/>
+            <file role="doc" name="interfaceXRL__DecoderFactoryInterface__inherit__graph.map"/>
+            <file role="doc" name="interfaceXRL__DecoderFactoryInterface__inherit__graph.md5"/>
+            <file role="doc" name="interfaceXRL__DecoderFactoryInterface__inherit__graph.png"/>
+            <file role="doc" name="interfaceXRL__DecoderInterface-members.html"/>
+            <file role="doc" name="interfaceXRL__DecoderInterface.html"/>
+            <file role="doc" name="interfaceXRL__DecoderInterface.js"/>
+            <file role="doc" name="interfaceXRL__DecoderInterface__inherit__graph.map"/>
+            <file role="doc" name="interfaceXRL__DecoderInterface__inherit__graph.md5"/>
+            <file role="doc" name="interfaceXRL__DecoderInterface__inherit__graph.png"/>
+            <file role="doc" name="interfaceXRL__EncoderFactoryInterface-members.html"/>
+            <file role="doc" name="interfaceXRL__EncoderFactoryInterface.html"/>
+            <file role="doc" name="interfaceXRL__EncoderFactoryInterface.js"/>
+            <file role="doc" name="interfaceXRL__EncoderFactoryInterface__inherit__graph.map"/>
+            <file role="doc" name="interfaceXRL__EncoderFactoryInterface__inherit__graph.md5"/>
+            <file role="doc" name="interfaceXRL__EncoderFactoryInterface__inherit__graph.png"/>
+            <file role="doc" name="interfaceXRL__EncoderInterface-members.html"/>
+            <file role="doc" name="interfaceXRL__EncoderInterface.html"/>
+            <file role="doc" name="interfaceXRL__EncoderInterface.js"/>
+            <file role="doc" name="interfaceXRL__EncoderInterface__inherit__graph.map"/>
+            <file role="doc" name="interfaceXRL__EncoderInterface__inherit__graph.md5"/>
+            <file role="doc" name="interfaceXRL__EncoderInterface__inherit__graph.png"/>
+            <file role="doc" name="interfaceXRL__RequestFactoryInterface-members.html"/>
+            <file role="doc" name="interfaceXRL__RequestFactoryInterface.html"/>
+            <file role="doc" name="interfaceXRL__RequestFactoryInterface.js"/>
+            <file role="doc" name="interfaceXRL__RequestFactoryInterface__inherit__graph.map"/>
+            <file role="doc" name="interfaceXRL__RequestFactoryInterface__inherit__graph.md5"/>
+            <file role="doc" name="interfaceXRL__RequestFactoryInterface__inherit__graph.png"/>
+            <file role="doc" name="interfaceXRL__RequestInterface-members.html"/>
+            <file role="doc" name="interfaceXRL__RequestInterface.html"/>
+            <file role="doc" name="interfaceXRL__RequestInterface.js"/>
+            <file role="doc" name="interfaceXRL__RequestInterface__inherit__graph.map"/>
+            <file role="doc" name="interfaceXRL__RequestInterface__inherit__graph.md5"/>
+            <file role="doc" name="interfaceXRL__RequestInterface__inherit__graph.png"/>
+            <file role="doc" name="interfaceXRL__ResponseFactoryInterface-members.html"/>
+            <file role="doc" name="interfaceXRL__ResponseFactoryInterface.html"/>
+            <file role="doc" name="interfaceXRL__ResponseFactoryInterface.js"/>
+            <file role="doc" name="interfaceXRL__ResponseFactoryInterface__inherit__graph.map"/>
+            <file role="doc" name="interfaceXRL__ResponseFactoryInterface__inherit__graph.md5"/>
+            <file role="doc" name="interfaceXRL__ResponseFactoryInterface__inherit__graph.png"/>
+            <file role="doc" name="interfaceXRL__ResponseInterface-members.html"/>
+            <file role="doc" name="interfaceXRL__ResponseInterface.html"/>
+            <file role="doc" name="interfaceXRL__ResponseInterface.js"/>
+            <file role="doc" name="interfaceXRL__ResponseInterface__inherit__graph.map"/>
+            <file role="doc" name="interfaceXRL__ResponseInterface__inherit__graph.md5"/>
+            <file role="doc" name="interfaceXRL__ResponseInterface__inherit__graph.png"/>
+            <file role="doc" name="jquery.js"/>
+            <file role="doc" name="navtree.css"/>
+            <file role="doc" name="navtree.js"/>
+            <file role="doc" name="navtreeindex.js"/>
+            <file role="doc" name="nav_f.png"/>
+            <file role="doc" name="nav_h.png"/>
+            <file role="doc" name="Node_8php_source.html"/>
+            <file role="doc" name="NonValidatingDecoderFactory_8php_source.html"/>
+            <file role="doc" name="open.png"/>
+            <file role="doc" name="pages.html"/>
+            <file role="doc" name="pages.js"/>
+            <file role="doc" name="PrettyEncoderFactory_8php_source.html"/>
+            <file role="doc" name="RequestFactoryInterface_8php_source.html"/>
+            <file role="doc" name="RequestFactory_8php_source.html"/>
+            <file role="doc" name="RequestInterface_8php_source.html"/>
+            <file role="doc" name="Request_8php_source.html"/>
+            <file role="doc" name="resize.js"/>
+            <file role="doc" name="ResponseFactoryInterface_8php_source.html"/>
+            <file role="doc" name="ResponseFactory_8php_source.html"/>
+            <file role="doc" name="ResponseInterface_8php_source.html"/>
+            <file role="doc" name="Response_8php_source.html"/>
+            <file role="doc" name="Server_8php_source.html"/>
+            <file role="doc" name="tabs.css"/>
+            <file role="doc" name="tab_a.png"/>
+            <file role="doc" name="tab_b.png"/>
+            <file role="doc" name="tab_h.png"/>
+            <file role="doc" name="tab_s.png"/>
+            <file role="doc" name="ValidatingDecoderFactory_8php_source.html"/>
+          </dir>
+        </dir>
+        <dir name="coverage">
+          <dir name="default">
+            <file role="doc" name="package-frame.html"/>
+            <file role="doc" name="package-summary.html"/>
+            <file role="doc" name="XRL_Callable.html"/>
+            <file role="doc" name="XRL_CallableFactory.html"/>
+            <file role="doc" name="XRL_Client.html"/>
+            <file role="doc" name="XRL_CompactEncoderFactory.html"/>
+            <file role="doc" name="XRL_Decoder.html"/>
+            <file role="doc" name="XRL_Encoder.html"/>
+            <file role="doc" name="XRL_Exception.html"/>
+            <file role="doc" name="XRL_FactoryRegistry.html"/>
+            <file role="doc" name="XRL_Node.html"/>
+            <file role="doc" name="XRL_NonValidatingDecoderFactory.html"/>
+            <file role="doc" name="XRL_PrettyEncoderFactory.html"/>
+            <file role="doc" name="XRL_Request.html"/>
+            <file role="doc" name="XRL_RequestFactory.html"/>
+            <file role="doc" name="XRL_Response.html"/>
+            <file role="doc" name="XRL_ResponseFactory.html"/>
+            <file role="doc" name="XRL_Server.html"/>
+            <file role="doc" name="XRL_ValidatingDecoderFactory.html"/>
+          </dir>
+          <file role="doc" name="allclasses-frame.html"/>
+          <file role="doc" name="index.html"/>
+          <file role="doc" name="overview-frame.html"/>
+          <file role="doc" name="overview-summary.html"/>
+          <file role="doc" name="stylesheet.css"/>
+        </dir>
+        <dir name="enduser">
+          <dir name="doctrees">
+            <file role="doc" name="environment.pickle"/>
+            <file role="doc" name="index.doctree"/>
+          </dir>
+          <dir name="html">
+            <dir name="_sources">
+              <file role="doc" name="index.txt"/>
+            </dir>
+            <dir name="_static">
+              <file role="doc" name="basic.css"/>
+              <file role="doc" name="doctools.js"/>
+              <file role="doc" name="file.png"/>
+              <file role="doc" name="jquery.js"/>
+              <file role="doc" name="minus.png"/>
+              <file role="doc" name="nature.css"/>
+              <file role="doc" name="opensearch.xml"/>
+              <file role="doc" name="plus.png"/>
+              <file role="doc" name="pygments.css"/>
+              <file role="doc" name="searchtools.js"/>
+              <file role="doc" name="underscore.js"/>
+            </dir>
+            <file role="doc" name="index.html"/>
+            <file role="doc" name="objects.inv"/>
+            <file role="doc" name="search.html"/>
+            <file role="doc" name="searchindex.js"/>
+          </dir>
+        </dir>
+        <dir name="src" baseinstalldir="/">
+          <file role="doc" name="index.rst"/>
+        </dir>
+      </dir>
+      <dir name="scripts" baseinstalldir="/">
+        <file role="script" name="xrl"/>
+      </dir>
+      <dir name="src" baseinstalldir="/">
+        <dir name="XRL">
+          <file role="php" name="Autoload.php"/>
+          <file role="php" name="Callable.php"/>
+          <file role="php" name="CallableFactory.php"/>
+          <file role="php" name="CallableFactoryInterface.php"/>
+          <file role="php" name="CallableInterface.php"/>
+          <file role="php" name="CLI.php"/>
+          <file role="php" name="Client.php"/>
+          <file role="php" name="CompactEncoderFactory.php"/>
+          <file role="php" name="Decoder.php"/>
+          <file role="php" name="DecoderFactoryInterface.php"/>
+          <file role="php" name="DecoderInterface.php"/>
+          <file role="php" name="Encoder.php"/>
+          <file role="php" name="EncoderFactoryInterface.php"/>
+          <file role="php" name="EncoderInterface.php"/>
+          <file role="php" name="Exception.php"/>
+          <file role="php" name="FactoryRegistry.php"/>
+          <file role="php" name="Node.php"/>
+          <file role="php" name="NonValidatingDecoderFactory.php"/>
+          <file role="php" name="Output.php"/>
+          <file role="php" name="PrettyEncoderFactory.php"/>
+          <file role="php" name="Request.php"/>
+          <file role="php" name="RequestFactory.php"/>
+          <file role="php" name="RequestFactoryInterface.php"/>
+          <file role="php" name="RequestInterface.php"/>
+          <file role="php" name="Response.php"/>
+          <file role="php" name="ResponseFactory.php"/>
+          <file role="php" name="ResponseFactoryInterface.php"/>
+          <file role="php" name="ResponseInterface.php"/>
+          <file role="php" name="Server.php"/>
+          <file role="php" name="ValidatingDecoderFactory.php"/>
+        </dir>
+      </dir>
+      <dir name="tests" baseinstalldir="/">
+        <dir name="testdata">
+          <dir name="requests">
+            <file role="test" name="assoc_array.xml"/>
+            <file role="test" name="assoc_array2.xml"/>
+            <file role="test" name="assoc_array3.xml"/>
+            <file role="test" name="binary.xml"/>
+            <file role="test" name="bool.xml"/>
+            <file role="test" name="bool2.xml"/>
+            <file role="test" name="datetime.xml"/>
+            <file role="test" name="double.xml"/>
+            <file role="test" name="empty.xml"/>
+            <file role="test" name="int.xml"/>
+            <file role="test" name="multi.xml"/>
+            <file role="test" name="num_array.xml"/>
+            <file role="test" name="num_array2.xml"/>
+            <file role="test" name="string.xml"/>
+            <file role="test" name="string2.xml"/>
+          </dir>
+          <dir name="responses">
+            <file role="test" name="failure.xml"/>
+            <file role="test" name="success.xml"/>
+          </dir>
+        </dir>
+        <file role="test" name="DecoderTest.php"/>
+        <file role="test" name="EncoderTest.php"/>
+        <file role="test" name="helpers.php"/>
+        <file role="test" name="ServerTest.php"/>
+      </dir>
     </dir>
-   </dir>
-   <dir name="tests" baseinstalldir="/">
-    <dir name="testdata">
-     <dir name="requests">
-      <file role="test" name="assoc_array.xml"/>
-      <file role="test" name="assoc_array2.xml"/>
-      <file role="test" name="assoc_array3.xml"/>
-      <file role="test" name="bool.xml"/>
-      <file role="test" name="bool2.xml"/>
-      <file role="test" name="double.xml"/>
-      <file role="test" name="empty.xml"/>
-      <file role="test" name="int.xml"/>
-      <file role="test" name="multi.xml"/>
-      <file role="test" name="num_array.xml"/>
-      <file role="test" name="num_array2.xml"/>
-      <file role="test" name="string.xml"/>
-      <file role="test" name="string2.xml"/>
-     </dir>
-     <dir name="responses">
-      <file role="test" name="failure.xml"/>
-      <file role="test" name="success.xml"/>
-     </dir>
-    </dir>
-    <file role="test" name="CompactEncoderTest.php"/>
-    <file role="test" name="DecoderTest.php"/>
-    <file role="test" name="EncoderTestCase.php"/>
-    <file role="test" name="helpers.php"/>
-    <file role="test" name="PrettyEncoderTest.php"/>
-    <file role="test" name="ServerTest.php"/>
-   </dir>
-  </dir>
- </contents>
- <dependencies>
-  <required>
-   <php>
-    <min>5.2.0</min>
-   </php>
-   <pearinstaller>
-    <min>2.0.0a1</min>
-   </pearinstaller>
-  </required>
- </dependencies>
- <phprelease/>
+  </contents>
+  <dependencies>
+    <required>
+      <php>
+        <min>5.2.0</min>
+      </php>
+      <pearinstaller>
+        <min>2.0.0a1</min>
+      </pearinstaller>
+      <extension>
+        <name>XMLReader</name>
+      </extension>
+      <extension>
+        <name>XMLWriter</name>
+      </extension>
+    </required>
+  </dependencies>
+  <phprelease/>
 </package>

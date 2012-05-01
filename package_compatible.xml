@@ -2,10 +2,118 @@
 <package version="2.1" xmlns="http://pear.php.net/dtd/package-2.1" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.1     http://pear.php.net/dtd/package-2.1.xsd">
  <name>XRL</name>
  <channel>pear.erebot.net</channel>
- <summary>Package XRL summary.
+ <summary>A simple XML-RPC client and server written in PHP
 </summary>
- <description>
-Package detailed description here (found in README)
+ <description>=================================================
+
+Features
+--------
+
+XRL provides the following features:
+
+*   Simple servers, using the property operator ``-&gt;`` to indicate
+    what methods the server provides.
+
+*   Simple clients, using the regular method call syntax
+    ``$client-&gt;procedure(42)`` to call a procedure
+    provided by the remote XML-RPC server.
+
+*   Intuitive XML-RPC calls, with automatic type conversion between
+    PHP types and their XML-RPC counterpart.
+
+*   Extensibility, using the array operator ``[]`` to manipulate
+    the factories used by either the client or server.
+
+*   Optional validation of XML-RPC messages (requests or responses).
+
+*   Two XML output formats (compact or indented), making it easy
+    to debug potentiel issues.
+
+*   A CLI script that can be used to query a remote XML-RPC server,
+    display traffic (for debugging purpose)
+
+*   Compatibility with PHP versions ranging from PHP 5.2.1 up to
+    the latest PHP 5.4 releases.
+
+
+Useful resources
+----------------
+
+*   http://fpoirotte.github.com/XRL/ |---| Complete documentation for XRL.
+
+*   https://pear.erebot.net/ |---| PEAR channel for the project.
+
+*   http://travis-ci.org/#!/fpoirotte/XRL |---| XRL's status on
+    Travis Continuous Integration.
+    Current status:
+    ..  image:: https://secure.travis-ci.org/fpoirotte/xrl.png
+        :alt: unknown
+        :target: http://travis-ci.org/#!/fpoirotte/xrl
+
+*   https://buildbot.erebot.net/ |---| Our Continuous Integration server.
+
+
+License
+-------
+
+XRL is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+XRL is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with XRL.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+
+A copy of the GNU General Public License is also available at
+https://raw.github.com/fpoirotte/XRL/master/LICENSE.
+
+Contributions
+-------------
+
+If you want to contribute to this project:
+
+- `Fork it &lt;https://github.com/fpoirotte/XRL/fork_select&gt;`_.
+- Change the code.
+- Send us a pull request.
+
+Please note that we ask contributors to assign the copyright in their
+contributions to the collective name &quot;The XRL Team&quot;.
+To make things easier to maintain, we also ask that you keep the same license
+in your contributions as the global one (GPL v3+).
+
+The copyright and licensing information should be reproduced at the top of
+every new file (as a comment in case that file must be later processed).
+For example, every new PHP source file should begin with the following
+paragraph:
+
+    &lt;?php
+    // © copyright XRL Team, 2012. All rights reserved.
+    /*
+        This file is part of XRL.
+
+        XRL is free software: you can redistribute it and/or modify
+        it under the terms of the GNU General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version.
+
+        XRL is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+
+        You should have received a copy of the GNU General Public License
+        along with XRL.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+    */
+
+..  |---| unicode:: U+02014 .. em dash
+    :trim:
+
+.. vim: ts=4 et
 </description>
  <lead>
   <name>François Poirotte</name>
@@ -13,8 +121,8 @@ Package detailed description here (found in README)
   <email>clicky@erebot.net</email>
   <active>yes</active>
  </lead>
- <date>2012-04-06</date>
- <time>00:04:48</time>
+ <date>2012-05-01</date>
+ <time>15:07:54</time>
  <version>
   <release>0.1.0</release>
   <api>0.1.0</api>
@@ -39,29 +147,379 @@ Package XRL API release notes for version 0.1.0.</notes>
    <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/int.xml"/>
    <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/empty.xml"/>
    <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/double.xml"/>
+   <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/datetime.xml"/>
    <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/bool2.xml"/>
    <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/bool.xml"/>
+   <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/binary.xml"/>
    <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/assoc_array3.xml"/>
    <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/assoc_array2.xml"/>
    <file role="test" name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/assoc_array.xml"/>
    <file role="test" name="test/pear.erebot.net/XRL/ServerTest.php"/>
-   <file role="test" name="test/pear.erebot.net/XRL/PrettyEncoderTest.php"/>
    <file role="test" name="test/pear.erebot.net/XRL/helpers.php"/>
-   <file role="test" name="test/pear.erebot.net/XRL/EncoderTestCase.php"/>
+   <file role="test" name="test/pear.erebot.net/XRL/EncoderTest.php"/>
    <file role="test" name="test/pear.erebot.net/XRL/DecoderTest.php"/>
-   <file role="test" name="test/pear.erebot.net/XRL/CompactEncoderTest.php"/>
+   <file role="script" name="script/xrl"/>
+   <file role="php" name="php/XRL/ValidatingDecoderFactory.php"/>
    <file role="php" name="php/XRL/Server.php"/>
+   <file role="php" name="php/XRL/ResponseInterface.php"/>
+   <file role="php" name="php/XRL/ResponseFactoryInterface.php"/>
+   <file role="php" name="php/XRL/ResponseFactory.php"/>
    <file role="php" name="php/XRL/Response.php"/>
+   <file role="php" name="php/XRL/RequestInterface.php"/>
+   <file role="php" name="php/XRL/RequestFactoryInterface.php"/>
+   <file role="php" name="php/XRL/RequestFactory.php"/>
    <file role="php" name="php/XRL/Request.php"/>
+   <file role="php" name="php/XRL/PrettyEncoderFactory.php"/>
+   <file role="php" name="php/XRL/Output.php"/>
+   <file role="php" name="php/XRL/NonValidatingDecoderFactory.php"/>
    <file role="php" name="php/XRL/Node.php"/>
+   <file role="php" name="php/XRL/FactoryRegistry.php"/>
    <file role="php" name="php/XRL/Exception.php"/>
    <file role="php" name="php/XRL/EncoderInterface.php"/>
+   <file role="php" name="php/XRL/EncoderFactoryInterface.php"/>
    <file role="php" name="php/XRL/Encoder.php"/>
    <file role="php" name="php/XRL/DecoderInterface.php"/>
+   <file role="php" name="php/XRL/DecoderFactoryInterface.php"/>
    <file role="php" name="php/XRL/Decoder.php"/>
+   <file role="php" name="php/XRL/CompactEncoderFactory.php"/>
    <file role="php" name="php/XRL/Client.php"/>
+   <file role="php" name="php/XRL/CLI.php"/>
+   <file role="php" name="php/XRL/CallableInterface.php"/>
+   <file role="php" name="php/XRL/CallableFactoryInterface.php"/>
+   <file role="php" name="php/XRL/CallableFactory.php"/>
    <file role="php" name="php/XRL/Callable.php"/>
    <file role="php" name="php/XRL/Autoload.php"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/src/src/index.rst"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/underscore.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/searchtools.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/pygments.css"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/plus.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/opensearch.xml"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/nature.css"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/minus.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/jquery.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/file.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/doctools.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/basic.css"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/enduser/html/_sources/enduser/html/_sources/index.txt"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/enduser/html/enduser/html/searchindex.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/enduser/html/enduser/html/search.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/enduser/html/enduser/html/objects.inv"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/enduser/html/enduser/html/index.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/enduser/doctrees/enduser/doctrees/index.doctree"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/enduser/doctrees/enduser/doctrees/environment.pickle"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_ValidatingDecoderFactory.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_Server.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_ResponseFactory.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_Response.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_RequestFactory.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_Request.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_PrettyEncoderFactory.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_NonValidatingDecoderFactory.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_Node.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_FactoryRegistry.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_Exception.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_Encoder.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_Decoder.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_CompactEncoderFactory.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_Client.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_CallableFactory.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_Callable.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/package-summary.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/package-frame.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/coverage/stylesheet.css"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/coverage/overview-summary.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/coverage/overview-frame.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/coverage/index.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/coverage/coverage/allclasses-frame.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/ValidatingDecoderFactory_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/tab_s.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/tab_h.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/tab_b.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/tab_a.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/tabs.css"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/Server_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/Response_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/ResponseInterface_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/ResponseFactory_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/ResponseFactoryInterface_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/resize.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/Request_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/RequestInterface_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/RequestFactory_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/RequestFactoryInterface_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/PrettyEncoderFactory_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/pages.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/pages.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/open.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/NonValidatingDecoderFactory_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/Node_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/nav_h.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/nav_f.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/navtreeindex.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/navtree.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/navtree.css"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/jquery.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseInterface__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseInterface__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseInterface__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseInterface.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseInterface.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseInterface-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseFactoryInterface__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseFactoryInterface__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseFactoryInterface__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseFactoryInterface.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseFactoryInterface.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseFactoryInterface-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestInterface__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestInterface__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestInterface__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestInterface.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestInterface.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestInterface-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestFactoryInterface__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestFactoryInterface__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestFactoryInterface__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestFactoryInterface.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestFactoryInterface.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestFactoryInterface-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderInterface__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderInterface__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderInterface__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderInterface.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderInterface.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderInterface-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderFactoryInterface__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderFactoryInterface__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderFactoryInterface__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderFactoryInterface.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderFactoryInterface.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderFactoryInterface-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderInterface__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderInterface__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderInterface__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderInterface.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderInterface.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderInterface-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderFactoryInterface__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderFactoryInterface__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderFactoryInterface__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderFactoryInterface.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderFactoryInterface.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderFactoryInterface-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableInterface__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableInterface__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableInterface__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableInterface.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableInterface.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableInterface-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableFactoryInterface__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableFactoryInterface__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableFactoryInterface__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableFactoryInterface.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableFactoryInterface.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableFactoryInterface-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/installdox"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_13.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_13.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_13.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_12.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_12.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_12.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_11.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_11.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_11.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_10.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_10.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_10.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_9.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_9.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_9.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_8.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_8.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_8.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_7.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_7.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_7.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_6.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_6.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_6.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_5.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_5.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_5.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_4.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_4.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_4.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_3.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_3.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_3.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_2.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_2.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_2.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_1.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_1.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_1.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_0.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_0.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_0.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/inherits.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/index.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/hierarchy.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/hierarchy.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/graph_legend.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/graph_legend.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/graph_legend.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/functions_vars.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/functions_func.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/functions.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2vertline.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2splitbar.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2pnode.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2plastnode.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2node.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2mnode.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2mlastnode.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2link.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2lastnode.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2folderopen.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2folderclosed.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2doc.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2blank.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/files.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/files.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/FactoryRegistry_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/Exception_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/Encoder_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/EncoderInterface_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/EncoderFactoryInterface_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/dynsections.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/doxygen.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/doxygen.css"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/dir_440675789f384b1cdccb5fd799ad3caf_dep.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/dir_440675789f384b1cdccb5fd799ad3caf_dep.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/dir_440675789f384b1cdccb5fd799ad3caf_dep.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/dir_440675789f384b1cdccb5fd799ad3caf.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/dir_38ad550d3c0442eb5e631871feec247e_dep.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/dir_38ad550d3c0442eb5e631871feec247e_dep.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/dir_38ad550d3c0442eb5e631871feec247e_dep.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/dir_38ad550d3c0442eb5e631871feec247e.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/dir_38ad550d3c0442eb5e631871feec247e.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/dirs.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/dirs.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/deprecated.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/Decoder_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/DecoderInterface_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/DecoderFactoryInterface_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/CompactEncoderFactory_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/closed.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/Client_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ValidatingDecoderFactory__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ValidatingDecoderFactory__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ValidatingDecoderFactory__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ValidatingDecoderFactory.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ValidatingDecoderFactory.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ValidatingDecoderFactory-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Server__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Server__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Server__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Server.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Server.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Server-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Response__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Response__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Response__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ResponseFactory__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ResponseFactory__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ResponseFactory__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ResponseFactory.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ResponseFactory.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ResponseFactory-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Response.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Response.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Response-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Request__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Request__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Request__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__RequestFactory__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__RequestFactory__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__RequestFactory__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__RequestFactory.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__RequestFactory.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__RequestFactory-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Request.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Request.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Request-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__PrettyEncoderFactory__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__PrettyEncoderFactory__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__PrettyEncoderFactory__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__PrettyEncoderFactory.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__PrettyEncoderFactory.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__PrettyEncoderFactory-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__NonValidatingDecoderFactory__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__NonValidatingDecoderFactory__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__NonValidatingDecoderFactory__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__NonValidatingDecoderFactory.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__NonValidatingDecoderFactory.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__NonValidatingDecoderFactory-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Node.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Node.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Node-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__FactoryRegistry__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__FactoryRegistry__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__FactoryRegistry__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__FactoryRegistry.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__FactoryRegistry.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__FactoryRegistry-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Exception.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Encoder__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Encoder__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Encoder__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Encoder.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Encoder.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Encoder-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Decoder__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Decoder__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Decoder__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Decoder.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Decoder.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Decoder-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CompactEncoderFactory__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CompactEncoderFactory__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CompactEncoderFactory__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CompactEncoderFactory.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CompactEncoderFactory.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CompactEncoderFactory-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Client__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Client__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Client__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Client.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Client.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Client-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Callable__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Callable__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Callable__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CallableFactory__inherit__graph.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CallableFactory__inherit__graph.md5"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CallableFactory__inherit__graph.map"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CallableFactory.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CallableFactory.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CallableFactory-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Callable.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Callable.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Callable-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Autoload.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Autoload.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Autoload-members.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/classes.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/Callable_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/CallableInterface_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/CallableFactory_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/CallableFactoryInterface_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/bc_s.png"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/Autoload_8php_source.html"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/annotated.js"/>
+   <file role="doc" name="doc/pear.erebot.net/XRL/api/html/api/html/annotated.html"/>
    <file role="data" name="data/pear.erebot.net/XRL/response.rng"/>
    <file role="data" name="data/pear.erebot.net/XRL/request.rng"/>
    <file role="data" name="data/pear.erebot.net/XRL/common.rng"/>
@@ -75,6 +533,12 @@ Package XRL API release notes for version 0.1.0.</notes>
    <pearinstaller>
     <min>1.4.8</min>
    </pearinstaller>
+   <extension>
+    <name>XMLReader</name>
+   </extension>
+   <extension>
+    <name>XMLWriter</name>
+   </extension>
   </required>
  </dependencies>
  <phprelease>
@@ -82,29 +546,379 @@ Package XRL API release notes for version 0.1.0.</notes>
    <install name="data/pear.erebot.net/XRL/common.rng" as="XRL/common.rng"/>
    <install name="data/pear.erebot.net/XRL/request.rng" as="XRL/request.rng"/>
    <install name="data/pear.erebot.net/XRL/response.rng" as="XRL/response.rng"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/annotated.html" as="XRL/api/html/api/html/annotated.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/annotated.js" as="XRL/api/html/api/html/annotated.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/Autoload_8php_source.html" as="XRL/api/html/api/html/Autoload_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/bc_s.png" as="XRL/api/html/api/html/bc_s.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/CallableFactoryInterface_8php_source.html" as="XRL/api/html/api/html/CallableFactoryInterface_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/CallableFactory_8php_source.html" as="XRL/api/html/api/html/CallableFactory_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/CallableInterface_8php_source.html" as="XRL/api/html/api/html/CallableInterface_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/Callable_8php_source.html" as="XRL/api/html/api/html/Callable_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classes.html" as="XRL/api/html/api/html/classes.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Autoload-members.html" as="XRL/api/html/api/html/classXRL__Autoload-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Autoload.html" as="XRL/api/html/api/html/classXRL__Autoload.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Autoload.js" as="XRL/api/html/api/html/classXRL__Autoload.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Callable-members.html" as="XRL/api/html/api/html/classXRL__Callable-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Callable.html" as="XRL/api/html/api/html/classXRL__Callable.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Callable.js" as="XRL/api/html/api/html/classXRL__Callable.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CallableFactory-members.html" as="XRL/api/html/api/html/classXRL__CallableFactory-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CallableFactory.html" as="XRL/api/html/api/html/classXRL__CallableFactory.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CallableFactory.js" as="XRL/api/html/api/html/classXRL__CallableFactory.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CallableFactory__inherit__graph.map" as="XRL/api/html/api/html/classXRL__CallableFactory__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CallableFactory__inherit__graph.md5" as="XRL/api/html/api/html/classXRL__CallableFactory__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CallableFactory__inherit__graph.png" as="XRL/api/html/api/html/classXRL__CallableFactory__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Callable__inherit__graph.map" as="XRL/api/html/api/html/classXRL__Callable__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Callable__inherit__graph.md5" as="XRL/api/html/api/html/classXRL__Callable__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Callable__inherit__graph.png" as="XRL/api/html/api/html/classXRL__Callable__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Client-members.html" as="XRL/api/html/api/html/classXRL__Client-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Client.html" as="XRL/api/html/api/html/classXRL__Client.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Client.js" as="XRL/api/html/api/html/classXRL__Client.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Client__inherit__graph.map" as="XRL/api/html/api/html/classXRL__Client__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Client__inherit__graph.md5" as="XRL/api/html/api/html/classXRL__Client__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Client__inherit__graph.png" as="XRL/api/html/api/html/classXRL__Client__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CompactEncoderFactory-members.html" as="XRL/api/html/api/html/classXRL__CompactEncoderFactory-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CompactEncoderFactory.html" as="XRL/api/html/api/html/classXRL__CompactEncoderFactory.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CompactEncoderFactory.js" as="XRL/api/html/api/html/classXRL__CompactEncoderFactory.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CompactEncoderFactory__inherit__graph.map" as="XRL/api/html/api/html/classXRL__CompactEncoderFactory__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CompactEncoderFactory__inherit__graph.md5" as="XRL/api/html/api/html/classXRL__CompactEncoderFactory__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__CompactEncoderFactory__inherit__graph.png" as="XRL/api/html/api/html/classXRL__CompactEncoderFactory__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Decoder-members.html" as="XRL/api/html/api/html/classXRL__Decoder-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Decoder.html" as="XRL/api/html/api/html/classXRL__Decoder.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Decoder.js" as="XRL/api/html/api/html/classXRL__Decoder.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Decoder__inherit__graph.map" as="XRL/api/html/api/html/classXRL__Decoder__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Decoder__inherit__graph.md5" as="XRL/api/html/api/html/classXRL__Decoder__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Decoder__inherit__graph.png" as="XRL/api/html/api/html/classXRL__Decoder__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Encoder-members.html" as="XRL/api/html/api/html/classXRL__Encoder-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Encoder.html" as="XRL/api/html/api/html/classXRL__Encoder.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Encoder.js" as="XRL/api/html/api/html/classXRL__Encoder.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Encoder__inherit__graph.map" as="XRL/api/html/api/html/classXRL__Encoder__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Encoder__inherit__graph.md5" as="XRL/api/html/api/html/classXRL__Encoder__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Encoder__inherit__graph.png" as="XRL/api/html/api/html/classXRL__Encoder__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Exception.html" as="XRL/api/html/api/html/classXRL__Exception.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__FactoryRegistry-members.html" as="XRL/api/html/api/html/classXRL__FactoryRegistry-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__FactoryRegistry.html" as="XRL/api/html/api/html/classXRL__FactoryRegistry.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__FactoryRegistry.js" as="XRL/api/html/api/html/classXRL__FactoryRegistry.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__FactoryRegistry__inherit__graph.map" as="XRL/api/html/api/html/classXRL__FactoryRegistry__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__FactoryRegistry__inherit__graph.md5" as="XRL/api/html/api/html/classXRL__FactoryRegistry__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__FactoryRegistry__inherit__graph.png" as="XRL/api/html/api/html/classXRL__FactoryRegistry__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Node-members.html" as="XRL/api/html/api/html/classXRL__Node-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Node.html" as="XRL/api/html/api/html/classXRL__Node.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Node.js" as="XRL/api/html/api/html/classXRL__Node.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__NonValidatingDecoderFactory-members.html" as="XRL/api/html/api/html/classXRL__NonValidatingDecoderFactory-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__NonValidatingDecoderFactory.html" as="XRL/api/html/api/html/classXRL__NonValidatingDecoderFactory.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__NonValidatingDecoderFactory.js" as="XRL/api/html/api/html/classXRL__NonValidatingDecoderFactory.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__NonValidatingDecoderFactory__inherit__graph.map" as="XRL/api/html/api/html/classXRL__NonValidatingDecoderFactory__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__NonValidatingDecoderFactory__inherit__graph.md5" as="XRL/api/html/api/html/classXRL__NonValidatingDecoderFactory__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__NonValidatingDecoderFactory__inherit__graph.png" as="XRL/api/html/api/html/classXRL__NonValidatingDecoderFactory__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__PrettyEncoderFactory-members.html" as="XRL/api/html/api/html/classXRL__PrettyEncoderFactory-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__PrettyEncoderFactory.html" as="XRL/api/html/api/html/classXRL__PrettyEncoderFactory.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__PrettyEncoderFactory.js" as="XRL/api/html/api/html/classXRL__PrettyEncoderFactory.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__PrettyEncoderFactory__inherit__graph.map" as="XRL/api/html/api/html/classXRL__PrettyEncoderFactory__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__PrettyEncoderFactory__inherit__graph.md5" as="XRL/api/html/api/html/classXRL__PrettyEncoderFactory__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__PrettyEncoderFactory__inherit__graph.png" as="XRL/api/html/api/html/classXRL__PrettyEncoderFactory__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Request-members.html" as="XRL/api/html/api/html/classXRL__Request-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Request.html" as="XRL/api/html/api/html/classXRL__Request.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Request.js" as="XRL/api/html/api/html/classXRL__Request.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__RequestFactory-members.html" as="XRL/api/html/api/html/classXRL__RequestFactory-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__RequestFactory.html" as="XRL/api/html/api/html/classXRL__RequestFactory.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__RequestFactory.js" as="XRL/api/html/api/html/classXRL__RequestFactory.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__RequestFactory__inherit__graph.map" as="XRL/api/html/api/html/classXRL__RequestFactory__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__RequestFactory__inherit__graph.md5" as="XRL/api/html/api/html/classXRL__RequestFactory__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__RequestFactory__inherit__graph.png" as="XRL/api/html/api/html/classXRL__RequestFactory__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Request__inherit__graph.map" as="XRL/api/html/api/html/classXRL__Request__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Request__inherit__graph.md5" as="XRL/api/html/api/html/classXRL__Request__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Request__inherit__graph.png" as="XRL/api/html/api/html/classXRL__Request__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Response-members.html" as="XRL/api/html/api/html/classXRL__Response-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Response.html" as="XRL/api/html/api/html/classXRL__Response.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Response.js" as="XRL/api/html/api/html/classXRL__Response.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ResponseFactory-members.html" as="XRL/api/html/api/html/classXRL__ResponseFactory-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ResponseFactory.html" as="XRL/api/html/api/html/classXRL__ResponseFactory.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ResponseFactory.js" as="XRL/api/html/api/html/classXRL__ResponseFactory.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ResponseFactory__inherit__graph.map" as="XRL/api/html/api/html/classXRL__ResponseFactory__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ResponseFactory__inherit__graph.md5" as="XRL/api/html/api/html/classXRL__ResponseFactory__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ResponseFactory__inherit__graph.png" as="XRL/api/html/api/html/classXRL__ResponseFactory__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Response__inherit__graph.map" as="XRL/api/html/api/html/classXRL__Response__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Response__inherit__graph.md5" as="XRL/api/html/api/html/classXRL__Response__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Response__inherit__graph.png" as="XRL/api/html/api/html/classXRL__Response__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Server-members.html" as="XRL/api/html/api/html/classXRL__Server-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Server.html" as="XRL/api/html/api/html/classXRL__Server.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Server.js" as="XRL/api/html/api/html/classXRL__Server.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Server__inherit__graph.map" as="XRL/api/html/api/html/classXRL__Server__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Server__inherit__graph.md5" as="XRL/api/html/api/html/classXRL__Server__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__Server__inherit__graph.png" as="XRL/api/html/api/html/classXRL__Server__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ValidatingDecoderFactory-members.html" as="XRL/api/html/api/html/classXRL__ValidatingDecoderFactory-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ValidatingDecoderFactory.html" as="XRL/api/html/api/html/classXRL__ValidatingDecoderFactory.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ValidatingDecoderFactory.js" as="XRL/api/html/api/html/classXRL__ValidatingDecoderFactory.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ValidatingDecoderFactory__inherit__graph.map" as="XRL/api/html/api/html/classXRL__ValidatingDecoderFactory__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ValidatingDecoderFactory__inherit__graph.md5" as="XRL/api/html/api/html/classXRL__ValidatingDecoderFactory__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/classXRL__ValidatingDecoderFactory__inherit__graph.png" as="XRL/api/html/api/html/classXRL__ValidatingDecoderFactory__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/Client_8php_source.html" as="XRL/api/html/api/html/Client_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/closed.png" as="XRL/api/html/api/html/closed.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/CompactEncoderFactory_8php_source.html" as="XRL/api/html/api/html/CompactEncoderFactory_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/DecoderFactoryInterface_8php_source.html" as="XRL/api/html/api/html/DecoderFactoryInterface_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/DecoderInterface_8php_source.html" as="XRL/api/html/api/html/DecoderInterface_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/Decoder_8php_source.html" as="XRL/api/html/api/html/Decoder_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/deprecated.html" as="XRL/api/html/api/html/deprecated.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/dirs.html" as="XRL/api/html/api/html/dirs.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/dirs.js" as="XRL/api/html/api/html/dirs.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/dir_38ad550d3c0442eb5e631871feec247e.html" as="XRL/api/html/api/html/dir_38ad550d3c0442eb5e631871feec247e.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/dir_38ad550d3c0442eb5e631871feec247e.js" as="XRL/api/html/api/html/dir_38ad550d3c0442eb5e631871feec247e.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/dir_38ad550d3c0442eb5e631871feec247e_dep.map" as="XRL/api/html/api/html/dir_38ad550d3c0442eb5e631871feec247e_dep.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/dir_38ad550d3c0442eb5e631871feec247e_dep.md5" as="XRL/api/html/api/html/dir_38ad550d3c0442eb5e631871feec247e_dep.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/dir_38ad550d3c0442eb5e631871feec247e_dep.png" as="XRL/api/html/api/html/dir_38ad550d3c0442eb5e631871feec247e_dep.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/dir_440675789f384b1cdccb5fd799ad3caf.html" as="XRL/api/html/api/html/dir_440675789f384b1cdccb5fd799ad3caf.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/dir_440675789f384b1cdccb5fd799ad3caf_dep.map" as="XRL/api/html/api/html/dir_440675789f384b1cdccb5fd799ad3caf_dep.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/dir_440675789f384b1cdccb5fd799ad3caf_dep.md5" as="XRL/api/html/api/html/dir_440675789f384b1cdccb5fd799ad3caf_dep.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/dir_440675789f384b1cdccb5fd799ad3caf_dep.png" as="XRL/api/html/api/html/dir_440675789f384b1cdccb5fd799ad3caf_dep.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/doxygen.css" as="XRL/api/html/api/html/doxygen.css"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/doxygen.png" as="XRL/api/html/api/html/doxygen.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/dynsections.js" as="XRL/api/html/api/html/dynsections.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/EncoderFactoryInterface_8php_source.html" as="XRL/api/html/api/html/EncoderFactoryInterface_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/EncoderInterface_8php_source.html" as="XRL/api/html/api/html/EncoderInterface_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/Encoder_8php_source.html" as="XRL/api/html/api/html/Encoder_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/Exception_8php_source.html" as="XRL/api/html/api/html/Exception_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/FactoryRegistry_8php_source.html" as="XRL/api/html/api/html/FactoryRegistry_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/files.html" as="XRL/api/html/api/html/files.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/files.js" as="XRL/api/html/api/html/files.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2blank.png" as="XRL/api/html/api/html/ftv2blank.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2doc.png" as="XRL/api/html/api/html/ftv2doc.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2folderclosed.png" as="XRL/api/html/api/html/ftv2folderclosed.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2folderopen.png" as="XRL/api/html/api/html/ftv2folderopen.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2lastnode.png" as="XRL/api/html/api/html/ftv2lastnode.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2link.png" as="XRL/api/html/api/html/ftv2link.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2mlastnode.png" as="XRL/api/html/api/html/ftv2mlastnode.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2mnode.png" as="XRL/api/html/api/html/ftv2mnode.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2node.png" as="XRL/api/html/api/html/ftv2node.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2plastnode.png" as="XRL/api/html/api/html/ftv2plastnode.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2pnode.png" as="XRL/api/html/api/html/ftv2pnode.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2splitbar.png" as="XRL/api/html/api/html/ftv2splitbar.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/ftv2vertline.png" as="XRL/api/html/api/html/ftv2vertline.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/functions.html" as="XRL/api/html/api/html/functions.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/functions_func.html" as="XRL/api/html/api/html/functions_func.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/functions_vars.html" as="XRL/api/html/api/html/functions_vars.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/graph_legend.html" as="XRL/api/html/api/html/graph_legend.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/graph_legend.md5" as="XRL/api/html/api/html/graph_legend.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/graph_legend.png" as="XRL/api/html/api/html/graph_legend.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/hierarchy.html" as="XRL/api/html/api/html/hierarchy.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/hierarchy.js" as="XRL/api/html/api/html/hierarchy.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/index.html" as="XRL/api/html/api/html/index.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherits.html" as="XRL/api/html/api/html/inherits.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_0.map" as="XRL/api/html/api/html/inherit_graph_0.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_0.md5" as="XRL/api/html/api/html/inherit_graph_0.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_0.png" as="XRL/api/html/api/html/inherit_graph_0.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_1.map" as="XRL/api/html/api/html/inherit_graph_1.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_1.md5" as="XRL/api/html/api/html/inherit_graph_1.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_1.png" as="XRL/api/html/api/html/inherit_graph_1.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_2.map" as="XRL/api/html/api/html/inherit_graph_2.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_2.md5" as="XRL/api/html/api/html/inherit_graph_2.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_2.png" as="XRL/api/html/api/html/inherit_graph_2.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_3.map" as="XRL/api/html/api/html/inherit_graph_3.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_3.md5" as="XRL/api/html/api/html/inherit_graph_3.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_3.png" as="XRL/api/html/api/html/inherit_graph_3.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_4.map" as="XRL/api/html/api/html/inherit_graph_4.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_4.md5" as="XRL/api/html/api/html/inherit_graph_4.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_4.png" as="XRL/api/html/api/html/inherit_graph_4.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_5.map" as="XRL/api/html/api/html/inherit_graph_5.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_5.md5" as="XRL/api/html/api/html/inherit_graph_5.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_5.png" as="XRL/api/html/api/html/inherit_graph_5.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_6.map" as="XRL/api/html/api/html/inherit_graph_6.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_6.md5" as="XRL/api/html/api/html/inherit_graph_6.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_6.png" as="XRL/api/html/api/html/inherit_graph_6.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_7.map" as="XRL/api/html/api/html/inherit_graph_7.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_7.md5" as="XRL/api/html/api/html/inherit_graph_7.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_7.png" as="XRL/api/html/api/html/inherit_graph_7.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_8.map" as="XRL/api/html/api/html/inherit_graph_8.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_8.md5" as="XRL/api/html/api/html/inherit_graph_8.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_8.png" as="XRL/api/html/api/html/inherit_graph_8.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_9.map" as="XRL/api/html/api/html/inherit_graph_9.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_9.md5" as="XRL/api/html/api/html/inherit_graph_9.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_9.png" as="XRL/api/html/api/html/inherit_graph_9.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_10.map" as="XRL/api/html/api/html/inherit_graph_10.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_10.md5" as="XRL/api/html/api/html/inherit_graph_10.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_10.png" as="XRL/api/html/api/html/inherit_graph_10.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_11.map" as="XRL/api/html/api/html/inherit_graph_11.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_11.md5" as="XRL/api/html/api/html/inherit_graph_11.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_11.png" as="XRL/api/html/api/html/inherit_graph_11.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_12.map" as="XRL/api/html/api/html/inherit_graph_12.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_12.md5" as="XRL/api/html/api/html/inherit_graph_12.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_12.png" as="XRL/api/html/api/html/inherit_graph_12.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_13.map" as="XRL/api/html/api/html/inherit_graph_13.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_13.md5" as="XRL/api/html/api/html/inherit_graph_13.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/inherit_graph_13.png" as="XRL/api/html/api/html/inherit_graph_13.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/installdox" as="XRL/api/html/api/html/installdox"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableFactoryInterface-members.html" as="XRL/api/html/api/html/interfaceXRL__CallableFactoryInterface-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableFactoryInterface.html" as="XRL/api/html/api/html/interfaceXRL__CallableFactoryInterface.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableFactoryInterface.js" as="XRL/api/html/api/html/interfaceXRL__CallableFactoryInterface.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableFactoryInterface__inherit__graph.map" as="XRL/api/html/api/html/interfaceXRL__CallableFactoryInterface__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableFactoryInterface__inherit__graph.md5" as="XRL/api/html/api/html/interfaceXRL__CallableFactoryInterface__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableFactoryInterface__inherit__graph.png" as="XRL/api/html/api/html/interfaceXRL__CallableFactoryInterface__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableInterface-members.html" as="XRL/api/html/api/html/interfaceXRL__CallableInterface-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableInterface.html" as="XRL/api/html/api/html/interfaceXRL__CallableInterface.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableInterface.js" as="XRL/api/html/api/html/interfaceXRL__CallableInterface.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableInterface__inherit__graph.map" as="XRL/api/html/api/html/interfaceXRL__CallableInterface__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableInterface__inherit__graph.md5" as="XRL/api/html/api/html/interfaceXRL__CallableInterface__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__CallableInterface__inherit__graph.png" as="XRL/api/html/api/html/interfaceXRL__CallableInterface__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderFactoryInterface-members.html" as="XRL/api/html/api/html/interfaceXRL__DecoderFactoryInterface-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderFactoryInterface.html" as="XRL/api/html/api/html/interfaceXRL__DecoderFactoryInterface.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderFactoryInterface.js" as="XRL/api/html/api/html/interfaceXRL__DecoderFactoryInterface.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderFactoryInterface__inherit__graph.map" as="XRL/api/html/api/html/interfaceXRL__DecoderFactoryInterface__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderFactoryInterface__inherit__graph.md5" as="XRL/api/html/api/html/interfaceXRL__DecoderFactoryInterface__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderFactoryInterface__inherit__graph.png" as="XRL/api/html/api/html/interfaceXRL__DecoderFactoryInterface__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderInterface-members.html" as="XRL/api/html/api/html/interfaceXRL__DecoderInterface-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderInterface.html" as="XRL/api/html/api/html/interfaceXRL__DecoderInterface.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderInterface.js" as="XRL/api/html/api/html/interfaceXRL__DecoderInterface.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderInterface__inherit__graph.map" as="XRL/api/html/api/html/interfaceXRL__DecoderInterface__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderInterface__inherit__graph.md5" as="XRL/api/html/api/html/interfaceXRL__DecoderInterface__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__DecoderInterface__inherit__graph.png" as="XRL/api/html/api/html/interfaceXRL__DecoderInterface__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderFactoryInterface-members.html" as="XRL/api/html/api/html/interfaceXRL__EncoderFactoryInterface-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderFactoryInterface.html" as="XRL/api/html/api/html/interfaceXRL__EncoderFactoryInterface.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderFactoryInterface.js" as="XRL/api/html/api/html/interfaceXRL__EncoderFactoryInterface.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderFactoryInterface__inherit__graph.map" as="XRL/api/html/api/html/interfaceXRL__EncoderFactoryInterface__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderFactoryInterface__inherit__graph.md5" as="XRL/api/html/api/html/interfaceXRL__EncoderFactoryInterface__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderFactoryInterface__inherit__graph.png" as="XRL/api/html/api/html/interfaceXRL__EncoderFactoryInterface__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderInterface-members.html" as="XRL/api/html/api/html/interfaceXRL__EncoderInterface-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderInterface.html" as="XRL/api/html/api/html/interfaceXRL__EncoderInterface.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderInterface.js" as="XRL/api/html/api/html/interfaceXRL__EncoderInterface.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderInterface__inherit__graph.map" as="XRL/api/html/api/html/interfaceXRL__EncoderInterface__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderInterface__inherit__graph.md5" as="XRL/api/html/api/html/interfaceXRL__EncoderInterface__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__EncoderInterface__inherit__graph.png" as="XRL/api/html/api/html/interfaceXRL__EncoderInterface__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestFactoryInterface-members.html" as="XRL/api/html/api/html/interfaceXRL__RequestFactoryInterface-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestFactoryInterface.html" as="XRL/api/html/api/html/interfaceXRL__RequestFactoryInterface.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestFactoryInterface.js" as="XRL/api/html/api/html/interfaceXRL__RequestFactoryInterface.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestFactoryInterface__inherit__graph.map" as="XRL/api/html/api/html/interfaceXRL__RequestFactoryInterface__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestFactoryInterface__inherit__graph.md5" as="XRL/api/html/api/html/interfaceXRL__RequestFactoryInterface__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestFactoryInterface__inherit__graph.png" as="XRL/api/html/api/html/interfaceXRL__RequestFactoryInterface__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestInterface-members.html" as="XRL/api/html/api/html/interfaceXRL__RequestInterface-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestInterface.html" as="XRL/api/html/api/html/interfaceXRL__RequestInterface.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestInterface.js" as="XRL/api/html/api/html/interfaceXRL__RequestInterface.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestInterface__inherit__graph.map" as="XRL/api/html/api/html/interfaceXRL__RequestInterface__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestInterface__inherit__graph.md5" as="XRL/api/html/api/html/interfaceXRL__RequestInterface__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__RequestInterface__inherit__graph.png" as="XRL/api/html/api/html/interfaceXRL__RequestInterface__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseFactoryInterface-members.html" as="XRL/api/html/api/html/interfaceXRL__ResponseFactoryInterface-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseFactoryInterface.html" as="XRL/api/html/api/html/interfaceXRL__ResponseFactoryInterface.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseFactoryInterface.js" as="XRL/api/html/api/html/interfaceXRL__ResponseFactoryInterface.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseFactoryInterface__inherit__graph.map" as="XRL/api/html/api/html/interfaceXRL__ResponseFactoryInterface__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseFactoryInterface__inherit__graph.md5" as="XRL/api/html/api/html/interfaceXRL__ResponseFactoryInterface__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseFactoryInterface__inherit__graph.png" as="XRL/api/html/api/html/interfaceXRL__ResponseFactoryInterface__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseInterface-members.html" as="XRL/api/html/api/html/interfaceXRL__ResponseInterface-members.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseInterface.html" as="XRL/api/html/api/html/interfaceXRL__ResponseInterface.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseInterface.js" as="XRL/api/html/api/html/interfaceXRL__ResponseInterface.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseInterface__inherit__graph.map" as="XRL/api/html/api/html/interfaceXRL__ResponseInterface__inherit__graph.map"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseInterface__inherit__graph.md5" as="XRL/api/html/api/html/interfaceXRL__ResponseInterface__inherit__graph.md5"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/interfaceXRL__ResponseInterface__inherit__graph.png" as="XRL/api/html/api/html/interfaceXRL__ResponseInterface__inherit__graph.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/jquery.js" as="XRL/api/html/api/html/jquery.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/navtree.css" as="XRL/api/html/api/html/navtree.css"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/navtree.js" as="XRL/api/html/api/html/navtree.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/navtreeindex.js" as="XRL/api/html/api/html/navtreeindex.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/nav_f.png" as="XRL/api/html/api/html/nav_f.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/nav_h.png" as="XRL/api/html/api/html/nav_h.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/Node_8php_source.html" as="XRL/api/html/api/html/Node_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/NonValidatingDecoderFactory_8php_source.html" as="XRL/api/html/api/html/NonValidatingDecoderFactory_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/open.png" as="XRL/api/html/api/html/open.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/pages.html" as="XRL/api/html/api/html/pages.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/pages.js" as="XRL/api/html/api/html/pages.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/PrettyEncoderFactory_8php_source.html" as="XRL/api/html/api/html/PrettyEncoderFactory_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/RequestFactoryInterface_8php_source.html" as="XRL/api/html/api/html/RequestFactoryInterface_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/RequestFactory_8php_source.html" as="XRL/api/html/api/html/RequestFactory_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/RequestInterface_8php_source.html" as="XRL/api/html/api/html/RequestInterface_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/Request_8php_source.html" as="XRL/api/html/api/html/Request_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/resize.js" as="XRL/api/html/api/html/resize.js"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/ResponseFactoryInterface_8php_source.html" as="XRL/api/html/api/html/ResponseFactoryInterface_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/ResponseFactory_8php_source.html" as="XRL/api/html/api/html/ResponseFactory_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/ResponseInterface_8php_source.html" as="XRL/api/html/api/html/ResponseInterface_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/Response_8php_source.html" as="XRL/api/html/api/html/Response_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/Server_8php_source.html" as="XRL/api/html/api/html/Server_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/tabs.css" as="XRL/api/html/api/html/tabs.css"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/tab_a.png" as="XRL/api/html/api/html/tab_a.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/tab_b.png" as="XRL/api/html/api/html/tab_b.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/tab_h.png" as="XRL/api/html/api/html/tab_h.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/tab_s.png" as="XRL/api/html/api/html/tab_s.png"/>
+   <install name="doc/pear.erebot.net/XRL/api/html/api/html/ValidatingDecoderFactory_8php_source.html" as="XRL/api/html/api/html/ValidatingDecoderFactory_8php_source.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/coverage/allclasses-frame.html" as="XRL/coverage/coverage/allclasses-frame.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/coverage/index.html" as="XRL/coverage/coverage/index.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/coverage/overview-frame.html" as="XRL/coverage/coverage/overview-frame.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/coverage/overview-summary.html" as="XRL/coverage/coverage/overview-summary.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/coverage/stylesheet.css" as="XRL/coverage/coverage/stylesheet.css"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/package-frame.html" as="XRL/coverage/default/coverage/default/package-frame.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/package-summary.html" as="XRL/coverage/default/coverage/default/package-summary.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_Callable.html" as="XRL/coverage/default/coverage/default/XRL_Callable.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_CallableFactory.html" as="XRL/coverage/default/coverage/default/XRL_CallableFactory.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_Client.html" as="XRL/coverage/default/coverage/default/XRL_Client.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_CompactEncoderFactory.html" as="XRL/coverage/default/coverage/default/XRL_CompactEncoderFactory.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_Decoder.html" as="XRL/coverage/default/coverage/default/XRL_Decoder.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_Encoder.html" as="XRL/coverage/default/coverage/default/XRL_Encoder.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_Exception.html" as="XRL/coverage/default/coverage/default/XRL_Exception.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_FactoryRegistry.html" as="XRL/coverage/default/coverage/default/XRL_FactoryRegistry.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_Node.html" as="XRL/coverage/default/coverage/default/XRL_Node.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_NonValidatingDecoderFactory.html" as="XRL/coverage/default/coverage/default/XRL_NonValidatingDecoderFactory.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_PrettyEncoderFactory.html" as="XRL/coverage/default/coverage/default/XRL_PrettyEncoderFactory.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_Request.html" as="XRL/coverage/default/coverage/default/XRL_Request.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_RequestFactory.html" as="XRL/coverage/default/coverage/default/XRL_RequestFactory.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_Response.html" as="XRL/coverage/default/coverage/default/XRL_Response.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_ResponseFactory.html" as="XRL/coverage/default/coverage/default/XRL_ResponseFactory.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_Server.html" as="XRL/coverage/default/coverage/default/XRL_Server.html"/>
+   <install name="doc/pear.erebot.net/XRL/coverage/default/coverage/default/XRL_ValidatingDecoderFactory.html" as="XRL/coverage/default/coverage/default/XRL_ValidatingDecoderFactory.html"/>
+   <install name="doc/pear.erebot.net/XRL/enduser/doctrees/enduser/doctrees/environment.pickle" as="XRL/enduser/doctrees/enduser/doctrees/environment.pickle"/>
+   <install name="doc/pear.erebot.net/XRL/enduser/doctrees/enduser/doctrees/index.doctree" as="XRL/enduser/doctrees/enduser/doctrees/index.doctree"/>
+   <install name="doc/pear.erebot.net/XRL/enduser/html/enduser/html/index.html" as="XRL/enduser/html/enduser/html/index.html"/>
+   <install name="doc/pear.erebot.net/XRL/enduser/html/enduser/html/objects.inv" as="XRL/enduser/html/enduser/html/objects.inv"/>
+   <install name="doc/pear.erebot.net/XRL/enduser/html/enduser/html/search.html" as="XRL/enduser/html/enduser/html/search.html"/>
+   <install name="doc/pear.erebot.net/XRL/enduser/html/enduser/html/searchindex.js" as="XRL/enduser/html/enduser/html/searchindex.js"/>
+   <install name="doc/pear.erebot.net/XRL/enduser/html/_sources/enduser/html/_sources/index.txt" as="XRL/enduser/html/_sources/enduser/html/_sources/index.txt"/>
+   <install name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/basic.css" as="XRL/enduser/html/_static/enduser/html/_static/basic.css"/>
+   <install name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/doctools.js" as="XRL/enduser/html/_static/enduser/html/_static/doctools.js"/>
+   <install name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/file.png" as="XRL/enduser/html/_static/enduser/html/_static/file.png"/>
+   <install name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/jquery.js" as="XRL/enduser/html/_static/enduser/html/_static/jquery.js"/>
+   <install name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/minus.png" as="XRL/enduser/html/_static/enduser/html/_static/minus.png"/>
+   <install name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/nature.css" as="XRL/enduser/html/_static/enduser/html/_static/nature.css"/>
+   <install name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/opensearch.xml" as="XRL/enduser/html/_static/enduser/html/_static/opensearch.xml"/>
+   <install name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/plus.png" as="XRL/enduser/html/_static/enduser/html/_static/plus.png"/>
+   <install name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/pygments.css" as="XRL/enduser/html/_static/enduser/html/_static/pygments.css"/>
+   <install name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/searchtools.js" as="XRL/enduser/html/_static/enduser/html/_static/searchtools.js"/>
+   <install name="doc/pear.erebot.net/XRL/enduser/html/_static/enduser/html/_static/underscore.js" as="XRL/enduser/html/_static/enduser/html/_static/underscore.js"/>
+   <install name="doc/pear.erebot.net/XRL/src/src/index.rst" as="XRL/src/src/index.rst"/>
    <install name="php/XRL/Autoload.php" as="XRL/Autoload.php"/>
    <install name="php/XRL/Callable.php" as="XRL/Callable.php"/>
+   <install name="php/XRL/CallableFactory.php" as="XRL/CallableFactory.php"/>
+   <install name="php/XRL/CallableFactoryInterface.php" as="XRL/CallableFactoryInterface.php"/>
+   <install name="php/XRL/CallableInterface.php" as="XRL/CallableInterface.php"/>
+   <install name="php/XRL/CLI.php" as="XRL/CLI.php"/>
    <install name="php/XRL/Client.php" as="XRL/Client.php"/>
+   <install name="php/XRL/CompactEncoderFactory.php" as="XRL/CompactEncoderFactory.php"/>
    <install name="php/XRL/Decoder.php" as="XRL/Decoder.php"/>
+   <install name="php/XRL/DecoderFactoryInterface.php" as="XRL/DecoderFactoryInterface.php"/>
    <install name="php/XRL/DecoderInterface.php" as="XRL/DecoderInterface.php"/>
    <install name="php/XRL/Encoder.php" as="XRL/Encoder.php"/>
+   <install name="php/XRL/EncoderFactoryInterface.php" as="XRL/EncoderFactoryInterface.php"/>
    <install name="php/XRL/EncoderInterface.php" as="XRL/EncoderInterface.php"/>
    <install name="php/XRL/Exception.php" as="XRL/Exception.php"/>
+   <install name="php/XRL/FactoryRegistry.php" as="XRL/FactoryRegistry.php"/>
    <install name="php/XRL/Node.php" as="XRL/Node.php"/>
+   <install name="php/XRL/NonValidatingDecoderFactory.php" as="XRL/NonValidatingDecoderFactory.php"/>
+   <install name="php/XRL/Output.php" as="XRL/Output.php"/>
+   <install name="php/XRL/PrettyEncoderFactory.php" as="XRL/PrettyEncoderFactory.php"/>
    <install name="php/XRL/Request.php" as="XRL/Request.php"/>
+   <install name="php/XRL/RequestFactory.php" as="XRL/RequestFactory.php"/>
+   <install name="php/XRL/RequestFactoryInterface.php" as="XRL/RequestFactoryInterface.php"/>
+   <install name="php/XRL/RequestInterface.php" as="XRL/RequestInterface.php"/>
    <install name="php/XRL/Response.php" as="XRL/Response.php"/>
+   <install name="php/XRL/ResponseFactory.php" as="XRL/ResponseFactory.php"/>
+   <install name="php/XRL/ResponseFactoryInterface.php" as="XRL/ResponseFactoryInterface.php"/>
+   <install name="php/XRL/ResponseInterface.php" as="XRL/ResponseInterface.php"/>
    <install name="php/XRL/Server.php" as="XRL/Server.php"/>
-   <install name="test/pear.erebot.net/XRL/CompactEncoderTest.php" as="XRL/CompactEncoderTest.php"/>
+   <install name="php/XRL/ValidatingDecoderFactory.php" as="XRL/ValidatingDecoderFactory.php"/>
+   <install name="script/xrl" as="xrl"/>
    <install name="test/pear.erebot.net/XRL/DecoderTest.php" as="XRL/DecoderTest.php"/>
-   <install name="test/pear.erebot.net/XRL/EncoderTestCase.php" as="XRL/EncoderTestCase.php"/>
+   <install name="test/pear.erebot.net/XRL/EncoderTest.php" as="XRL/EncoderTest.php"/>
    <install name="test/pear.erebot.net/XRL/helpers.php" as="XRL/helpers.php"/>
-   <install name="test/pear.erebot.net/XRL/PrettyEncoderTest.php" as="XRL/PrettyEncoderTest.php"/>
    <install name="test/pear.erebot.net/XRL/ServerTest.php" as="XRL/ServerTest.php"/>
    <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/assoc_array.xml" as="XRL/testdata/requests/testdata/requests/assoc_array.xml"/>
    <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/assoc_array2.xml" as="XRL/testdata/requests/testdata/requests/assoc_array2.xml"/>
    <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/assoc_array3.xml" as="XRL/testdata/requests/testdata/requests/assoc_array3.xml"/>
+   <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/binary.xml" as="XRL/testdata/requests/testdata/requests/binary.xml"/>
    <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/bool.xml" as="XRL/testdata/requests/testdata/requests/bool.xml"/>
    <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/bool2.xml" as="XRL/testdata/requests/testdata/requests/bool2.xml"/>
+   <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/datetime.xml" as="XRL/testdata/requests/testdata/requests/datetime.xml"/>
    <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/double.xml" as="XRL/testdata/requests/testdata/requests/double.xml"/>
    <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/empty.xml" as="XRL/testdata/requests/testdata/requests/empty.xml"/>
    <install name="test/pear.erebot.net/XRL/testdata/requests/testdata/requests/int.xml" as="XRL/testdata/requests/testdata/requests/int.xml"/>
