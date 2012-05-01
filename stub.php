@@ -50,11 +50,7 @@ $sig  = $phar->getSignature();
 define('XRL_SIG', $sig['hash']);
 define('XRL_SIGTYPE', $sig['hash_type']);
 
-// your package-specific stuff here, for instance, here is what Pyrus does:
+$cli = new XRL_CLI();
+die($cli->run($_SERVER['argv']));
 
-/**
- * $frontend = new \Pyrus\ScriptFrontend\Commands;
- * @array_shift($_SERVER['argv']);
- * $frontend->run($_SERVER['argv']);
- */
 __HALT_COMPILER();
