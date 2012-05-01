@@ -99,6 +99,8 @@ every new file (as a comment in case that file must be later processed).
 For example, every new PHP source file should begin with the following
 paragraph:
 
+..  sourcecode::
+
     <?php
     // © copyright XRL Team, 2012. All rights reserved.
     /*
@@ -151,7 +153,9 @@ resources useful:
 
 *   http://travis-ci.org/#!/fpoirotte/XRL |---| XRL's status on
     Travis Continuous Integration.
+
     Current status:
+
     ..  image:: https://secure.travis-ci.org/fpoirotte/xrl.png
         :alt: unknown
         :target: http://travis-ci.org/#!/fpoirotte/xrl
