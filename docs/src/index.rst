@@ -8,17 +8,17 @@ need to customize parts of the code.
 
 You can find more information about this project on the following websites:
 
-*   https://github.com/fpoirotte/xrl/ |---| Project page on GitHub.
+*   https://github.com/fpoirotte/XRL/ |---| Project page on GitHub.
 *   https://pear.erebot.net/ |---| PEAR channel for the project.
 *   https://buildbot.erebot.net/ |---| Our Continuous Integration server.
-*   http://travis-ci.org/#!/fpoirotte/xrl |---| Travis Continuous Integration.
+*   http://travis-ci.org/#!/fpoirotte/XRL |---| Travis Continuous Integration.
 
 
 Current status on http://travis-ci.org/:
 
-..  image:: https://secure.travis-ci.org/fpoirotte/xrl.png
+..  image:: https://secure.travis-ci.org/fpoirotte/XRL.png
     :alt: unknown
-    :target: http://travis-ci.org/#!/fpoirotte/xrl
+    :target: http://travis-ci.org/#!/fpoirotte/XRL
 
 
 ..  |---| unicode:: U+02014 .. em dash
