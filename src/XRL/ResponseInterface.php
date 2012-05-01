@@ -22,7 +22,7 @@
  *      request, as produced by an XML-RPC server.
  *
  * \note
- *      This interfaces is never used by XML-RPC
+ *      This interface is never used by XML-RPC
  *      clients.
  */
 interface XRL_ResponseInterface

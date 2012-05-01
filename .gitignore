@@ -1,3 +1,13 @@
-*.phar
-*.tgz
-docs/html/
+/package.xml
+/package_compatible.xml
+
+/docs/html
+/docs/api
+/docs/enduser
+/docs/coverage
+/*.pem
+/*.phar
+/*.pubkey
+/*.tgz
+/*.tagfile.xml
+

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<project name="XRL" description="" default="all">
+    <property name="qa.coverage.force" value="false"/>
+
+    <!--
+        Override subfile for PHPUnit as
+        XRL does not use a bootstrap file.
+    -->
+    <property name="subfile.phpunit" value="phing/phpunit.xml"/>
+
+    <fileset dir="src/" id="sources">
+        <include name="**/*.php"/>
+    </fileset>
+
+    <fileset dir="tests/" id="tests">
+        <include name="**/*.php"/>
+    </fileset>
+
+    <target name="all"/>
+
+    <!--
+        The buildenv sets the copyright line to "Erebot".
+        We override the target to fix that.
+    -->
+    <target name="doc_enduser" description="Generate end-user documentation in HTML format">
+        <property name="doc_release" value=""/>
+        <tstamp prefix="sphinx">
+            <format property="year" pattern="%Y" locale="C"/>
+        </tstamp>
+        <exec command="SPHINX_VERSION=${version} SPHINX_RELEASE=${version}${doc_release} SPHINX_PROJECT=${phing.project.name} sphinx-build -c buildenv/sphinx/ -b html -D html_use_opensearch=http://erebot.github.com/${phing.project.name} -D copyright='${sphinx.year}, The XRL Team' -d docs/enduser/doctrees docs/src docs/enduser/html"
+            passthru="true" checkreturn="true" logoutput="true"/>
+    </target>
+
+    <import file="buildenv/build.xml"/>
+</project>
+
