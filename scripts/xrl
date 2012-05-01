@@ -446,8 +446,12 @@ class XRL_CLI
                     $p = array();
                     $v = (string) substr($v, 1);
                     foreach (str_split($v) as $o) {
-                        if (!array_key_exists($o, $options))
-                            throw new Exception('Unknown option "'.$o.'".');
+                        if (!array_key_exists($o, $options)) {
+                            throw new Exception(
+                                'Unknown option "'.$o.'". '.
+                                'Use -h to get help.'
+                            );
+                        }
 
                         if (is_bool($options[$o]))
                             $options[$o] = TRUE;
