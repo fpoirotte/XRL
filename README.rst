@@ -99,8 +99,6 @@ every new file (as a comment in case that file must be later processed).
 For example, every new PHP source file should begin with the following
 paragraph:
 
-..  sourcecode::
-
     <?php
     // © copyright XRL Team, 2012. All rights reserved.
     /*
