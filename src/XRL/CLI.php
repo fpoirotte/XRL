@@ -44,13 +44,14 @@ class XRL_CLI
         $version = 'dev';
 
         // But try to figure out an actual version from our layout.
-        $dir    = dirname(dirname(__FILE__));
+        $dir    = dirname(dirname(dirname(__FILE__)));
         $files  = array();
-        foreach (new RegexIterator(
-                new DirectoryIterator($dir),
-               '/^RELEASE\-(.+)$/',
-               RegexIterator::GET_MATCH
-            ) as $file) {
+        $iter   = new RegexIterator(
+            new DirectoryIterator($dir),
+           '/^RELEASE\-(.+)$/',
+           RegexIterator::GET_MATCH
+        );
+        foreach ($iter as $file) {
             $files[$file[1]] = $file;
         }
 
@@ -520,5 +521,4 @@ class XRL_CLI
         return 0;
     }
 }
-
 
