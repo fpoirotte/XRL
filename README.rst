@@ -1,3 +1,20 @@
+.. :  © copyright XRL Team, 2012. All rights reserved.
+.. :
+.. :  This file is part of XRL.
+.. :
+.. :  XRL is free software: you can redistribute it and/or modify
+.. :  it under the terms of the GNU General Public License as published by
+.. :  the Free Software Foundation, either version 3 of the License, or
+.. :  (at your option) any later version.
+.. :
+.. :  XRL is distributed in the hope that it will be useful,
+.. :  but WITHOUT ANY WARRANTY; without even the implied warranty of
+.. :  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.. :  GNU General Public License for more details.
+.. :
+.. :  You should have received a copy of the GNU General Public License
+.. :  along with XRL.  If not, see <http://www.gnu.org/licenses/>.
+
 A simple XML-RPC client and server written in PHP
 =================================================
 
@@ -90,53 +107,43 @@ If you want to contribute to this project:
 * Send us a pull request.
 
 Please note that we ask contributors to assign the copyright in their
-contributions to the collective name "The XRL Team".
+contributions to the collective name "XRL Team".
 To make things easier to maintain, we also ask that you keep the same license
 in your contributions as the global one (GPL v3+).
 
 The copyright and licensing information should be reproduced at the top of
-every new file (as a comment in case that file must be later processed).
+every new file (as a special comment).
 For example, every new PHP source file should begin with the following
 paragraph:
 
     <?php
-    // © copyright XRL Team, 2012. All rights reserved.
-    /*
-        This file is part of XRL.
-
-        XRL is free software: you can redistribute it and/or modify
-        it under the terms of the GNU General Public License as published by
-        the Free Software Foundation, either version 3 of the License, or
-        (at your option) any later version.
-
-        XRL is distributed in the hope that it will be useful,
-        but WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-        GNU General Public License for more details.
-
-        You should have received a copy of the GNU General Public License
-        along with XRL.  If not, see <http://www.gnu.org/licenses/>.
-    */
+    /**
+     * \file
+     *
+     * \copyright XRL Team, 2012. All rights reserved.
+     *
+     *  This file is part of XRL.
+     *
+     *  XRL is free software: you can redistribute it and/or modify
+     *  it under the terms of the GNU General Public License as published by
+     *  the Free Software Foundation, either version 3 of the License, or
+     *  (at your option) any later version.
+     *
+     *  XRL is distributed in the hope that it will be useful,
+     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     *  GNU General Public License for more details.
+     *
+     *  You should have received a copy of the GNU General Public License
+     *  along with XRL.  If not, see <http://www.gnu.org/licenses/>.
+     */
 
 
 License
 -------
 
-XRL is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-XRL is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with XRL.  If not, see <http://www.gnu.org/licenses/>.
-
-A copy of the GNU General Public License is also available at
-https://raw.github.com/fpoirotte/XRL/master/LICENSE.
+XRL is released under the GPLv3 license. A copy of the license is available
+at https://raw.github.com/fpoirotte/XRL/master/LICENSE.
 
 
 Other resources
