@@ -33,6 +33,7 @@ extends PHPUnit_Framework_TestCase
             DIRECTORY_SEPARATOR . $folder .
             DIRECTORY_SEPARATOR . $filename . '.xml'
         );
+        $content = str_replace(array("\r\n", "\r"), "\n", $content);
 
         // Indent, use <string>.
         $result = array(array(new XRL_Encoder($tz, TRUE, TRUE), $content, TRUE));
