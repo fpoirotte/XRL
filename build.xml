@@ -28,7 +28,7 @@
         <tstamp prefix="sphinx">
             <format property="year" pattern="%Y" locale="C"/>
         </tstamp>
-        <exec command="SPHINX_VERSION=${version} SPHINX_RELEASE=${version}${doc_release} SPHINX_PROJECT=${phing.project.name} sphinx-build -c buildenv/sphinx/ -b html -D html_use_opensearch=http://erebot.github.com/${phing.project.name} -D copyright='${sphinx.year}, The XRL Team' -d docs/enduser/doctrees docs/src docs/enduser/html"
+        <exec command="SPHINX_VERSION=${version} SPHINX_RELEASE=${version}${doc_release} SPHINX_PROJECT=${phing.project.name} sphinx-build -c vendor/erebot/buildenv/sphinx/ -b html -D html_use_opensearch=http://erebot.github.com/${phing.project.name} -D copyright='${sphinx.year}, The XRL Team' -d docs/enduser/doctrees docs/src docs/enduser/html"
             passthru="true" checkreturn="true" logoutput="true"/>
     </target>
 
