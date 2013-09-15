@@ -28,4 +28,5 @@ require_once(
     DIRECTORY_SEPARATOR . 'XRL' .
     DIRECTORY_SEPARATOR . 'Autoload.php'
 );
+spl_autoload_register(array("XRL_Autoload", "load"));
 

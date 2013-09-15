@@ -17,7 +17,7 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-include(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'helpers.php');
+include_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'helpers.php');
 
 class   DecoderTest
 extends PHPUnit_Framework_TestCase
