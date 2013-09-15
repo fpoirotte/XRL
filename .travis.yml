@@ -21,5 +21,5 @@ script:
 
 after_script:
     - composer require --dev $prefer_source "satooshi/php-coveralls dev-master"
-    - php vendor/bin/coveralls -n -v
+    - php vendor/bin/coveralls -n -v --exclude-no-stmt
 
