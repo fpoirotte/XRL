@@ -92,7 +92,7 @@ implements  Countable,
      * \throw InvalidArgumentException
      *      The given timezone is invalid.
      */
-    public function __construct($timezone   = NULL)
+    public function __construct($timezone = NULL)
     {
         if ($timezone === NULL)
             $timezone = @date_default_timezone_get();
