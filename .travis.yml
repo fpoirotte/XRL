@@ -13,7 +13,11 @@ notifications:
     email: false
     irc: "irc.iiens.net#Erebot"
 
-script: phpunit --coverage-clover clover.xml tests/
+before_script:
+    - composer self-update
+
+script:
+    - phpunit --coverage-clover clover.xml tests/
 
 after_script:
     - composer require --dev $prefer_source "satooshi/php-coveralls dev-master"
