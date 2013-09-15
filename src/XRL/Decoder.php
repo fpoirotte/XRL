@@ -93,16 +93,9 @@ implements  XRL_DecoderInterface
         $reader = new XMLReader();
         $reader->xml($data, NULL, LIBXML_NONET | LIBXML_NOENT);
         if ($this->_validate) {
-            if ('@data_dir@' != '@'.'data_dir'.'@') {
-                $schema = '@data_dir@' .
-                    DIRECTORY_SEPARATOR . 'pear.erebot.net' .
-                    DIRECTORY_SEPARATOR . 'XRL';
-            }
-            else
-                $schema = dirname(dirname(dirname(__FILE__))) .
-                    DIRECTORY_SEPARATOR . 'data';
-
-            $schema .= DIRECTORY_SEPARATOR;
+            $schema = dirname(dirname(dirname(__FILE__))) .
+                DIRECTORY_SEPARATOR . 'data' .
+                DIRECTORY_SEPARATOR;
             $schema .= $request ? 'request.rng' : 'response.rng';
             $reader->setRelaxNGSchema($schema);
         }

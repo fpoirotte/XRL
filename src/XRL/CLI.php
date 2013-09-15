@@ -37,32 +37,25 @@ class XRL_CLI
      */
     static public function getVersion()
     {
-        // Test for installation via pear/pyrus.
-        $version = '@PACKAGE_VERSION@';
-        if ($version != '@'.'PACKAGE_VERSION'.'@')
-            return $version;
+        // From a phar release.
+        if (!strncmp('phar://', __FILE__, 7)) {
+            $phar = new Phar(__FILE__);
+            $md = $phar->getMetadata();
+            return $md['version'];
+        }
 
-        // We're running from a repository checkout.
-        // Default to a generic "dev"elopment version.
-        $version = 'dev';
+        // From a composer install.
+        $getver = dirname(dirname(dirname(__FILE__))) .
+                    DIRECTORY_SEPARATOR . 'vendor' .
+                    DIRECTORY_SEPARATOR . 'erebot' .
+                    DIRECTORY_SEPARATOR . 'buildenv' .
+                    DIRECTORY_SEPARATOR . 'get_version.php';
+        if (file_exists($getver)) {
+            return trim(shell_exec($getver));
+        }
 
-        // But try to figure out an actual version from our layout.
-        $dir    = dirname(dirname(dirname(__FILE__)));
-        $files  = array();
-        $iter   = new RegexIterator(
-            new DirectoryIterator($dir),
-            '/^RELEASE\-(.+)$/',
-            RegexIterator::GET_MATCH
-        );
-        foreach ($iter as $file)
-            $files[$file[1]] = $file;
-
-        if (!count($files))
-            return $version;
-
-        uksort($files, 'version_compare');
-        list($file, $version) = array_pop($files);
-        return $version;
+        // Default guess.
+        return 'dev';
     }
 
     /**
@@ -78,20 +71,9 @@ class XRL_CLI
      */
     public function printUsage($o, $prog)
     {
-        $dataDir = '@data_dir@';
-        // Running from sources/clone.
-        if ($dataDir == '@'.'data_dir'.'@') {
-            $usageDir = dirname(dirname(dirname(__FILE__))) .
-                            DIRECTORY_SEPARATOR . 'data';
-        }
-        else
-            $usageDir = $dataDir;
-
-        $usageDir .= DIRECTORY_SEPARATOR;
-        if ($dataDir != '@'.'data_dir'.'@' || !strncmp(__FILE__, 'phar://', 7))
-            $usageDir .= 'pear.erebot.net' . DIRECTORY_SEPARATOR . 'XRL';
-
-        $usageFile  = $usageDir . DIRECTORY_SEPARATOR . 'usage.txt';
+        $usageFile  = dirname(dirname(dirname(__FILE__))) .
+                        DIRECTORY_SEPARATOR . 'data' .
+                        DIRECTORY_SEPARATOR . 'usage.txt';
         $usage      = @file_get_contents($usageFile);
         $usage      = str_replace(array("\r\n", "\r"), "\n", $usage);
         $usage      = trim($usage);
