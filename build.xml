@@ -2,11 +2,15 @@
 <project name="XRL" description="" default="all">
     <property name="qa.coverage.force" value="false"/>
 
-    <!--
-        Override subfile for PHPUnit as
-        XRL does not use a bootstrap file.
-    -->
+    <!-- XRL does not use Erebot's bootstrap. -->
     <property name="subfile.phpunit" value="phing/phpunit.xml"/>
+
+    <!-- XRL uses a custom stub. -->
+    <property name="phar.stub" value="stub.php"/>
+
+    <fileset dir="." id="phar.files">
+        <include name="data/**"/>
+    </fileset>
 
     <fileset dir="src/" id="sources">
         <include name="**/*.php"/>
@@ -18,10 +22,7 @@
 
     <target name="all"/>
 
-    <!--
-        The buildenv sets the copyright line to "Erebot".
-        We override the target to fix that.
-    -->
+    <!-- Force the copyright line to "XRL Team" rather than "Erebot". -->
     <target name="doc_enduser" description="Generate end-user documentation in HTML format">
         <property name="doc_release" value=""/>
         <tstamp prefix="sphinx">
@@ -31,6 +32,6 @@
             passthru="true" checkreturn="true" logoutput="true"/>
     </target>
 
-    <import file="buildenv/build.xml"/>
+    <import file="vendor/erebot/buildenv/build.xml"/>
 </project>
 

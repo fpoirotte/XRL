@@ -1,3 +1,0 @@
-[submodule "buildenv"]
-	path = buildenv
-	url = git://github.com/Erebot/Erebot_Buildenv.git

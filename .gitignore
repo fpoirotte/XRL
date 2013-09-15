@@ -1,13 +1,12 @@
-/package.xml
-/package_compatible.xml
-
-/docs/html
+# Documentation
 /docs/api
 /docs/enduser
 /docs/coverage
-/*.pem
+
+# Release artifacts
 /*.phar
 /*.pubkey
-/*.tgz
 /*.tagfile.xml
 
+# Dependencies
+/vendor

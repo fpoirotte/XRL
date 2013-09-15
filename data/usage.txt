@@ -14,8 +14,8 @@ Options:
 Additional parameters for the procedure must be passed as a list
 of types & values, where the following types may be used:
 bool      The next argument is a boolean.
-          Use "0",  "off" or "false" for FALSE
-          or "1", "on" or "true" for TRUE.
+          Use "0", "off" or "false" for FALSE
+          and "1", "on" or "true" for TRUE.
 datetime  The next argument is a date with time information,
           using one of PHP's compound formats.
           Eg. "@1215282385" for a UNIX timestamp.

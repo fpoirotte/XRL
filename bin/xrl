@@ -21,21 +21,13 @@
  *  along with XRL.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if ('@php_dir@' == '@'.'php_dir'.'@') {
-    require_once(
-        dirname(dirname(__FILE__)) .
-        DIRECTORY_SEPARATOR . 'src' .
-        DIRECTORY_SEPARATOR . 'XRL' .
-        DIRECTORY_SEPARATOR . 'Autoload.php'
-    );
-}
-else {
-    require_once(
-        '@php_dir@' .
-        DIRECTORY_SEPARATOR . 'XRL' .
-        DIRECTORY_SEPARATOR . 'Autoload.php'
-    );
-}
+require_once(
+    dirname(dirname(__FILE__)) .
+    DIRECTORY_SEPARATOR . 'src' .
+    DIRECTORY_SEPARATOR . 'XRL' .
+    DIRECTORY_SEPARATOR . 'Autoload.php'
+);
+spl_autoload_register(array("XRL_Autoload", "load"));
 
 $cli = new XRL_CLI();
 die($cli->run($_SERVER['argv']));

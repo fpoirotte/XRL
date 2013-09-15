@@ -1,11 +1,10 @@
-
 language: php
 
 php:
-    - 5.2
-    - 5.3.2
+    - 5.3.3
     - 5.3
     - 5.4
+    - 5.5
 
 branches:
     only: master
@@ -14,5 +13,9 @@ notifications:
     email: false
     irc: "irc.iiens.net#Erebot"
 
-script: phpunit tests/
+script: phpunit --coverage-clover clover.xml tests/
+
+after_script:
+    - composer require --dev $prefer_source "satooshi/php-coveralls dev-master"
+    - php vendor/bin/coveralls -n -v
 

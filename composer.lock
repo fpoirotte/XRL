@@ -1,0 +1,136 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "b5ab6af48e7941c91cc1a8d50ca4733b",
+    "packages": [
+
+    ],
+    "packages-dev": [
+        {
+            "name": "erebot/buildenv",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Erebot/Erebot_Buildenv.git",
+                "reference": "b511e88891a11c70f8f6ebeff800b6881559df98"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://packages.erebot.net:943/composer/erebot-buildenv-b511e88891a11c70f8f6ebeff800b6881559df98-zip-33a30c.tar",
+                "reference": "dev-master",
+                "shasum": "bc7365cbe2109bfca64051f5c4d2d77785b13074"
+            },
+            "require": {
+                "ext-phar": "*",
+                "ext-xsl": "*",
+                "phing/phing": ">=2.4.3",
+                "php": ">=5.2.2"
+            },
+            "suggest": {
+                "pdepend/pdepend": "Computes metrics on code quality",
+                "phpmd/phpmd": "Detects overly complicated code patterns (mess detector)",
+                "phpunit/phpunit": "Unit tests for PHP code",
+                "sebastian/phpcpd": "Detects (ab)use of repeated code (copy-paste detector)",
+                "squizlabs/php_codesniffer": "Detects violations of a set of predefined rules (>= 1.2.2 required)"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "François Poirotte",
+                    "email": "clicky@erebot.net",
+                    "role": "lead"
+                }
+            ],
+            "description": "Build environment for the Erebot project",
+            "homepage": "https://github.com/Erebot/Erebot_Buildenv",
+            "keywords": [
+                "Erebot"
+            ],
+            "support": {
+                "email": "erebot@erebot.net",
+                "issues": "https://github.com/Erebot/Erebot_Buildenv/issues",
+                "wiki": "http://erebot.github.com/Erebot/",
+                "irc": "irc://irc.iiens.net/Erebot",
+                "source": "https://github.com/Erebot/Erebot_Buildenv"
+            },
+            "time": "2013-08-17 17:15:26"
+        },
+        {
+            "name": "phing/phing",
+            "version": "2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phingofficial/phing.git",
+                "reference": "3f7d71bf561bafea39087250f777b349438cc32e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phingofficial/phing/zipball/3f7d71bf561bafea39087250f777b349438cc32e",
+                "reference": "3f7d71bf561bafea39087250f777b349438cc32e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "bin": [
+                "bin/phing"
+            ],
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "classes/phing/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                "classes"
+            ],
+            "license": [
+                "LGPL3"
+            ],
+            "authors": [
+                {
+                    "name": "Michiel Rook",
+                    "email": "mrook@php.net"
+                },
+                {
+                    "name": "Phing Community",
+                    "homepage": "http://www.phing.info/trac/wiki/Development/Contributors"
+                }
+            ],
+            "description": "PHing Is Not GNU make; it's a PHP project build system or build tool based on Apache Ant.",
+            "homepage": "http://www.phing.info/",
+            "keywords": [
+                "build",
+                "task",
+                "tool"
+            ],
+            "time": "2013-08-26 21:13:03"
+        }
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "erebot/buildenv": 20
+    },
+    "platform": {
+        "php": ">=5.2.2",
+        "ext-xmlreader": "*",
+        "ext-xmlwriter": "*"
+    },
+    "platform-dev": [
+
+    ]
+}
