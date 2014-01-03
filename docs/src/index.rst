@@ -9,7 +9,8 @@ need to customize parts of the code.
 You can find more information about this project on the following websites:
 
 *   https://github.com/fpoirotte/XRL/ |---| Project page on GitHub.
-*   https://packages.erebot.net/ |---| PEAR channel for the project.
+*   https://packages.erebot.net/ |---| Repository for the project.
+*   https://ci.erebot.net/doc/api/XRL/html/ |---| API documentation
 *   https://ci.erebot.net/ |---| Our Continuous Integration server.
 *   http://travis-ci.org/fpoirotte/XRL |---| Travis Continuous Integration.
 
