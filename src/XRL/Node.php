@@ -49,7 +49,7 @@ class XRL_Node
     {
         $skipNodes = array(XMLReader::SIGNIFICANT_WHITESPACE);
         do {
-            if (!$reader->read()) {
+            if (!@$reader->read()) {
                 throw new InvalidArgumentException(
                     'Unexpected end of document'
                 );
