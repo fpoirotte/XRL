@@ -1,5 +1,5 @@
 {
-    "name": "fpoirott/xrl",
+    "name": "fpoirotte/xrl",
     "description": "Simple XML-RPC Library (both client and server)",
     "keywords": ["XML", "RPC"],
     "homepage": "https://github.com/fpoirotte/XRL",
