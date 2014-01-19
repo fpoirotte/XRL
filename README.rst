@@ -45,22 +45,17 @@ XRL provides the following features:
     (sorted from easiest to most complex):
 
     -   Using a PHAR archive.
-    -   Using our PEAR repository (https://pear.erebot.net/),
-        which is compatible with both the regular pear installer
-        and Pyrus (the next generation PEAR installer).
     -   Using a git clone.
-    -   From the sources.
+    -   From sources.
 
-*   A CLI script (only for PEAR/source installs, but see below)
+*   A CLI script (for git/source installs, but see below)
     that can be used to query a remote XML-RPC server,
-    display traffic (for debugging purpose), etc.
+    display traffic (for debugging purposes), etc.
 
 *   A ``.phar`` archive that contains all of XRL's source code
-    and can also be used in place of the regular CLI script
-    for PHAR installs.
+    and can also be used in place of the regular CLI script.
 
-*   Compatibility with PHP versions ranging from PHP 5.2.1 up to
-    the latest PHP 5.4 releases.
+*   Compatibility with PHP versions from PHP 5.2.1 onward.
 
 
 Installation
@@ -68,31 +63,21 @@ Installation
 
 Several types of installations are possible:
 
-*   Using pear:
-
-        $ pear channel-discover pear.erebot.net
-        $ pear install erebot/XRL
-
-*   Using Pyrus:
-
-        $ pear channel-discover pear.erebot.net
-        $ pyrus install erebot/XRL
-
 *   Using a ``.phar`` archive:
 
-        $ wget --no-check-certificate https://pear.erebot.net/get/XRL-latest.phar
+        $ wget --no-check-certificate https://pear.erebot.net/get/XRL-dev-master.phar
 
 *   From a git clone:
 
         $ git clone git://github.com/fpoirotte/XRL.git
 
-*   From the sources:
+*   From sources:
 
-    -   As a `.tar.gz archive <https://github.com/fpoirotte/XRL/tarball/master>`:
+    -   As a `.tar.gz archive <https://github.com/fpoirotte/XRL/tarball/master>`_:
 
             $ wget -O XRL-sources.tar.gz https://github.com/fpoirotte/XRL/tarball/master
 
-    -   As a `.zip archive <https://github.com/fpoirotte/XRL/zipball/master>`:
+    -   As a `.zip archive <https://github.com/fpoirotte/XRL/zipball/master>`_:
 
             $ wget -O XRL-sources.zip https://github.com/fpoirotte/XRL/zipball/master
 
@@ -102,7 +87,7 @@ Contributions
 
 If you want to contribute to this project:
 
-* `Fork it <https://github.com/fpoirotte/XRL/fork_select>`.
+* `Fork it <https://github.com/fpoirotte/XRL/fork_select>`_.
 * Change the code.
 * Send us a pull request.
 
@@ -152,18 +137,16 @@ Other resources
 In addition to the information above, you may find the following
 resources useful:
 
-*   http://fpoirotte.github.com/XRL/ |---| Complete documentation for XRL.
+*   http://fpoirotte.github.io/XRL/ |---| Complete documentation for XRL.
 
-*   https://pear.erebot.net/ |---| PEAR channel for the project.
-
-*   http://travis-ci.org/#!/fpoirotte/XRL |---| XRL's status on
+*   http://travis-ci.org/fpoirotte/XRL |---| XRL's status on
     Travis Continuous Integration.
 
-    Current status:
+    Current status: |travis-ci|
 
-    ..  image:: https://secure.travis-ci.org/fpoirotte/xrl.png
-        :alt: unknown
-        :target: http://travis-ci.org/#!/fpoirotte/xrl
+..  |travis-ci| image:: https://api.travis-ci.org/fpoirotte/xrl.png
+    :alt: unknown
+    :target: http://travis-ci.org/fpoirotte/xrl
 
 *   https://buildbot.erebot.net/ |---| Our Continuous Integration server.
 
