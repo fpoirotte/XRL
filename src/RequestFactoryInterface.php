@@ -1,4 +1,3 @@
-#!/usr/bin/env php
 <?php
 /**
  * \file
@@ -29,30 +28,23 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-if (version_compare(phpversion(), '5.3.3', '<')) {
-    echo "XRL requires PHP 5.3.3 or newer." . PHP_EOL;
-    exit -1;
+namespace fpoirotte\XRL;
+
+/**
+ * \brief
+ *      Interface for a factory that produces objects
+ *      representing XML-RPC requests.
+ */
+interface RequestFactoryInterface
+{
+    /**
+     * Create an XML-RPC request.
+     *
+     * \param string $method
+     *      Name of the XML-RPC procedure to call.
+     *
+     * \param array $params
+     *      Parameters to pass to the remote procedure.
+     */
+    public function createRequest($method, array $params);
 }
-
-foreach (array('phar', 'spl', 'xmlreader', 'xmlwriter') as $ext) {
-    if (!extension_loaded($ext)) {
-        echo "Extension $ext is required" . PHP_EOL;
-        exit -1;
-    }
-}
-
-try {
-    Phar::mapPhar();
-} catch (Exception $e) {
-    echo "Cannot process XRL phar:" . PHP_EOL;
-    echo $e->getMessage() . PHP_EOL;
-    exit -1;
-}
-
-require('phar://' . __FILE__ . '/src/Autoload.php');
-\fpoirotte\XRL\Autoload::register();
-
-$cli = new \fpoirotte\XRL\CLI();
-die($cli->run($_SERVER['argv']));
-
-__HALT_COMPILER();

@@ -1,4 +1,3 @@
-#!/usr/bin/env php
 <?php
 /**
  * \file
@@ -29,30 +28,42 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-if (version_compare(phpversion(), '5.3.3', '<')) {
-    echo "XRL requires PHP 5.3.3 or newer." . PHP_EOL;
-    exit -1;
-}
+namespace fpoirotte\XRL;
 
-foreach (array('phar', 'spl', 'xmlreader', 'xmlwriter') as $ext) {
-    if (!extension_loaded($ext)) {
-        echo "Extension $ext is required" . PHP_EOL;
-        exit -1;
+/**
+ * \brief
+ *      This class represents the response
+ *      to an XML-RPC request.
+ */
+class Response implements \fpoirotte\XRL\ResponseInterface
+{
+    /// The response to an XML-RPC request, as serialized XML.
+    protected $result;
+
+    /**
+     * Create the response to an XML-RPC request.
+     *
+     * \param mixed $xmlResult
+     *      The result of the request. This may be a scalar
+     *      (integer, boolean, float, string), an array,
+     *      an exception or a \c DateTime object.
+     */
+    public function __construct($xmlResult)
+    {
+        $this->result = $xmlResult;
+    }
+
+    /// \copydoc fpoirotte::XRL::ResponseInterface::__toString()
+    public function __toString()
+    {
+        return $this->result;
+    }
+
+    /// \copydoc fpoirotte::XRL::ResponseInterface::publish()
+    public function publish()
+    {
+        header('Content-Type: text/xml');
+        header('Content-Length: '.strlen($this->result));
+        exit($this->result);
     }
 }
-
-try {
-    Phar::mapPhar();
-} catch (Exception $e) {
-    echo "Cannot process XRL phar:" . PHP_EOL;
-    echo $e->getMessage() . PHP_EOL;
-    exit -1;
-}
-
-require('phar://' . __FILE__ . '/src/Autoload.php');
-\fpoirotte\XRL\Autoload::register();
-
-$cli = new \fpoirotte\XRL\CLI();
-die($cli->run($_SERVER['argv']));
-
-__HALT_COMPILER();

@@ -1,4 +1,3 @@
-#!/usr/bin/env php
 <?php
 /**
  * \file
@@ -29,30 +28,51 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-if (version_compare(phpversion(), '5.3.3', '<')) {
-    echo "XRL requires PHP 5.3.3 or newer." . PHP_EOL;
-    exit -1;
-}
+namespace fpoirotte\XRL;
 
-foreach (array('phar', 'spl', 'xmlreader', 'xmlwriter') as $ext) {
-    if (!extension_loaded($ext)) {
-        echo "Extension $ext is required" . PHP_EOL;
-        exit -1;
+/**
+ * \brief
+ *      A class that represents an XML-RPC request.
+ */
+class Request implements \fpoirotte\XRL\RequestInterface
+{
+    /// Name of the remote procedure to call.
+    protected $procedure;
+
+    /// Parameters to pass to the remote procedure.
+    protected $params;
+
+    /**
+     * Creates a new XML-RPC request.
+     *
+     * \param string $procedure
+     *      Name of the remote procedure to call.
+     *
+     * \param array $params
+     *      Parameters to pass to the remote procedure.
+     *
+     * \throw InvalidArgumentException
+     *      An invalid procedure name was given.
+     */
+    public function __construct($procedure, array $params)
+    {
+        if (!is_string($procedure)) {
+            throw new \InvalidArgumentException('Invalid procedure name');
+        }
+
+        $this->procedure    = $procedure;
+        $this->params       = $params;
+    }
+
+    /// \copydoc fpoirotte::XRL::RequestInterface::getProcedure()
+    public function getProcedure()
+    {
+        return $this->procedure;
+    }
+
+    /// \copydoc fpoirotte::XRL::RequestInterface::getParams()
+    public function getParams()
+    {
+        return $this->params;
     }
 }
-
-try {
-    Phar::mapPhar();
-} catch (Exception $e) {
-    echo "Cannot process XRL phar:" . PHP_EOL;
-    echo $e->getMessage() . PHP_EOL;
-    exit -1;
-}
-
-require('phar://' . __FILE__ . '/src/Autoload.php');
-\fpoirotte\XRL\Autoload::register();
-
-$cli = new \fpoirotte\XRL\CLI();
-die($cli->run($_SERVER['argv']));
-
-__HALT_COMPILER();

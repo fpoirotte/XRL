@@ -34,4 +34,3 @@
 
     <import file="vendor/erebot/buildenv/build.xml"/>
 </project>
-

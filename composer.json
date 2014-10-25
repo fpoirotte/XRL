@@ -24,22 +24,31 @@
         }
     ],
     "require": {
-        "php": ">=5.2.2",
+        "php": ">=5.3.3",
         "ext-XMLReader": "*",
         "ext-XMLWriter": "*"
     },
     "require-dev": {
-        "erebot/buildenv": "dev-master"
+        "erebot/buildenv": "*",
+        "pdepend/pdepend": "*",
+        "squizlabs/php_codesniffer": ">=1.2.2",
+        "phpmd/phpmd": "*",
+        "sebastian/phpcpd": "*",
+        "phpunit/phpunit": "*"
+    },
+    "suggest": {
+        "ext-openssl": "For accessing resources requiring an encrypted (SSL/TLS) connection",
+        "erebot/plop": "For logging various events"
     },
     "autoload": {
-        "psr-0": {
-            "XRL": "src/"
+        "psr-4": {
+            "fpoirotte\\XRL\\": "src/"
         }
     },
     "bin": ["bin/xrl"],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.x-dev"
+            "dev-master": "2.0.x-dev"
         }
     }
 }

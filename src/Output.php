@@ -1,4 +1,3 @@
-#!/usr/bin/env php
 <?php
 /**
  * \file
@@ -29,30 +28,56 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-if (version_compare(phpversion(), '5.3.3', '<')) {
-    echo "XRL requires PHP 5.3.3 or newer." . PHP_EOL;
-    exit -1;
-}
+namespace fpoirotte\XRL;
 
-foreach (array('phar', 'spl', 'xmlreader', 'xmlwriter') as $ext) {
-    if (!extension_loaded($ext)) {
-        echo "Extension $ext is required" . PHP_EOL;
-        exit -1;
+/**
+ * \brief
+ *      A class that formats messages
+ *      before sending them to a stream.
+ */
+class Output
+{
+    /// Stream to send the messages to.
+    protected $stream;
+
+    /**
+     * Create a new outputter.
+     *
+     * \param resource $stream
+     *      The PHP stream this outputter
+     *      will write to.
+     */
+    public function __construct($stream)
+    {
+        $this->stream = $stream;
+    }
+
+    /**
+     * Write some message to the stream,
+     * in a \c printf() fashion.
+     *
+     * \param string $format
+     *      A format string to use to send the message.
+     *
+     * \note
+     *      You may pass additional parameters to this
+     *      method. They will serve as arguments for
+     *      the format string.
+     *
+     * \note
+     *      You don't need to add an end-of-line sequence
+     *      to the format string, one will automatically
+     *      be added for you by this method.
+     */
+    public function write($format /* , ... */)
+    {
+        $args = func_get_args();
+        array_shift($args);
+        // Protection against format attacks.
+        if (!count($args)) {
+            $args[] = $format;
+            $format = "%s";
+        }
+        vfprintf($this->stream, $format.PHP_EOL, $args);
     }
 }
-
-try {
-    Phar::mapPhar();
-} catch (Exception $e) {
-    echo "Cannot process XRL phar:" . PHP_EOL;
-    echo $e->getMessage() . PHP_EOL;
-    exit -1;
-}
-
-require('phar://' . __FILE__ . '/src/Autoload.php');
-\fpoirotte\XRL\Autoload::register();
-
-$cli = new \fpoirotte\XRL\CLI();
-die($cli->run($_SERVER['argv']));
-
-__HALT_COMPILER();

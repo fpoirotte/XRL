@@ -17,18 +17,17 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-include_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'helpers.php');
+namespace fpoirotte\XRL\tests;
 
-class   EncoderTest
-extends PHPUnit_Framework_TestCase
+class Encoder extends \PHPUnit_Framework_TestCase
 {
-    protected function _getXML($folder, $filename)
+    protected function getXML($folder, $filename)
     {
         // Emulate a server located in Ireland.
-        $tz = new DateTimeZone("Europe/Dublin");
+        $tz = new \DateTimeZone("Europe/Dublin");
 
         $content = file_get_contents(
-            dirname(__FILE__) .
+            __DIR__ .
             DIRECTORY_SEPARATOR . 'testdata' .
             DIRECTORY_SEPARATOR . $folder .
             DIRECTORY_SEPARATOR . $filename . '.xml'
@@ -36,12 +35,12 @@ extends PHPUnit_Framework_TestCase
         $content = str_replace(array("\r\n", "\r"), "\n", $content);
 
         // Indent, use <string>.
-        $result = array(array(new XRL_Encoder($tz, TRUE, TRUE), $content, TRUE));
+        $result = array(array(new \fpoirotte\XRL\Encoder($tz, true, true), $content, true));
 
         // Stripped indented.
         $stripped = preg_replace('#\\s*<string>|</string>\\s*#', '', $content);
         // Indent, don't use <string>
-        $result[] = array(new XRL_Encoder($tz, TRUE, FALSE), $stripped, TRUE);
+        $result[] = array(new \fpoirotte\XRL\Encoder($tz, true, false), $stripped, true);
 
         // Remove all whitespaces.
         $content = str_replace(array(' ', "\n", "\r", "\t"), '', $content);
@@ -54,12 +53,12 @@ extends PHPUnit_Framework_TestCase
         );
 
         // No indent, use <string>
-        $result[] = array(new XRL_Encoder($tz, FALSE, TRUE), $content, FALSE);
+        $result[] = array(new \fpoirotte\XRL\Encoder($tz, false, true), $content, false);
 
         // Stripped unindented.
         $stripped = str_replace(array('<string>', '</string>'), '', $content);
         // No indent, don't use <string>
-        $result[] = array(new XRL_Encoder($tz, FALSE, FALSE), $stripped, FALSE);
+        $result[] = array(new \fpoirotte\XRL\Encoder($tz, false, false), $stripped, false);
 
         return $result;
     }
@@ -67,18 +66,20 @@ extends PHPUnit_Framework_TestCase
     public function requestProvider($method)
     {
         $len = strlen('testEncodeRequestWith');
-        if (strncmp($method, 'testEncodeRequestWith', $len))
-            throw new Exception('Bad request for provider');
+        if (strncmp($method, 'testEncodeRequestWith', $len)) {
+            throw new \Exception('Bad request for provider');
+        }
         $method = (string) substr($method, $len);
 
-        if (strpos($method, 'Parameters') !== FALSE)
+        if (strpos($method, 'Parameters') !== false) {
             list($prefix, $index) = explode('Parameters', $method);
-        else if (strpos($method, 'Parameter') !== FALSE)
+        } elseif (strpos($method, 'Parameter') !== false) {
             list($prefix, $index) = explode('Parameter', $method);
-        else if (strpos($method, 'Array') !== FALSE)
+        } elseif (strpos($method, 'Array') !== false) {
             list($prefix, $index) = explode('Array', $method);
-        else
+        } else {
             list($prefix, $index) = array($method, '');
+        }
 
         $mapping = array(
             'Empty'         => 'empty',
@@ -93,23 +94,27 @@ extends PHPUnit_Framework_TestCase
             'DateTime'      => 'datetime',
         );
 
-        if (isset($mapping[$prefix]))
-            return $this->_getXML('requests', $mapping[$prefix] . $index);
-        return $this->_getXML('requests', $prefix . $index);
+        if (isset($mapping[$prefix])) {
+            return $this->getXML('requests', $mapping[$prefix] . $index);
+        }
+        return $this->getXML('requests', $prefix . $index);
     }
 
     public function responseProvider($method)
     {
         $len = strlen('testEncode');
-        if (strncmp($method, 'testEncode', $len))
-            throw new Exception('Bad request for provider');
+        if (strncmp($method, 'testEncode', $len)) {
+            throw new \Exception('Bad request for provider');
+        }
         $method = (string) substr($method, $len);
 
-        if ($method == 'Failure')
-            return $this->_getXML('responses', 'failure');
-        if ($method == 'SuccessfulResponse')
-            return $this->_getXML('responses', 'success');
-        throw new Exception('Request for unknown data');
+        if ($method == 'Failure') {
+            return $this->getXML('responses', 'failure');
+        }
+        if ($method == 'SuccessfulResponse') {
+            return $this->getXML('responses', 'success');
+        }
+        throw new \Exception('Request for unknown data');
     }
 
     /**
@@ -117,9 +122,9 @@ extends PHPUnit_Framework_TestCase
      */
     public function testEncodeRequestWithEmptyParameters($encoder, $expected)
     {
-        $request    = new XRL_Request('emptyParams', array());
+        $request    = new \fpoirotte\XRL\Request('emptyParams', array());
         $received   = $encoder->encodeRequest($request);
-        $this->assertEquals($expected, $received, var_export($encoder, TRUE));
+        $this->assertEquals($expected, $received, var_export($encoder, true));
     }
 
     /**
@@ -127,9 +132,9 @@ extends PHPUnit_Framework_TestCase
      */
     public function testEncodeRequestWithMultipleParameters($encoder, $expected)
     {
-        $request    = new XRL_Request('multiParams', array(42, 'test'));
+        $request    = new \fpoirotte\XRL\Request('multiParams', array(42, 'test'));
         $received   = $encoder->encodeRequest($request);
-        $this->assertEquals($expected, $received, var_export($encoder, TRUE));
+        $this->assertEquals($expected, $received, var_export($encoder, true));
     }
 
     /**
@@ -137,9 +142,9 @@ extends PHPUnit_Framework_TestCase
      */
     public function testEncodeRequestWithIntegerParameter($encoder, $expected)
     {
-        $request    = new XRL_Request('intParam', array(42));
+        $request    = new \fpoirotte\XRL\Request('intParam', array(42));
         $received   = $encoder->encodeRequest($request);
-        $this->assertEquals($expected, $received, var_export($encoder, TRUE));
+        $this->assertEquals($expected, $received, var_export($encoder, true));
     }
 
     /**
@@ -147,9 +152,9 @@ extends PHPUnit_Framework_TestCase
      */
     public function testEncodeRequestWithBooleanParameter($encoder, $expected)
     {
-        $request    = new XRL_Request('boolParam', array(TRUE));
+        $request    = new \fpoirotte\XRL\Request('boolParam', array(true));
         $received   = $encoder->encodeRequest($request);
-        $this->assertEquals($expected, $received, var_export($encoder, TRUE));
+        $this->assertEquals($expected, $received, var_export($encoder, true));
     }
 
     /**
@@ -157,9 +162,9 @@ extends PHPUnit_Framework_TestCase
      */
     public function testEncodeRequestWithBooleanParameter2($encoder, $expected)
     {
-        $request    = new XRL_Request('boolParam', array(FALSE));
+        $request    = new \fpoirotte\XRL\Request('boolParam', array(false));
         $received   = $encoder->encodeRequest($request);
-        $this->assertEquals($expected, $received, var_export($encoder, TRUE));
+        $this->assertEquals($expected, $received, var_export($encoder, true));
     }
 
     /**
@@ -167,9 +172,9 @@ extends PHPUnit_Framework_TestCase
      */
     public function testEncodeRequestWithStringParameter($encoder, $expected)
     {
-        $request    = new XRL_Request('stringParam', array(''));
+        $request    = new \fpoirotte\XRL\Request('stringParam', array(''));
         $received   = $encoder->encodeRequest($request);
-        $this->assertEquals($expected, $received, var_export($encoder, TRUE));
+        $this->assertEquals($expected, $received, var_export($encoder, true));
     }
 
     /**
@@ -177,9 +182,9 @@ extends PHPUnit_Framework_TestCase
      */
     public function testEncodeRequestWithStringParameter2($encoder, $expected)
     {
-        $request    = new XRL_Request('stringParam', array('test'));
+        $request    = new \fpoirotte\XRL\Request('stringParam', array('test'));
         $received   = $encoder->encodeRequest($request);
-        $this->assertEquals($expected, $received, var_export($encoder, TRUE));
+        $this->assertEquals($expected, $received, var_export($encoder, true));
     }
 
     /**
@@ -187,9 +192,9 @@ extends PHPUnit_Framework_TestCase
      */
     public function testEncodeRequestWithDoubleParameter($encoder, $expected)
     {
-        $request    = new XRL_Request('doubleParam', array(3.14));
+        $request    = new \fpoirotte\XRL\Request('doubleParam', array(3.14));
         $received   = $encoder->encodeRequest($request);
-        $this->assertEquals($expected, $received, var_export($encoder, TRUE));
+        $this->assertEquals($expected, $received, var_export($encoder, true));
     }
 
     /**
@@ -198,11 +203,11 @@ extends PHPUnit_Framework_TestCase
     public function testEncodeRequestWithDateTimeParameter($encoder, $expected)
     {
         // Emulate a client located in Metropolitain France.
-        $tz         = new DateTimeZone('Europe/Paris');
-        $date       = new DateTime('1985-11-28T14:00:00', $tz);
-        $request    = new XRL_Request('dateTimeParam', array($date));
+        $tz         = new \DateTimeZone('Europe/Paris');
+        $date       = new \DateTime('1985-11-28T14:00:00', $tz);
+        $request    = new \fpoirotte\XRL\Request('dateTimeParam', array($date));
         $received   = $encoder->encodeRequest($request);
-        $this->assertEquals($expected, $received, var_export($encoder, TRUE));
+        $this->assertEquals($expected, $received, var_export($encoder, true));
     }
 
     /**
@@ -211,9 +216,9 @@ extends PHPUnit_Framework_TestCase
     public function testEncodeRequestWithBinaryParameter($encoder, $expected)
     {
         // An invalid UTF-8 sequence.
-        $request    = new XRL_Request('binaryParam', array("\xE8\xE9\xE0"));
+        $request    = new \fpoirotte\XRL\Request('binaryParam', array("\xE8\xE9\xE0"));
         $received   = $encoder->encodeRequest($request);
-        $this->assertEquals($expected, $received, var_export($encoder, TRUE));
+        $this->assertEquals($expected, $received, var_export($encoder, true));
     }
 
     /**
@@ -222,9 +227,9 @@ extends PHPUnit_Framework_TestCase
     public function testEncodeRequestWithNumericArray($encoder, $expected)
     {
         $array      = array('test', 42);
-        $request    = new XRL_Request('numArray', array($array));
+        $request    = new \fpoirotte\XRL\Request('numArray', array($array));
         $received   = $encoder->encodeRequest($request);
-        $this->assertEquals($expected, $received, var_export($encoder, TRUE));
+        $this->assertEquals($expected, $received, var_export($encoder, true));
     }
 
     /**
@@ -233,9 +238,9 @@ extends PHPUnit_Framework_TestCase
     public function testEncodeRequestWithNumericArray2($encoder, $expected)
     {
         $array      = array();
-        $request    = new XRL_Request('numArray', array($array));
+        $request    = new \fpoirotte\XRL\Request('numArray', array($array));
         $received   = $encoder->encodeRequest($request);
-        $this->assertEquals($expected, $received, var_export($encoder, TRUE));
+        $this->assertEquals($expected, $received, var_export($encoder, true));
     }
 
     /**
@@ -244,9 +249,9 @@ extends PHPUnit_Framework_TestCase
     public function testEncodeRequestWithAssociativeArray($encoder, $expected)
     {
         $array      = array('foo' => 'test', 'bar' => 42);
-        $request    = new XRL_Request('assocArray', array($array));
+        $request    = new \fpoirotte\XRL\Request('assocArray', array($array));
         $received   = $encoder->encodeRequest($request);
-        $this->assertEquals($expected, $received, var_export($encoder, TRUE));
+        $this->assertEquals($expected, $received, var_export($encoder, true));
     }
 
     /**
@@ -255,9 +260,9 @@ extends PHPUnit_Framework_TestCase
     public function testEncodeRequestWithAssociativeArray2($encoder, $expected)
     {
         $array      = array('foo', 42 => 'bar');
-        $request    = new XRL_Request('assocArray', array($array));
+        $request    = new \fpoirotte\XRL\Request('assocArray', array($array));
         $received   = $encoder->encodeRequest($request);
-        $this->assertEquals($expected, $received, var_export($encoder, TRUE));
+        $this->assertEquals($expected, $received, var_export($encoder, true));
     }
 
     /**
@@ -266,14 +271,14 @@ extends PHPUnit_Framework_TestCase
     public function testEncodeRequestWithAssociativeArray3($encoder, $expected)
     {
         $array      = array(42 => 'foo', 'bar');
-        $request    = new XRL_Request('assocArray', array($array));
+        $request    = new \fpoirotte\XRL\Request('assocArray', array($array));
         $received   = $encoder->encodeRequest($request);
-        $this->assertEquals($expected, $received, var_export($encoder, TRUE));
+        $this->assertEquals($expected, $received, var_export($encoder, true));
     }
 
 #    public function testEncodeRequestWithObject()
 #    {
-#        $request    = new XRL_Request('objParam', array());
+#        $request    = new \fpoirotte\XRL\Request('objParam', array());
 #        $received   = $encoder->encodeRequest($request);
 #        $this->assertEquals($this->METHOD_OBJ_PARAM, $received);
 #    }
@@ -283,10 +288,11 @@ extends PHPUnit_Framework_TestCase
      */
     public function testEncodeFailure($encoder, $expected, $indented)
     {
-        $failure    = new Exception('Test_failure', 42);
+        $failure    = new \Exception('Test_failure', 42);
         $received   = $encoder->encodeError($failure);
-        if (!$indented)
+        if (!$indented) {
             $received = str_replace('Exception: ', 'Exception:', $received);
+        }
         $this->assertEquals($expected, $received);
     }
 
@@ -300,4 +306,3 @@ extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $received);
     }
 }
-

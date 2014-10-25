@@ -1,4 +1,3 @@
-#!/usr/bin/env php
 <?php
 /**
  * \file
@@ -29,30 +28,51 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-if (version_compare(phpversion(), '5.3.3', '<')) {
-    echo "XRL requires PHP 5.3.3 or newer." . PHP_EOL;
-    exit -1;
+namespace fpoirotte\XRL;
+
+/**
+ * \brief
+ *      Interface for an XML-RPC decoder.
+ */
+interface DecoderInterface
+{
+    /**
+     * Decode an XML-RPC request.
+     *
+     * \param string $data
+     *      An XML-RPC request as serialized XML.
+     *
+     * \retval fpoirotte::XRL::Request
+     *      An object representing an XML-RPC request.
+     *
+     * \throw InvalidArgumentException
+     *      The given \c $data was invalid. For example,
+     *      it wasn't a string, it didn"t contain any XML
+     *      or the request was malformed.
+     */
+    public function decodeRequest($data);
+
+    /**
+     * Decode an XML-RPC response.
+     *
+     * \param string $data
+     *      An XML-RPC response as serialized XML.
+     *
+     * \retval mixed
+     *      The return value represented by the
+     *      XML-RPC response, using native PHP types.
+     *
+     * \throw fpoirotte::XRL::Exception
+     *      Thrown whenever the response described
+     *      a failure. This exception's \c getCode()
+     *      and \c getMessage() methods can be used
+     *      to retrieve the original failure's code
+     *      and description, respectively.
+     *
+     * \throw InvalidArgumentException
+     *      The given \c $data was invalid. For example,
+     *      it wasn't a string, it didn"t contain any XML
+     *      or the request was malformed.
+     */
+    public function decodeResponse($data);
 }
-
-foreach (array('phar', 'spl', 'xmlreader', 'xmlwriter') as $ext) {
-    if (!extension_loaded($ext)) {
-        echo "Extension $ext is required" . PHP_EOL;
-        exit -1;
-    }
-}
-
-try {
-    Phar::mapPhar();
-} catch (Exception $e) {
-    echo "Cannot process XRL phar:" . PHP_EOL;
-    echo $e->getMessage() . PHP_EOL;
-    exit -1;
-}
-
-require('phar://' . __FILE__ . '/src/Autoload.php');
-\fpoirotte\XRL\Autoload::register();
-
-$cli = new \fpoirotte\XRL\CLI();
-die($cli->run($_SERVER['argv']));
-
-__HALT_COMPILER();

@@ -17,27 +17,37 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace fpoirotte\XRL\tests;
+namespace fpoirotte\XRL\tests\stub;
 
-class Server extends \PHPUnit_Framework_TestCase
+class TestServer
 {
-    protected $server;
-    protected $cls;
-
-    public function setUp()
+    public static function intResult()
     {
-        $this->server   = new \fpoirotte\XRL\Server();
-        $this->cls      = '\\fpoirotte\\XRL\\tests\\stub\\TestServer';
-        foreach (get_class_methods($this->cls) as $func) {
-            $this->server->$func = array($this->cls, $func);
-        }
+        return 42;
     }
 
-    public function testCountProcedures()
+    public static function boolResult()
     {
-        $this->assertEquals(
-            count(get_class_methods($this->cls)),
-            count($this->server)
-        );
+        return true;
+    }
+
+    public static function boolResult2()
+    {
+        return false;
+    }
+
+    public static function stringResult()
+    {
+        return '';
+    }
+
+    public static function stringResult2()
+    {
+        return 'test';
+    }
+
+    public static function doubleResult()
+    {
+        return 3.14;
     }
 }

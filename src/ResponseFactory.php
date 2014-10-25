@@ -1,4 +1,3 @@
-#!/usr/bin/env php
 <?php
 /**
  * \file
@@ -29,30 +28,19 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-if (version_compare(phpversion(), '5.3.3', '<')) {
-    echo "XRL requires PHP 5.3.3 or newer." . PHP_EOL;
-    exit -1;
-}
+namespace fpoirotte\XRL;
 
-foreach (array('phar', 'spl', 'xmlreader', 'xmlwriter') as $ext) {
-    if (!extension_loaded($ext)) {
-        echo "Extension $ext is required" . PHP_EOL;
-        exit -1;
+/**
+ * \brief
+ *      A factory that produces objects wrapping
+ *      XML-RPC responses in a way that makes it
+ *      easy to publish them.
+ */
+class ResponseFactory implements \fpoirotte\XRL\ResponseFactoryInterface
+{
+    /// \copydoc fpoirotte::XRL::ResponseFactoryInterface::createResponse()
+    public function createResponse($response)
+    {
+        return new \fpoirotte\XRL\Response($response);
     }
 }
-
-try {
-    Phar::mapPhar();
-} catch (Exception $e) {
-    echo "Cannot process XRL phar:" . PHP_EOL;
-    echo $e->getMessage() . PHP_EOL;
-    exit -1;
-}
-
-require('phar://' . __FILE__ . '/src/Autoload.php');
-\fpoirotte\XRL\Autoload::register();
-
-$cli = new \fpoirotte\XRL\CLI();
-die($cli->run($_SERVER['argv']));
-
-__HALT_COMPILER();

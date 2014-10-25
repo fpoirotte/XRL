@@ -17,27 +17,18 @@
     along with XRL.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace fpoirotte\XRL\tests;
+// Avoid harmless warning on some
+// badly-configured PHP installations.
+date_default_timezone_set('UTC');
 
-class Server extends \PHPUnit_Framework_TestCase
-{
-    protected $server;
-    protected $cls;
+require_once(
+    dirname(__DIR__) .
+    DIRECTORY_SEPARATOR . 'vendor' .
+    DIRECTORY_SEPARATOR . 'autoload.php'
+);
 
-    public function setUp()
-    {
-        $this->server   = new \fpoirotte\XRL\Server();
-        $this->cls      = '\\fpoirotte\\XRL\\tests\\stub\\TestServer';
-        foreach (get_class_methods($this->cls) as $func) {
-            $this->server->$func = array($this->cls, $func);
-        }
-    }
-
-    public function testCountProcedures()
-    {
-        $this->assertEquals(
-            count(get_class_methods($this->cls)),
-            count($this->server)
-        );
-    }
-}
+require_once(
+    __DIR__ .
+    DIRECTORY_SEPARATOR . 'stub' .
+    DIRECTORY_SEPARATOR . 'TestServer.php'
+);

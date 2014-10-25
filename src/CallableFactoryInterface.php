@@ -1,4 +1,3 @@
-#!/usr/bin/env php
 <?php
 /**
  * \file
@@ -29,30 +28,33 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-if (version_compare(phpversion(), '5.3.3', '<')) {
-    echo "XRL requires PHP 5.3.3 or newer." . PHP_EOL;
-    exit -1;
+namespace fpoirotte\XRL;
+
+/**
+ * \brief
+ *      Interface for a factory meant to create
+ *      callable objects.
+ */
+interface CallableFactoryInterface
+{
+    /**
+     * Constructs a new callable object from any
+     * PHP representation of a callable.
+     *
+     * \param mixed $callable
+     *      A callable item. It must be compatible
+     *      with the PHP callback pseudo-type.
+     *
+     * \retval fpoirotte::XRL::CallableInterface
+     *      A callable object wrapping the PHP callback.
+     *
+     * \throw InvalidArgumentException
+     *      The given item is not compatible
+     *      with the PHP callback pseudo-type.
+     *
+     * \see
+     *      More information on the callback pseudo-type can be found here:
+     *      http://php.net/language.pseudo-types.php#language.types.callback
+     */
+    public function fromPHP($callable);
 }
-
-foreach (array('phar', 'spl', 'xmlreader', 'xmlwriter') as $ext) {
-    if (!extension_loaded($ext)) {
-        echo "Extension $ext is required" . PHP_EOL;
-        exit -1;
-    }
-}
-
-try {
-    Phar::mapPhar();
-} catch (Exception $e) {
-    echo "Cannot process XRL phar:" . PHP_EOL;
-    echo $e->getMessage() . PHP_EOL;
-    exit -1;
-}
-
-require('phar://' . __FILE__ . '/src/Autoload.php');
-\fpoirotte\XRL\Autoload::register();
-
-$cli = new \fpoirotte\XRL\CLI();
-die($cli->run($_SERVER['argv']));
-
-__HALT_COMPILER();

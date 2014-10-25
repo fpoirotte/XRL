@@ -1,4 +1,4 @@
-.. :  © copyright XRL Team, 2012. All rights reserved.
+.. :  © copyright XRL Team, 2012-2014. All rights reserved.
 .. :
 .. :  This file is part of XRL.
 .. :
@@ -44,18 +44,18 @@ XRL provides the following features:
 *   Many different types of installations are possible
     (sorted from easiest to most complex):
 
-    -   Using a PHAR archive.
-    -   Using a git clone.
-    -   From sources.
+    -   Using a PHAR archive
+    -   Using `composer <http://getcomposer.org/>`_
+    -   From sources
 
-*   A CLI script (for git/source installs, but see below)
+*   A CLI script (for composer/source installs, but see below)
     that can be used to query a remote XML-RPC server,
     display traffic (for debugging purposes), etc.
 
 *   A ``.phar`` archive that contains all of XRL's source code
     and can also be used in place of the regular CLI script.
 
-*   Compatibility with PHP versions from PHP 5.2.1 onward.
+*   Compatibility with PHP versions from PHP 5.3.3 onward.
 
 
 Installation
@@ -65,13 +65,18 @@ Several types of installations are possible:
 
 *   Using a ``.phar`` archive:
 
-        $ wget --no-check-certificate https://pear.erebot.net/get/XRL-dev-master.phar
+        $ wget --no-check-certificate https://packages.erebot.net/get/XRL-dev-master.phar
 
-*   From a git clone:
+*   Using composer:
 
-        $ git clone git://github.com/fpoirotte/XRL.git
+        $ php composer.phar require --no-update fpoirotte/xrl
+        $ php composer.phar update --no-dev
 
 *   From sources:
+
+    -   As a git clone:
+
+            $ git clone git://github.com/fpoirotte/XRL.git
 
     -   As a `.tar.gz archive <https://github.com/fpoirotte/XRL/tarball/master>`_:
 
@@ -93,8 +98,8 @@ If you want to contribute to this project:
 
 Please note that we ask contributors to assign the copyright in their
 contributions to the collective name "XRL Team".
-To make things easier to maintain, we also ask that you keep the same license
-in your contributions as the global one (GPL v3+).
+To make things easier, we also ask that you keep the same license
+in your contributions as the global one if possible (3-clause BSD License).
 
 The copyright and licensing information should be reproduced at the top of
 every new file (as a special comment).
@@ -105,30 +110,38 @@ paragraph:
     /**
      * \file
      *
-     * \copyright XRL Team, 2012. All rights reserved.
+     * Copyright (c) <year>, XRL Team
+     * All rights reserved.
      *
-     *  This file is part of XRL.
+     * Redistribution and use in source and binary forms, with or without
+     * modification, are permitted provided that the following conditions are met:
+     *     * Redistributions of source code must retain the above copyright
+     *       notice, this list of conditions and the following disclaimer.
+     *     * Redistributions in binary form must reproduce the above copyright
+     *       notice, this list of conditions and the following disclaimer in the
+     *       documentation and/or other materials provided with the distribution.
+     *     * Neither the name of the <organization> nor the
+     *       names of its contributors may be used to endorse or promote products
+     *       derived from this software without specific prior written permission.
      *
-     *  XRL is free software: you can redistribute it and/or modify
-     *  it under the terms of the GNU General Public License as published by
-     *  the Free Software Foundation, either version 3 of the License, or
-     *  (at your option) any later version.
-     *
-     *  XRL is distributed in the hope that it will be useful,
-     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     *  GNU General Public License for more details.
-     *
-     *  You should have received a copy of the GNU General Public License
-     *  along with XRL.  If not, see <http://www.gnu.org/licenses/>.
+     * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+     * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+     * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+     * DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
+     * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+     * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+     * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+     * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+     * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+     * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      */
 
 
 License
 -------
 
-XRL is released under the GPLv3 license. A copy of the license is available
-at https://raw.github.com/fpoirotte/XRL/master/LICENSE.
+XRL is released under the 3-clause BSD License. An online copy of the license
+is available at https://raw.github.com/fpoirotte/XRL/master/LICENSE.
 
 
 Other resources
@@ -148,7 +161,7 @@ resources useful:
     :alt: unknown
     :target: http://travis-ci.org/fpoirotte/xrl
 
-*   https://buildbot.erebot.net/ |---| Our Continuous Integration server.
+*   https://ci.erebot.net/ |---| Our Continuous Integration server.
 
 
 ..  |---| unicode:: U+02014 .. em dash
