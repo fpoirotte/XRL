@@ -110,7 +110,8 @@ class Encoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
      */
     public function testEncodeRequestWithEmptyParameters($encoder, $expected)
     {
@@ -120,7 +121,8 @@ class Encoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
      */
     public function testEncodeRequestWithMultipleParameters($encoder, $expected)
     {
@@ -130,7 +132,8 @@ class Encoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
      */
     public function testEncodeRequestWithIntegerParameter($encoder, $expected)
     {
@@ -140,7 +143,8 @@ class Encoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
      */
     public function testEncodeRequestWithBooleanParameter($encoder, $expected)
     {
@@ -150,7 +154,8 @@ class Encoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
      */
     public function testEncodeRequestWithBooleanParameter2($encoder, $expected)
     {
@@ -160,7 +165,8 @@ class Encoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
      */
     public function testEncodeRequestWithStringParameter($encoder, $expected)
     {
@@ -170,7 +176,8 @@ class Encoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
      */
     public function testEncodeRequestWithStringParameter2($encoder, $expected)
     {
@@ -180,7 +187,8 @@ class Encoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
      */
     public function testEncodeRequestWithDoubleParameter($encoder, $expected)
     {
@@ -190,7 +198,8 @@ class Encoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
      */
     public function testEncodeRequestWithDateTimeParameter($encoder, $expected)
     {
@@ -203,7 +212,8 @@ class Encoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
      */
     public function testEncodeRequestWithBinaryParameter($encoder, $expected)
     {
@@ -214,7 +224,8 @@ class Encoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
      */
     public function testEncodeRequestWithNumericArray($encoder, $expected)
     {
@@ -225,7 +236,8 @@ class Encoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
      */
     public function testEncodeRequestWithNumericArray2($encoder, $expected)
     {
@@ -236,7 +248,8 @@ class Encoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
      */
     public function testEncodeRequestWithAssociativeArray($encoder, $expected)
     {
@@ -247,7 +260,8 @@ class Encoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
      */
     public function testEncodeRequestWithAssociativeArray2($encoder, $expected)
     {
@@ -258,7 +272,8 @@ class Encoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
      */
     public function testEncodeRequestWithAssociativeArray3($encoder, $expected)
     {
@@ -269,7 +284,8 @@ class Encoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider responseProvider
+     * @dataProvider    responseProvider
+     * @covers          \fpoirotte\XRL\Encoder::encodeError
      */
     public function testEncodeFailure($encoder, $expected, $indented)
     {
@@ -282,7 +298,8 @@ class Encoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider responseProvider
+     * @dataProvider    responseProvider
+     * @covers          \fpoirotte\XRL\Encoder::encodeResponse
      */
     public function testEncodeSuccessfulResponse($encoder, $expected)
     {

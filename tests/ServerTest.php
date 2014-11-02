@@ -25,6 +25,7 @@ class Server extends \PHPUnit_Framework_TestCase
         }
     }
 
+    /// @covers \fpoirotte\XRL\Server::testCountProcedures
     public function testCountProcedures()
     {
         $this->assertEquals(

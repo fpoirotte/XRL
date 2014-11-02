@@ -100,7 +100,8 @@ class Decoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      */
     public function testDecodeRequestWithEmptyParameters($decoder, $xml)
     {
@@ -113,7 +114,8 @@ class Decoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      */
     public function testDecodeRequestWithMultipleParameters($decoder, $xml)
     {
@@ -128,7 +130,8 @@ class Decoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      */
     public function testDecodeRequestWithIntegerParameter($decoder, $xml)
     {
@@ -142,7 +145,8 @@ class Decoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      */
     public function testDecodeRequestWithBooleanParameter($decoder, $xml)
     {
@@ -156,7 +160,8 @@ class Decoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      */
     public function testDecodeRequestWithBooleanParameter2($decoder, $xml)
     {
@@ -170,7 +175,8 @@ class Decoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      */
     public function testDecodeRequestWithStringParameter($decoder, $xml)
     {
@@ -184,7 +190,8 @@ class Decoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      */
     public function testDecodeRequestWithStringParameter2($decoder, $xml)
     {
@@ -198,7 +205,8 @@ class Decoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      */
     public function testDecodeRequestWithDoubleParameter($decoder, $xml)
     {
@@ -212,7 +220,8 @@ class Decoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      */
     public function testDecodeRequestWithDateTimeParameter($decoder, $xml)
     {
@@ -229,7 +238,8 @@ class Decoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      */
     public function testDecodeRequestWithBinaryParameter($decoder, $xml)
     {
@@ -243,7 +253,8 @@ class Decoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      */
     public function testDecodeRequestWithNumericArray($decoder, $xml)
     {
@@ -258,7 +269,8 @@ class Decoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      */
     public function testDecodeRequestWithNumericArray2($decoder, $xml)
     {
@@ -273,7 +285,8 @@ class Decoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      */
     public function testDecodeRequestWithAssociativeArray($decoder, $xml)
     {
@@ -303,7 +316,8 @@ class Decoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider requestProvider
+     * @dataProvider    requestProvider
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      */
     public function testDecodeRequestWithAssociativeArray3($decoder, $xml)
     {
@@ -318,7 +332,8 @@ class Decoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider responseProvider
+     * @dataProvider    responseProvider
+     * @covers          \fpoirotte\XRL\Decoder::decodeResponse
      */
     public function testDecodeFailure($decoder, $xml, $indented)
     {
@@ -343,7 +358,8 @@ class Decoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider responseProvider
+     * @dataProvider    responseProvider
+     * @covers          \fpoirotte\XRL\Decoder::decodeResponse
      */
     public function testDecodeSuccessfulResponse($decoder, $xml)
     {

@@ -21,14 +21,13 @@ notifications:
     irc: "irc.iiens.net#Erebot"
 
 before_script:
-    - if [ "$TRAVIS_PHP_VERSION" = "5.3.3" ]; then prefer_source="--prefer-source"; else prefer_source=""; fi
     - composer self-update -n
-    - composer install --dev -n $prefer_source
+    - composer install --dev -n
 
 script:
-    - php -c tests/hhvm.ini vendor/bin/phpunit --coverage-clover clover.xml --test-suffix=.php --bootstrap ./tests/bootstrap.php tests/
+    - php -c tests/hhvm.ini vendor/bin/phpunit --coverage-clover clover.xml --bootstrap ./tests/bootstrap.php tests/
 
 after_script:
-    - composer require --dev $prefer_source "satooshi/php-coveralls dev-master"
+    - composer require --dev "satooshi/php-coveralls dev-master"
     - php vendor/bin/coveralls -n -v
 
