@@ -3,7 +3,7 @@
     "description": "Simple XML-RPC Library (both client and server)",
     "keywords": ["XML", "RPC"],
     "homepage": "https://github.com/fpoirotte/XRL",
-    "license": "GPL-3.0+",
+    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "François Poirotte",
@@ -17,19 +17,15 @@
         "irc": "irc://irc.iiens.net/Erebot",
         "source": "https://github.com/fpoirotte/XRL"
     },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "http://packages.erebot.net"
-        }
-    ],
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.4",
         "ext-XMLReader": "*",
-        "ext-XMLWriter": "*"
+        "ext-XMLWriter": "*",
+        "ext-gmp": "*"
     },
     "require-dev": {
         "erebot/buildenv": "*",
+        "fpoirotte/natives4doxygen": "*",
         "pdepend/pdepend": "*",
         "squizlabs/php_codesniffer": ">=1.2.2",
         "phpmd/phpmd": "*",
