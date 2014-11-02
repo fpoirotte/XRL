@@ -1,21 +1,13 @@
 <?php
-// © copyright XRL Team, 2012. All rights reserved.
 /*
-    This file is part of XRL, a simple XML-RPC Library for PHP.
-
-    XRL is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    XRL is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with XRL.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ * This file is part of XRL, a simple XML-RPC Library for PHP.
+ *
+ * Copyright (c) 2012, XRL Team. All rights reserved.
+ * XRL is licensed under the 3-clause BSD License.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 /*
  * This example expects an XML-RPC server providing a "qux"
@@ -34,8 +26,8 @@
  * Server: https://foobar.example.com:4443/tests/xrl/server.php
  */
 
-require_once("XRL/Autoload.php");
-spl_autoload_register(array("XRL_Autoload", "load"));
+require_once("src/Autoload.php");
+\fpoirotte\XRL\Autoload::register();
 
 // Create the URL that will be used to contact the XML-RPC server.
 $pos        = strrpos($_SERVER['SCRIPT_NAME'], '/');
@@ -48,11 +40,10 @@ $serverUrl .= (string) substr($_SERVER['SCRIPT_NAME'], 0, $pos);
 $serverUrl .= '/server.php';
 
 // Create a new client.
-$client     = new XRL_Client($serverUrl);
+$client     = new \fpoirotte\XRL\Client($serverUrl);
 
 // Call the remote server's qux() procedure.
 $res = $client->qux(23);
 
 // Display the result: "int(65)" (42 + 23).
 var_dump($res);
-

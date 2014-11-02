@@ -1,2 +1,4 @@
-@INCLUDE = vendor/erebot/buildenv/Doxyfile
-EXAMPLE_PATH           = example/
+@INCLUDE        = vendor/erebot/buildenv/Doxyfile
+INPUT          += vendor/fpoirotte/natives4doxygen/docs/
+EXAMPLE_PATH    = docs/example/
+
