@@ -1,22 +1,15 @@
-.. :  © copyright XRL Team, 2012-2014. All rights reserved.
+.. : This file is part of XRL, a simple XML-RPC Library for PHP.
 .. :
-.. :  This file is part of XRL.
+.. : Copyright (c) 2012, XRL Team. All rights reserved.
+.. : XRL is licensed under the 3-clause BSD License.
 .. :
-.. :  XRL is free software: you can redistribute it and/or modify
-.. :  it under the terms of the GNU General Public License as published by
-.. :  the Free Software Foundation, either version 3 of the License, or
-.. :  (at your option) any later version.
-.. :
-.. :  XRL is distributed in the hope that it will be useful,
-.. :  but WITHOUT ANY WARRANTY; without even the implied warranty of
-.. :  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-.. :  GNU General Public License for more details.
-.. :
-.. :  You should have received a copy of the GNU General Public License
-.. :  along with XRL.  If not, see <http://www.gnu.org/licenses/>.
+.. : For the full copyright and license information, please view the LICENSE
+.. : file that was distributed with this source code.
 
 A simple XML-RPC client and server written in PHP
 =================================================
+
+|travis-ci| |coveralls| |versioneye-updates| |versioneye-refs|
 
 Features
 --------
@@ -55,7 +48,7 @@ XRL provides the following features:
 *   A ``.phar`` archive that contains all of XRL's source code
     and can also be used in place of the regular CLI script.
 
-*   Compatibility with PHP versions from PHP 5.3.3 onward.
+*   Compatibility with PHP versions from PHP 5.3.4 onward.
 
 
 Installation
@@ -65,26 +58,36 @@ Several types of installations are possible:
 
 *   Using a ``.phar`` archive:
 
-        $ wget --no-check-certificate https://packages.erebot.net/get/XRL-dev-master.phar
+        ..  sourcecode:: console
+
+            $ wget --no-check-certificate https://packages.erebot.net/get/XRL-dev-master.phar
 
 *   Using composer:
 
-        $ php composer.phar require --no-update fpoirotte/xrl
-        $ php composer.phar update --no-dev
+        ..  sourcecode:: console
+
+            $ php composer.phar require --no-update fpoirotte/xrl
+            $ php composer.phar update --no-dev
 
 *   From sources:
 
     -   As a git clone:
 
-            $ git clone git://github.com/fpoirotte/XRL.git
+        ..  sourcecode:: console
+
+                $ git clone git://github.com/fpoirotte/XRL.git
 
     -   As a `.tar.gz archive <https://github.com/fpoirotte/XRL/tarball/master>`_:
 
-            $ wget -O XRL-sources.tar.gz https://github.com/fpoirotte/XRL/tarball/master
+        ..  sourcecode:: console
+
+                $ wget -O XRL-sources.tar.gz https://github.com/fpoirotte/XRL/tarball/master
 
     -   As a `.zip archive <https://github.com/fpoirotte/XRL/zipball/master>`_:
 
-            $ wget -O XRL-sources.zip https://github.com/fpoirotte/XRL/zipball/master
+        ..  sourcecode:: console
+
+                $ wget -O XRL-sources.zip https://github.com/fpoirotte/XRL/zipball/master
 
 
 Contributions
@@ -92,57 +95,63 @@ Contributions
 
 If you want to contribute to this project:
 
-* `Fork it <https://github.com/fpoirotte/XRL/fork_select>`_.
+* `Fork it <https://github.com/fpoirotte/XRL/fork>`_.
 * Change the code.
 * Send us a pull request.
 
-Please note that we ask contributors to assign the copyright in their
-contributions to the collective name "XRL Team".
-To make things easier, we also ask that you keep the same license
-in your contributions as the global one if possible (3-clause BSD License).
+Please read the section on copyright attribution and licensing below carefully
+before sending your pull request.
 
-The copyright and licensing information should be reproduced at the top of
-every new file (as a special comment).
-For example, every new PHP source file should begin with the following
-paragraph:
-
-    <?php
-    /**
-     * \file
-     *
-     * Copyright (c) <year>, XRL Team
-     * All rights reserved.
-     *
-     * Redistribution and use in source and binary forms, with or without
-     * modification, are permitted provided that the following conditions are met:
-     *     * Redistributions of source code must retain the above copyright
-     *       notice, this list of conditions and the following disclaimer.
-     *     * Redistributions in binary form must reproduce the above copyright
-     *       notice, this list of conditions and the following disclaimer in the
-     *       documentation and/or other materials provided with the distribution.
-     *     * Neither the name of the <organization> nor the
-     *       names of its contributors may be used to endorse or promote products
-     *       derived from this software without specific prior written permission.
-     *
-     * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-     * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-     * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-     * DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
-     * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-     * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-     * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-     * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-     * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-     * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-     */
-
-
-License
--------
+Copyright and license
+---------------------
 
 XRL is released under the 3-clause BSD License. An online copy of the license
 is available at https://raw.github.com/fpoirotte/XRL/master/LICENSE.
 
+We ask contributors to assign the copyright in their contributions
+to the collective name "XRL Team".
+
+To make things easier, we also ask that you keep the same license
+in your contributions as the global one if possible (3-clause BSD License).
+
+The copyright and licensing information should be reproduced at the top
+of every file. A template is given below for PHP files.
+For other types of files (RelaxNG schemae, reStructuredText pages, etc.),
+adapt the template to fit that file's particular syntax requirements.
+
+Since we want to retain credit for contributors where it's due, feel free
+to add a Doxygen \\authors command with your name and email in every class
+where you made significant changes. Please make sure the email address is valid.
+
+Example template (taken from XRL's autoloader) for PHP files containing
+both copyright information, licensing information and contributor credits:
+
+..  sourcecode:: php
+
+    <?php
+    /*
+     * This file is part of XRL, a simple XML-RPC Library for PHP.
+     *
+     * Copyright (c) 2012, XRL Team. All rights reserved.
+     * XRL is licensed under the 3-clause BSD License.
+     *
+     * For the full copyright and license information, please view the LICENSE
+     * file that was distributed with this source code.
+     */
+
+    namespace fpoirotte\XRL;
+
+    /**
+     * \brief
+     *      An helper class that wraps XRL's autoloader.
+     *
+     * \authors John Doe <john@doe.example.com>
+     * \authors Jane Doe <jane@doe.example.com>
+     */
+    class Autoload
+    {
+        // Some code here...
+    }
 
 Other resources
 ---------------
@@ -152,19 +161,30 @@ resources useful:
 
 *   http://fpoirotte.github.io/XRL/ |---| Complete documentation for XRL.
 
-*   http://travis-ci.org/fpoirotte/XRL |---| XRL's status on
-    Travis Continuous Integration.
-
-    Current status: |travis-ci|
-
-..  |travis-ci| image:: https://api.travis-ci.org/fpoirotte/xrl.png
-    :alt: unknown
-    :target: http://travis-ci.org/fpoirotte/xrl
-
 *   https://ci.erebot.net/ |---| Our Continuous Integration server.
 
+
+
+..  : End of page.
+..  : The rest of this document are definitions for various macros.
+
+..  |travis-ci| image:: https://api.travis-ci.org/fpoirotte/XRL.png
+    :alt: unknown
+    :target: http://travis-ci.org/fpoirotte/XRL
+
+..  |coveralls| image:: https://coveralls.io/repos/fpoirotte/XRL/badge.png?branch=master
+    :alt: unknown
+    :target: https://coveralls.io/r/fpoirotte/XRL?branch=master
+
+..  |versioneye-updates| image:: https://www.versioneye.com/php/fpoirotte:xrl/dev-master/badge.svg
+    :alt: unknown
+    :target: https://www.versioneye.com/php/fpoirotte:xrl/dev-master
+
+..  |versioneye-refs| image:: https://www.versioneye.com/php/fpoirotte:xrl/reference_badge.svg?style=flat
+    :alt: unknown
+    :target: https://www.versioneye.com/php/fpoirotte:xrl/references
 
 ..  |---| unicode:: U+02014 .. em dash
     :trim:
 
-.. vim: ts=4 et
+..  : vim: ts=4 et
