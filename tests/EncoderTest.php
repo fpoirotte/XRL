@@ -268,13 +268,6 @@ class Encoder extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $received, var_export($encoder, true));
     }
 
-#    public function testEncodeRequestWithObject()
-#    {
-#        $request    = new \fpoirotte\XRL\Request('objParam', array());
-#        $received   = $encoder->encodeRequest($request);
-#        $this->assertEquals($this->METHOD_OBJ_PARAM, $received);
-#    }
-
     /**
      * @dataProvider responseProvider
      */

@@ -13,7 +13,7 @@ namespace fpoirotte\XRL\Types;
 
 class DateTimeIso8601 extends \fpoirotte\XRL\Types\AbstractType
 {
-    public function get()
+    public function __toString()
     {
         return $this->value->format(\DateTime::ISO8601);
     }
@@ -40,7 +40,10 @@ class DateTimeIso8601 extends \fpoirotte\XRL\Types\AbstractType
         }
 
         $result = new \DateTime($value, $timezone);
-        if (strcasecmp($value, $result->format(\DateTime::ISO8601))) {
+
+        // We can't just use DateTime::ISO8601 (= "Y-m-d\TH:i:sO")
+        // because the XML-RPC specification forbids timezones.
+        if (strcasecmp($value, $result->format('Y-m-d\TH:i:s'))) {
             throw new \InvalidArgumentException('Invalid date/time');
         }
 

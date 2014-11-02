@@ -24,8 +24,11 @@ class Nil extends \fpoirotte\XRL\Types\AbstractType
         return $writer->writeElement('nil');
     }
 
-    protected static function parse($value)
-    {
+    protected static function parse(
+        \XMLReader $reader,
+        $value,
+        \DateTimeZone $timezone = null
+    ) {
         return null;
     }
 }

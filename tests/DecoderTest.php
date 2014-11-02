@@ -123,8 +123,8 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('multiParams', $request->getProcedure());
         $this->assertEquals(2, count($params));
-        $this->assertSame(42, $params[0]);
-        $this->assertSame('test', $params[1]);
+        $this->assertSame(42, $params[0]->get());
+        $this->assertSame('test', $params[1]->get());
     }
 
     /**
@@ -138,7 +138,7 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('intParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame(42, $params[0]);
+        $this->assertSame(42, $params[0]->get());
     }
 
     /**
@@ -152,7 +152,7 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('boolParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame(true, $params[0]);
+        $this->assertSame(true, $params[0]->get());
     }
 
     /**
@@ -166,7 +166,7 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('boolParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame(false, $params[0]);
+        $this->assertSame(false, $params[0]->get());
     }
 
     /**
@@ -180,7 +180,7 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('stringParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame('', $params[0]);
+        $this->assertSame('', $params[0]->get());
     }
 
     /**
@@ -194,7 +194,7 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('stringParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame('test', $params[0]);
+        $this->assertSame('test', $params[0]->get());
     }
 
     /**
@@ -208,7 +208,7 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('doubleParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame(3.14, $params[0]);
+        $this->assertSame(3.14, $params[0]->get());
     }
 
     /**
@@ -225,7 +225,7 @@ class Decoder extends \PHPUnit_Framework_TestCase
         // Emulate a client located in Metropolitain France.
         $tz         = new \DateTimeZone('Europe/Paris');
         $reference  = new \DateTime('1985-11-28T14:00:00+0100', $tz);
-        $this->assertEquals($reference->format('U'), $params[0]->format('U'));
+        $this->assertEquals($reference->format('U'), $params[0]->get()->format('U'));
     }
 
     /**
@@ -239,7 +239,7 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('binaryParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame("\xE8\xE9\xE0", $params[0]);
+        $this->assertSame("\xE8\xE9\xE0", $params[0]->get());
     }
 
     /**
@@ -254,7 +254,7 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('numArray', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame($array, $params[0]);
+        $this->assertSame($array, $params[0]->get());
     }
 
     /**
@@ -269,7 +269,7 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('numArray', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame($array, $params[0]);
+        $this->assertSame($array, $params[0]->get());
     }
 
     /**
@@ -284,7 +284,7 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('assocArray', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame($array, $params[0]);
+        $this->assertSame($array, $params[0]->get());
     }
 
     /**
@@ -299,7 +299,7 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('assocArray', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame($array, $params[0]);
+        $this->assertSame($array, $params[0]->get());
     }
 
     /**
@@ -314,15 +314,8 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('assocArray', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame($array, $params[0]);
+        $this->assertSame($array, $params[0]->get());
     }
-
-#    public function testDecodeRequestWithObject()
-#    {
-#        $request    = new \fpoirotte\XRL\Request('objParam', array());
-#        $received   = $decoder->decodeRequest($request);
-#        $this->assertEquals($this->METHOD_OBJ_PARAM, $received);
-#    }
 
     /**
      * @dataProvider responseProvider
@@ -355,7 +348,7 @@ class Decoder extends \PHPUnit_Framework_TestCase
     public function testDecodeSuccessfulResponse($decoder, $xml)
     {
         $expected = array(42, 'test');
-        $response = $decoder->decodeResponse($xml);
+        $response = $decoder->decodeResponse($xml)->get();
         $this->assertSame($expected, $response);
     }
 }

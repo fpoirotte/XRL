@@ -13,7 +13,7 @@ namespace fpoirotte\XRL\Types;
 
 class I8 extends \fpoirotte\XRL\Types\AbstractType
 {
-    public function get()
+    public function __toString()
     {
         return gmp_strval($this->value);
     }
