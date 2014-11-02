@@ -11,8 +11,15 @@
 
 namespace fpoirotte\XRL\Types;
 
+/**
+ * \brief
+ *      The XML-RPC "array" type.
+ *
+ * \authors François Poirotte <clicky@erebot.net>
+ */
 class ArrayType extends \fpoirotte\XRL\Types\AbstractCollection
 {
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::get()
     public function get()
     {
         $res = array();
@@ -22,7 +29,9 @@ class ArrayType extends \fpoirotte\XRL\Types\AbstractCollection
         return $res;
     }
 
-    public function set($value) {
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::set()
+    public function set($value)
+    {
         if (!is_array($value)) {
             throw new \InvalidArgumentException('Expected array value');
         }
@@ -52,6 +61,7 @@ class ArrayType extends \fpoirotte\XRL\Types\AbstractCollection
         $this->value = $value;
     }
 
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::write()
     public function write(\XMLWriter $writer)
     {
         $writer->startElement('array');
@@ -65,14 +75,24 @@ class ArrayType extends \fpoirotte\XRL\Types\AbstractCollection
         $writer->endElement();
     }
 
-    protected static function parse(
-        \XMLReader $reader,
-        $value,
-        \DateTimeZone $timezone = null
-    ) {
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::parse()
+    protected static function parse($value, \DateTimeZone $timezone = null)
+    {
         return array();
     }
 
+    /**
+     * Change the item at some index in the collection.
+     *
+     * \param int $offset
+     *      Index of the item to modify.
+     *
+     * \param mixed $value
+     *      New value for the item at the given index.
+     *
+     * \return
+     *      This method does not return any value.
+     */
     public function offsetSet($offset, $value)
     {
         if ($offset === null) {
@@ -86,12 +106,29 @@ class ArrayType extends \fpoirotte\XRL\Types\AbstractCollection
         $this->value[$offset] = $value;
     }
 
-    public function offsetUnset($offset) {
+    /**
+     * Remove an item from the collection.
+     *
+     * \param mixed $offset
+     *      Index of the item to remove.
+     *
+     * \return
+     *      This method does not return any value.
+     */
+    public function offsetUnset($offset)
+    {
         unset($this->value[$offset]);
         // Force reindexation.
         $this->value = array_values($value);
     }
 
+    /**
+     * Return the current index
+     * of this collection's cursor.
+     *
+     * \retval mixed
+     *      Current index.
+     */
     public function key()
     {
         return $this->index;

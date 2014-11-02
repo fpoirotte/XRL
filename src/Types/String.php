@@ -11,15 +11,24 @@
 
 namespace fpoirotte\XRL\Types;
 
+/**
+ * \brief
+ *      The XML-RPC "string" type.
+ *
+ * \authors François Poirotte <clicky@erebot.net>
+ */
 class String extends \fpoirotte\XRL\Types\AbstractType
 {
-    public function set($value) {
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::set()
+    public function set($value)
+    {
         if (!is_string($value)) {
             throw new \InvalidArgumentException('Expected string value');
         }
         $this->value = $value;
     }
 
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::write()
     public function write(\XMLWriter $writer)
     {
         $writer->writeElement('string', $this->value);

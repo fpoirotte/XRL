@@ -11,10 +11,18 @@
 
 namespace fpoirotte\XRL\Types;
 
-// "i4" is mostly an alias for "int",
-// but it has its own type nonetheless.
+/**
+ * \brief
+ *      The XML-RPC "i4" type.
+ *
+ * The "i4" type is just an alias for "int",
+ * but with a different (shorter) name.
+ *
+ * \authors François Poirotte <clicky@erebot.net>
+ */
 class I4 extends \fpoirotte\XRL\Types\Int
 {
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::write()
     public function write(\XMLWriter $writer)
     {
         $writer->writeElement('i4', $this->value);

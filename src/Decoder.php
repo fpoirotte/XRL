@@ -29,6 +29,7 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
     /// Timezone used to decode date/times.
     protected $timezone;
 
+    /// Names for the various types of XML nodes in libxml.
     protected static $types = array(
         \XMLReader::NONE                    => 'NONE',
         \XMLReader::ELEMENT                 => 'ELEMENT',
@@ -367,7 +368,7 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
                 $value = '';
             }
             $this->expectEndTag($reader, $type);
-            $value = $cls::read($reader, $value, $this->timezone);
+            $value = $cls::read($value, $this->timezone);
             return self::checkType($allowedTypes, $type, $value);
         }
 

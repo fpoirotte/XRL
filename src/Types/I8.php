@@ -11,14 +11,25 @@
 
 namespace fpoirotte\XRL\Types;
 
+/**
+ * \brief
+ *      The XML-RPC "i8" type.
+ *
+ * This type represents a signed 64-bits integer.
+ *
+ * \authors François Poirotte <clicky@erebot.net>
+ */
 class I8 extends \fpoirotte\XRL\Types\AbstractType
 {
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::__toString()
     public function __toString()
     {
         return gmp_strval($this->value);
     }
 
-    public function set($value) {
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::set()
+    public function set($value)
+    {
         // Versions before PHP 5.6 used resources to represent big numbers
         // while new versions use objects instead.
         if ((is_resource($value) && get_resource_type($value) === 'GMP integer') ||
@@ -43,6 +54,7 @@ class I8 extends \fpoirotte\XRL\Types\AbstractType
         $this->value = $value;
     }
 
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::write()
     public function write(\XMLWriter $writer)
     {
         $writer->writeElement('i8', gmp_strval($this->value));

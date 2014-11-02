@@ -11,24 +11,34 @@
 
 namespace fpoirotte\XRL\Types;
 
+/**
+ * \brief
+ *      The XML-RPC "nil" type for null values.
+ *
+ * \authors François Poirotte <clicky@erebot.net>
+ */
 class Nil extends \fpoirotte\XRL\Types\AbstractType
 {
-    public function set($value) {
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::set()
+    public function set($value)
+    {
         if ($value !== null) {
             throw new \InvalidArgumentException('Expected null value');
         }
     }
 
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::write()
     public function write(\XMLWriter $writer)
     {
         return $writer->writeElement('nil');
     }
 
-    protected static function parse(
-        \XMLReader $reader,
-        $value,
-        \DateTimeZone $timezone = null
-    ) {
-        return null;
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::parse()
+    protected static function parse($value, \DateTimeZone $timezone = null)
+    {
+        if ($value === '' || $value === null) {
+            return null;
+        }
+        return $value;
     }
 }

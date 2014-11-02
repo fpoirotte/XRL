@@ -11,18 +11,23 @@
 
 namespace fpoirotte\XRL\Types;
 
+/**
+ * \brief
+ *      The XML-RPC "base64" type.
+ *
+ * \authors François Poirotte <clicky@erebot.net>
+ */
 class Base64 extends \fpoirotte\XRL\Types\String
 {
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::write()
     public function write(\XMLWriter $writer)
     {
         $writer->writeElement('base64', base64_encode($this->value));
     }
 
-    protected static function parse(
-        \XMLReader $reader,
-        $value,
-        \DateTimeZone $timezone = null
-    ) {
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::parse()
+    protected static function parse($value, \DateTimeZone $timezone = null)
+    {
         $res = base64_decode($value, true);
         if ($res === false) {
             throw new \InvalidArgumentException('Expected base64-encoded input');

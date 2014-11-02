@@ -11,25 +11,32 @@
 
 namespace fpoirotte\XRL\Types;
 
+/**
+ * \brief
+ *      The XML-RPC "double" type.
+ *
+ * \authors François Poirotte <clicky@erebot.net>
+ */
 class Double extends \fpoirotte\XRL\Types\AbstractType
 {
-    public function set($value) {
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::set()
+    public function set($value)
+    {
         if (!is_double($value)) {
             throw new \InvalidArgumentException('Expected double value');
         }
         $this->value = $value;
     }
 
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::write()
     public function write(\XMLWriter $writer)
     {
         $writer->writeElement('double', $this->value);
     }
 
-    protected static function parse(
-        \XMLReader $reader,
-        $value,
-        \DateTimeZone $timezone = null
-    ) {
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::parse()
+    protected static function parse($value, \DateTimeZone $timezone = null)
+    {
         /// @FIXME implement stricter checks
         return (double) $value;
     }

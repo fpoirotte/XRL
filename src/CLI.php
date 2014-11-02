@@ -51,6 +51,12 @@ class CLI
         return 'dev';
     }
 
+    /**
+     * Return XRL's copyright and license information.
+     *
+     * \retval string
+     *      Full copyright and license information.
+     */
     public static function getCopyrightAndLicense()
     {
         return str_replace(

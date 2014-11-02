@@ -11,9 +11,17 @@
 
 namespace fpoirotte\XRL\Types;
 
+/**
+ * \brief
+ *      The XML-RPC "int" type.
+ *
+ * \authors François Poirotte <clicky@erebot.net>
+ */
 class Int extends \fpoirotte\XRL\Types\AbstractType
 {
-    public function set($value) {
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::set()
+    public function set($value)
+    {
         // Versions before PHP 5.6 used resources to represent big numbers
         // while new versions use objects instead.
         if ((is_resource($value) && get_resource_type($value) === 'GMP integer') ||
@@ -37,6 +45,7 @@ class Int extends \fpoirotte\XRL\Types\AbstractType
         $this->value = gmp_intval($value);
     }
 
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::write()
     public function write(\XMLWriter $writer)
     {
         $writer->writeElement('int', $this->value);
