@@ -5,8 +5,8 @@ Options:
                   between the XML-RPC client and server.
  -n               Dry run. Don't send the actual query.
                   Use with -d to debug encoder issues.
- -t <timezone>    Use this timezone to convert dates.
-                  Eg. "Europe/Paris".
+ -t <timezone>    Use this timezone to convert dates between local
+                  and remote time. Eg. "Europe/Paris".
  -x               Perform XML validation on received messages.
  -v               Show this program's version and exit.
  -h               Show this program's help.
@@ -14,8 +14,8 @@ Options:
 Additional parameters for the procedure must be passed as a list
 of types & values, where the following types may be used:
 bool      The next argument is a boolean.
-          Use "0", "off" or "false" for FALSE
-          and "1", "on" or "true" for TRUE.
+          Use "0", "off" or "false" for false
+          and "1", "on" or "true" for true.
 datetime  The next argument is a date with time information,
           using one of PHP's compound formats.
           Eg. "@1215282385" for a UNIX timestamp.
@@ -41,8 +41,15 @@ string    The next argument is a string (possibly containing
 
 Example:
   %1$s %2$s foo int 42 bool on
-is the same as:'
+
+  is roughly equivalent to:
+
   <php
-      $client = new XRL_Client("%2$s");
-      var_dump($client->foo(42, TRUE));
+    require_once('path/to/XRL/Autoload.php');
+    \fpoirotte\XRL\Autoload::register();
+    $client = new \fpoirotte\XRL\Client("%2$s");
+    var_dump($client->foo(42, true));
   ?>
+
+View the LICENSE file that was distributed with this project or run
+%1$s -v for the full copyright and license information.

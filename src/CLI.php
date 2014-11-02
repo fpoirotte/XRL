@@ -1,31 +1,12 @@
 <?php
-/**
- * \file
+/*
+ * This file is part of XRL, a simple XML-RPC Library for PHP.
  *
- * Copyright (c) 2012, XRL Team
- * All rights reserved.
+ * Copyright (c) 2012, XRL Team. All rights reserved.
+ * XRL is licensed under the 3-clause BSD License.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the <organization> nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace fpoirotte\XRL;
@@ -35,6 +16,8 @@ namespace fpoirotte\XRL;
  *      A class that implements a simple CLI script
  *      to send XML-RPC queries and to display their
  *      result.
+ *
+ * \authors François Poirotte <clicky@erebot.net>
  */
 class CLI
 {
@@ -66,6 +49,19 @@ class CLI
 
         // Default guess.
         return 'dev';
+    }
+
+    public static function getCopyrightAndLicense()
+    {
+        return str_replace(
+            "\n",
+            PHP_EOL,
+            file_get_contents(
+                dirname(__DIR__) .
+                DIRECTORY_SEPARATOR .
+                'LICENSE'
+            )
+        );
     }
 
     /**
@@ -212,7 +208,7 @@ class CLI
             case 'boolean':
             case 'bool':
             case 'b':
-                $parseFunc = array($this, '_parseBool');
+                $parseFunc = array($this, 'parseBool');
                 break;
 
             case 'integer':
@@ -236,7 +232,7 @@ class CLI
 
             case 'file':
             case '@':
-                $parseFunc = array($this, '_parseFile');
+                $parseFunc = array($this, 'parseFile');
                 break;
 
             case 'timestamp':
@@ -247,7 +243,7 @@ class CLI
             case 'dt':
             case 't':
             case 'd':
-                $parseFunc = array($this, '_parseTimestamp');
+                $parseFunc = array($this, 'parseTimestamp');
                 break;
 
             case 'hash':
@@ -428,9 +424,10 @@ class CLI
         // Show version.
         if ($options['v']) {
             $version = self::getVersion();
-            echo 'XRL v. '.$version.' -- copyright the XRL Team'.PHP_EOL;
-            echo 'Licensed under the new 3-clause BSD License'.PHP_EOL;
-            echo 'Visit https://github.com/fpoirotte/XRL for more'.PHP_EOL;
+            $license = self::getCopyrightAndLicense();
+            echo 'XRL version ' . $version . PHP_EOL;
+            echo PHP_EOL . $license . PHP_EOL;
+            echo 'Visit https://github.com/fpoirotte/XRL for more!' . PHP_EOL;
             return 0;
         }
 
@@ -490,8 +487,7 @@ class CLI
             // Nothing to do.
         }
 
-        echo 'Result:'.PHP_EOL;
-        print_r($result);
+        echo 'Result:' . PHP_EOL . $result . PHP_EOL;
         return 0;
     }
 }
