@@ -1,31 +1,12 @@
 <?php
-/**
- * \file
+/*
+ * This file is part of XRL, a simple XML-RPC Library for PHP.
  *
- * Copyright (c) 2012, XRL Team
- * All rights reserved.
+ * Copyright (c) 2012, XRL Team. All rights reserved.
+ * XRL is licensed under the 3-clause BSD License.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the <organization> nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace fpoirotte\XRL;
@@ -34,6 +15,8 @@ namespace fpoirotte\XRL;
  * \brief
  *      A decoder that can process XML-RPC requests
  *      and responses, with optional XML validation.
+ *
+ * \authors François Poirotte <clicky@erebot.net>
  */
 class Decoder implements \fpoirotte\XRL\DecoderInterface
 {
@@ -45,6 +28,27 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
 
     /// Timezone used to decode date/times.
     protected $timezone;
+
+    protected static $types = array(
+        \XMLReader::NONE                    => 'NONE',
+        \XMLReader::ELEMENT                 => 'ELEMENT',
+        \XMLReader::ATTRIBUTE               => 'ATTRIBUTE',
+        \XMLReader::TEXT                    => 'TEXT',
+        \XMLReader::CDATA                   => 'CDATA',
+        \XMLReader::ENTITY_REF              => 'ENTITY_REF',
+        \XMLReader::ENTITY                  => 'ENTITY',
+        \XMLReader::PI                      => 'PI',
+        \XMLReader::COMMENT                 => 'COMMENT',
+        \XMLReader::DOC                     => 'DOC',
+        \XMLReader::DOC_TYPE                => 'DOC_TYPE',
+        \XMLReader::DOC_FRAGMENT            => 'DOC_FRAGMENT',
+        \XMLReader::NOTATION                => 'NOTATION',
+        \XMLReader::WHITESPACE              => 'WHITESPACE',
+        \XMLReader::SIGNIFICANT_WHITESPACE  => 'SIGNIFICANT_WHITESPACE',
+        \XMLReader::END_ELEMENT             => 'END_ELEMENT',
+        \XMLReader::END_ENTITY              => 'END_ENTITY',
+        \XMLReader::XML_DECLARATION         => 'XML_DECLARATION',
+    );
 
     /**
      * Creates a new decoder.
@@ -170,9 +174,10 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
 
         $type = $node->nodeType;
         if ($type != \XMLReader::ELEMENT) {
+            $type = isset(self::$types[$type]) ? self::$types[$type] : "#$type";
             throw new \InvalidArgumentException(
                 "Expected an opening $expectedTag tag ".
-                "but got a node of type #$type instead"
+                "but got a node of type $type instead"
             );
         }
 
@@ -211,9 +216,10 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
 
         $type = $node->nodeType;
         if ($type != \XMLReader::END_ELEMENT) {
+            $type = isset(self::$types[$type]) ? self::$types[$type] : "#$type";
             throw new \InvalidArgumentException(
                 "Expected a closing $expectedTag tag ".
-                "but got a node of type #$type instead"
+                "but got a node of type $type instead"
             );
         }
 
@@ -250,13 +256,14 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
 
         $type = $node->nodeType;
         if ($type != \XMLReader::TEXT) {
+            $type = isset(self::$types[$type]) ? self::$types[$type] : "#$type";
             throw new \InvalidArgumentException(
                 "Expected a text node, but got ".
-                "a node of type #$type instead"
+                "a node of type $type instead"
             );
         }
 
-        $value              = $node->value;
+        $value = $node->value;
         $this->prepareNextNode();
         return $value;
     }
@@ -288,7 +295,7 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
         if (count($allowedTypes) && !in_array($type, $allowedTypes)) {
             $allowed = implode(', ', $allowedTypes);
             throw new \InvalidArgumentException(
-                "Expected one of: $allowed, but got $type"
+                "Expected one of: $allowed; got $type"
             );
         }
 
@@ -315,7 +322,7 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
      *      value was of a type that is not allowed in this
      *      context.
      */
-    protected function decodeValue($reader, array $allowedTypes = array())
+    protected function decodeValue(\XMLReader $reader, array $allowedTypes = array())
     {
         // Support for the <nil> extension
         // (http://ontosys.com/xml-rpc/extensions.php)
@@ -332,16 +339,17 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
 
         // Other basic types.
         $types = array(
-            'i4',
-            'int',
-            'boolean',
-            'string',
-            'double',
-            'dateTime.iso8601',
-            'base64',
+            'i4'                => '\\fpoirotte\\XRL\\Types\\I4',
+            'i8'                => '\\fpoirotte\\XRL\\Types\\I8',
+            'int'               => '\\fpoirotte\\XRL\\Types\\Int',
+            'boolean'           => '\\fpoirotte\\XRL\\Types\\Boolean',
+            'string'            => '\\fpoirotte\\XRL\\Types\\String',
+            'double'            => '\\fpoirotte\\XRL\\Types\\Double',
+            'dateTime.iso8601'  => '\\fpoirotte\\XRL\\Types\\DateTimeIso8601',
+            'base64'            => '\\fpoirotte\\XRL\\Types\\Base64',
         );
 
-        foreach ($types as $type) {
+        foreach ($types as $type => $cls) {
             try {
                 $this->expectStartTag($reader, $type);
             } catch (\InvalidArgumentException $e) {
@@ -353,45 +361,13 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
             } catch (\InvalidArgumentException $e) {
                 // Both "string" & "base64" may refer
                 // to an empty string.
-                if ($type != 'string' && $type != 'base64') {
+                if ($type !== 'string' && $type !== 'base64') {
                     throw $e;
                 }
                 $value = '';
             }
             $this->expectEndTag($reader, $type);
-
-            switch ($type) {
-                case 'i4':
-                    $type = 'int';
-                    // fall-through as "i4" is an alias for "int".
-                case 'int':
-                    $value = (int) $value;
-                    break;
-
-                case 'boolean':
-                    $value = (bool) $value;
-                    break;
-
-                case 'string':
-                    break;
-
-                case 'double':
-                    $value = (double) $value;
-                    break;
-
-                case 'dateTime.iso8601':
-                    $result = new \DateTime($value, $this->timezone);
-                    if ($result->format('Y-m-d\\TH:i:s') != $value) {
-                        throw new \InvalidArgumentException('Invalid date/time');
-                    }
-                    $value = $result;
-                    break;
-
-                case 'base64':
-                    $value = base64_decode($value);
-                    break;
-            }
-
+            $value = $cls::read($reader, $value, $this->timezone);
             return self::checkType($allowedTypes, $type, $value);
         }
 
@@ -403,7 +379,7 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
         }
 
         if (!$error) {
-            $value = array();
+            $value = new \fpoirotte\XRL\Types\Struct(array());
             // Read values.
             while (true) {
                 $error = null;
@@ -418,7 +394,7 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
 
                 // Read key.
                 $this->expectStartTag($reader, 'name');
-                $key = $this->decodeValue($reader, array('string', 'int'));
+                $key = $this->decodeValue($reader, array('string'));
                 $this->expectEndTag($reader, 'name');
 
                 $this->expectStartTag($reader, 'value');
@@ -438,7 +414,7 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
         }
 
         if (!$error) {
-            $value = array();
+            $value = new \fpoirotte\XRL\Types\ArrayType(array());
             $this->expectStartTag($reader, 'data');
             // Read values.
             while (true) {
@@ -551,7 +527,8 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
             $this->expectStartTag($reader, 'value');
 
             $response = $this->decodeValue($reader);
-            if (!is_array($response) || count($response) != 2) {
+            if (!($response instanceof \fpoirotte\XRL\Types\Struct) ||
+                count($response) != 2) {
                 throw new \UnexpectedValueException(
                     'An associative array with exactly '.
                     'two entries was expected'
@@ -583,8 +560,8 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
 
         if ($error) {
             throw new \fpoirotte\XRL\Exception(
-                $response['faultString'],
-                $response['faultCode']
+                (string) $response['faultString'],
+                (int) $response['faultCode']->get()
             );
         }
 
