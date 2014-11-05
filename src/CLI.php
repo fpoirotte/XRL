@@ -444,10 +444,9 @@ class CLI
         }
 
         // Then let's do it!
-        $newArgs    = array_map('\\fpoirotte\\XRL\\NativeEncoder::convert', $params['additional']);
-        $encoder    = new \fpoirotte\XRL\Encoder($options['t'], true);
-        $decoder    = new \fpoirotte\XRL\Decoder($options['t'], $options['x']);
-        $request    = new \fpoirotte\XRL\Request($params['procedure'], $newArgs);
+        $encoder    = new \fpoirotte\XRL\NativeEncoder(new \fpoirotte\XRL\Encoder($options['t'], true));
+        $decoder    = new \fpoirotte\XRL\NativeDecoder(new \fpoirotte\XRL\Decoder($options['t'], $options['x']));
+        $request    = new \fpoirotte\XRL\Request($params['procedure'], $params['additional']);
 
         $xml = $encoder->encodeRequest($request);
         if ($options['d']) {
@@ -491,7 +490,7 @@ class CLI
             // Nothing to do.
         }
 
-        echo 'Result:' . PHP_EOL . $result . PHP_EOL;
+        echo 'Result:' . PHP_EOL . print_r($result, true) . PHP_EOL;
         return 0;
     }
 }
