@@ -23,7 +23,7 @@ namespace fpoirotte\XRL\Types;
 class I4 extends \fpoirotte\XRL\Types\Int
 {
     /// \copydoc fpoirotte::XRL::Types::AbstractType::write()
-    public function write(\XMLWriter $writer)
+    public function write(\XMLWriter $writer, \DateTimeZone $timezone, $stringTag)
     {
         $writer->writeElement('i4', $this->value);
     }

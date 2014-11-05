@@ -14,7 +14,7 @@
      <member>
       <name>bar</name>
       <value>
-       <int>42</int>
+       <i4>42</i4>
       </value>
      </member>
     </struct>

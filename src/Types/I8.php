@@ -55,7 +55,7 @@ class I8 extends \fpoirotte\XRL\Types\AbstractType
     }
 
     /// \copydoc fpoirotte::XRL::Types::AbstractType::write()
-    public function write(\XMLWriter $writer)
+    public function write(\XMLWriter $writer, \DateTimeZone $timezone, $stringTag)
     {
         $writer->writeElement('i8', gmp_strval($this->value));
     }

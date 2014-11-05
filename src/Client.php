@@ -149,8 +149,9 @@ class Client extends \fpoirotte\XRL\FactoryRegistry
      */
     public function __call($method, array $args)
     {
+        $newArgs    = array_map('\\fpoirotte\\XRL\\NativeEncoder::convert', $args);
         $factory    = $this['fpoirotte\\XRL\\RequestFactoryInterface'];
-        $request    = $factory->createRequest($method, $args);
+        $request    = $factory->createRequest($method, $newArgs);
         assert($request instanceof \fpoirotte\XRL\RequestInterface);
 
         $factory    = $this['fpoirotte\\XRL\\EncoderFactoryInterface'];

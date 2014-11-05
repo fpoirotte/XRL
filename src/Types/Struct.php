@@ -37,7 +37,7 @@ class Struct extends \fpoirotte\XRL\Types\AbstractCollection
         }
 
         foreach ($value as $key => $val) {
-            if (!is_string($key)) {
+            if (!is_string($key) && !is_int($key)) {
                 throw new \InvalidArgumentException('Expected struct value');
             }
 
@@ -50,7 +50,7 @@ class Struct extends \fpoirotte\XRL\Types\AbstractCollection
     }
 
     /// \copydoc fpoirotte::XRL::Types::AbstractType::write()
-    public function write(\XMLWriter $writer)
+    public function write(\XMLWriter $writer, \DateTimeZone $timezone, $stringTag)
     {
         $writer->startElement('struct');
         foreach ($this->value as $key => $val) {
@@ -59,7 +59,7 @@ class Struct extends \fpoirotte\XRL\Types\AbstractCollection
             $writer->text((string) $key);
             $writer->endElement();
             $writer->startElement('value');
-            $val->write($writer);
+            $val->write($writer, $timezone, $stringTag);
             $writer->endElement();
             $writer->endElement();
         }

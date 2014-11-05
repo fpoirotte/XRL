@@ -35,9 +35,9 @@ class Boolean extends \fpoirotte\XRL\Types\AbstractType
     }
 
     /// \copydoc fpoirotte::XRL::Types::AbstractType::write()
-    public function write(\XMLWriter $writer)
+    public function write(\XMLWriter $writer, \DateTimeZone $timezone, $stringTag)
     {
-        $writer->writeElement('boolean', $this->value);
+        $writer->writeElement('boolean', (int) $this->value);
     }
 
     /// \copydoc fpoirotte::XRL::Types::AbstractType::parse()

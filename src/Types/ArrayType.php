@@ -48,8 +48,8 @@ class ArrayType extends \fpoirotte\XRL\Types\AbstractCollection
         }
 
         // Hash / associative array.
-        if ($keys !== $numeric) {
-            throw new \InvalidArgumentException('Expected array value');
+        if ($keys != $numeric) {
+            throw new \InvalidArgumentException('Expected array value2');
         }
 
         foreach ($value as $val) {
@@ -62,13 +62,13 @@ class ArrayType extends \fpoirotte\XRL\Types\AbstractCollection
     }
 
     /// \copydoc fpoirotte::XRL::Types::AbstractType::write()
-    public function write(\XMLWriter $writer)
+    public function write(\XMLWriter $writer, \DateTimeZone $timezone, $stringTag)
     {
         $writer->startElement('array');
         $writer->startElement('data');
         foreach ($this->value as $val) {
             $writer->startElement('value');
-            $val->write($writer);
+            $val->write($writer, $timezone, $stringTag);
             $writer->endElement();
         }
         $writer->endElement();

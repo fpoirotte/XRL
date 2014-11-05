@@ -123,8 +123,15 @@ abstract class AbstractType
      * \param XMLWriter $writer
      *      Writer the value will be exported to.
      *
+     * \param DateTimeZone $timezone
+     *      Timezone to use when exporting dates/times.
+     *
+     * \param bool $stringTag
+     *      Whether to use \<string\> tags at all
+     *      when encoding strings.
+     *
      * \return
      *      This method does not return any value.
      */
-    abstract public function write(\XMLWriter $writer);
+    abstract public function write(\XMLWriter $writer, \DateTimeZone $timezone, $stringTag);
 }

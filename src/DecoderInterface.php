@@ -42,8 +42,7 @@ interface DecoderInterface
      *      An XML-RPC response as serialized XML.
      *
      * \retval mixed
-     *      The return value represented by the
-     *      XML-RPC response, using native PHP types.
+     *      The return value represented by the XML-RPC response.
      *
      * \throw fpoirotte::XRL::Exception
      *      Thrown whenever the response described

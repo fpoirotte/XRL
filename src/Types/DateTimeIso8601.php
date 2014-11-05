@@ -19,12 +19,14 @@ namespace fpoirotte\XRL\Types;
  */
 class DateTimeIso8601 extends \fpoirotte\XRL\Types\AbstractType
 {
+    // We can't just use DateTime::ISO8601 (= "Y-m-d\\TH:i:sO")
+    // because the XML-RPC specification forbids timezones.
+    const XMLRPC_FORMAT = 'Y-m-d\\TH:i:s';
+
     /// \copydoc fpoirotte::XRL::Types::AbstractType::__toString()
     public function __toString()
     {
-        // We can't just use DateTime::ISO8601 (= "Y-m-d\\TH:i:sO")
-        // because the XML-RPC specification forbids timezones.
-        return $this->value->format('Y-m-d\\TH:i:s');
+        return $this->value->format(self::XMLRPC_FORMAT);
     }
 
     /// \copydoc fpoirotte::XRL::Types::AbstractType::set()
@@ -37,9 +39,16 @@ class DateTimeIso8601 extends \fpoirotte\XRL\Types\AbstractType
     }
 
     /// \copydoc fpoirotte::XRL::Types::AbstractType::write()
-    public function write(\XMLWriter $writer)
+    public function write(\XMLWriter $writer, \DateTimeZone $timezone, $stringTag)
     {
-        return $writer->writeElement('dateTime.iso8601', $this->value);
+        // PHP has serious issues with timezone handling.
+        // As a workaround, we use format(), specifying a UNIX timestamp
+        // as the format to use, which we then reinject in a new DateTime.
+        $date = new \DateTime('@'.$this->value->format('U'), $timezone);
+        return $writer->writeElement(
+            'dateTime.iso8601',
+            $date->format(self::XMLRPC_FORMAT)
+        );
     }
 
     /// \copydoc fpoirotte::XRL::Types::AbstractType::parse()
@@ -51,9 +60,7 @@ class DateTimeIso8601 extends \fpoirotte\XRL\Types\AbstractType
 
         $result = new \DateTime($value, $timezone);
 
-        // We can't just use DateTime::ISO8601 (= "Y-m-d\\TH:i:sO")
-        // because the XML-RPC specification forbids timezones.
-        if (strcasecmp($value, $result->format('Y-m-d\\TH:i:s'))) {
+        if (strcasecmp($value, $result->format(self::XMLRPC_FORMAT))) {
             throw new \InvalidArgumentException('Invalid date/time');
         }
 

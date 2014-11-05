@@ -417,7 +417,7 @@ class CLI
         try {
             list($options, $params) = $this->parse($args);
         } catch (\Exception $e) {
-            fprintf(STDERR, '%s: %s'.PHP_EOL, $prog, $e->getMessage());
+            fprintf(STDERR, '%s: %s' . PHP_EOL, $prog, $e->getMessage());
             return 2;
         }
 
@@ -444,21 +444,19 @@ class CLI
         }
 
         // Then let's do it!
+        $newArgs    = array_map('\\fpoirotte\\XRL\\NativeEncoder::convert', $params['additional']);
         $encoder    = new \fpoirotte\XRL\Encoder($options['t'], true);
         $decoder    = new \fpoirotte\XRL\Decoder($options['t'], $options['x']);
-        $request    = new \fpoirotte\XRL\Request(
-            $params['procedure'],
-            $params['additional']
-        );
+        $request    = new \fpoirotte\XRL\Request($params['procedure'], $newArgs);
 
         $xml = $encoder->encodeRequest($request);
         if ($options['d']) {
-            echo "Request:".PHP_EOL;
-            echo trim($xml).PHP_EOL.PHP_EOL;
+            echo "Request:" . PHP_EOL;
+            echo trim($xml) . PHP_EOL . PHP_EOL;
         }
 
         if ($options['n']) {
-            echo 'Not sending the actual query due to dry run mode.'.PHP_EOL;
+            echo 'Not sending the actual query due to dry run mode.' . PHP_EOL;
             return 0;
         }
 
@@ -476,15 +474,15 @@ class CLI
         if ($data === false) {
             fprintf(
                 STDERR,
-                'Could not query "%s"'.PHP_EOL,
+                'Could not query "%s"' . PHP_EOL,
                 $params['serverURL']
             );
             return 1;
         }
 
         if ($options['d']) {
-            echo 'Response:'.PHP_EOL;
-            echo trim($data).PHP_EOL.PHP_EOL;
+            echo 'Response:' . PHP_EOL;
+            echo trim($data) . PHP_EOL . PHP_EOL;
         }
 
         try {

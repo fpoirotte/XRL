@@ -6,7 +6,7 @@
     <array>
      <data>
       <value>
-       <int>42</int>
+       <i4>42</i4>
       </value>
       <value>
        <string>test</string>

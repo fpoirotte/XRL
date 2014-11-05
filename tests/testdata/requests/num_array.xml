@@ -10,7 +10,7 @@
        <string>test</string>
       </value>
       <value>
-       <int>42</int>
+       <i4>42</i4>
       </value>
      </data>
     </array>

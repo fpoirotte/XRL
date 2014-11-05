@@ -26,13 +26,27 @@ class Encoder extends \PHPUnit_Framework_TestCase
         );
         $content = str_replace(array("\r\n", "\r"), "\n", $content);
 
+        $result = array();
+
         // Indent, use <string>.
-        $result = array(array(new \fpoirotte\XRL\Encoder($tz, true, true), $content, true));
+        $result[] = array(
+            new \fpoirotte\XRL\NativeEncoder(
+                new \fpoirotte\XRL\Encoder($tz, true, true)
+            ),
+            $content,
+            true
+        );
 
         // Stripped indented.
         $stripped = preg_replace('#\\s*<string>|</string>\\s*#', '', $content);
         // Indent, don't use <string>
-        $result[] = array(new \fpoirotte\XRL\Encoder($tz, true, false), $stripped, true);
+        $result[] = array(
+            new \fpoirotte\XRL\NativeEncoder(
+                new \fpoirotte\XRL\Encoder($tz, true, false)
+            ),
+            $stripped,
+            true
+        );
 
         // Remove all whitespaces.
         $content = str_replace(array(' ', "\n", "\r", "\t"), '', $content);
@@ -45,12 +59,24 @@ class Encoder extends \PHPUnit_Framework_TestCase
         );
 
         // No indent, use <string>
-        $result[] = array(new \fpoirotte\XRL\Encoder($tz, false, true), $content, false);
+        $result[] = array(
+            new \fpoirotte\XRL\NativeEncoder(
+                new \fpoirotte\XRL\Encoder($tz, false, true)
+            ),
+            $content,
+            false
+        );
 
         // Stripped unindented.
         $stripped = str_replace(array('<string>', '</string>'), '', $content);
         // No indent, don't use <string>
-        $result[] = array(new \fpoirotte\XRL\Encoder($tz, false, false), $stripped, false);
+        $result[] = array(
+            new \fpoirotte\XRL\NativeEncoder(
+                new \fpoirotte\XRL\Encoder($tz, false, false)
+            ),
+            $stripped,
+            false
+        );
 
         return $result;
     }
@@ -126,7 +152,10 @@ class Encoder extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeRequestWithMultipleParameters($encoder, $expected)
     {
-        $request    = new \fpoirotte\XRL\Request('multiParams', array(42, 'test'));
+        $request    = new \fpoirotte\XRL\Request(
+            'multiParams',
+            array_map(array($encoder, 'convert'), array(42, 'test'))
+        );
         $received   = $encoder->encodeRequest($request);
         $this->assertEquals($expected, $received, var_export($encoder, true));
     }
@@ -137,7 +166,10 @@ class Encoder extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeRequestWithIntegerParameter($encoder, $expected)
     {
-        $request    = new \fpoirotte\XRL\Request('intParam', array(42));
+        $request    = new \fpoirotte\XRL\Request(
+            'intParam',
+            array_map(array($encoder, 'convert'), array(42))
+        );
         $received   = $encoder->encodeRequest($request);
         $this->assertEquals($expected, $received, var_export($encoder, true));
     }
@@ -148,7 +180,10 @@ class Encoder extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeRequestWithBooleanParameter($encoder, $expected)
     {
-        $request    = new \fpoirotte\XRL\Request('boolParam', array(true));
+        $request    = new \fpoirotte\XRL\Request(
+            'boolParam',
+            array_map(array($encoder, 'convert'), array(true))
+        );
         $received   = $encoder->encodeRequest($request);
         $this->assertEquals($expected, $received, var_export($encoder, true));
     }
@@ -159,7 +194,10 @@ class Encoder extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeRequestWithBooleanParameter2($encoder, $expected)
     {
-        $request    = new \fpoirotte\XRL\Request('boolParam', array(false));
+        $request    = new \fpoirotte\XRL\Request(
+            'boolParam',
+            array_map(array($encoder, 'convert'), array(false))
+        );
         $received   = $encoder->encodeRequest($request);
         $this->assertEquals($expected, $received, var_export($encoder, true));
     }
@@ -170,7 +208,10 @@ class Encoder extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeRequestWithStringParameter($encoder, $expected)
     {
-        $request    = new \fpoirotte\XRL\Request('stringParam', array(''));
+        $request    = new \fpoirotte\XRL\Request(
+            'stringParam',
+            array_map(array($encoder, 'convert'), array(''))
+        );
         $received   = $encoder->encodeRequest($request);
         $this->assertEquals($expected, $received, var_export($encoder, true));
     }
@@ -181,7 +222,10 @@ class Encoder extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeRequestWithStringParameter2($encoder, $expected)
     {
-        $request    = new \fpoirotte\XRL\Request('stringParam', array('test'));
+        $request    = new \fpoirotte\XRL\Request(
+            'stringParam',
+            array_map(array($encoder, 'convert'), array('test'))
+        );
         $received   = $encoder->encodeRequest($request);
         $this->assertEquals($expected, $received, var_export($encoder, true));
     }
@@ -192,7 +236,10 @@ class Encoder extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeRequestWithDoubleParameter($encoder, $expected)
     {
-        $request    = new \fpoirotte\XRL\Request('doubleParam', array(3.14));
+        $request    = new \fpoirotte\XRL\Request(
+            'doubleParam',
+            array_map(array($encoder, 'convert'), array(3.14))
+        );
         $received   = $encoder->encodeRequest($request);
         $this->assertEquals($expected, $received, var_export($encoder, true));
     }
@@ -206,7 +253,8 @@ class Encoder extends \PHPUnit_Framework_TestCase
         // Emulate a client located in Metropolitain France.
         $tz         = new \DateTimeZone('Europe/Paris');
         $date       = new \DateTime('1985-11-28T14:00:00', $tz);
-        $request    = new \fpoirotte\XRL\Request('dateTimeParam', array($date));
+        $params     = array_map(array($encoder, 'convert'), array($date));
+        $request    = new \fpoirotte\XRL\Request('dateTimeParam', $params);
         $received   = $encoder->encodeRequest($request);
         $this->assertEquals($expected, $received, var_export($encoder, true));
     }
@@ -218,7 +266,10 @@ class Encoder extends \PHPUnit_Framework_TestCase
     public function testEncodeRequestWithBinaryParameter($encoder, $expected)
     {
         // An invalid UTF-8 sequence.
-        $request    = new \fpoirotte\XRL\Request('binaryParam', array("\xE8\xE9\xE0"));
+        $request    = new \fpoirotte\XRL\Request(
+            'binaryParam',
+            array_map(array($encoder, 'convert'), array("\xE8\xE9\xE0"))
+        );
         $received   = $encoder->encodeRequest($request);
         $this->assertEquals($expected, $received, var_export($encoder, true));
     }
@@ -229,7 +280,7 @@ class Encoder extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeRequestWithNumericArray($encoder, $expected)
     {
-        $array      = array('test', 42);
+        $array      = $encoder::convert(array('test', 42));
         $request    = new \fpoirotte\XRL\Request('numArray', array($array));
         $received   = $encoder->encodeRequest($request);
         $this->assertEquals($expected, $received, var_export($encoder, true));
@@ -241,7 +292,7 @@ class Encoder extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeRequestWithNumericArray2($encoder, $expected)
     {
-        $array      = array();
+        $array      = $encoder::convert(array());
         $request    = new \fpoirotte\XRL\Request('numArray', array($array));
         $received   = $encoder->encodeRequest($request);
         $this->assertEquals($expected, $received, var_export($encoder, true));
@@ -253,7 +304,7 @@ class Encoder extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeRequestWithAssociativeArray($encoder, $expected)
     {
-        $array      = array('foo' => 'test', 'bar' => 42);
+        $array      = $encoder::convert(array('foo' => 'test', 'bar' => 42));
         $request    = new \fpoirotte\XRL\Request('assocArray', array($array));
         $received   = $encoder->encodeRequest($request);
         $this->assertEquals($expected, $received, var_export($encoder, true));
@@ -265,7 +316,7 @@ class Encoder extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeRequestWithAssociativeArray2($encoder, $expected)
     {
-        $array      = array('foo', 42 => 'bar');
+        $array      = $encoder::convert(array('foo', 42 => 'bar'));
         $request    = new \fpoirotte\XRL\Request('assocArray', array($array));
         $received   = $encoder->encodeRequest($request);
         $this->assertEquals($expected, $received, var_export($encoder, true));
@@ -277,7 +328,7 @@ class Encoder extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeRequestWithAssociativeArray3($encoder, $expected)
     {
-        $array      = array(42 => 'foo', 'bar');
+        $array      = $encoder::convert(array(42 => 'foo', 'bar'));
         $request    = new \fpoirotte\XRL\Request('assocArray', array($array));
         $received   = $encoder->encodeRequest($request);
         $this->assertEquals($expected, $received, var_export($encoder, true));

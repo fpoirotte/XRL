@@ -29,8 +29,12 @@ class String extends \fpoirotte\XRL\Types\AbstractType
     }
 
     /// \copydoc fpoirotte::XRL::Types::AbstractType::write()
-    public function write(\XMLWriter $writer)
+    public function write(\XMLWriter $writer, \DateTimeZone $timezone, $stringTag)
     {
-        $writer->writeElement('string', $this->value);
+        if ($stringTag) {
+            $writer->writeElement('string', $this->value);
+        } else {
+            $writer->text($this->value);
+        }
     }
 }

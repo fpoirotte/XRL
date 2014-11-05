@@ -20,7 +20,7 @@ namespace fpoirotte\XRL\Types;
 class Base64 extends \fpoirotte\XRL\Types\String
 {
     /// \copydoc fpoirotte::XRL::Types::AbstractType::write()
-    public function write(\XMLWriter $writer)
+    public function write(\XMLWriter $writer, \DateTimeZone $timezone, $stringTag)
     {
         $writer->writeElement('base64', base64_encode($this->value));
     }
