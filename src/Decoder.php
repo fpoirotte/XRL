@@ -174,7 +174,7 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
         $node = $this->readNode($reader);
 
         $type = $node->nodeType;
-        if ($type != \XMLReader::ELEMENT) {
+        if ($type !== \XMLReader::ELEMENT) {
             $type = isset(self::$types[$type]) ? self::$types[$type] : "#$type";
             throw new \InvalidArgumentException(
                 "Expected an opening $expectedTag tag ".
@@ -183,7 +183,7 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
         }
 
         $readTag = $node->name;
-        if ($readTag != $expectedTag) {
+        if ($readTag !== $expectedTag) {
             throw new \InvalidArgumentException(
                 "Got opening tag for $readTag instead of $expectedTag"
             );
@@ -216,7 +216,7 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
         $node = $this->readNode($reader);
 
         $type = $node->nodeType;
-        if ($type != \XMLReader::END_ELEMENT) {
+        if ($type !== \XMLReader::END_ELEMENT) {
             $type = isset(self::$types[$type]) ? self::$types[$type] : "#$type";
             throw new \InvalidArgumentException(
                 "Expected a closing $expectedTag tag ".
@@ -225,7 +225,7 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
         }
 
         $readTag = $node->name;
-        if ($readTag != $expectedTag) {
+        if ($readTag !== $expectedTag) {
             throw new \InvalidArgumentException(
                 "Got closing tag for $readTag instead of $expectedTag"
             );
@@ -256,7 +256,7 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
         $node = $this->readNode($reader);
 
         $type = $node->nodeType;
-        if ($type != \XMLReader::TEXT) {
+        if ($type !== \XMLReader::TEXT) {
             $type = isset(self::$types[$type]) ? self::$types[$type] : "#$type";
             throw new \InvalidArgumentException(
                 "Expected a text node, but got ".
@@ -325,21 +325,11 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
      */
     protected function decodeValue(\XMLReader $reader, array $allowedTypes = array())
     {
-        // Support for the <nil> extension
-        // (http://ontosys.com/xml-rpc/extensions.php)
-        $error = null;
-        try {
-            $this->expectStartTag($reader, 'nil');
-        } catch (\InvalidArgumentException $error) {
-        }
-
-        if (!$error) {
-            $this->expectEndTag($reader, 'nil');
-            return self::checkType($allowedTypes, 'nil', null);
-        }
-
-        // Other basic types.
+        // Basic types.
         $types = array(
+            // Support for the <nil> extension
+            // (http://ontosys.com/xml-rpc/extensions.php)
+            'nil'               => '\\fpoirotte\\XRL\\Types\\Nil',
             'i4'                => '\\fpoirotte\\XRL\\Types\\I4',
             'i8'                => '\\fpoirotte\\XRL\\Types\\I8',
             'int'               => '\\fpoirotte\\XRL\\Types\\Int',
@@ -348,6 +338,13 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
             'double'            => '\\fpoirotte\\XRL\\Types\\Double',
             'dateTime.iso8601'  => '\\fpoirotte\\XRL\\Types\\DateTimeIso8601',
             'base64'            => '\\fpoirotte\\XRL\\Types\\Base64',
+
+            // Some Apache extensions.
+            // See http://ws.apache.org/xmlrpc/types.html
+            '{http://ws.apache.org/xmlrpc/namespaces/extensions}i8'
+                => '\\fpoirotte\\XRL\\Types\\I8',
+            '{http://ws.apache.org/xmlrpc/namespaces/extensions}nil'
+                => '\\fpoirotte\\XRL\\Types\\Nil',
         );
 
         foreach ($types as $type => $cls) {

@@ -35,8 +35,8 @@ class Node
      *      this node.
      *
      * \param bool $validate
-     *      Whether an exception should be raised (\c TRUE)
-     *      or not (\c FALSE) if the current node is not valid.
+     *      Whether an exception should be raised (\c true)
+     *      or not (\c false) if the current node is not valid.
      */
     public function __construct(\XMLReader $reader, $validate)
     {
@@ -53,16 +53,22 @@ class Node
         } while (in_array($reader->nodeType, $skipNodes));
 
         $fields = array(
-            'name',
             'nodeType',
             'value',
             'isEmptyElement',
+            'localName',
+            'namespaceURI',
         );
 
         $this->properties = array();
         foreach ($fields as $field) {
             $this->properties[$field] = $reader->$field;
         }
+        $name = $reader->localName;
+        if ($reader->namespaceURI !== '') {
+            $name = '{' . $reader->namespaceURI . '}' . $name;
+        }
+        $this->properties['name'] = $name;
     }
 
     /**
@@ -96,8 +102,8 @@ class Node
      * and return whether the expansion worked or not.
      *
      * \retval bool
-     *      \c TRUE if this node was an empty one and it
-     *      has been successfully expanded, or \c FALSE
+     *      \c true if this node was an empty one and it
+     *      has been successfully expanded, or \c false
      *      otherwise.
      */
     public function emptyNodeExpansionWorked()

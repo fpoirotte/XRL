@@ -17,10 +17,10 @@ namespace fpoirotte\XRL\Types;
  *
  * \authors François Poirotte <clicky@erebot.net>
  */
-class DateTimeIso8601 extends \fpoirotte\XRL\Types\AbstractDateTime
+class DateTime extends \fpoirotte\XRL\Types\AbstractDateTime
 {
     // We can't just use DateTime::ISO8601 (= "Y-m-d\\TH:i:sO")
-    // because the XML-RPC specification forbids timezones.
-    const XMLRPC_FORMAT = 'Y-m-d\\TH:i:s';
-    const XMLRPC_TYPE   = 'dateTime.iso8601';
+    // because the PHP format omits milliseconds.
+    const XMLRPC_FORMAT = 'Y-m-d\\TH:i:s.uO';
+    const XMLRPC_TYPE   = '{http://ws.apache.org/xmlrpc/namespaces/extensions}dateTime';
 }
