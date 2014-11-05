@@ -43,12 +43,6 @@ class Request implements \fpoirotte\XRL\RequestInterface
             throw new \InvalidArgumentException('Invalid procedure name');
         }
 
-        foreach ($params as $param) {
-            if (!($param instanceof \fpoirotte\XRL\Types\AbstractType)) {
-                throw new \InvalidArgumentException('Invalid parameter');
-            }
-        }
-
         $this->procedure    = $procedure;
         $this->params       = $params;
     }

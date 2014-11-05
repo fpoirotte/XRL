@@ -25,9 +25,21 @@ class Decoder extends \PHPUnit_Framework_TestCase
             DIRECTORY_SEPARATOR . $filename . '.xml'
         );
 
-        $result = array(
-            array(new \fpoirotte\XRL\Decoder($tz, true), $content, true),
-            array(new \fpoirotte\XRL\Decoder($tz, false), $content, true),
+        $result = array();
+
+        $result[] = array(
+            new \fpoirotte\XRL\NativeDecoder(
+                new \fpoirotte\XRL\Decoder($tz, true)
+            ),
+            $content,
+            true
+        );
+        $result[] = array(
+            new \fpoirotte\XRL\NativeDecoder(
+                new \fpoirotte\XRL\Decoder($tz, false)
+            ),
+            $content,
+            true
         );
 
         // Remove all whitespaces.
@@ -40,8 +52,21 @@ class Decoder extends \PHPUnit_Framework_TestCase
             $content
         );
 
-        $result[] = array(new \fpoirotte\XRL\Decoder($tz, true), $content, false);
-        $result[] = array(new \fpoirotte\XRL\Decoder($tz, false), $content, false);
+        $result[] = array(
+            new \fpoirotte\XRL\NativeDecoder(
+                new \fpoirotte\XRL\Decoder($tz, true)
+            ),
+            $content,
+            false
+        );
+        $result[] = array(
+            new \fpoirotte\XRL\NativeDecoder(
+                new \fpoirotte\XRL\Decoder($tz, false)
+            ),
+            $content,
+            false
+        );
+
         return $result;
     }
 
@@ -102,6 +127,7 @@ class Decoder extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
     public function testDecodeRequestWithEmptyParameters($decoder, $xml)
     {
@@ -116,6 +142,7 @@ class Decoder extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
     public function testDecodeRequestWithMultipleParameters($decoder, $xml)
     {
@@ -125,13 +152,14 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('multiParams', $request->getProcedure());
         $this->assertEquals(2, count($params));
-        $this->assertSame(42, $params[0]->get());
-        $this->assertSame('test', $params[1]->get());
+        $this->assertSame(42, $params[0]);
+        $this->assertSame('test', $params[1]);
     }
 
     /**
      * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
     public function testDecodeRequestWithIntegerParameter($decoder, $xml)
     {
@@ -141,12 +169,13 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('intParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame(42, $params[0]->get());
+        $this->assertSame(42, $params[0]);
     }
 
     /**
      * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
     public function testDecodeRequestWithBooleanParameter($decoder, $xml)
     {
@@ -156,12 +185,13 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('boolParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame(true, $params[0]->get());
+        $this->assertSame(true, $params[0]);
     }
 
     /**
      * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
     public function testDecodeRequestWithBooleanParameter2($decoder, $xml)
     {
@@ -171,12 +201,13 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('boolParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame(false, $params[0]->get());
+        $this->assertSame(false, $params[0]);
     }
 
     /**
      * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
     public function testDecodeRequestWithStringParameter($decoder, $xml)
     {
@@ -186,12 +217,13 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('stringParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame('', $params[0]->get());
+        $this->assertSame('', $params[0]);
     }
 
     /**
      * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
     public function testDecodeRequestWithStringParameter2($decoder, $xml)
     {
@@ -201,12 +233,13 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('stringParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame('test', $params[0]->get());
+        $this->assertSame('test', $params[0]);
     }
 
     /**
      * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
     public function testDecodeRequestWithDoubleParameter($decoder, $xml)
     {
@@ -216,12 +249,13 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('doubleParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame(3.14, $params[0]->get());
+        $this->assertSame(3.14, $params[0]);
     }
 
     /**
      * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
     public function testDecodeRequestWithDateTimeParameter($decoder, $xml)
     {
@@ -234,12 +268,13 @@ class Decoder extends \PHPUnit_Framework_TestCase
         // Emulate a client located in Metropolitain France.
         $tz         = new \DateTimeZone('Europe/Paris');
         $reference  = new \DateTime('1985-11-28T14:00:00+0100', $tz);
-        $this->assertEquals($reference->format('U'), $params[0]->get()->format('U'));
+        $this->assertEquals($reference->format('U'), $params[0]->format('U'));
     }
 
     /**
      * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
     public function testDecodeRequestWithBinaryParameter($decoder, $xml)
     {
@@ -249,12 +284,13 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('binaryParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame("\xE8\xE9\xE0", $params[0]->get());
+        $this->assertSame("\xE8\xE9\xE0", $params[0]);
     }
 
     /**
      * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
     public function testDecodeRequestWithNumericArray($decoder, $xml)
     {
@@ -265,12 +301,13 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('numArray', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame($array, $params[0]->get());
+        $this->assertSame($array, $params[0]);
     }
 
     /**
      * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
     public function testDecodeRequestWithNumericArray2($decoder, $xml)
     {
@@ -281,12 +318,13 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('numArray', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame($array, $params[0]->get());
+        $this->assertSame($array, $params[0]);
     }
 
     /**
      * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
     public function testDecodeRequestWithAssociativeArray($decoder, $xml)
     {
@@ -297,11 +335,12 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('assocArray', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame($array, $params[0]->get());
+        $this->assertSame($array, $params[0]);
     }
 
     /**
      * @dataProvider requestProvider
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
     public function testDecodeRequestWithAssociativeArray2($decoder, $xml)
     {
@@ -312,12 +351,13 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('assocArray', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame($array, $params[0]->get());
+        $this->assertSame($array, $params[0]);
     }
 
     /**
      * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
     public function testDecodeRequestWithAssociativeArray3($decoder, $xml)
     {
@@ -328,12 +368,13 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params = $request->getParams();
         $this->assertEquals('assocArray', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame($array, $params[0]->get());
+        $this->assertSame($array, $params[0]);
     }
 
     /**
      * @dataProvider    responseProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeResponse
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
     public function testDecodeFailure($decoder, $xml, $indented)
     {
@@ -360,11 +401,12 @@ class Decoder extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider    responseProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeResponse
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
     public function testDecodeSuccessfulResponse($decoder, $xml)
     {
         $expected = array(42, 'test');
-        $response = $decoder->decodeResponse($xml)->get();
+        $response = $decoder->decodeResponse($xml);
         $this->assertSame($expected, $response);
     }
 }

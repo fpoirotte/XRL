@@ -169,10 +169,7 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
     /// \copydoc fpoirotte::XRL::EncoderInterface::encodeRequest()
     public function encodeRequest(\fpoirotte\XRL\Request $request)
     {
-        $newParams = array();
-        foreach ($request->getParams() as $param) {
-            $newParams[] = static::convert($param);
-        }
+        $newParams = array_map('static::convert', $request->getParams());
         return $this->encoder->encodeRequest(
             new \fpoirotte\XRL\Request($request->getProcedure(), $newParams)
         );
