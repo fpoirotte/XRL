@@ -345,6 +345,8 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
                 => '\\fpoirotte\\XRL\\Types\\I8',
             '{http://ws.apache.org/xmlrpc/namespaces/extensions}nil'
                 => '\\fpoirotte\\XRL\\Types\\Nil',
+            '{http://ws.apache.org/xmlrpc/namespaces/extensions}dateTime'
+                => '\\fpoirotte\\XRL\\Types\\DateTime',
         );
 
         foreach ($types as $type => $cls) {
