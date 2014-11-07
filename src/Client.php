@@ -44,7 +44,7 @@ namespace fpoirotte\XRL;
  *
  * \authors François Poirotte <clicky@erebot.net>
  */
-class Client extends \fpoirotte\XRL\FactoryRegistry
+class Client
 {
     /// The remote XML-RPC server's base URL.
     protected $baseURL;
@@ -52,8 +52,11 @@ class Client extends \fpoirotte\XRL\FactoryRegistry
     /// A stream context to use when querying the server.
     protected $context;
 
-    /// Callable used to fetch the response.
-    protected $fetcher;
+    /// Encoder for the request.
+    protected $encoder;
+
+    /// Decoder for the response.
+    protected $decoder;
 
     /**
      * Create a new XML-RPC client.
@@ -62,12 +65,17 @@ class Client extends \fpoirotte\XRL\FactoryRegistry
      *      Base URL for the XML-RPC server,
      *      eg. "http://www.example.com/xmlrpc/".
      *
-     * \param string $timezone
-     *      (optional) The name of the timezone the remote server
-     *      is in (eg. "Europe/Paris"). This parameter is used
-     *      to represent dates and times using the proper timezone
-     *      before sending them to the server.
-     *      If omitted, the client's current timezone is used.
+     * \param fpoirotte::XRL::EncoderInterface $encoder
+     *      (optional) Encoder to use for requests.
+     *      If omitted, an encoder that accepts native PHP types,
+     *      does not use indentation, but uses the \<string\> tags
+     *      is automatically created using the machine's timezone.
+     *
+     * \param fpoirotte::XRL::DecoderInterface $decoder
+     *      (optional) Decoder to use for responses.
+     *      If omitted, a decoder that performs XML validation and
+     *      converts values to native PHP types is automatically
+     *      created using the machine's timezone.
      *
      * \param resource $context
      *      (optional) A PHP stream context to use
@@ -84,11 +92,12 @@ class Client extends \fpoirotte\XRL\FactoryRegistry
      * \throw InvalidArgumentException
      *      The given timezone or context is invalid.
      */
-    public function __construct($baseURL, $timezone = null, $context = null)
-    {
-        if ($timezone === null) {
-            $timezone = @date_default_timezone_get();
-        }
+    public function __construct(
+        $baseURL,
+        \fpoirotte\XRL\EncoderInterface $encoder = null,
+        \fpoirotte\XRL\DecoderInterface $decoder = null,
+        $context = null
+    ) {
         if ($context === null) {
             $context = stream_context_get_default();
         }
@@ -97,25 +106,22 @@ class Client extends \fpoirotte\XRL\FactoryRegistry
             throw new \InvalidArgumentException('Invalid context');
         }
 
-        $this->baseURL = $baseURL;
-        try {
-            $timezone = new \DateTimeZone($timezone);
-        } catch (\Exception $e) {
-            throw new \InvalidArgumentException($e->getMessage(), $e->getCode());
+        if ($encoder === null) {
+            $encoder = new \fpoirotte\XRL\NativeEncoder(
+                new \fpoirotte\XRL\Encoder(null, false, true)
+            );
         }
 
-        $this->context      = $context;
-        $this->fetcher      = 'file_get_contents';
-        $this->interfaces   = array(
-            'fpoirotte\\xrl\\encoderfactoryinterface'   =>
-                new \fpoirotte\XRL\CompactEncoderFactory($timezone),
+        if ($decoder === null) {
+            $decoder = new \fpoirotte\XRL\NativeDecoder(
+                new \fpoirotte\XRL\Decoder(null, true)
+            );
+        }
 
-            'fpoirotte\\xrl\\decoderfactoryinterface'   =>
-                new \fpoirotte\XRL\ValidatingDecoderFactory($timezone),
-
-            'fpoirotte\\xrl\\requestfactoryinterface'   =>
-                new \fpoirotte\XRL\RequestFactory(),
-        );
+        $this->baseURL  = $baseURL;
+        $this->context  = $context;
+        $this->encoder  = $encoder;
+        $this->decoder  = $decoder;
     }
 
     /**
@@ -150,19 +156,8 @@ class Client extends \fpoirotte\XRL\FactoryRegistry
     public function __call($method, array $args)
     {
         $newArgs    = array_map('\\fpoirotte\\XRL\\NativeEncoder::convert', $args);
-        $factory    = $this['fpoirotte\\XRL\\RequestFactoryInterface'];
-        $request    = $factory->createRequest($method, $newArgs);
-        assert($request instanceof \fpoirotte\XRL\RequestInterface);
-
-        $factory    = $this['fpoirotte\\XRL\\EncoderFactoryInterface'];
-        $encoder    = $factory->createEncoder();
-        assert($encoder instanceof \fpoirotte\XRL\EncoderInterface);
-
-        $factory    = $this['fpoirotte\\XRL\\DecoderFactoryInterface'];
-        $decoder    = $factory->createDecoder();
-        assert($decoder instanceof \fpoirotte\XRL\DecoderInterface);
-
-        $xml        = $encoder->encodeRequest($request);
+        $request    = new \fpoirotte\XRL\Request($method, $newArgs);
+        $xml        = $this->encoder->encodeRequest($request);
         $options    = array(
             'http' => array(
                 'method'    => 'POST',
@@ -170,19 +165,14 @@ class Client extends \fpoirotte\XRL\FactoryRegistry
                 'header'    => 'Content-Type: text/xml',
             ),
         );
-        stream_context_set_option($this->context, $options);
 
-        $data = @call_user_func(
-            $this->fetcher,
-            $this->baseURL,
-            false,
-            $this->context
-        );
+        stream_context_set_option($this->context, $options);
+        $data = @file_get_contents($this->baseURL, false, $this->context);
         if ($data === false) {
             throw new \RuntimeException('The server could not be queried');
         }
 
-        $result = $decoder->decodeResponse($data);
+        $result = $this->decoder->decodeResponse($data);
         return $result;
     }
 }

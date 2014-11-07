@@ -55,21 +55,33 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
      * Creates a new decoder.
      *
      * \param DateTimeZone $timezone
-     *      Information on the timezone incoming
+     *      (optional) Information on the timezone incoming
      *      date/times come from.
+     *      If omitted, the machine's current timezone is used.
      *
      * \param bool $validate
-     *      Whether the decoder should validate
+     *      (optional) Whether the decoder should validate
      *      its input (\c true) or not (\c false).
+     *      Validation is enabled by default.
      *
      * \throw InvalidArgumentException
      *      The value passed for \c $validate was
      *      not a boolean.
      */
-    public function __construct(\DateTimeZone $timezone, $validate = true)
-    {
+    public function __construct(
+        \DateTimeZone $timezone = null,
+        $validate = true
+    ) {
         if (!is_bool($validate)) {
             throw new \InvalidArgumentException('Not a boolean');
+        }
+
+        if ($timezone === null) {
+            try {
+                $timezone = new \DateTimeZone(@date_default_timezone_get());
+            } catch (\Exception $e) {
+                throw new \InvalidArgumentException($e->getMessage(), $e->getCode());
+            }
         }
 
         $this->validate    = $validate;

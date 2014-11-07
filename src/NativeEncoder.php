@@ -115,7 +115,8 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
             case 'integer':
                 try {
                     return new \fpoirotte\XRL\Types\I4($value);
-                } catch (\InvalidArgumentException $e) { }
+                } catch (\InvalidArgumentException $e) {
+                }
                 return new \fpoirotte\XRL\Types\I8($value);
 
             case 'double':
@@ -132,7 +133,8 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
                 $newValue = array_map("static::convert", $value);
                 try {
                     return new \fpoirotte\XRL\Types\ArrayType($newValue);
-                } catch (\InvalidArgumentException $e) { }
+                } catch (\InvalidArgumentException $e) {
+                }
                 return new \fpoirotte\XRL\Types\Struct($newValue);
 
             case 'object':
@@ -143,7 +145,8 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
                 if (get_resource_type($value) === 'GMP integer') {
                     try {
                         return new \fpoirotte\XRL\Types\I4($value);
-                    } catch (\InvalidArgumentException $e) { }
+                    } catch (\InvalidArgumentException $e) {
+                    }
                     return new \fpoirotte\XRL\Types\I8($value);
                 }
                 // Fall-through intentional.

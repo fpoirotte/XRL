@@ -18,7 +18,10 @@ namespace fpoirotte\XRL\Types;
  *
  * \authors François Poirotte <clicky@erebot.net>
  */
-abstract class AbstractCollection extends \fpoirotte\XRL\Types\AbstractType implements \ArrayAccess, \Iterator, \Countable
+abstract class AbstractCollection extends \fpoirotte\XRL\Types\AbstractType implements
+    \ArrayAccess,
+    \Iterator,
+    \Countable
 {
     /// Current index in the collection.
     protected $index = 0;

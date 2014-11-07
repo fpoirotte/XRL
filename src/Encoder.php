@@ -33,23 +33,26 @@ class Encoder implements \fpoirotte\XRL\EncoderInterface
      * Create a new XML-RPC encoder.
      *
      * \param DateTimeZone $timezone
-     *      Information on the timezone for which
+     *      (optional) Information on the timezone for which
      *      date/times should be encoded.
+     *      If omitted, the machine's current timezone is used.
      *
      * \param bool $indent
-     *      Whether the XML produced should be indented (\c true)
-     *      or not (\c false).
+     *      (optional) Whether the XML produced should be
+     *      indented (\c true) or not (\c false).
+     *      Defaults to no indentation.
      *
      * \param bool $stringTag
-     *      Whether strings should be encoded explicitly
+     *      (optional) Whether strings should be encoded explicitly
      *      using the \<string\> tag (\c true) or implicitly (\c false).
+     *      Defaults to not using such tags.
      *
      * \throw InvalidArgumentException
      *      An invalid value was passed for either the \c $indent
      *      or \c $stringTag argument.
      */
     public function __construct(
-        \DateTimeZone $timezone,
+        \DateTimeZone $timezone = null,
         $indent = false,
         $stringTag = false
     ) {
@@ -58,6 +61,14 @@ class Encoder implements \fpoirotte\XRL\EncoderInterface
         }
         if (!is_bool($stringTag)) {
             throw new \InvalidArgumentException('$stringTag must be a boolean');
+        }
+
+        if ($timezone === null) {
+            try {
+                $timezone = new \DateTimeZone(@date_default_timezone_get());
+            } catch (\Exception $e) {
+                throw new \InvalidArgumentException($e->getMessage(), $e->getCode());
+            }
         }
 
         $this->indent       = $indent;

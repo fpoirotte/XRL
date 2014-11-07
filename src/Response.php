@@ -27,12 +27,15 @@ class Response implements \fpoirotte\XRL\ResponseInterface
      * Create the response to an XML-RPC request.
      *
      * \param mixed $xmlResult
-     *      The result of the request. This may be a scalar
-     *      (integer, boolean, float, string), an array,
-     *      an exception or a \c DateTime object.
+     *      The result of the request as a string,
+     *      encoded using XML-RPC types.
      */
     public function __construct($xmlResult)
     {
+        if (!is_string($xmlResult)) {
+            throw new \InvalidArgumentException('Not a valid response');
+        }
+
         $this->result = $xmlResult;
     }
 

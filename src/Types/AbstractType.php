@@ -96,7 +96,7 @@ abstract class AbstractType
      * \retval mixed
      *      A value compatible with this type.
      */
-    static protected function parse($value, \DateTimeZone $timezone = null)
+    protected static function parse($value, \DateTimeZone $timezone = null)
     {
         return $value;
     }

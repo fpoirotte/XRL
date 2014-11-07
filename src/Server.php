@@ -64,56 +64,55 @@ namespace fpoirotte\XRL;
  *
  * \authors François Poirotte <clicky@erebot.net>
  */
-class Server extends \fpoirotte\XRL\FactoryRegistry implements \Countable, \IteratorAggregate
+class Server implements \Countable, \IteratorAggregate
 {
     /// Registered "procedures".
-    protected $funcs;
+    protected $XRLFunctions;
+
+    /// Encoder for the request.
+    protected $XRLEncoder;
+
+    /// Decoder for the response.
+    protected $XRLDecoder;
+
 
     /**
      * Create a new XML-RPC server.
      *
-     * \param string|DateTimeZone $timezone
-     *      (optional) The name of the timezone the remote server
-     *      is in (eg. "Europe/Paris"). This parameter is used
-     *      to represent dates and times using the proper timezone
-     *      before sending them to the server.
-     *      If omitted, the client's current timezone is used.
+     * \param fpoirotte::XRL::EncoderInterface $encoder
+     *      (optional) Encoder to use to build responses.
+     *      If omitted, an encoder that accepts native PHP types,
+     *      does not use indentation, but uses the \<string\> tags
+     *      is automatically created using the machine's timezone.
      *
-     * \note
-     *      See http://php.net/manual/en/timezones.php for a list
-     *      of valid timezone names supported by PHP.
+     * \param fpoirotte::XRL::DecoderInterface $decoder
+     *      (optional) Decoder to use to parse responses.
+     *      If omitted, a decoder that performs XML validation and
+     *      converts values to native PHP types is automatically
+     *      created using the machine's timezone.
      *
      * \throw InvalidArgumentException
      *      The given timezone is invalid.
      */
-    public function __construct($timezone = null)
-    {
-        if ($timezone === null) {
-            $timezone = @date_default_timezone_get();
+    public function __construct(
+        \fpoirotte\XRL\EncoderInterface $encoder = null,
+        \fpoirotte\XRL\DecoderInterface $decoder = null
+    ) {
+        if ($encoder === null) {
+            $encoder = new \fpoirotte\XRL\NativeEncoder(
+                new \fpoirotte\XRL\Encoder(null, false, true)
+            );
         }
 
-        if (!is_object($timezone) || !($timezone instanceof \DateTimeZone)) {
-            try {
-                $timezone = new \DateTimeZone($timezone);
-            } catch (\Exception $e) {
-                throw new \InvalidArgumentException($e->getMessage(), $e->getCode());
-            }
+        if ($decoder === null) {
+            $decoder = new \fpoirotte\XRL\NativeDecoder(
+                new \fpoirotte\XRL\Decoder(null, true)
+            );
         }
 
-        $this->funcs        = array();
-        $this->interfaces   = array(
-            'fpoirotte\\xrl\\encoderfactoryinterface'   =>
-                new \fpoirotte\XRL\CompactEncoderFactory($timezone),
-
-            'fpoirotte\\xrl\\decoderfactoryinterface'   =>
-                new \fpoirotte\XRL\ValidatingDecoderFactory($timezone),
-
-            'fpoirotte\\xrl\\callablefactoryinterface'  =>
-                new \fpoirotte\XRL\CallableFactory(),
-
-            'fpoirotte\\xrl\\responsefactoryinterface'  =>
-                new \fpoirotte\XRL\ResponseFactory(),
-        );
+        $this->XRLEncoder   = $encoder;
+        $this->XRLDecoder   = $decoder;
+        $this->XRLFunctions = array();
     }
 
     /**
@@ -121,6 +120,8 @@ class Server extends \fpoirotte\XRL\FactoryRegistry implements \Countable, \Iter
      *
      * \param string $func
      *      A valid name for the procedure.
+     *      Names starting with the string "XRL" (case-insensitive)
+     *      are reserved.
      *
      * \param mixed $callback
      *      Any valid PHP callback.
@@ -137,10 +138,7 @@ class Server extends \fpoirotte\XRL\FactoryRegistry implements \Countable, \Iter
      */
     public function __set($func, $callback)
     {
-        $factory    = $this['\\fpoirotte\\XRL\\CallableFactoryInterface'];
-        $callable   = $factory->fromPHP($callback);
-        assert($callable instanceof \fpoirotte\XRL\CallableInterface);
-        $this->funcs[$func] = $callable;
+        $this->XRLFunctions[$func] = new \fpoirotte\XRL\CallableObject($callback);
     }
 
     /**
@@ -165,7 +163,7 @@ class Server extends \fpoirotte\XRL\FactoryRegistry implements \Countable, \Iter
      */
     public function __get($func)
     {
-        return $this->funcs[$func];
+        return $this->XRLFunctions[$func];
     }
 
     /**
@@ -182,7 +180,7 @@ class Server extends \fpoirotte\XRL\FactoryRegistry implements \Countable, \Iter
      */
     public function __isset($func)
     {
-        return isset($this->funcs[$func]);
+        return isset($this->XRLFunctions[$func]);
     }
 
     /**
@@ -198,7 +196,7 @@ class Server extends \fpoirotte\XRL\FactoryRegistry implements \Countable, \Iter
      */
     public function __unset($func)
     {
-        unset($this->funcs[$func]);
+        unset($this->XRLFunctions[$func]);
     }
 
     /**
@@ -211,7 +209,7 @@ class Server extends \fpoirotte\XRL\FactoryRegistry implements \Countable, \Iter
      */
     public function count()
     {
-        return count($this->funcs);
+        return count($this->XRLFunctions);
     }
 
     /**
@@ -224,7 +222,7 @@ class Server extends \fpoirotte\XRL\FactoryRegistry implements \Countable, \Iter
      */
     public function getIterator()
     {
-        return new \ArrayIterator($this->funcs);
+        return new \ArrayIterator($this->XRLFunctions);
     }
 
     /**
@@ -240,7 +238,7 @@ class Server extends \fpoirotte\XRL\FactoryRegistry implements \Countable, \Iter
      * \retval fpoirotte::XRL::ResponseInterface
      *      The response for that request. This response
      *      may indicate either success or failure of the
-     *      Remote Procedure Call 
+     *      Remote Procedure Call .
      */
     public function handle($data = null)
     {
@@ -248,34 +246,23 @@ class Server extends \fpoirotte\XRL\FactoryRegistry implements \Countable, \Iter
             $data = file_get_contents('php://input');
         }
 
-        $factory    = $this['\\fpoirotte\\XRL\\EncoderFactoryInterface'];
-        $encoder    = $factory->createEncoder();
-        assert($encoder instanceof \fpoirotte\XRL\EncoderInterface);
-
-        $factory    = $this['\\fpoirotte\\XRL\\DecoderFactoryInterface'];
-        $decoder    = $factory->createDecoder();
-        assert($decoder instanceof \fpoirotte\XRL\DecoderInterface);
-
         try {
-            $request    = $decoder->decodeRequest($data);
+            $request    = $this->XRLDecoder->decodeRequest($data);
             $procedure  = $request->getProcedure();
 
-            if (!isset($this->funcs[$procedure])) {
+            if (!isset($this->XRLFunctions[$procedure])) {
                 throw new \BadFunctionCallException(
                     "No such procedure ($procedure)"
                 );
             }
 
-            $callable   = $this->funcs[$procedure];
+            $callable   = $this->XRLFunctions[$procedure];
             $result     = $callable->invokeArgs($request->getParams());
-            $response   = $encoder->encodeResponse($result);
+            $response   = $this->XRLEncoder->encodeResponse($result);
         } catch (\Exception $result) {
-            $response   = $encoder->encodeError($result);
+            $response   = $this->XRLEncoder->encodeError($result);
         }
 
-        $factory = $this['\\fpoirotte\\XRL\\ResponseFactoryInterface'];
-        $returnValue = $factory->createResponse($response);
-        assert($returnValue instanceof \fpoirotte\XRL\ResponseInterface);
-        return $returnValue;
+        return new \fpoirotte\XRL\Response($response);
     }
 }
