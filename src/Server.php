@@ -64,7 +64,7 @@ namespace fpoirotte\XRL;
  *
  * \authors François Poirotte <clicky@erebot.net>
  */
-class Server implements \Countable, \IteratorAggregate
+class Server implements \Countable, \IteratorAggregate, \ArrayAccess
 {
     /// Registered "procedures".
     protected $XRLFunctions;
@@ -142,6 +142,16 @@ class Server implements \Countable, \IteratorAggregate
     }
 
     /**
+     * \copydoc fpoirotte::XRL::Server::__set()
+     *
+     * This method is an alias for fpoirotte::XRL::Server::__set().
+     */
+    public function offsetSet($func, $callback)
+    {
+        $this->XRLFunctions[$func] = new \fpoirotte\XRL\CallableObject($callback);
+    }
+
+    /**
      * Return a procedure previously registered
      * with this XML-RPC server.
      *
@@ -167,6 +177,16 @@ class Server implements \Countable, \IteratorAggregate
     }
 
     /**
+     * \copydoc fpoirotte::XRL::Server::__get()
+     *
+     * This method is an alias for fpoirotte::XRL::Server::__get().
+     */
+    public function offsetGet($func)
+    {
+        return $this->XRLFunctions[$func];
+    }
+
+    /**
      * Test whether a procedure has been registered
      * with the given name on this server.
      *
@@ -184,6 +204,16 @@ class Server implements \Countable, \IteratorAggregate
     }
 
     /**
+     * \copydoc fpoirotte::XRL::Server::__isset()
+     *
+     * This method is an alias for fpoirotte::XRL::Server::__isset().
+     */
+    public function offsetExists($func)
+    {
+        return isset($this->XRLFunctions[$func]);
+    }
+
+    /**
      * Unregister a procedure.
      *
      * \param string $func
@@ -195,6 +225,16 @@ class Server implements \Countable, \IteratorAggregate
      *      on this XML-RPC server.
      */
     public function __unset($func)
+    {
+        unset($this->XRLFunctions[$func]);
+    }
+
+    /**
+     * \copydoc fpoirotte::XRL::Server::__unset()
+     *
+     * This method is an alias for fpoirotte::XRL::Server::__unset().
+     */
+    public function offsetUnset($func)
     {
         unset($this->XRLFunctions[$func]);
     }
@@ -223,6 +263,48 @@ class Server implements \Countable, \IteratorAggregate
     public function getIterator()
     {
         return new \ArrayIterator($this->XRLFunctions);
+    }
+
+    /**
+     * Add public methods of a class or object to this server,
+     * with an optional prefix.
+     *
+     */
+    public function adopt($other, $prefix = '')
+    {
+        if (!is_string($other) && !is_object($other)) {
+            throw new \InvalidArgumentException('Invalid adoption');
+        }
+
+        if (!is_string($prefix)) {
+            throw new \InvalidArgumentException('Invalid prefix');
+        }
+
+        $prefix = rtrim('.');
+        if ($prefix !== '') {
+            $prefix .= '.';
+        }
+
+        if (is_object($other)) {
+            // An object was passed.
+            $class = get_class($other);
+            foreach (get_class_methods($class) as $method) {
+                // Only adopt public methods of the object.
+                $reflector = new \ReflectionMethod($class, $method);
+                if ($reflector->isPublic()) {
+                    $this[$prefix . $method] = array($other, $method);
+                }
+            }
+        } else {
+            // A class was passed.
+            foreach (get_class_methods($other) as $method) {
+                // Only adopt methods which are both public and static.
+                $reflector = new \ReflectionMethod($other, $method);
+                if ($reflector->isPublic() && $reflector->isStatic()) {
+                    $this[$prefix . $method] = array($other, $method);
+                }
+            }
+        }
     }
 
     /**

@@ -20,9 +20,7 @@ class Server extends \PHPUnit_Framework_TestCase
     {
         $this->server   = new \fpoirotte\XRL\Server();
         $this->cls      = '\\fpoirotte\\XRL\\tests\\stub\\TestServer';
-        foreach (get_class_methods($this->cls) as $func) {
-            $this->server->$func = array($this->cls, $func);
-        }
+        $this->server->adopt($this->cls);
     }
 
     /// @covers \fpoirotte\XRL\Server::testCountProcedures

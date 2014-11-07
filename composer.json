@@ -22,7 +22,8 @@
         "ext-XMLReader": "*",
         "ext-XMLWriter": "*",
         "ext-gmp": "*",
-        "ext-pcre": "*"
+        "ext-pcre": "*",
+        "ext-SPL": "*"
     },
     "require-dev": {
         "erebot/buildenv": "*",
