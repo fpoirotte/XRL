@@ -289,9 +289,10 @@ class Server implements \Countable, \IteratorAggregate, \ArrayAccess
             // An object was passed.
             $class = get_class($other);
             foreach (get_class_methods($class) as $method) {
-                // Only adopt public methods of the object.
+                // Only adopt public methods of the object,
+                // excluding the constructor.
                 $reflector = new \ReflectionMethod($class, $method);
-                if ($reflector->isPublic()) {
+                if ($reflector->isPublic() && !$reflector->isConstructor()) {
                     $this[$prefix . $method] = array($other, $method);
                 }
             }
