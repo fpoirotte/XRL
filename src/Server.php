@@ -266,11 +266,11 @@ class Server implements \Countable, \IteratorAggregate, \ArrayAccess
     }
 
     /**
-     * Add public methods of a class or object to this server,
+     * Expose the public methods of a class or object,
      * with an optional prefix.
      *
      */
-    public function adopt($other, $prefix = '')
+    public function expose($other, $prefix = '')
     {
         if (!is_string($other) && !is_object($other)) {
             throw new \InvalidArgumentException('Invalid adoption');
