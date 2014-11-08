@@ -38,11 +38,8 @@ class NativeDecoder implements \fpoirotte\XRL\DecoderInterface
     public function decodeRequest($data)
     {
         $request    = $this->decoder->decodeRequest($data);
-        $newParams  = array();
-        foreach ($request->getParams() as $param) {
-            $newParams[] = $param->get();
-        }
-        return new \fpoirotte\XRL\Request($request->getProcedure(), $newParams);
+        $params     = array_map(function ($p) { return $p->get(); }, $request->getParams());
+        return new \fpoirotte\XRL\Request($request->getProcedure(), $params);
     }
 
     /// \copydoc fpoirotte::XRL::DecoderInterface::decodeResponse()
