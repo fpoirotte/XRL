@@ -280,7 +280,7 @@ class Server implements \Countable, \IteratorAggregate, \ArrayAccess
             throw new \InvalidArgumentException('Invalid prefix');
         }
 
-        $prefix = rtrim('.');
+        $prefix = rtrim($prefix, '.');
         if ($prefix !== '') {
             $prefix .= '.';
         }
@@ -290,9 +290,12 @@ class Server implements \Countable, \IteratorAggregate, \ArrayAccess
             $class = get_class($other);
             foreach (get_class_methods($class) as $method) {
                 // Only adopt public methods of the object,
-                // excluding the constructor.
+                // excluding the constructor and static methods.
+                // To also register static methods, call this method
+                // a second time with get_class($other).
                 $reflector = new \ReflectionMethod($class, $method);
-                if ($reflector->isPublic() && !$reflector->isConstructor()) {
+                if ($reflector->isPublic() && !$reflector->isConstructor() &&
+                    !$reflector->isStatic()) {
                     $this[$prefix . $method] = array($other, $method);
                 }
             }
@@ -340,7 +343,9 @@ class Server implements \Countable, \IteratorAggregate, \ArrayAccess
             }
 
             $callable   = $this->XRLFunctions[$procedure];
-            $result     = $callable->invokeArgs($request->getParams());
+            // Necessary to keep references.
+            $params     = $request->getParams();
+            $result     = $callable->invokeArgs($params);
             $response   = $this->XRLEncoder->encodeResponse($result);
         } catch (\Exception $result) {
             $response   = $this->XRLEncoder->encodeError($result);
