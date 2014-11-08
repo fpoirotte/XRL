@@ -406,7 +406,7 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
 
                 // Read key.
                 $this->expectStartTag($reader, 'name');
-                $key = $this->decodeValue($reader, array('string'));
+                $key = $this->parseText($reader);
                 $this->expectEndTag($reader, 'name');
 
                 $this->expectStartTag($reader, 'value');
