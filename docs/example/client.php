@@ -35,15 +35,16 @@ $serverUrl  =   (!empty($_SERVER['HTTP_SSL']) &&
                 strcasecmp($_SERVER['HTTP_SSL'], 'off'))
                 ? 'https'
                 : 'http';
-$serverUrl .= '://'.$_SERVER['HTTP_HOST'].':'.$_SERVER['SERVER_PORT'];
+$serverUrl .= '://'.$_SERVER['HTTP_HOST'];
 $serverUrl .= (string) substr($_SERVER['SCRIPT_NAME'], 0, $pos);
 $serverUrl .= '/server.php';
 
 // Create a new client.
 $client     = new \fpoirotte\XRL\Client($serverUrl);
 
-// Call the remote server's qux() procedure.
-$res = $client->qux(23);
+// List all available procedures.
+var_dump($client->{'system.listMethods'}());
 
-// Display the result: "int(65)" (42 + 23).
-var_dump($res);
+// Say hello :)
+var_dump($client->hello('world'));
+
