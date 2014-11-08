@@ -228,4 +228,52 @@ class CapableServer
         // Produce the final output.
         return implode("\n", $help);
     }
+
+    /**
+     * Perform several calls to XML-RPC methods
+     * in a single go.
+     *
+     * \param array $requests
+     *      Array of requests, each described as a struct
+     *      with the following information:
+     *      - "methodName": name of the method to call
+     *      - "params": array of parameters for the method
+     *
+     * \retval array
+     *      Array of responses, one for each request,
+     *      in the same order.
+     *      Each response may be either a fault or an array
+     *      with a single element (the call's result).
+     *
+     * \note
+     *      Recursive calls to system.multicall are forbidden.
+     */
+    public function multicall(array $requests)
+    {
+        $responses = array();
+        foreach ($requests as $request) {
+            try {
+                if (!is_array($request)) {
+                    throw new \BadFunctionCallException('Expected struct');
+                }
+                if (!isset($request['methodName'])) {
+                    throw new \BadFunctionCallException('Missing methodName');
+                }
+                if (!isset($request['params'])) {
+                    throw new \BadFunctionCallException('Missing params');
+                }
+                if ($request['methodName'] === 'system.multicall') {
+                    throw new \BadFunctionCallException('Recursive call');
+                }
+
+                $result = $this->server->call($request['methodName'], $request['params']);
+                // Results are wrapped in an array to make it possible
+                // to distinguish faults from regular structs.
+                $responses[] = array($result);
+            } catch (\Exception $error) {
+                $responses[] = $error;
+            }
+        }
+        return $responses;
+    }
 }

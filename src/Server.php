@@ -312,8 +312,7 @@ class Server implements \Countable, \IteratorAggregate, \ArrayAccess
     }
 
     /**
-     * Handles an XML-RPC request and returns a response
-     * for that request.
+     * Handle an XML-RPC request and return a response for it.
      *
      * \param string $data
      *      (optional) An XML-RPC request to process,
@@ -324,7 +323,7 @@ class Server implements \Countable, \IteratorAggregate, \ArrayAccess
      * \retval fpoirotte::XRL::ResponseInterface
      *      The response for that request. This response
      *      may indicate either success or failure of the
-     *      Remote Procedure Call .
+     *      Remote Procedure Call.
      */
     public function handle($data = null)
     {
@@ -335,22 +334,43 @@ class Server implements \Countable, \IteratorAggregate, \ArrayAccess
         try {
             $request    = $this->XRLDecoder->decodeRequest($data);
             $procedure  = $request->getProcedure();
-
-            if (!isset($this->XRLFunctions[$procedure])) {
-                throw new \BadFunctionCallException(
-                    "No such procedure ($procedure)"
-                );
-            }
-
-            $callable   = $this->XRLFunctions[$procedure];
             // Necessary to keep references.
             $params     = $request->getParams();
-            $result     = $callable->invokeArgs($params);
+
+            $result     = $this->call($procedure, $params);
             $response   = $this->XRLEncoder->encodeResponse($result);
         } catch (\Exception $result) {
             $response   = $this->XRLEncoder->encodeError($result);
         }
 
         return new \fpoirotte\XRL\Response($response);
+    }
+
+    /**
+     * Call an XML-RPC procedure.
+     *
+     * \param string $procedure
+     *      Name of the procedure to call.
+     *
+     * \param array $params
+     *      Parameters for that procedure.
+     *
+     * \retval mixed
+     *      The procedure's return value.
+     */
+    public function call($procedure, array $params)
+    {
+        if (!is_string($procedure)) {
+            throw new \BadFunctionCallException('Expected a string');
+        }
+
+        if (!isset($this->XRLFunctions[$procedure])) {
+            throw new \BadFunctionCallException(
+                "No such procedure ($procedure)"
+            );
+        }
+
+        $callable = $this->XRLFunctions[$procedure];
+        return $callable->invokeArgs($params);
     }
 }
