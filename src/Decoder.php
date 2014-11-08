@@ -454,6 +454,7 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
         } catch (\InvalidArgumentException $e) {
             $value = '';
         }
+        $value = new \fpoirotte\XRL\Types\String($value);
         return self::checkType($allowedTypes, 'string', $value);
     }
 
@@ -573,7 +574,7 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
         if ($error) {
             throw new \fpoirotte\XRL\Exception(
                 (string) $response['faultString'],
-                (int) $response['faultCode']->get()
+                $response['faultCode']->get()
             );
         }
 
