@@ -158,14 +158,7 @@ class Encoder implements \fpoirotte\XRL\EncoderInterface
         $writer->startElement('methodResponse');
         $writer->startElement('fault');
         $writer->startElement('value');
-        $exc = new \fpoirotte\XRL\Types\Struct(
-            array(
-                'faultCode'     => new \fpoirotte\XRL\Types\Int($error->getCode()),
-                'faultString'   => new \fpoirotte\XRL\Types\String(
-                    get_class($error).': '.$error->getMessage()
-                ),
-            )
-        );
+        $exc = \fpoirotte\XRL\NativeEncoder::convert($error);
         $exc->write($writer, $this->timezone, $this->stringTag);
         $writer->endElement();
         $writer->endElement();

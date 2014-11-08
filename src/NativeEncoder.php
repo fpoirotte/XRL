@@ -164,6 +164,17 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
             return new \fpoirotte\XRL\Types\DateTimeIso8601($value);
         }
 
+        if ($value instanceof \Exception) {
+            return new \fpoirotte\XRL\Types\Struct(
+                array(
+                    'faultCode'     => new \fpoirotte\XRL\Types\Int($value->getCode()),
+                    'faultString'   => new \fpoirotte\XRL\Types\String(
+                        get_class($value).': '.$value->getMessage()
+                    ),
+                )
+            );
+        }
+
         if (!($value instanceof \Serializable) && !method_exists($value, '__sleep')) {
             throw new \InvalidArgumentException('Could not serialize object');
         }
