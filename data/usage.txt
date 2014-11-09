@@ -1,15 +1,15 @@
 Usage: %1$s [options] <server URL> <procedure> [args...]
 
 Options:
- -d               Debug mode. Display all XML exchanges
-                  between the XML-RPC client and server.
+ -h               Show this program's help.
  -n               Dry run. Don't send the actual query.
                   Use with -d to debug encoder issues.
  -t <timezone>    Use this timezone to convert dates between local
                   and remote time. Eg. "Europe/Paris".
+ -v               Be verbose (repeat for even more verbose output).
+                  Requires erebot/plop.
+ -V               Show this program's version and exit.
  -x               Perform XML validation on received messages.
- -v               Show this program's version and exit.
- -h               Show this program's help.
 
 Additional parameters for the procedure must be passed as a list
 of types & values, where the following types may be used:

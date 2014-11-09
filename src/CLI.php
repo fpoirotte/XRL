@@ -340,7 +340,8 @@ class CLI
             'h' => false,
             'n' => false,
             't' => new \DateTimeZone(@date_default_timezone_get()),
-            'v' => false,
+            'v' => 0,
+            'V' => false,
             'x' => false,
         );
 
@@ -361,6 +362,8 @@ class CLI
 
                         if (is_bool($options[$o])) {
                             $options[$o] = true;
+                        } elseif (is_int($options[$o])) {
+                            $options[$o]++;
                         } else {
                             $p[] = $o;
                         }
@@ -428,7 +431,7 @@ class CLI
         }
 
         // Show version.
-        if ($options['v']) {
+        if ($options['V']) {
             $version = self::getVersion();
             $license = self::getCopyrightAndLicense();
             echo 'XRL version ' . $version . PHP_EOL;
@@ -448,17 +451,26 @@ class CLI
         $decoder    = new \fpoirotte\XRL\NativeDecoder(new \fpoirotte\XRL\Decoder($options['t'], $options['x']));
         $request    = new \fpoirotte\XRL\Request($params['procedure'], $params['additional']);
 
-        $xml = $encoder->encodeRequest($request);
-        if ($options['d']) {
-            echo "Request:" . PHP_EOL;
-            echo trim($xml) . PHP_EOL . PHP_EOL;
+        // Change verbosity as necessary.
+        if (class_exists('\\Plop\\Plop')) {
+            $logging = \Plop\Plop::getInstance();
+            $logging->getLogger()->setLevel(40 - max(4, $options['v']) * 10);
+        } else {
+            $logging = null;
         }
 
+        // Prepare the request.
+        $xml = $encoder->encodeRequest($request);
+        $logging and $logging->debug(
+            "Request:\n%(request)s",
+            array('request' => $xml)
+        );
         if ($options['n']) {
             echo 'Not sending the actual query due to dry run mode.' . PHP_EOL;
             return 0;
         }
 
+        // Prepare the context.
         $context    = stream_context_get_default();
         $ctxOptions = array(
             'http' => array(
@@ -468,37 +480,11 @@ class CLI
             ),
         );
         stream_context_set_option($context, $ctxOptions);
+        libxml_set_streams_context($context);
 
-        $data = file_get_contents($params['serverURL'], false, $context);
-        if ($data === false) {
-            fprintf(
-                STDERR,
-                'Could not query "%s"' . PHP_EOL,
-                $params['serverURL']
-            );
-            return 1;
-        }
-
-        if ($options['d']) {
-            echo 'Response:' . PHP_EOL;
-            echo trim($data) . PHP_EOL . PHP_EOL;
-        }
-
-        $processor  = new \fpoirotte\XRL\HeadersProcessor();
-        $meta       = $processor->process($http_response_header);
-        $params     = '';
-        if (isset($meta['type'])) {
-            // MIME type.
-            $params = $meta['type'];
-        }
-        if (isset($meta['params']['charset'])) {
-            $params .= ';charset=' . $meta['params']['charset'];
-        }
-
+        // Send the request and process the response.
         try {
-            $result = $decoder->decodeResponse(
-                "data://$params;base64," . base64_encode($data)
-            );
+            $result = $decoder->decodeResponse($params['serverURL']);
         } catch (\Exception $result) {
             // Nothing to do.
         }
