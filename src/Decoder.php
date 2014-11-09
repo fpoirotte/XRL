@@ -353,10 +353,16 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
 
             // Some Apache extensions.
             // See http://ws.apache.org/xmlrpc/types.html
-            '{http://ws.apache.org/xmlrpc/namespaces/extensions}i8'
-                => '\\fpoirotte\\XRL\\Types\\I8',
             '{http://ws.apache.org/xmlrpc/namespaces/extensions}nil'
                 => '\\fpoirotte\\XRL\\Types\\Nil',
+            '{http://ws.apache.org/xmlrpc/namespaces/extensions}i1'
+                => '\\fpoirotte\\XRL\\Types\\I1',
+            '{http://ws.apache.org/xmlrpc/namespaces/extensions}i8'
+                => '\\fpoirotte\\XRL\\Types\\I8',
+            '{http://ws.apache.org/xmlrpc/namespaces/extensions}i2'
+                => '\\fpoirotte\\XRL\\Types\\I2',
+            '{http://ws.apache.org/xmlrpc/namespaces/extensions}biginteger'
+                => '\\fpoirotte\\XRL\\Types\\BigInteger',
             '{http://ws.apache.org/xmlrpc/namespaces/extensions}dateTime'
                 => '\\fpoirotte\\XRL\\Types\\DateTime',
         );

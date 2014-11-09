@@ -30,7 +30,10 @@ class Nil extends \fpoirotte\XRL\Types\AbstractType
     /// \copydoc fpoirotte::XRL::Types::AbstractType::write()
     public function write(\XMLWriter $writer, \DateTimeZone $timezone, $stringTag)
     {
-        return $writer->writeElement('nil');
+        return $writer->writeElementNS(
+            'http://ws.apache.org/xmlrpc/namespaces/extensions',
+            'nil'
+        );
     }
 
     /// \copydoc fpoirotte::XRL::Types::AbstractType::parse()

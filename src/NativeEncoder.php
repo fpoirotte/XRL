@@ -147,7 +147,11 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
                         return new \fpoirotte\XRL\Types\I4($value);
                     } catch (\InvalidArgumentException $e) {
                     }
-                    return new \fpoirotte\XRL\Types\I8($value);
+                    try {
+                        return new \fpoirotte\XRL\Types\I8($value);
+                    } catch (\InvalidArgumentException $e) {
+                    }
+                    return new \fpoirotte\XRL\Types\BigInteger($value);
                 }
                 // Fall-through intentional.
 

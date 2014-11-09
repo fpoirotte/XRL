@@ -15,48 +15,13 @@ namespace fpoirotte\XRL\Types;
  * \brief
  *      The XML-RPC "i8" type.
  *
- * This type represents a signed 64-bits integer.
+ * The "i8" type extension, as described in
+ * http://ws.apache.org/xmlrpc/types.html
  *
  * \authors François Poirotte <clicky@erebot.net>
  */
-class I8 extends \fpoirotte\XRL\Types\AbstractType
+class I8 extends \fpoirotte\XRL\Types\AbstractInteger
 {
-    /// \copydoc fpoirotte::XRL::Types::AbstractType::__toString()
-    public function __toString()
-    {
-        return gmp_strval($this->value);
-    }
-
-    /// \copydoc fpoirotte::XRL::Types::AbstractType::set()
-    public function set($value)
-    {
-        // Versions before PHP 5.6 used resources to represent big numbers
-        // while new versions use objects instead.
-        if ((is_resource($value) && get_resource_type($value) === 'GMP integer') ||
-            (is_object($value) && ($value instanceof \GMP))) {
-            // It is already a GMP integer.
-        } else {
-            $value = @gmp_init($value, 10);
-        }
-        if ($value === false) {
-            throw new \InvalidArgumentException('Expected a signed 64-bits integer value');
-        }
-
-        // Check type bounds.
-        $binval = gmp_strval($value, 2);
-        if (!strncmp($binval, '-1', 2)) {
-            $binval = (string) substr($binval, 2);
-        }
-        if (strlen($binval) >= 64) {
-            throw new \InvalidArgumentException('Expected a signed 64-bits integer value');
-        }
-
-        $this->value = $value;
-    }
-
-    /// \copydoc fpoirotte::XRL::Types::AbstractType::write()
-    public function write(\XMLWriter $writer, \DateTimeZone $timezone, $stringTag)
-    {
-        $writer->writeElement('i8', gmp_strval($this->value));
-    }
+    const XMLRPC_TYPE   = '{http://ws.apache.org/xmlrpc/namespaces/extensions}i8';
+    const INTEGER_BITS  = 64;
 }

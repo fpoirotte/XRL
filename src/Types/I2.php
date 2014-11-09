@@ -13,15 +13,15 @@ namespace fpoirotte\XRL\Types;
 
 /**
  * \brief
- *      The XML-RPC "i4" type.
+ *      The XML-RPC "i2" type.
  *
- * The "i4" type is just an alias for "int",
- * but with a different (shorter) name.
+ * The "i2" type extension, as described in
+ * http://ws.apache.org/xmlrpc/types.html
  *
  * \authors François Poirotte <clicky@erebot.net>
  */
-class I4 extends \fpoirotte\XRL\Types\AbstractInteger
+class I2 extends \fpoirotte\XRL\Types\AbstractInteger
 {
-    const XMLRPC_TYPE   = 'i4';
-    const INTEGER_BITS  = 32;
+    const XMLRPC_TYPE   = '{http://ws.apache.org/xmlrpc/namespaces/extensions}i2';
+    const INTEGER_BITS  = 16;
 }
