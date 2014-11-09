@@ -484,9 +484,20 @@ class CLI
             echo trim($data) . PHP_EOL . PHP_EOL;
         }
 
+        $processor  = new \fpoirotte\XRL\HeadersProcessor();
+        $meta       = $processor->process($http_response_header);
+        $params     = '';
+        if (isset($meta['type'])) {
+            // MIME type.
+            $params = $meta['type'];
+        }
+        if (isset($meta['params']['charset'])) {
+            $params .= ';charset=' . $meta['params']['charset'];
+        }
+
         try {
             $result = $decoder->decodeResponse(
-                'data://text/plain;base64,' . base64_encode($data)
+                "data://$params;base64," . base64_encode($data)
             );
         } catch (\Exception $result) {
             // Nothing to do.

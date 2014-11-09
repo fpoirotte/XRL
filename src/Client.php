@@ -58,6 +58,9 @@ class Client
     /// Decoder for the response.
     protected $decoder;
 
+    /// Headers processor.
+    protected $processor;
+
     /**
      * Create a new XML-RPC client.
      *
@@ -118,10 +121,11 @@ class Client
             );
         }
 
-        $this->baseURL  = $baseURL;
-        $this->context  = $context;
-        $this->encoder  = $encoder;
-        $this->decoder  = $decoder;
+        $this->baseURL      = $baseURL;
+        $this->context      = $context;
+        $this->encoder      = $encoder;
+        $this->decoder      = $decoder;
+        $this->processor    = new \fpoirotte\XRL\HeadersProcessor();
     }
 
     /**
@@ -172,7 +176,19 @@ class Client
             throw new \RuntimeException('The server could not be queried');
         }
 
-        $result = $this->decoder->decodeResponse('data://text/plain;base64,' . base64_encode($data));
+        $meta   = $this->processor->process($http_response_header);
+        $params = '';
+        if (isset($meta['type'])) {
+            // MIME type.
+            $params = $meta['type'];
+        }
+        if (isset($meta['params']['charset'])) {
+            $params .= ';charset=' . $meta['params']['charset'];
+        }
+
+        $result = $this->decoder->decodeResponse(
+            "data://$params;base64," . base64_encode($data)
+        );
         return $result;
     }
 }
