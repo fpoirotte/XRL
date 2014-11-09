@@ -109,6 +109,11 @@ class CapableServer
                 'specUrl'       => 'http://xmlrpc-c.sourceforge.net/xmlrpc-c/introspection.html',
                 'specVersion'   => 1,
             ),
+
+            'faults_interop' => array(
+                'specUrl'       => 'http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php',
+                'specVersion'   => 20010516,
+            ),
         );
     }
 
