@@ -27,6 +27,7 @@
     },
     "require-dev": {
         "erebot/buildenv": "*",
+        "erebot/plop": "*",
         "fpoirotte/natives4doxygen": "*",
         "pdepend/pdepend": "*",
         "squizlabs/php_codesniffer": ">=1.2.2",
