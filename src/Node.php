@@ -42,7 +42,10 @@ class Node
     {
         $skipNodes = array(\XMLReader::SIGNIFICANT_WHITESPACE);
         do {
-            if (!$reader->read()) {
+            // We must silence read() as old PHP (5.3.x) emit warnings
+            // which get caught by PHPUnit and other custom error handlers
+            // when the method fails and this causes various issues.
+            if (!@$reader->read()) {
                 $error = libxml_get_last_error();
                 if (!$error) {
                     // We reached the end of the document.
