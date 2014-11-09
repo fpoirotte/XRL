@@ -42,13 +42,39 @@ class Node
     {
         $skipNodes = array(\XMLReader::SIGNIFICANT_WHITESPACE);
         do {
-            if (!@$reader->read()) {
-                throw new \InvalidArgumentException(
-                    'Unexpected end of document'
-                );
+            if (!$reader->read()) {
+                $error = libxml_get_last_error();
+                if (!$error) {
+                    // We reached the end of the document.
+                    // This is not an error but it causes
+                    // read() to fail anyway.
+                    // We throw a special error which gets caught
+                    // and dealt with appropriately by the caller.
+                    throw new \InvalidArgumentException('End of document');
+                }
+
+                if ($error->code === 32) {
+                    // 32 = XML_ERR_UNSUPPORTED_ENCODING
+                    throw \fpoirotte\XRL\Faults::get(
+                        \fpoirotte\XRL\Faults::UNSUPPORTED_ENCODING
+                    );
+                } elseif ($error->code === 1 || $error->code === 2) {
+                    // 1 = XML_ERR_INTERNAL_ERROR
+                    // 2 = XML_ERR_NO_MEMORY
+                    throw \fpoirotte\XRL\Faults::get(
+                        \fpoirotte\XRL\Faults::INTERNAL_ERROR
+                    );
+                } else {
+                    // Generic error handling.
+                    throw \fpoirotte\XRL\Faults::get(
+                        \fpoirotte\XRL\Faults::NOT_WELL_FORMED
+                    );
+                }
             }
             if ($validate && !$reader->isValid()) {
-                throw new \InvalidArgumentException('Invalid document');
+                throw \fpoirotte\XRL\Faults::get(
+                    \fpoirotte\XRL\Faults::INVALID_XML_RPC
+                );
             }
         } while (in_array($reader->nodeType, $skipNodes));
 

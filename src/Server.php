@@ -372,9 +372,7 @@ class Server implements \Countable, \IteratorAggregate, \ArrayAccess
         }
 
         if (!isset($this->XRLFunctions[$procedure])) {
-            throw new \BadFunctionCallException(
-                "No such procedure ($procedure)"
-            );
+            throw \fpoirotte\XRL\Faults::get(\fpoirotte\XRL\Faults::METHOD_NOT_FOUND);
         }
 
         $callable = $this->XRLFunctions[$procedure];

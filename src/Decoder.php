@@ -466,53 +466,66 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
         }
 
         $reader = $this->getReader($URI, true);
-        $this->expectStartTag($reader, 'methodCall');
-        $this->expectStartTag($reader, 'methodName');
-        $methodName = $this->parseText($reader);
-        $this->expectEndTag($reader, 'methodName');
-
-        $params         = array();
-        $emptyParams    = null;
+        $ldel = libxml_disable_entity_loader(true);
+        $luie = libxml_use_internal_errors(true);
+        libxml_clear_errors();
         try {
-            $this->expectStartTag($reader, 'params');
-        } catch (\InvalidArgumentException $emptyParams) {
-            // Nothing to do here (no arguments given).
-        }
+            $this->expectStartTag($reader, 'methodCall');
+            $this->expectStartTag($reader, 'methodName');
+            $methodName = $this->parseText($reader);
+            $this->expectEndTag($reader, 'methodName');
 
-        if (!$emptyParams) {
-            $endOfParams = null;
-            while (true) {
-                try {
-                    $this->expectStartTag($reader, 'param');
-                } catch (\InvalidArgumentException $endOfParams) {
-                    // Nothing to do here (end of arguments).
-                }
-
-                if ($endOfParams) {
-                    break;
-                }
-
-                $this->expectStartTag($reader, 'value');
-                $params[] = $this->decodeValue($reader);
-                $this->expectEndTag($reader, 'value');
-                $this->expectEndTag($reader, 'param');
+            $params         = array();
+            $emptyParams    = null;
+            try {
+                $this->expectStartTag($reader, 'params');
+            } catch (\InvalidArgumentException $emptyParams) {
+                // Nothing to do here (no arguments given).
             }
-            $this->expectEndTag($reader, 'params');
-        }
-        $this->expectEndTag($reader, 'methodCall');
 
-        $endOfFile = null;
-        try {
-            $this->readNode($reader);
-        } catch (\InvalidArgumentException $endOfFile) {
-        }
+            if (!$emptyParams) {
+                $endOfParams = null;
+                while (true) {
+                    try {
+                        $this->expectStartTag($reader, 'param');
+                    } catch (\InvalidArgumentException $endOfParams) {
+                        // Nothing to do here (end of arguments).
+                    }
 
-        if (!$endOfFile) {
-            throw new \InvalidArgumentException('Expected end of document');
-        }
+                    if ($endOfParams) {
+                        break;
+                    }
 
-        $request = new \fpoirotte\XRL\Request($methodName, $params);
-        return $request;
+                    $this->expectStartTag($reader, 'value');
+                    $params[] = $this->decodeValue($reader);
+                    $this->expectEndTag($reader, 'value');
+                    $this->expectEndTag($reader, 'param');
+                }
+                $this->expectEndTag($reader, 'params');
+            }
+            $this->expectEndTag($reader, 'methodCall');
+
+            $endOfFile = null;
+            try {
+                $this->readNode($reader);
+            } catch (\InvalidArgumentException $endOfFile) {
+            }
+
+            if (!$endOfFile) {
+                throw new \InvalidArgumentException('Expected end of document');
+            }
+
+            $request = new \fpoirotte\XRL\Request($methodName, $params);
+            libxml_disable_entity_loader($ldel);
+            libxml_clear_errors();
+            libxml_use_internal_errors($luie);
+            return $request;
+        } catch (\Exception $e) {
+            libxml_disable_entity_loader($ldel);
+            libxml_clear_errors();
+            libxml_use_internal_errors($luie);
+            throw $e;
+        }
     }
 
     /// \copydoc fpoirotte::XRL::DecoderInterface::decodeResponse()
@@ -524,60 +537,73 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
 
         $error  = null;
         $reader = $this->getReader($URI, false);
-        $this->expectStartTag($reader, 'methodResponse');
+        $ldel = libxml_disable_entity_loader(true);
+        $luie = libxml_use_internal_errors(true);
+        libxml_clear_errors();
         try {
-            // Try to parse a successful response first.
-            $this->expectStartTag($reader, 'params');
-            $this->expectStartTag($reader, 'param');
-            $this->expectStartTag($reader, 'value');
-            $response = $this->decodeValue($reader);
-            $this->expectEndTag($reader, 'value');
-            $this->expectEndTag($reader, 'param');
-            $this->expectEndTag($reader, 'params');
-        } catch (\InvalidArgumentException $error) {
-            // Try to parse a fault instead.
-            $this->expectStartTag($reader, 'fault');
-            $this->expectStartTag($reader, 'value');
+            $this->expectStartTag($reader, 'methodResponse');
+            try {
+                // Try to parse a successful response first.
+                $this->expectStartTag($reader, 'params');
+                $this->expectStartTag($reader, 'param');
+                $this->expectStartTag($reader, 'value');
+                $response = $this->decodeValue($reader);
+                $this->expectEndTag($reader, 'value');
+                $this->expectEndTag($reader, 'param');
+                $this->expectEndTag($reader, 'params');
+            } catch (\InvalidArgumentException $error) {
+                // Try to parse a fault instead.
+                $this->expectStartTag($reader, 'fault');
+                $this->expectStartTag($reader, 'value');
 
-            $response = $this->decodeValue($reader);
-            if (!($response instanceof \fpoirotte\XRL\Types\Struct) ||
-                count($response) != 2) {
-                throw new \UnexpectedValueException(
-                    'An associative array with exactly '.
-                    'two entries was expected'
+                $response = $this->decodeValue($reader);
+                if (!($response instanceof \fpoirotte\XRL\Types\Struct) ||
+                    count($response) != 2) {
+                    throw new \UnexpectedValueException(
+                        'An associative array with exactly '.
+                        'two entries was expected'
+                    );
+                }
+
+                if (!isset($response['faultCode'])) {
+                    throw new \DomainException('The failure lacks a faultCode');
+                }
+
+                if (!isset($response['faultString'])) {
+                    throw new \DomainException('The failure lacks a faultString');
+                }
+
+                $this->expectEndTag($reader, 'value');
+                $this->expectEndTag($reader, 'fault');
+            }
+            $this->expectEndTag($reader, 'methodResponse');
+
+            $endOfFile = null;
+            try {
+                $this->readNode($reader);
+            } catch (\InvalidArgumentException $endOfFile) {
+            }
+
+            if (!$endOfFile) {
+                throw new \InvalidArgumentException('Expected end of document');
+            }
+
+            if ($error) {
+                throw new \fpoirotte\XRL\Exception(
+                    (string) $response['faultString'],
+                    $response['faultCode']->get()
                 );
             }
 
-            if (!isset($response['faultCode'])) {
-                throw new \DomainException('The failure lacks a faultCode');
-            }
-
-            if (!isset($response['faultString'])) {
-                throw new \DomainException('The failure lacks a faultString');
-            }
-
-            $this->expectEndTag($reader, 'value');
-            $this->expectEndTag($reader, 'fault');
+            libxml_disable_entity_loader($ldel);
+            libxml_clear_errors();
+            libxml_use_internal_errors($luie);
+            return $response;
+        } catch (\Exception $e) {
+            libxml_disable_entity_loader($ldel);
+            libxml_clear_errors();
+            libxml_use_internal_errors($luie);
+            throw $e;
         }
-        $this->expectEndTag($reader, 'methodResponse');
-
-        $endOfFile = null;
-        try {
-            $this->readNode($reader);
-        } catch (\InvalidArgumentException $endOfFile) {
-        }
-
-        if (!$endOfFile) {
-            throw new \InvalidArgumentException('Expected end of document');
-        }
-
-        if ($error) {
-            throw new \fpoirotte\XRL\Exception(
-                (string) $response['faultString'],
-                $response['faultCode']->get()
-            );
-        }
-
-        return $response;
     }
 }

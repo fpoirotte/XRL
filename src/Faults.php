@@ -80,12 +80,12 @@ class Faults implements \Serializable
     {
     }
 
-    public static function get($name, $exc = null)
+    public static function get($fault, $exc = null)
     {
         if (!isset(self::$faults[$fault])) {
             throw new \InvalidArgumentException('Unknown interoperability fault');
         }
         $params = self::$faults[$fault];
-        return new \Exception($params['msg'], $params['code'], $exc);
+        return new \fpoirotte\XRL\Exception($params['msg'], $params['code'], $exc);
     }
 }
