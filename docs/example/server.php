@@ -84,4 +84,9 @@ $server->expose('Maths', 'maths');
 // - A full XML-RPC request may be passed using the "request"
 //   parameter (for demonstration purpose only).
 // - Otherwise, the default processing of POST'ed data applies.
-$server->handle(isset($_GET['request']) ? $_GET['request'] : null)->publish();
+if (isset($_GET['request'])) {
+    $data = 'data://text/plain;base64,' . base64_encode($_GET['request']);
+} else {
+    $data = null;
+}
+$server->handle($data)->publish();

@@ -131,7 +131,9 @@ class Decoder extends \PHPUnit_Framework_TestCase
      */
     public function testDecodeRequestWithEmptyParameters($decoder, $xml)
     {
-        $request = $decoder->decodeRequest($xml);
+        $request = $decoder->decodeRequest(
+            'data://text/plain;base64,' . base64_encode($xml)
+        );
         $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
 
         $params = $request->getParams();
@@ -146,7 +148,9 @@ class Decoder extends \PHPUnit_Framework_TestCase
      */
     public function testDecodeRequestWithMultipleParameters($decoder, $xml)
     {
-        $request = $decoder->decodeRequest($xml);
+        $request = $decoder->decodeRequest(
+            'data://text/plain;base64,' . base64_encode($xml)
+        );
         $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
 
         $params = $request->getParams();
@@ -163,7 +167,9 @@ class Decoder extends \PHPUnit_Framework_TestCase
      */
     public function testDecodeRequestWithIntegerParameter($decoder, $xml)
     {
-        $request = $decoder->decodeRequest($xml);
+        $request = $decoder->decodeRequest(
+            'data://text/plain;base64,' . base64_encode($xml)
+        );
         $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
 
         $params = $request->getParams();
@@ -179,7 +185,9 @@ class Decoder extends \PHPUnit_Framework_TestCase
      */
     public function testDecodeRequestWithBooleanParameter($decoder, $xml)
     {
-        $request = $decoder->decodeRequest($xml);
+        $request = $decoder->decodeRequest(
+            'data://text/plain;base64,' . base64_encode($xml)
+        );
         $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
 
         $params = $request->getParams();
@@ -195,7 +203,9 @@ class Decoder extends \PHPUnit_Framework_TestCase
      */
     public function testDecodeRequestWithBooleanParameter2($decoder, $xml)
     {
-        $request = $decoder->decodeRequest($xml);
+        $request = $decoder->decodeRequest(
+            'data://text/plain;base64,' . base64_encode($xml)
+        );
         $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
 
         $params = $request->getParams();
@@ -211,7 +221,9 @@ class Decoder extends \PHPUnit_Framework_TestCase
      */
     public function testDecodeRequestWithStringParameter($decoder, $xml)
     {
-        $request = $decoder->decodeRequest($xml);
+        $request = $decoder->decodeRequest(
+            'data://text/plain;base64,' . base64_encode($xml)
+        );
         $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
 
         $params = $request->getParams();
@@ -227,7 +239,9 @@ class Decoder extends \PHPUnit_Framework_TestCase
      */
     public function testDecodeRequestWithStringParameter2($decoder, $xml)
     {
-        $request = $decoder->decodeRequest($xml);
+        $request = $decoder->decodeRequest(
+            'data://text/plain;base64,' . base64_encode($xml)
+        );
         $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
 
         $params = $request->getParams();
@@ -243,7 +257,9 @@ class Decoder extends \PHPUnit_Framework_TestCase
      */
     public function testDecodeRequestWithDoubleParameter($decoder, $xml)
     {
-        $request = $decoder->decodeRequest($xml);
+        $request = $decoder->decodeRequest(
+            'data://text/plain;base64,' . base64_encode($xml)
+        );
         $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
 
         $params = $request->getParams();
@@ -259,7 +275,9 @@ class Decoder extends \PHPUnit_Framework_TestCase
      */
     public function testDecodeRequestWithDateTimeParameter($decoder, $xml)
     {
-        $request = $decoder->decodeRequest($xml);
+        $request = $decoder->decodeRequest(
+            'data://text/plain;base64,' . base64_encode($xml)
+        );
         $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
 
         $params = $request->getParams();
@@ -278,7 +296,9 @@ class Decoder extends \PHPUnit_Framework_TestCase
      */
     public function testDecodeRequestWithBinaryParameter($decoder, $xml)
     {
-        $request = $decoder->decodeRequest($xml);
+        $request = $decoder->decodeRequest(
+            'data://text/plain;base64,' . base64_encode($xml)
+        );
         $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
 
         $params = $request->getParams();
@@ -295,7 +315,9 @@ class Decoder extends \PHPUnit_Framework_TestCase
     public function testDecodeRequestWithNumericArray($decoder, $xml)
     {
         $array      = array('test', 42);
-        $request    = $decoder->decodeRequest($xml);
+        $request    = $decoder->decodeRequest(
+            'data://text/plain;base64,' . base64_encode($xml)
+        );
         $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
 
         $params = $request->getParams();
@@ -312,7 +334,9 @@ class Decoder extends \PHPUnit_Framework_TestCase
     public function testDecodeRequestWithNumericArray2($decoder, $xml)
     {
         $array      = array();
-        $request    = $decoder->decodeRequest($xml);
+        $request    = $decoder->decodeRequest(
+            'data://text/plain;base64,' . base64_encode($xml)
+        );
         $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
 
         $params = $request->getParams();
@@ -329,7 +353,9 @@ class Decoder extends \PHPUnit_Framework_TestCase
     public function testDecodeRequestWithAssociativeArray($decoder, $xml)
     {
         $array      = array('foo' => 'test', 'bar' => 42);
-        $request    = $decoder->decodeRequest($xml);
+        $request    = $decoder->decodeRequest(
+            'data://text/plain;base64,' . base64_encode($xml)
+        );
         $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
 
         $params = $request->getParams();
@@ -345,7 +371,9 @@ class Decoder extends \PHPUnit_Framework_TestCase
     public function testDecodeRequestWithAssociativeArray2($decoder, $xml)
     {
         $array      = array('foo', 42 => 'bar');
-        $request    = $decoder->decodeRequest($xml);
+        $request    = $decoder->decodeRequest(
+            'data://text/plain;base64,' . base64_encode($xml)
+        );
         $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
 
         $params = $request->getParams();
@@ -362,7 +390,9 @@ class Decoder extends \PHPUnit_Framework_TestCase
     public function testDecodeRequestWithAssociativeArray3($decoder, $xml)
     {
         $array      = array(42 => 'foo', 'bar');
-        $request    = $decoder->decodeRequest($xml);
+        $request    = $decoder->decodeRequest(
+            'data://text/plain;base64,' . base64_encode($xml)
+        );
         $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
 
         $params = $request->getParams();
@@ -380,7 +410,9 @@ class Decoder extends \PHPUnit_Framework_TestCase
     {
         $response = null;
         try {
-            $decoder->decodeResponse($xml);
+            $decoder->decodeResponse(
+                'data://text/plain;base64,' . base64_encode($xml)
+            );
         } catch (\Exception $response) {
             // Nothing to do here.
         }
@@ -406,7 +438,9 @@ class Decoder extends \PHPUnit_Framework_TestCase
     public function testDecodeSuccessfulResponse($decoder, $xml)
     {
         $expected = array(42, 'test');
-        $response = $decoder->decodeResponse($xml);
+        $response = $decoder->decodeResponse(
+            'data://text/plain;base64,' . base64_encode($xml)
+        );
         $this->assertSame($expected, $response);
     }
 }

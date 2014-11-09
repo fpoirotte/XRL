@@ -92,8 +92,8 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
     /**
      * Returns an XML reader for some data.
      *
-     * \param string $data
-     *      XML data to process.
+     * \param string $URI
+     *      URI to the XML data to process.
      *
      * \param bool $request
      *      Whether the data refers to an XML-RPC
@@ -111,7 +111,7 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
      *      on the fly if that's what this decoder was
      *      configured to do during construction.
      */
-    protected function getReader($data, $request)
+    protected function getReader($URI, $request)
     {
         if (!is_bool($request)) {
             throw new \InvalidArgumentException('Not a boolean');
@@ -119,7 +119,7 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
 
         $this->currentNode = null;
         $reader = new \XMLReader();
-        $reader->xml($data, null, LIBXML_NONET | LIBXML_NOENT);
+        $reader->open($URI, null, LIBXML_NONET | LIBXML_NOENT);
         if ($this->validate) {
             $schema = dirname(__DIR__) .
                 DIRECTORY_SEPARATOR . 'data' .
@@ -459,13 +459,13 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
     }
 
     /// \copydoc fpoirotte::XRL::DecoderInterface::decodeRequest()
-    public function decodeRequest($data)
+    public function decodeRequest($URI)
     {
-        if (!is_string($data)) {
+        if (!is_string($URI)) {
             throw new \InvalidArgumentException('A string was expected');
         }
 
-        $reader = $this->getReader($data, true);
+        $reader = $this->getReader($URI, true);
         $this->expectStartTag($reader, 'methodCall');
         $this->expectStartTag($reader, 'methodName');
         $methodName = $this->parseText($reader);
@@ -516,14 +516,14 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
     }
 
     /// \copydoc fpoirotte::XRL::DecoderInterface::decodeResponse()
-    public function decodeResponse($data)
+    public function decodeResponse($URI)
     {
-        if (!is_string($data)) {
+        if (!is_string($URI)) {
             throw new \InvalidArgumentException('A string was expected');
         }
 
         $error  = null;
-        $reader = $this->getReader($data, false);
+        $reader = $this->getReader($URI, false);
         $this->expectStartTag($reader, 'methodResponse');
         try {
             // Try to parse a successful response first.

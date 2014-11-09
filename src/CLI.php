@@ -485,7 +485,9 @@ class CLI
         }
 
         try {
-            $result = $decoder->decodeResponse($data);
+            $result = $decoder->decodeResponse(
+                'data://text/plain;base64,' . base64_encode($data)
+            );
         } catch (\Exception $result) {
             // Nothing to do.
         }

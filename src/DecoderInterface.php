@@ -22,8 +22,8 @@ interface DecoderInterface
     /**
      * Decode an XML-RPC request.
      *
-     * \param string $data
-     *      An XML-RPC request as serialized XML.
+     * \param string $URI
+     *      URI to XML-RPC request.
      *
      * \retval fpoirotte::XRL::Request
      *      An object representing an XML-RPC request.
@@ -33,13 +33,13 @@ interface DecoderInterface
      *      it wasn't a string, it didn"t contain any XML
      *      or the request was malformed.
      */
-    public function decodeRequest($data);
+    public function decodeRequest($URI);
 
     /**
      * Decode an XML-RPC response.
      *
-     * \param string $data
-     *      An XML-RPC response as serialized XML.
+     * \param string $URI
+     *      URI to the XML-RPC response.
      *
      * \retval mixed
      *      The return value represented by the XML-RPC response.
@@ -56,5 +56,5 @@ interface DecoderInterface
      *      it wasn't a string, it didn"t contain any XML
      *      or the request was malformed.
      */
-    public function decodeResponse($data);
+    public function decodeResponse($URI);
 }

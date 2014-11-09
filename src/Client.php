@@ -172,7 +172,7 @@ class Client
             throw new \RuntimeException('The server could not be queried');
         }
 
-        $result = $this->decoder->decodeResponse($data);
+        $result = $this->decoder->decodeResponse('data://text/plain;base64,' . base64_encode($data));
         return $result;
     }
 }

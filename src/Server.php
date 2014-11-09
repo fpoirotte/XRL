@@ -314,25 +314,32 @@ class Server implements \Countable, \IteratorAggregate, \ArrayAccess
     /**
      * Handle an XML-RPC request and return a response for it.
      *
-     * \param string $data
-     *      (optional) An XML-RPC request to process,
-     *      as serialized XML. If omitted, this method
-     *      will try to retrieve the request directly
-     *      from the POST data sent to this PHP script.
+     * \param string $URI
+     *      (optional) URI to the XML-RPC request to process,
+     *      If omitted, this method will try to retrieve the request
+     *      directly from the data POST'ed to this script.
      *
      * \retval fpoirotte::XRL::ResponseInterface
      *      The response for that request. This response
      *      may indicate either success or failure of the
      *      Remote Procedure Call.
+     *
+     * \note
+     *      Use the "data://" wrapper to pass the serialized
+     *      request as raw data.
+     *
+     * \see
+     *      See http://php.net/wrappers.data.php for information
+     *      on how to use the "data://" wrapper.
      */
-    public function handle($data = null)
+    public function handle($URI = null)
     {
-        if ($data === null) {
-            $data = file_get_contents('php://input');
+        if ($URI === null) {
+            $URI = 'php://input';
         }
 
         try {
-            $request    = $this->XRLDecoder->decodeRequest($data);
+            $request    = $this->XRLDecoder->decodeRequest($URI);
             $procedure  = $request->getProcedure();
             // Necessary to keep references.
             $params     = $request->getParams();

@@ -35,16 +35,16 @@ class NativeDecoder implements \fpoirotte\XRL\DecoderInterface
     }
 
     /// \copydoc fpoirotte::XRL::DecoderInterface::decodeRequest()
-    public function decodeRequest($data)
+    public function decodeRequest($URI)
     {
-        $request    = $this->decoder->decodeRequest($data);
+        $request    = $this->decoder->decodeRequest($URI);
         $params     = array_map(function ($p) { return $p->get(); }, $request->getParams());
         return new \fpoirotte\XRL\Request($request->getProcedure(), $params);
     }
 
     /// \copydoc fpoirotte::XRL::DecoderInterface::decodeResponse()
-    public function decodeResponse($data)
+    public function decodeResponse($URI)
     {
-        return $this->decoder->decodeResponse($data)->get();
+        return $this->decoder->decodeResponse($URI)->get();
     }
 }
