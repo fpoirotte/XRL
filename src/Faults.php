@@ -76,7 +76,7 @@ class Faults implements \Serializable
         return null;
     }
 
-    final public function unserialize()
+    final public function unserialize($serialized)
     {
     }
 
