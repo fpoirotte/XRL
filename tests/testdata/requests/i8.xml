@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <methodCall>
- <methodName>intParam</methodName>
+ <methodName>i8Param</methodName>
  <params>
   <param>
    <value>
-    <int>2147483647</int>
+    <i8>9223372036854775807</i8>
    </value>
   </param>
  </params>

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <methodCall>
- <methodName>intParam</methodName>
+ <methodName>stringParam</methodName>
  <params>
   <param>
-   <value>
-    <int>2147483647</int>
-   </value>
+   <value></value>
   </param>
  </params>
 </methodCall>

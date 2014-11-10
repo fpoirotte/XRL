@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<methodCall>
+ <methodName>domParam</methodName>
+ <params>
+  <param>
+   <value>
+    <ex:dom xmlns:ex="http://ws.apache.org/xmlrpc/namespaces/extensions">
+     <ns:foo xmlns:ns="http://example.com/ns">
+      <bar xmlns:ns2="http://example.com/ns2" baz="42" ns2:qux="blah"/>
+     </ns:foo>
+    </ex:dom>
+   </value>
+  </param>
+ </params>
+</methodCall>

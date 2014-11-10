@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <methodCall>
- <methodName>intParam</methodName>
+ <methodName>i1Param</methodName>
  <params>
   <param>
    <value>
-    <int>2147483647</int>
+    <ex:i1 xmlns:ex="http://ws.apache.org/xmlrpc/namespaces/extensions">127</ex:i1>
    </value>
   </param>
  </params>

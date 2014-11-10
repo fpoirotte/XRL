@@ -13,147 +13,50 @@ namespace fpoirotte\XRL\tests;
 
 class Decoder extends \PHPUnit_Framework_TestCase
 {
-    protected function getXML($folder, $filename)
+    public function getRequest($path)
     {
-        // Emulate a server located in Ireland.
-        $tz = new \DateTimeZone("Europe/Dublin");
-
         $content = file_get_contents(
             __DIR__ .
             DIRECTORY_SEPARATOR . 'testdata' .
-            DIRECTORY_SEPARATOR . $folder .
-            DIRECTORY_SEPARATOR . $filename . '.xml'
+            DIRECTORY_SEPARATOR . 'requests' .
+            DIRECTORY_SEPARATOR .
+            str_replace('/', DIRECTORY_SEPARATOR, $path . '.xml')
         );
 
-        $result = array();
-
-        $result[] = array(
-            new \fpoirotte\XRL\NativeDecoder(
-                new \fpoirotte\XRL\Decoder($tz, true)
-            ),
-            $content,
-            true
-        );
-        $result[] = array(
-            new \fpoirotte\XRL\NativeDecoder(
-                new \fpoirotte\XRL\Decoder($tz, false)
-            ),
-            $content,
-            true
+        $decoder = new \fpoirotte\XRL\NativeDecoder(
+            new \fpoirotte\XRL\Decoder(
+                new \DateTimeZone("Europe/Dublin"),
+                true
+            )
         );
 
-        // Remove all whitespaces.
-        $content = str_replace(array(' ', "\n", "\r", "\t"), '', $content);
-
-        // Remove the XML declaration.
-        $content = str_replace(
-            '<'.'?xmlversion="1.0"encoding="UTF-8"?'.'>',
-            '',
-            $content
+        $request = $decoder->decodeRequest(
+            'data://;base64,' . base64_encode($content)
         );
-
-        $result[] = array(
-            new \fpoirotte\XRL\NativeDecoder(
-                new \fpoirotte\XRL\Decoder($tz, true)
-            ),
-            $content,
-            false
-        );
-        $result[] = array(
-            new \fpoirotte\XRL\NativeDecoder(
-                new \fpoirotte\XRL\Decoder($tz, false)
-            ),
-            $content,
-            false
-        );
-
-        return $result;
-    }
-
-    public function requestProvider($method)
-    {
-        $len = strlen('testDecodeRequestWith');
-        if (strncmp($method, 'testDecodeRequestWith', $len)) {
-            throw new \Exception('Bad request for provider');
-        }
-        $method = (string) substr($method, $len);
-
-        if (strpos($method, 'Parameters') !== false) {
-            list($prefix, $index) = explode('Parameters', $method);
-        } elseif (strpos($method, 'Parameter') !== false) {
-            list($prefix, $index) = explode('Parameter', $method);
-        } elseif (strpos($method, 'Array') !== false) {
-            list($prefix, $index) = explode('Array', $method);
-        } else {
-            list($prefix, $index) = array($method, '');
-        }
-
-        $mapping = array(
-            'Empty'         => 'empty',
-            'Multiple'      => 'multi',
-            'Integer'       => 'int',
-            'Boolean'       => 'bool',
-            'String'        => 'string',
-            'Double'        => 'double',
-            'Numeric'       => 'num_array',
-            'Associative'   => 'assoc_array',
-            'Binary'        => 'binary',
-            'DateTime'      => 'datetime',
-        );
-
-        if (isset($mapping[$prefix])) {
-            return $this->getXML('requests', $mapping[$prefix] . $index);
-        }
-        return $this->getXML('requests', $prefix . $index);
-    }
-
-    public function responseProvider($method)
-    {
-        $len = strlen('testDecode');
-        if (strncmp($method, 'testDecode', $len)) {
-            throw new \Exception('Bad request for provider');
-        }
-        $method = (string) substr($method, $len);
-
-        if ($method == 'Failure') {
-            return $this->getXML('responses', 'failure');
-        }
-        if ($method == 'SuccessfulResponse') {
-            return $this->getXML('responses', 'success');
-        }
-        throw new \Exception('Request for unknown data');
+        $this->assertInstanceOf('\\fpoirotte\\XRL\\Request', $request);
+        return $request;
     }
 
     /**
-     * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
-    public function testDecodeRequestWithEmptyParameters($decoder, $xml)
+    public function testDecodeEmptyParameters()
     {
-        $request = $decoder->decodeRequest(
-            'data://;base64,' . base64_encode($xml)
-        );
-        $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
-
-        $params = $request->getParams();
+        $request    = $this->getRequest('empty');
+        $params     = $request->getParams();
         $this->assertEquals('emptyParams', $request->getProcedure());
         $this->assertEquals(0, count($params));
     }
 
     /**
-     * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
-    public function testDecodeRequestWithMultipleParameters($decoder, $xml)
+    public function testDecodeMultipleParameters()
     {
-        $request = $decoder->decodeRequest(
-            'data://;base64,' . base64_encode($xml)
-        );
-        $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
-
-        $params = $request->getParams();
+        $request    = $this->getRequest('multi');
+        $params     = $request->getParams();
         $this->assertEquals('multiParams', $request->getProcedure());
         $this->assertEquals(2, count($params));
         $this->assertSame(42, $params[0]);
@@ -161,126 +64,192 @@ class Decoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
-    public function testDecodeRequestWithIntegerParameter($decoder, $xml)
+    public function testDecodeInteger()
     {
-        $request = $decoder->decodeRequest(
-            'data://;base64,' . base64_encode($xml)
-        );
-        $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
-
-        $params = $request->getParams();
+        $request    = $this->getRequest('int');
+        $params     = $request->getParams();
         $this->assertEquals('intParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
-        $this->assertSame(42, $params[0]);
+        // 2**31-1
+        $this->assertSame((1 << 30) - 1 + (1 << 30), $params[0]);
     }
 
     /**
-     * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
-    public function testDecodeRequestWithBooleanParameter($decoder, $xml)
+    public function testDecode8BitsSignedInteger()
     {
-        $request = $decoder->decodeRequest(
-            'data://;base64,' . base64_encode($xml)
-        );
-        $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
+        $request    = $this->getRequest('i1');
+        $params     = $request->getParams();
+        $this->assertEquals('i1Param', $request->getProcedure());
+        $this->assertEquals(1, count($params));
+        // 2**8-1
+        $this->assertSame((1 << 7) - 1, $params[0]);
+    }
 
-        $params = $request->getParams();
+    /**
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
+     */
+    public function testDecode16BitsSignedInteger()
+    {
+        $request    = $this->getRequest('i2');
+        $params     = $request->getParams();
+        $this->assertEquals('i2Param', $request->getProcedure());
+        $this->assertEquals(1, count($params));
+        // 2**16-1
+        $this->assertSame((1 << 15) - 1, $params[0]);
+    }
+
+    /**
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
+     */
+    public function testDecode32BitsSignedInteger()
+    {
+        $request    = $this->getRequest('i4');
+        $params     = $request->getParams();
+        $this->assertEquals('i4Param', $request->getProcedure());
+        $this->assertEquals(1, count($params));
+        // 2**31-1
+        $this->assertSame((1 << 30) - 1 + (1 << 30), $params[0]);
+    }
+
+    /**
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
+     */
+    public function testDecode64BitsSignedInteger()
+    {
+        $request    = $this->getRequest('i8');
+        $params     = $request->getParams();
+        $this->assertEquals('i8Param', $request->getProcedure());
+        $this->assertEquals(1, count($params));
+        // 2**63-1
+        $expected = gmp_sub(gmp_pow(2, 63), 1);
+        $this->assertSame(gmp_strval($expected), gmp_strval($params[0]));
+    }
+
+    /**
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
+     */
+    public function testDecode64BitsSignedInteger2()
+    {
+        $request    = $this->getRequest('i82');
+        $params     = $request->getParams();
+        $this->assertEquals('i8Param', $request->getProcedure());
+        $this->assertEquals(1, count($params));
+        // 2**63-1
+        $expected = gmp_sub(gmp_pow(2, 63), 1);
+        $this->assertSame(gmp_strval($expected), gmp_strval($params[0]));
+    }
+
+    /**
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
+     */
+    public function testDecodeBigInteger()
+    {
+        $request    = $this->getRequest('bigint');
+        $params     = $request->getParams();
+        $this->assertEquals('bigintParam', $request->getProcedure());
+        $this->assertEquals(1, count($params));
+        // 2**63
+        $expected = gmp_pow(2, 63);
+        $this->assertSame(gmp_strval($expected), gmp_strval($params[0]));
+    }
+
+    /**
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
+     */
+    public function testDecodeBoolean()
+    {
+        $request    = $this->getRequest('bool');
+        $params     = $request->getParams();
         $this->assertEquals('boolParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
         $this->assertSame(true, $params[0]);
     }
 
     /**
-     * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
-    public function testDecodeRequestWithBooleanParameter2($decoder, $xml)
+    public function testDecodeBoolean2()
     {
-        $request = $decoder->decodeRequest(
-            'data://;base64,' . base64_encode($xml)
-        );
-        $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
-
-        $params = $request->getParams();
+        $request    = $this->getRequest('bool2');
+        $params     = $request->getParams();
         $this->assertEquals('boolParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
         $this->assertSame(false, $params[0]);
     }
 
     /**
-     * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
-    public function testDecodeRequestWithStringParameter($decoder, $xml)
+    public function testDecodeString()
     {
-        $request = $decoder->decodeRequest(
-            'data://;base64,' . base64_encode($xml)
-        );
-        $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
-
-        $params = $request->getParams();
+        $request    = $this->getRequest('string');
+        $params     = $request->getParams();
         $this->assertEquals('stringParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
         $this->assertSame('', $params[0]);
     }
 
     /**
-     * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
-    public function testDecodeRequestWithStringParameter2($decoder, $xml)
+    public function testDecodeString2()
     {
-        $request = $decoder->decodeRequest(
-            'data://;base64,' . base64_encode($xml)
-        );
-        $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
-
-        $params = $request->getParams();
+        $request    = $this->getRequest('string2');
+        $params     = $request->getParams();
         $this->assertEquals('stringParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
         $this->assertSame('test', $params[0]);
     }
 
     /**
-     * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
-    public function testDecodeRequestWithDoubleParameter($decoder, $xml)
+    public function testDecodeString3()
     {
-        $request = $decoder->decodeRequest(
-            'data://;base64,' . base64_encode($xml)
-        );
-        $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
+        $request    = $this->getRequest('string3');
+        $params     = $request->getParams();
+        $this->assertEquals('stringParam', $request->getProcedure());
+        $this->assertEquals(1, count($params));
+        $this->assertSame('', $params[0]);
+    }
 
-        $params = $request->getParams();
+    /**
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
+     */
+    public function testDecodeDouble()
+    {
+        $request    = $this->getRequest('double');
+        $params     = $request->getParams();
         $this->assertEquals('doubleParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
         $this->assertSame(3.14, $params[0]);
     }
 
     /**
-     * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
-    public function testDecodeRequestWithDateTimeParameter($decoder, $xml)
+    public function testDecodeDatetime()
     {
-        $request = $decoder->decodeRequest(
-            'data://;base64,' . base64_encode($xml)
-        );
-        $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
-
-        $params = $request->getParams();
+        $request    = $this->getRequest('datetime');
+        $params     = $request->getParams();
         $this->assertEquals('dateTimeParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
         // Emulate a client located in Metropolitain France.
@@ -290,157 +259,161 @@ class Decoder extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
-    public function testDecodeRequestWithBinaryParameter($decoder, $xml)
+    public function testDecodeDom()
     {
-        $request = $decoder->decodeRequest(
-            'data://;base64,' . base64_encode($xml)
-        );
-        $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
+        $xml = <<<XML
+            <ns:foo xmlns:ns="http://example.com/ns">
+                <bar baz="42" xmlns:ns2="http://example.com/ns2" ns2:qux="blah"/>
+            </ns:foo>
+XML;
+        $dom = new \DomDocument();
+        $dom->loadXML($xml);
 
-        $params = $request->getParams();
+        $request    = $this->getRequest('dom');
+        $params     = $request->getParams();
+        $this->assertEquals('domParam', $request->getProcedure());
+        $this->assertEquals(1, count($params));
+        $this->assertEqualXmlStructure(
+            $dom->firstChild,
+            dom_import_simplexml($params[0])
+        );
+    }
+
+    /**
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
+     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
+     */
+    public function testDecodeBinary()
+    {
+        $request    = $this->getRequest('binary');
+        $params     = $request->getParams();
         $this->assertEquals('binaryParam', $request->getProcedure());
         $this->assertEquals(1, count($params));
         $this->assertSame("\xE8\xE9\xE0", $params[0]);
     }
 
     /**
-     * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
-    public function testDecodeRequestWithNumericArray($decoder, $xml)
+    public function testDecodeNumericArray()
     {
+        $request    = $this->getRequest('num_array');
         $array      = array('test', 42);
-        $request    = $decoder->decodeRequest(
-            'data://;base64,' . base64_encode($xml)
-        );
-        $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
-
-        $params = $request->getParams();
+        $params     = $request->getParams();
         $this->assertEquals('numArray', $request->getProcedure());
         $this->assertEquals(1, count($params));
         $this->assertSame($array, $params[0]);
     }
 
     /**
-     * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
-    public function testDecodeRequestWithNumericArray2($decoder, $xml)
+    public function testDecodeEmptyArray()
     {
+        $request    = $this->getRequest('empty_array');
         $array      = array();
-        $request    = $decoder->decodeRequest(
-            'data://;base64,' . base64_encode($xml)
-        );
-        $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
-
-        $params = $request->getParams();
+        $params     = $request->getParams();
         $this->assertEquals('numArray', $request->getProcedure());
         $this->assertEquals(1, count($params));
         $this->assertSame($array, $params[0]);
     }
 
     /**
-     * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
-    public function testDecodeRequestWithAssociativeArray($decoder, $xml)
+    public function testDecodeAssociativeArray()
     {
+        $request    = $this->getRequest('assoc_array');
         $array      = array('foo' => 'test', 'bar' => 42);
-        $request    = $decoder->decodeRequest(
-            'data://;base64,' . base64_encode($xml)
-        );
-        $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
-
-        $params = $request->getParams();
+        $params     = $request->getParams();
         $this->assertEquals('assocArray', $request->getProcedure());
         $this->assertEquals(1, count($params));
         $this->assertSame($array, $params[0]);
     }
 
     /**
-     * @dataProvider requestProvider
-     * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
-     */
-    public function testDecodeRequestWithAssociativeArray2($decoder, $xml)
-    {
-        $array      = array('foo', 42 => 'bar');
-        $request    = $decoder->decodeRequest(
-            'data://;base64,' . base64_encode($xml)
-        );
-        $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
-
-        $params = $request->getParams();
-        $this->assertEquals('assocArray', $request->getProcedure());
-        $this->assertEquals(1, count($params));
-        $this->assertSame($array, $params[0]);
-    }
-
-    /**
-     * @dataProvider    requestProvider
      * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
-    public function testDecodeRequestWithAssociativeArray3($decoder, $xml)
+    public function testDecodeAssociativeArray2()
     {
-        $array      = array(42 => 'foo', 'bar');
-        $request    = $decoder->decodeRequest(
-            'data://;base64,' . base64_encode($xml)
-        );
-        $this->assertTrue($request instanceof \fpoirotte\XRL\Request);
-
-        $params = $request->getParams();
+        $request    = $this->getRequest('assoc_array2');
+        $array      = array('foo', 42 => 'bar');
+        $params     = $request->getParams();
         $this->assertEquals('assocArray', $request->getProcedure());
         $this->assertEquals(1, count($params));
         $this->assertSame($array, $params[0]);
     }
 
     /**
-     * @dataProvider    responseProvider
-     * @covers          \fpoirotte\XRL\Decoder::decodeResponse
+     * @covers          \fpoirotte\XRL\Decoder::decodeRequest
      * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
-    public function testDecodeFailure($decoder, $xml, $indented)
+    public function testDecodeAssociativeArray3()
     {
-        $response = null;
-        try {
-            $decoder->decodeResponse(
-                'data://;base64,' . base64_encode($xml)
-            );
-        } catch (\Exception $response) {
-            // Nothing to do here.
-        }
-        if (!$response) {
-            $this->fail('An exception was expected');
-        }
-
-        $this->assertTrue($response instanceof \fpoirotte\XRL\Exception);
-        $this->assertEquals(42, $response->getCode());
-        if ($indented) {
-            $expected = 'Exception: Test_failure';
-        } else {
-            $expected = 'Exception:Test_failure';
-        }
-        $this->assertEquals($expected, $response->getMessage());
+        $request    = $this->getRequest('assoc_array3');
+        $array      = array(42 => 'foo', 'bar');
+        $params     = $request->getParams();
+        $this->assertEquals('assocArray', $request->getProcedure());
+        $this->assertEquals(1, count($params));
+        $this->assertSame($array, $params[0]);
     }
 
     /**
-     * @dataProvider    responseProvider
+     * @covers                      \fpoirotte\XRL\Decoder::decodeResponse
+     * @covers                      \fpoirotte\XRL\NativeDecoder::decodeRequest
+     * @expectedException           \fpoirotte\XRL\Exception
+     * @expectedExceptionCode       42
+     * @expectedExceptionMessage    Exception: Test_failure
+     */
+    public function testDecodeFailureResponse()
+    {
+        $content = file_get_contents(
+            __DIR__ .
+            DIRECTORY_SEPARATOR . 'testdata' .
+            DIRECTORY_SEPARATOR . 'responses' .
+            DIRECTORY_SEPARATOR . 'failure.xml'
+        );
+
+        $decoder = new \fpoirotte\XRL\NativeDecoder(
+            new \fpoirotte\XRL\Decoder(
+                new \DateTimeZone("Europe/Dublin"),
+                true
+            )
+        );
+
+        $decoder->decodeResponse('data://;base64,' . base64_encode($content));
+    }
+
+    /**
      * @covers          \fpoirotte\XRL\Decoder::decodeResponse
      * @covers          \fpoirotte\XRL\NativeDecoder::decodeRequest
      */
-    public function testDecodeSuccessfulResponse($decoder, $xml)
+    public function testDecodeSuccessfulResponse()
     {
-        $expected = array(42, 'test');
-        $response = $decoder->decodeResponse(
-            'data://;base64,' . base64_encode($xml)
+        $content = file_get_contents(
+            __DIR__ .
+            DIRECTORY_SEPARATOR . 'testdata' .
+            DIRECTORY_SEPARATOR . 'responses' .
+            DIRECTORY_SEPARATOR . 'success.xml'
         );
-        $this->assertSame($expected, $response);
+
+        $decoder = new \fpoirotte\XRL\NativeDecoder(
+            new \fpoirotte\XRL\Decoder(
+                new \DateTimeZone("Europe/Dublin"),
+                true
+            )
+        );
+
+        $response = $decoder->decodeResponse(
+            'data://;base64,' . base64_encode($content)
+        );
+        $this->assertSame(array(42, 'test'), $response);
     }
 }

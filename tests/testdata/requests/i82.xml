@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<methodCall>
+ <methodName>i8Param</methodName>
+ <params>
+  <param>
+   <value>
+    <ex:i8 xmlns:ex="http://ws.apache.org/xmlrpc/namespaces/extensions">9223372036854775807</ex:i8>
+   </value>
+  </param>
+ </params>
+</methodCall>
