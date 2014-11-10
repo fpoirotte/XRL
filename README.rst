@@ -16,8 +16,8 @@ Features
 
 XRL provides the following features:
 
-*   Simple servers, using the property operator ``->`` to indicate
-    what methods the server provides.
+*   Simple servers, using either the property operator ``->``
+    or array accessors ``[]`` to provide methods.
 
 *   Simple clients, using the regular method call syntax
     ``$client->procedure(42)`` to call a procedure
@@ -25,9 +25,6 @@ XRL provides the following features:
 
 *   Intuitive XML-RPC calls, with automatic type conversion between
     PHP types and their XML-RPC counterparts.
-
-*   Extensibility, using the array operator ``[]`` to manipulate
-    the factories used by either the client or server.
 
 *   Optional validation of XML-RPC messages (both requests and responses).
 
@@ -120,8 +117,8 @@ For other types of files (RelaxNG schemae, reStructuredText pages, etc.),
 adapt the template to fit that file's particular syntax requirements.
 
 Since we want to retain credit for contributors where it's due, feel free
-to add a Doxygen \\authors command with your name and email in every class
-where you made significant changes. Please make sure the email address is valid.
+to add a Doxygen ``\\authors`` command with your name and email in every class
+where you made significant changes.
 
 Example template (taken from XRL's autoloader) for PHP files containing
 both copyright information, licensing information and contributor credits:
