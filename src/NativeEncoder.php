@@ -164,6 +164,18 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
             return $value;
         }
 
+        if ($value instanceof \GMP) {
+            try {
+                return new \fpoirotte\XRL\Types\I4($value);
+            } catch (\InvalidArgumentException $e) {
+            }
+            try {
+                return new \fpoirotte\XRL\Types\I8($value);
+            } catch (\InvalidArgumentException $e) {
+            }
+            return new \fpoirotte\XRL\Types\BigInteger($value);
+        }
+
         if ($value instanceof \DateTime) {
             return new \fpoirotte\XRL\Types\DateTimeIso8601($value);
         }
