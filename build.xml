@@ -6,7 +6,7 @@
     <property name="subfile.phpunit" value="phing/phpunit.xml"/>
 
     <!-- XRL uses a custom stub. -->
-    <property name="phar.stub" value="stub.php"/>
+    <property name="phar.stub" value="bin/xrl"/>
 
     <fileset dir="." id="phar.files">
         <include name="data/**"/>

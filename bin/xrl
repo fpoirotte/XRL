@@ -1,13 +1,37 @@
 #!/usr/bin/env php
 <?php
-/**
- * \copyright
+/*
+ * This file is part of XRL, a simple XML-RPC Library for PHP.
  *
- *      Copyright (c) 2012, XRL Team. All rights reserved.
+ * Copyright (c) 2012, XRL Team. All rights reserved.
+ * XRL is licensed under the 3-clause BSD License.
  *
- *      For the full copyright and license information, please view the LICENSE
- *      file that was distributed with this source code.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
+
+if (version_compare(phpversion(), '5.3.4', '<')) {
+    echo "XRL requires PHP 5.3.4 or newer." . PHP_EOL;
+    exit -1;
+}
+
+$extensions = array(
+    'phar',
+    'spl',
+    'xmlreader',
+    'xmlwriter',
+    'libxml',
+    'simplexml',
+    'gmp',
+    'pcre',
+);
+
+foreach ($extensions as $ext) {
+    if (!extension_loaded($ext)) {
+        echo "Extension $ext is required" . PHP_EOL;
+        exit -1;
+    }
+}
 
 @include_once(
     dirname(__DIR__) .
@@ -15,9 +39,22 @@
     DIRECTORY_SEPARATOR . 'autoload.php'
 );
 
+if (!strncasecmp(substr(__FILE__, -5), '.phar', 5)) {
+    try {
+        Phar::mapPhar();
+    } catch (Exception $e) {
+        echo "Cannot process XRL phar:" . PHP_EOL;
+        echo $e->getMessage() . PHP_EOL;
+        exit -1;
+    }
+    $base = 'phar://' . __FILE__;
+} else {
+    $base = dirname(__DIR__);
+}
+
 if (!class_exists('\\fpoirotte\\XRL\\Autoload')) {
     require_once(
-        dirname(__DIR__) .
+        $base .
         DIRECTORY_SEPARATOR . 'src' .
         DIRECTORY_SEPARATOR . 'Autoload.php'
     );
@@ -26,3 +63,5 @@ if (!class_exists('\\fpoirotte\\XRL\\Autoload')) {
 
 $cli = new \fpoirotte\XRL\CLI();
 die($cli->run($_SERVER['argv']));
+
+__HALT_COMPILER();
