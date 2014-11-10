@@ -61,7 +61,7 @@ abstract class AbstractInteger extends \fpoirotte\XRL\Types\AbstractType
         if (strpos(static::XMLRPC_TYPE, '}') !== false) {
             list($ns, $tagName) = explode('}', static::XMLRPC_TYPE, 2);
             $ns = (string) substr($ns, 1);
-            return $writer->writeElementNS($ns, $tagName, gmp_strval($this->value));
+            return $writer->writeElementNS('ex', $tagName, $ns, gmp_strval($this->value));
         }
         return $writer->writeElement(static::XMLRPC_TYPE, gmp_strval($this->value));
     }

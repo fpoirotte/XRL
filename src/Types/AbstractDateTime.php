@@ -44,7 +44,7 @@ abstract class AbstractDateTime extends \fpoirotte\XRL\Types\AbstractType
         if (strpos(static::XMLRPC_TYPE, '}') !== false) {
             list($ns, $tagName) = explode('}', static::XMLRPC_TYPE, 2);
             $ns = (string) substr($ns, 1);
-            return $writer->writeElementNS($ns, $tagName, $date->format(static::XMLRPC_FORMAT));
+            return $writer->writeElementNS('ex', $tagName, $ns, $date->format(static::XMLRPC_FORMAT));
         }
         return $writer->writeElement(static::XMLRPC_TYPE, $date->format(static::XMLRPC_FORMAT));
     }

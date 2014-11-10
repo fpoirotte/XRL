@@ -31,8 +31,9 @@ class Nil extends \fpoirotte\XRL\Types\AbstractType
     public function write(\XMLWriter $writer, \DateTimeZone $timezone, $stringTag)
     {
         return $writer->writeElementNS(
-            'http://ws.apache.org/xmlrpc/namespaces/extensions',
-            'nil'
+            'ex',
+            'nil',
+            'http://ws.apache.org/xmlrpc/namespaces/extensions'
         );
     }
 

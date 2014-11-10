@@ -8,6 +8,7 @@
  * file that was distributed with this source code.
 -->
 <grammar xmlns="http://relaxng.org/ns/structure/1.0"
+    xmlns:doc="http://www.example.com/annotation"
     datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
 
     <start>
@@ -16,26 +17,40 @@
 
     <define name="types">
         <choice>
+            <ref name="nil"/>
             <ref name="int"/>
             <ref name="boolean"/>
             <ref name="string"/>
             <ref name="double"/>
-            <ref name="dateTime.iso8601"/>
+            <ref name="dateTime"/>
             <ref name="base64"/>
             <ref name="struct"/>
             <ref name="array"/>
+            <ref name="namespaced"/>
             <text/>
+        </choice>
+    </define>
+
+    <define name="nil">
+        <choice>
+            <element name="nil">
+                <empty/>
+            </element>
         </choice>
     </define>
 
     <define name="int">
         <choice>
-            <element name="i4">
-                <data type="integer"/>
+            <element name="int">
+                <data type="int"/>
             </element>
 
-            <element name="int">
-                <data type="integer"/>
+            <element name="i4">
+                <data type="int"/>
+            </element>
+
+            <element name="i8">
+                <data type="long"/>
             </element>
         </choice>
     </define>
@@ -62,7 +77,7 @@
         </element>
     </define>
 
-    <define name="dateTime.iso8601">
+    <define name="dateTime">
         <element name="dateTime.iso8601">
             <data type="dateTime"/>
         </element>
@@ -100,6 +115,52 @@
                 </zeroOrMore>
             </element>
         </element>
+    </define>
+
+    <define name="namespaced">
+        <doc:comment>
+            Any element that is contained inside a namespace.
+            That element may use any namespaced attribute
+            and may contain any element/attribute (including
+            non-namespaced ones) in its subtree.
+        </doc:comment>
+
+        <element>
+            <anyName>
+                <except>
+                    <nsName ns=""/>
+                </except>
+            </anyName>
+
+            <zeroOrMore>
+                <choice>
+                    <attribute>
+                        <anyName>
+                            <except>
+                                <nsName ns=""/>
+                            </except>
+                        </anyName>
+                    </attribute>
+                    <text/>
+                    <ref name="anyElement"/>
+                </choice>
+            </zeroOrMore>
+        </element>
+    </define>
+
+    <define name="anyElement">
+        <element>
+            <anyName/>
+            <zeroOrMore>
+                <choice>
+                    <attribute>
+                        <anyName/>
+                    </attribute>
+                    <text/>
+                    <ref name="anyElement"/>
+                </choice>
+          </zeroOrMore>
+      </element>
     </define>
 </grammar>
 

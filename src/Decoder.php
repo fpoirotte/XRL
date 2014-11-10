@@ -146,7 +146,7 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
             return $this->currentNode;
         }
 
-        $this->currentNode = new \fpoirotte\XRL\Node($reader, $this->validate);
+        $this->currentNode = new \fpoirotte\XRL\Node($reader, $this->validate, true);
         return $this->currentNode;
     }
 
@@ -452,6 +452,24 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
             $this->expectEndTag($reader, 'data');
             $this->expectEndTag($reader, 'array');
             return self::checkType($allowedTypes, 'array', $value);
+        }
+
+        // Handle Apache's <dom> type.
+        $error = null;
+        try {
+            $this->expectStartTag($reader, '{http://ws.apache.org/xmlrpc/namespaces/extensions}dom');
+        } catch (\InvalidArgumentException $error) {
+        }
+
+        if (!$error) {
+            $value = \fpoirotte\XRL\Types\Dom::read($reader->readInnerXML());
+            // Move to next sibling, skipping subtrees, and save the result.
+            $this->currentNode = new \fpoirotte\XRL\Node($reader, $this->validate, false);
+            return self::checkType(
+                $allowedTypes,
+                '{http://ws.apache.org/xmlrpc/namespaces/extensions}dom',
+                $value
+            );
         }
 
         // Default type (string).

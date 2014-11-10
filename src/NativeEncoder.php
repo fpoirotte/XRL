@@ -168,6 +168,12 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
             return new \fpoirotte\XRL\Types\DateTimeIso8601($value);
         }
 
+        if (($value instanceof \DOMNode) ||
+            ($value instanceof \XMLWriter) ||
+            ($value instanceof \SimpleXMLElement)) {
+            return new \fpoirotte\XRL\Types\Dom($value);
+        }
+
         if ($value instanceof \Exception) {
             return new \fpoirotte\XRL\Types\Struct(
                 array(

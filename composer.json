@@ -21,11 +21,14 @@
         "php": ">=5.3.4",
         "ext-XMLReader": "*",
         "ext-XMLWriter": "*",
+        "ext-libxml": "*",
+        "ext-SimpleXML": "*",
         "ext-gmp": "*",
         "ext-pcre": "*",
         "ext-SPL": "*"
     },
     "require-dev": {
+        "ext-dom": "*",
         "erebot/buildenv": "*",
         "erebot/plop": "*",
         "fpoirotte/natives4doxygen": "*",

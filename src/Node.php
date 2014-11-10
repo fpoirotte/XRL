@@ -37,15 +37,18 @@ class Node
      * \param bool $validate
      *      Whether an exception should be raised (\c true)
      *      or not (\c false) if the current node is not valid.
+     *
+     * \param bool $subtrees
+     *      Whether to explore subtrees (\c true) or not (\c false).
      */
-    public function __construct(\XMLReader $reader, $validate)
+    public function __construct(\XMLReader $reader, $validate, $subtrees)
     {
-        $skipNodes = array(\XMLReader::SIGNIFICANT_WHITESPACE);
         do {
-            // We must silence read() as old PHP (5.3.x) emit warnings
+            // We must silence read()/next() as old PHPs (5.3.x) emit warnings
             // which get caught by PHPUnit and other custom error handlers
-            // when the method fails and this causes various issues.
-            if (!@$reader->read()) {
+            // when the methods fail and this is known to cause some issues.
+            if (($subtrees && !@$reader->read()) ||
+                (!$subtrees && !@$reader->next())) {
                 $error = libxml_get_last_error();
                 if (!$error) {
                     // We reached the end of the document.
@@ -79,7 +82,9 @@ class Node
                     \fpoirotte\XRL\Faults::INVALID_XML_RPC
                 );
             }
-        } while (in_array($reader->nodeType, $skipNodes));
+
+            $subtrees = true;
+        } while ($reader->nodeType === \XMLReader::SIGNIFICANT_WHITESPACE);
 
         $fields = array(
             'nodeType',
