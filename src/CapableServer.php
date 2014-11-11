@@ -85,7 +85,30 @@ class CapableServer
 
     protected static function adaptType($type)
     {
-        return $type;
+        switch ($type) {
+            case 'integer':
+                return 'int';
+
+            case 'float':
+                return 'double';
+
+            case 'null':
+                return 'nil';
+
+            case 'DateTime':
+                return 'dateTime.iso8601';
+
+            case 'boolean':
+                return 'bool';
+
+            case 'int':
+            case 'double':
+            case 'string':
+            case 'bool':
+            case 'array':
+                return $type;
+        }
+        return null;
     }
 
     /**
