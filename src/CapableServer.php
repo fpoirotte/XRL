@@ -88,7 +88,7 @@ class CapableServer
         $tag    = null;
         $tags   = array(
             'params'    => array(),
-            'retval'    => null,
+            'retval'    => 'null',
         );
         $buffer = '';
 
