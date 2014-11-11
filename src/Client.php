@@ -168,7 +168,6 @@ class Client
 
         stream_context_set_option($this->context, $options);
         libxml_set_streams_context($this->context);
-        $result = $this->decoder->decodeResponse($this->baseURL);
-        return $result;
+        return $this->decoder->decodeResponse($this->baseURL);
     }
 }

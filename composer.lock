@@ -63,16 +63,16 @@
         },
         {
             "name": "erebot/buildenv",
-            "version": "1.2.3",
+            "version": "1.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Erebot/Erebot_Buildenv.git",
-                "reference": "48bfcd6da386db1693481926996ab234358c891a"
+                "reference": "a137041b3ffc641cc3b8261ce148381f71ac514f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Erebot/Erebot_Buildenv/zipball/48bfcd6da386db1693481926996ab234358c891a",
-                "reference": "48bfcd6da386db1693481926996ab234358c891a",
+                "url": "https://api.github.com/repos/Erebot/Erebot_Buildenv/zipball/a137041b3ffc641cc3b8261ce148381f71ac514f",
+                "reference": "a137041b3ffc641cc3b8261ce148381f71ac514f",
                 "shasum": ""
             },
             "require": {
@@ -108,7 +108,7 @@
             "keywords": [
                 "Erebot"
             ],
-            "time": "2014-11-11 11:21:16"
+            "time": "2014-11-11 19:27:58"
         },
         {
             "name": "erebot/plop",
