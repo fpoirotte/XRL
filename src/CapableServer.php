@@ -11,17 +11,53 @@
 
 namespace fpoirotte\XRL;
 
+/**
+ * \brief
+ *      A class that adds various capabilities
+ *      to an XML-RPC server.
+ */
 class CapableServer
 {
+    /// Original XML-RPC server.
     protected $server;
+
+    /// Whitelist of XML-RPC methods to announce.
     protected $whitelist;
 
+    /**
+     * Wrap an XML-RPC server to add capabilities support.
+     *
+     * \param fpoirotte::XRL::Server $server
+     *      Server to wrap.
+     *
+     * \param array $whitelist
+     *      (optional) Whitelist of methods that can
+     *      be announced by the newly upgraded server.
+     *      Pass an empty array to disable announces.
+     *      By default, all methods are announced.
+     */
     protected function __construct(\fpoirotte\XRL\Server $server, array $whitelist = null)
     {
         $this->server       = $server;
         $this->whitelist    = $whitelist;
     }
 
+    /**
+     * Turn a regular XML-RPC server into one
+     * that supports various XML-RPC capabilities.
+     *
+     * \param fpoirotte::XRL::Server $server
+     *      An XML-RPC to upgrade.
+     *
+     * \param array $whitelist
+     *      (optional) Whitelist of methods that can
+     *      be announced by the newly upgraded server.
+     *      Pass an empty array to disable announces.
+     *      By default, all methods are announced.
+     *
+     * \retval fpoirotte::XRL::Server
+     *      The upgraded server.
+     */
     public static function enable(\fpoirotte\XRL\Server $server, array $whitelist = null)
     {
         $wrapper = new static($server, $whitelist);
@@ -29,6 +65,20 @@ class CapableServer
         return $server;
     }
 
+    /**
+     * Extract parameter and return type information
+     * from a documentation comment.
+     *
+     * \param string $doc
+     *      Documentation comment the types
+     *      will be extracted from.
+     *
+     * \retval array
+     *      Array with type information.
+     *      The "retval" key contains information about the return type,
+     *      while the array in the "params" key contains information
+     *      about each parameter's type (indexed by its name).
+     */
     protected static function extractTypes($doc)
     {
         $doc    = trim(substr($doc, 3, -2), " \t\r\n*");
@@ -83,6 +133,17 @@ class CapableServer
         return $tags;
     }
 
+    /**
+     * Return XML-RPC type that comes the closest
+     * to some type used in documentation comments.
+     *
+     * \param string $type
+     *      A type used in a documentation comment.
+     *
+     * \retval string
+     *      The closest XML-RPC, or \c null if none
+     *      could be derived.
+     */
     protected static function adaptType($type)
     {
         switch ($type) {

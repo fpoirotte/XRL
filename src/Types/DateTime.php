@@ -13,14 +13,24 @@ namespace fpoirotte\XRL\Types;
 
 /**
  * \brief
- *      The XML-RPC "dateTime.iso8601" type.
+ *      The XML-RPC "dateTime" type.
+ *
+ * The "dateTime" type extension, as described in
+ * http://ws.apache.org/xmlrpc/types.html
  *
  * \authors François Poirotte <clicky@erebot.net>
  */
 class DateTime extends \fpoirotte\XRL\Types\AbstractDateTime
 {
-    // We can't just use DateTime::ISO8601 (= "Y-m-d\\TH:i:sO")
-    // because the PHP format omits milliseconds.
+    /**
+     * \brief
+     *      Date/time format.
+     *
+     * We can't just use DateTime::ISO8601 (= "Y-m-d\\TH:i:sO")
+     * because the PHP format omits milliseconds.
+     */
     const XMLRPC_FORMAT = 'Y-m-d\\TH:i:s.uO';
+
+    /// XML-RPC type for this class.
     const XMLRPC_TYPE   = '{http://ws.apache.org/xmlrpc/namespaces/extensions}dateTime';
 }

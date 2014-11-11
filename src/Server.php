@@ -269,6 +269,25 @@ class Server implements \Countable, \IteratorAggregate, \ArrayAccess
      * Expose the public methods of a class or object,
      * with an optional prefix.
      *
+     * \param mixed $other
+     *      Class or object to expose.
+     *      For classes, only public static methods are exposed.
+     *      For objects, public non-static methods are exposed,
+     *      except for the constructor.
+     *
+     * \param string $prefix
+     *      Prefix under which the class/object's methods
+     *      will be exposed. Defaults to the empty string
+     *      (ie. the methods are exposed without any prefix).
+     *
+     * \return
+     *      This method does not return any value.
+     *
+     * \note
+     *      To expose all public methods of an object (both
+     *      static and non-static), call this method twice:
+     *      - once with the actual object
+     *      - and a second time with <code>get_class($object)</code>
      */
     public function expose($other, $prefix = '')
     {

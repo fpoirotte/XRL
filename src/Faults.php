@@ -11,8 +11,16 @@
 
 namespace fpoirotte\XRL;
 
-class Faults implements \Serializable
+/**
+ * \brief
+ *      Definitions of interoperability faults.
+ *
+ * \see
+ *      http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php
+ */
+class Faults
 {
+    /// Parameters for interoperability faults.
     protected static $faults = array(
         'NOT_WELL_FORMED' => array(
             'code'  => -32700,
@@ -56,31 +64,65 @@ class Faults implements \Serializable
         ),
     );
 
+    /// Alias for the corresponding interoperability fault.
     const NOT_WELL_FORMED       = 'NOT_WELL_FORMED';
+
+    /// Alias for the corresponding interoperability fault.
     const UNSUPPORTED_ENCODING  = 'UNSUPPORTED_ENCODING';
+
+    /// Alias for the corresponding interoperability fault.
     const INVALID_CHARACTER     = 'INVALID_CHARACTER';
+
+    /// Alias for the corresponding interoperability fault.
     const INVALID_XML_RPC       = 'INVALID_XML_RPC';
+
+    /// Alias for the corresponding interoperability fault.
     const METHOD_NOT_FOUND      = 'METHOD_NOT_FOUND';
+
+    /// Alias for the corresponding interoperability fault.
     const INVALID_PARAMETERS    = 'INVALID_PARAMETERS';
+
+    /// Alias for the corresponding interoperability fault.
     const INTERNAL_ERROR        = 'INTERNAL_ERROR';
+
+    /// Alias for the corresponding interoperability fault.
     const APPLICATION_ERROR     = 'APPLICATION_ERROR';
+
+    /// Alias for the corresponding interoperability fault.
     const SYSTEM_ERROR          = 'SYSTEM_ERROR';
+
+    /// Alias for the corresponding interoperability fault.
     const TRANSPORT_ERROR       = 'TRANSPORT_ERROR';
 
+
+    /**
+     * Dummy constructor that prevents
+     * creation of instances.
+     */
     final private function __construct()
     {
     }
 
-    final public function serialize()
-    {
-        return null;
-    }
-
-    final public function unserialize($serialized)
-    {
-    }
-
-    public static function get($fault, $exc = null)
+    /**
+     * Retrieve interoperability fault.
+     *
+     * \param string $fault
+     *      Fault identifier.
+     *      Use the constants defined in this class
+     *      to refer to faults.
+     *
+     * \param Exception $exc
+     *      Original exception.
+     *
+     * \retval Exception
+     *      New exception representing
+     *      the interoperability fault.
+     *
+     * \throw InvalidArgumentException
+     *      The given interoperability fault
+     *      could not be found.
+     */
+    public static function get($fault, \Exception $exc = null)
     {
         if (!isset(self::$faults[$fault])) {
             throw new \InvalidArgumentException('Unknown interoperability fault');

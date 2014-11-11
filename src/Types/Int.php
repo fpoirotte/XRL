@@ -19,6 +19,9 @@ namespace fpoirotte\XRL\Types;
  */
 class Int extends \fpoirotte\XRL\Types\AbstractInteger
 {
+    /// XML-RPC type for this class.
     const XMLRPC_TYPE   = 'int';
+
+    /// Integer size in bits.
     const INTEGER_BITS  = 32;
 }

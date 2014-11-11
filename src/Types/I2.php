@@ -22,6 +22,9 @@ namespace fpoirotte\XRL\Types;
  */
 class I2 extends \fpoirotte\XRL\Types\AbstractInteger
 {
+    /// XML-RPC type for this class.
     const XMLRPC_TYPE   = '{http://ws.apache.org/xmlrpc/namespaces/extensions}i2';
+
+    /// Integer size in bits.
     const INTEGER_BITS  = 16;
 }

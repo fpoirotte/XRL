@@ -13,12 +13,16 @@ namespace fpoirotte\XRL\Types;
 
 /**
  * \brief
- *      The XML-RPC "base64" type.
+ *      The XML-RPC "dom" type.
+ *
+ * The "dom" type extension, as described in
+ * http://ws.apache.org/xmlrpc/types.html
  *
  * \authors François Poirotte <clicky@erebot.net>
  */
 class Dom extends \fpoirotte\XRL\Types\AbstractType
 {
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::__toString()
     public function __toString()
     {
         return $this->value->asXML();
