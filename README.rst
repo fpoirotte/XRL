@@ -9,7 +9,7 @@
 A simple XML-RPC client and server written in PHP
 =================================================
 
-|travis-ci| |coveralls| |versioneye-updates| |versioneye-refs|
+|travis-ci| |coveralls| |versioneye-updates| |versioneye-refs| |hhvm|
 
 Features
 --------
@@ -117,7 +117,7 @@ For other types of files (RelaxNG schemae, reStructuredText pages, etc.),
 adapt the template to fit that file's particular syntax requirements.
 
 Since we want to retain credit for contributors where it's due, feel free
-to add a Doxygen ``\\authors`` command with your name and email in every class
+to add a Doxygen ``\authors`` command with your name and email in every class
 where you made significant changes.
 
 Example template (taken from XRL's autoloader) for PHP files containing
@@ -173,13 +173,17 @@ resources useful:
     :alt: unknown
     :target: https://coveralls.io/r/fpoirotte/XRL?branch=master
 
-..  |versioneye-updates| image:: https://www.versioneye.com/php/fpoirotte:xrl/dev-master/badge.svg
+..  |versioneye-updates| image:: https://www.versioneye.com/php/fpoirotte:xrl/dev-master/badge.png
     :alt: unknown
     :target: https://www.versioneye.com/php/fpoirotte:xrl/dev-master
 
 ..  |versioneye-refs| image:: https://www.versioneye.com/php/fpoirotte:xrl/reference_badge.svg?style=flat
     :alt: unknown
     :target: https://www.versioneye.com/php/fpoirotte:xrl/references
+
+..  |hhvm| image:: http://hhvm.h4cc.de/badge/fpoirotte/xrl.png
+    :alt: unknown
+    :target: http://hhvm.h4cc.de/package/fpoirotte/xrl
 
 ..  |---| unicode:: U+02014 .. em dash
     :trim:

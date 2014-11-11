@@ -1,15 +1,11 @@
-# Build
+# Build artifacts.
 /build
+/*.tagfile.xml
 
 # Documentation
 /docs/api
 /docs/enduser
 /docs/coverage
-
-# Release artifacts
-/*.phar
-/*.pubkey
-/*.tagfile.xml
 
 # Dependencies
 /vendor
