@@ -19,6 +19,9 @@ class Faults extends \PHPUnit_Framework_TestCase
         $this->server->foo  = function ($s) { return $s; };
     }
 
+    /**
+     * @covers      \fpoirotte\XRL\Faults
+     */
     public function testIllFormed()
     {
         $res = $this->server->handle('data://,%2F');
@@ -34,6 +37,9 @@ EXPECTED;
         );
     }
 
+    /**
+     * @covers      \fpoirotte\XRL\Faults
+     */
     public function testUnsupportedEncoding()
     {
         $res = $this->server->handle(
@@ -54,6 +60,9 @@ EXPECTED;
         );
     }
 
+    /**
+     * @covers      \fpoirotte\XRL\Faults
+     */
     public function testInvalidCharacter()
     {
         $res = $this->server->handle(
@@ -75,6 +84,9 @@ EXPECTED;
         );
     }
 
+    /**
+     * @covers      \fpoirotte\XRL\Faults
+     */
     public function testInvalidXmlRpc()
     {
         $res = $this->server->handle(
@@ -95,6 +107,9 @@ EXPECTED;
         );
     }
 
+    /**
+     * @covers      \fpoirotte\XRL\Faults
+     */
     public function testMethodNotFound()
     {
         $res = $this->server->handle(

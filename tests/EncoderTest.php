@@ -13,22 +13,14 @@ namespace fpoirotte\XRL\tests;
 
 class Encoder extends \PHPUnit_Framework_TestCase
 {
-    const TEST_DOM = <<<XML
-            <ns:foo xmlns:ns="http://example.com/ns">
-                <bar baz="42" xmlns:ns2="http://example.com/ns2" ns2:qux="blah"/>
-            </ns:foo>
-XML;
-
     public function setUp()
     {
         // Emulate a server located in Ireland that uses
         // indentation and the <string> tag.
-        $this->encoder = new \fpoirotte\XRL\NativeEncoder(
-            new \fpoirotte\XRL\Encoder(
-                new \DateTimeZone("Europe/Dublin"),
-                true,
-                true
-            )
+        $this->encoder = new \fpoirotte\XRL\Encoder(
+            new \DateTimeZone("Europe/Dublin"),
+            true,
+            true
         );
     }
 
@@ -45,243 +37,262 @@ XML;
     }
 
     /**
-     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::convert
+     * @covers          \fpoirotte\XRL\Encoder
      */
     public function testEncodeEmptyParameters()
     {
-        $request    = new \fpoirotte\XRL\Request('emptyParams', array());
+        $request    = new \fpoirotte\XRL\Request(
+            'emptyParams',
+            array()
+        );
         $this->assertEqualsRequest('empty', $this->encoder->encodeRequest($request));
     }
 
     /**
-     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::convert
+     * @covers          \fpoirotte\XRL\Encoder
      */
     public function testEncodeMultipleParameters()
     {
-        $request    = new \fpoirotte\XRL\Request('multiParams', array(42, 'test'));
+        $request    = new \fpoirotte\XRL\Request(
+            'multiParams',
+            array(
+                new \fpoirotte\XRL\Types\I4(42),
+                new \fpoirotte\XRL\Types\String('test'),
+            )
+        );
         $this->assertEqualsRequest('multi', $this->encoder->encodeRequest($request));
     }
 
     /**
-     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::convert
+     * @covers          \fpoirotte\XRL\Encoder
      */
     public function testEncode32BitsSignedInteger()
     {
-        $request    = new \fpoirotte\XRL\Request('i4Param', array(2147483647));
+        $request    = new \fpoirotte\XRL\Request(
+            'i4Param',
+            array(new \fpoirotte\XRL\Types\I4(2147483647))
+        );
         $this->assertEqualsRequest('i4', $this->encoder->encodeRequest($request));
     }
 
     /**
-     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::convert
+     * @covers          \fpoirotte\XRL\Encoder
+     */
+    public function testEncode32BitsSignedInteger2()
+    {
+        $request    = new \fpoirotte\XRL\Request(
+            'intParam',
+            array(new \fpoirotte\XRL\Types\Int(2147483647))
+        );
+        $this->assertEqualsRequest('int', $this->encoder->encodeRequest($request));
+    }
+
+    /**
+     * @covers          \fpoirotte\XRL\Encoder
      */
     public function testEncode64BitsSignedInteger()
     {
-        $request    = new \fpoirotte\XRL\Request('i8Param', array(gmp_init('9223372036854775807')));
+        $request    = new \fpoirotte\XRL\Request(
+            'i8Param',
+            array(
+                new \fpoirotte\XRL\Types\I8(gmp_init('9223372036854775807'))
+            )
+        );
         $this->assertEqualsRequest('i82', $this->encoder->encodeRequest($request));
     }
 
     /**
-     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::convert
+     * @covers          \fpoirotte\XRL\Encoder
      */
     public function testEncodeBigInteger()
     {
-        $request    = new \fpoirotte\XRL\Request('bigintParam', array(gmp_init('9223372036854775808')));
+        $request    = new \fpoirotte\XRL\Request(
+            'bigintParam',
+            array(
+                new \fpoirotte\XRL\Types\BigInteger(gmp_init('9223372036854775808'))
+            )
+        );
         $this->assertEqualsRequest('bigint', $this->encoder->encodeRequest($request));
     }
 
     /**
-     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::convert
+     * @covers          \fpoirotte\XRL\Encoder
      */
     public function testEncodeBoolean()
     {
-        $request    = new \fpoirotte\XRL\Request('boolParam', array(true));
+        $request    = new \fpoirotte\XRL\Request(
+            'boolParam',
+            array(new \fpoirotte\XRL\Types\Boolean(true))
+        );
         $this->assertEqualsRequest('bool', $this->encoder->encodeRequest($request));
     }
 
     /**
-     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::convert
+     * @covers          \fpoirotte\XRL\Encoder
      */
     public function testEncodeBoolean2()
     {
-        $request    = new \fpoirotte\XRL\Request('boolParam', array(false));
+        $request    = new \fpoirotte\XRL\Request(
+            'boolParam',
+            array(new \fpoirotte\XRL\Types\Boolean(false))
+        );
         $this->assertEqualsRequest('bool2', $this->encoder->encodeRequest($request));
     }
 
     /**
-     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::convert
+     * @covers          \fpoirotte\XRL\Encoder
      */
     public function testEncodeString()
     {
-        $request    = new \fpoirotte\XRL\Request('stringParam', array(''));
+        $request    = new \fpoirotte\XRL\Request(
+            'stringParam',
+            array(new \fpoirotte\XRL\Types\String(''))
+        );
         $this->assertEqualsRequest('string', $this->encoder->encodeRequest($request));
     }
 
     /**
-     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::convert
+     * @covers          \fpoirotte\XRL\Encoder
      */
     public function testEncodeString2()
     {
-        $request    = new \fpoirotte\XRL\Request('stringParam', array('test'));
+        $request    = new \fpoirotte\XRL\Request(
+            'stringParam',
+            array(new \fpoirotte\XRL\Types\String('test'))
+        );
         $this->assertEqualsRequest('string2', $this->encoder->encodeRequest($request));
     }
 
     /**
-     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::convert
+     * @covers          \fpoirotte\XRL\Encoder
      */
     public function testEncodeDouble()
     {
-        $request    = new \fpoirotte\XRL\Request('doubleParam', array(3.14));
+        $request    = new \fpoirotte\XRL\Request(
+            'doubleParam',
+            array(new \fpoirotte\XRL\Types\Double(3.14))
+        );
         $this->assertEqualsRequest('double', $this->encoder->encodeRequest($request));
     }
 
     /**
-     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::convert
+     * @covers          \fpoirotte\XRL\Encoder
      */
     public function testEncodeDatetime()
     {
         // Emulate a client located in Metropolitain France.
         $tz         = new \DateTimeZone('Europe/Paris');
         $date       = new \DateTime('1985-11-28T14:00:00', $tz);
-        $request    = new \fpoirotte\XRL\Request('dateTimeParam', array($date));
+        $request    = new \fpoirotte\XRL\Request(
+            'dateTimeParam',
+            array(new \fpoirotte\XRL\Types\DateTimeIso8601($date))
+        );
         $this->assertEqualsRequest('datetime', $this->encoder->encodeRequest($request));
     }
 
     /**
-     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::convert
+     * @covers          \fpoirotte\XRL\Encoder
      */
     public function testEncodeBinary()
     {
         // An invalid UTF-8 sequence.
-        $request    = new \fpoirotte\XRL\Request('binaryParam', array("\xE8\xE9\xE0"));
+        $request    = new \fpoirotte\XRL\Request(
+            'binaryParam',
+            array(new \fpoirotte\XRL\Types\Base64("\xE8\xE9\xE0"))
+        );
         $this->assertEqualsRequest('binary', $this->encoder->encodeRequest($request));
     }
 
     /**
-     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::convert
+     * @covers          \fpoirotte\XRL\Encoder
      */
     public function testEncodeNumericArray()
     {
-        $array      = array('test', 42);
+        $array      = new \fpoirotte\XRL\Types\ArrayType(
+            array(
+                new \fpoirotte\XRL\Types\String('test'),
+                new \fpoirotte\XRL\Types\I4(42),
+            )
+        );
         $request    = new \fpoirotte\XRL\Request('numArray', array($array));
         $this->assertEqualsRequest('num_array', $this->encoder->encodeRequest($request));
     }
 
     /**
-     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::convert
+     * @covers          \fpoirotte\XRL\Encoder
      */
     public function testEncodeEmptyArray()
     {
-        $array      = array();
+        $array      = new \fpoirotte\XRL\Types\ArrayType(array());
         $request    = new \fpoirotte\XRL\Request('numArray', array($array));
         $this->assertEqualsRequest('empty_array', $this->encoder->encodeRequest($request));
     }
 
     /**
-     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::convert
+     * @covers          \fpoirotte\XRL\Encoder
      */
     public function testEncodeAssociativeArray()
     {
-        $array      = array('foo' => 'test', 'bar' => 42);
+        $array      = new \fpoirotte\XRL\Types\Struct(
+            array(
+                'foo' => new \fpoirotte\XRL\Types\String('test'),
+                'bar' => new \fpoirotte\XRL\Types\I4(42),
+            )
+        );
         $request    = new \fpoirotte\XRL\Request('assocArray', array($array));
         $this->assertEqualsRequest('assoc_array', $this->encoder->encodeRequest($request));
     }
 
     /**
-     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::convert
+     * @covers          \fpoirotte\XRL\Encoder
      */
     public function testEncodeAssociativeArray2()
     {
-        $array      = array('foo', 42 => 'bar');
+        $array      = new \fpoirotte\XRL\Types\Struct(
+            array(
+                new \fpoirotte\XRL\Types\String('foo'),
+                42 => new \fpoirotte\XRL\Types\String('bar'),
+            )
+        );
         $request    = new \fpoirotte\XRL\Request('assocArray', array($array));
         $this->assertEqualsRequest('assoc_array2', $this->encoder->encodeRequest($request));
     }
 
     /**
-     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::convert
+     * @covers          \fpoirotte\XRL\Encoder
      */
     public function testEncodeAssociativeArray3()
     {
-        $array      = array(42 => 'foo', 'bar');
+        $array      = new \fpoirotte\XRL\Types\Struct(
+            array(
+                42 => new \fpoirotte\XRL\Types\String('foo'),
+                new \fpoirotte\XRL\Types\String('bar'),
+            )
+        );
         $request    = new \fpoirotte\XRL\Request('assocArray', array($array));
         $this->assertEqualsRequest('assoc_array3', $this->encoder->encodeRequest($request));
     }
 
     /**
-     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::convert
+     * @covers          \fpoirotte\XRL\Encoder
      */
     public function testEncodeSimpleXmlElement()
     {
-        $sxml = simplexml_load_string(self::TEST_DOM);
-        $request    = new \fpoirotte\XRL\Request('domParam', array($sxml));
-        $this->assertEqualsRequest('dom', $this->encoder->encodeRequest($request));
-    }
-
-    /**
-     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::convert
-     */
-    public function testEncodeDomnode()
-    {
-        $dom = new \DomDocument();
-        $dom->loadXML(self::TEST_DOM);
-        $request    = new \fpoirotte\XRL\Request('domParam', array($dom));
-        $this->assertEqualsRequest('dom', $this->encoder->encodeRequest($request));
-    }
-
-    /**
-     * @covers          \fpoirotte\XRL\Encoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeRequest
-     * @covers          \fpoirotte\XRL\NativeEncoder::convert
-     */
-    public function testEncodeXmlWriter()
-    {
-        $writer = new \XMLWriter();
-        $writer->openMemory();
-        $writer->writeRaw(self::TEST_DOM);
-        $request    = new \fpoirotte\XRL\Request('domParam', array($writer));
+        $sxml = simplexml_load_string(<<<XML
+            <ns:foo xmlns:ns="http://example.com/ns">
+                <bar baz="42" xmlns:ns2="http://example.com/ns2" ns2:qux="blah"/>
+            </ns:foo>
+XML
+        );
+        $request    = new \fpoirotte\XRL\Request(
+            'domParam',
+            array(new \fpoirotte\XRL\Types\Dom($sxml))
+        );
         $this->assertEqualsRequest('dom', $this->encoder->encodeRequest($request));
     }
 
     /**
      * @covers          \fpoirotte\XRL\Encoder::encodeError
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeError
      */
     public function testEncodeFailureResponse()
     {
@@ -299,7 +310,6 @@ XML;
 
     /**
      * @covers          \fpoirotte\XRL\Encoder::encodeResponse
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeResponse
      */
     public function testEncodeSuccessfulResponse()
     {
@@ -310,7 +320,12 @@ XML;
             DIRECTORY_SEPARATOR . 'success.xml'
         );
 
-        $response   = array(42, 'test');
+        $response   = new \fpoirotte\XRL\Types\ArrayType(
+            array(
+                new \fpoirotte\XRL\Types\I4(42),
+                new \fpoirotte\XRL\Types\String('test'),
+            )
+        );
         $received   = $this->encoder->encodeResponse($response);
         $this->assertSame($content, $received);
     }
