@@ -18,29 +18,14 @@ class NativeEncoder extends \PHPUnit_Framework_TestCase
         $this->encoder = $this->getMockBuilder('\\fpoirotte\\XRL\\EncoderInterface')->getMock();
     }
 
-    /**
-     * @covers          \fpoirotte\XRL\NativeEncoder::__construct
-     * @covers          \fpoirotte\XRL\NativeEncoder::encodeError
-     */
-    public function testEncodeError()
-    {
-        $encoder    = new \fpoirotte\XRL\NativeEncoder($this->encoder);
-        $exc        = new \Exception();
-
-        $this->encoder
-            ->expects($this->once())
-            ->method('encodeError')
-            ->with($this->equalTo($exc))
-            ->will($this->returnValue($exc));
-
-        $this->assertSame($exc, $encoder->encodeError($exc));
-    }
-
     public function nativeTypes()
     {
         $xml = new \XMLWriter();
         $xml->openMemory();
         $xml->writeElement('foo', 'bar');
+
+        $dom = new \DOMDocument();
+        $dom->loadXML('<foo>bar</foo>');
 
         return array(
             array(null, '\\fpoirotte\\XRL\\Types\\Nil'),
@@ -68,16 +53,31 @@ class NativeEncoder extends \PHPUnit_Framework_TestCase
                 '\\fpoirotte\\XRL\\Types\\Nil'
             ),
             array(new \DateTime(), '\\fpoirotte\\XRL\\Types\\DateTimeIso8601'),
-            array(
-                @\DOMDocument::loadXML('<foo>bar</foo>'),
-                '\\fpoirotte\\XRL\\Types\\Dom'
-            ),
+            array($dom, '\\fpoirotte\\XRL\\Types\\Dom'),
             array($xml, '\\fpoirotte\\XRL\\Types\\Dom'),
             array(
                 simplexml_load_string('<foo>bar</foo>'),
                 '\\fpoirotte\\XRL\\Types\\Dom'
             ),
         );
+    }
+
+    /**
+     * @covers          \fpoirotte\XRL\NativeEncoder::__construct
+     * @covers          \fpoirotte\XRL\NativeEncoder::encodeError
+     */
+    public function testEncodeError()
+    {
+        $encoder    = new \fpoirotte\XRL\NativeEncoder($this->encoder);
+        $exc        = new \Exception();
+
+        $this->encoder
+            ->expects($this->once())
+            ->method('encodeError')
+            ->with($this->equalTo($exc))
+            ->will($this->returnValue($exc));
+
+        $this->assertSame($exc, $encoder->encodeError($exc));
     }
 
     /**
