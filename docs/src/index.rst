@@ -8,12 +8,9 @@ need to customize parts of the code.
 
 You can find more information about this project on the following websites:
 
-*   https://github.com/fpoirotte/XRL/ |---| Project page on GitHub.
-*   https://packagist.org/packages/fpoirotte/XRL |---| Package page on Packagist.
-*   http://travis-ci.org/fpoirotte/XRL |---| Travis Continuous Integration.
-
-
-..  |---| unicode:: U+02014 .. em dash
-    :trim:
+*   `XRL on GitHub (code and issue tracker) <https://github.com/fpoirotte/XRL/>`_
+*   `XRL on Packagist (composer repository) <https://packagist.org/packages/fpoirotte/XRL>`_
+*   `XRL on Travis-CI (continuous integration) <http://travis-ci.org/fpoirotte/XRL>`_
+*   `API documentation for XRL <./api/>`_
 
 .. vim: ts=4 et

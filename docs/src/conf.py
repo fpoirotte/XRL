@@ -63,10 +63,13 @@ def prepare(globs, locs):
     })
 
     # Copy doxygen output to Sphinx's output folder
-    shutil.copytree(
-        os.path.join(root, 'docs', 'api', 'html'),
-        os.path.join(root, 'docs', 'enduser', 'html', 'api'),
-    )
+    try:
+        shutil.copytree(
+            os.path.join(root, 'docs', 'api', 'html'),
+            os.path.join(root, 'docs', 'enduser', 'html', 'api'),
+        )
+    except OSError:
+        pass
 
     real_conf = os.path.join(buildenv, 'sphinx', 'conf.py')
     print "Including real configuration file (%s)..." % (real_conf, )
