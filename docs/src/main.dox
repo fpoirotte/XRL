@@ -1,0 +1,41 @@
+/**
+ * \mainpage
+ *
+ *  XRL is a simple XML-RPC Library for PHP.
+ *  It includes both a client and server implementation.
+ *
+ *  Main features:
+ *  *   Very intuitive syntax for RPC using the method call operator
+ *      on client objects:
+ *      \code
+ *          $result = $client->remoteMethod('first parameter', 'second parameter');
+ *      \endcode
+ *
+ *  *   Very intuitive syntax for methods definition on the server side,
+ *      using either array accessors:
+ *      \code
+ *          $server['myMethod'] = function ($s) { return 'Hello ' . $s; }
+ *      \endcode
+ *      or attribute accessors:
+ *      \code
+ *          $server->myMethod = function ($s) { return 'Hello ' . $s; }
+ *      \endcode
+ *
+ *  *   Automatic type juggling back and forth between native PHP types
+ *      and XML-RPC types
+ *
+ *  *   Support for many XML-RPC extensions:
+ *      *   <a href="http://tech.groups.yahoo.com/group/xml-rpc/message/2897">getCapabilities</a>
+ *      *   <a href="http://xmlrpc-c.sourceforge.net/introspection.html">introspection</a>
+ *      *   <a href="http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php">faults_interop</a>
+ *      *   <a href="http://mirrors.talideon.com/articles/multicall.html">multicall</a>
+ *      *   <a href="http://ws.apache.org/xmlrpc/types.html">Apache's types</a>
+ *
+ *  *   Easy to install, easy to use:
+ *      *   Sources only depend on PHP 5.3.4+ and a few PHP extensions
+ *          (PCRE, SPL, GMP & XML-related extensions)
+ *      *   Can be installed from sources or from a PHAR archive
+ *
+ *  *   Bundled command-line XML-RPC client (bin/xrl when installed
+ *      from sources, the PHAR archive itself otherwise)
+ */

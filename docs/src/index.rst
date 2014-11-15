@@ -9,17 +9,9 @@ need to customize parts of the code.
 You can find more information about this project on the following websites:
 
 *   https://github.com/fpoirotte/XRL/ |---| Project page on GitHub.
-*   https://packages.erebot.net/ |---| Repository for the project.
-*   https://ci.erebot.net/doc/api/XRL/html/ |---| API documentation
-*   https://ci.erebot.net/ |---| Our Continuous Integration server.
+*   https://packagist.org/packages/fpoirotte/XRL |---| Package page on Packagist.
 *   http://travis-ci.org/fpoirotte/XRL |---| Travis Continuous Integration.
 
-
-Current status on http://travis-ci.org/: |travis|
-
-..  |travis| image:: https://secure.travis-ci.org/fpoirotte/XRL.png
-    :alt: unknown
-    :target: http://travis-ci.org/fpoirotte/XRL
 
 ..  |---| unicode:: U+02014 .. em dash
     :trim:

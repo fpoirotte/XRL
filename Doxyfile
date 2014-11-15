@@ -1,4 +1,6 @@
 @INCLUDE        = vendor/erebot/buildenv/Doxyfile
 INPUT          += vendor/fpoirotte/natives4doxygen/docs/
+INPUT          += docs/src/
+FILE_PATTERNS  += *.dox
 EXAMPLE_PATH    = docs/example/
 
