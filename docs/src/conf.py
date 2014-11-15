@@ -84,6 +84,7 @@ def prepare(globs, locs):
     if 'html_extra_path' not in locs:
         locs['html_extra_path'] = []
     locs['html_extra_path'].append(os.path.join(root, 'build'))
+    locs['html_theme'] = 'haiku'
 
 
 prepare(globals(), locals())

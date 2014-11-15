@@ -1,28 +1,83 @@
-Welcome to XRL's documentation!
-===============================
+XRL's documentation
+===================
 
 XRL (short for XML-RPC Library) is a collection of PHP classes that ease
 the creation of XML-RPC clients or servers.
-The API is meant to be very intuitive and yet very extensible in case you ever
-need to customize parts of the code.
 
 ..  ifconfig:: version == 'latest'
 
     ..  warning::
 
-        This documentation was built automatically from the latest change
-        in `XRL's code <https://github.com/fpoirotte/XRL/>`_. It does not
-        necessarily reflect features from any current or upcoming release.
-        Check out https://readthedocs.org/projects/xrl/ for documentation
-        on released versions of XRL.
+        This documentation was built automatically from the latest changes
+        in `XRL's code <https://github.com/fpoirotte/XRL/>`_.
+        It does not necessarily reflect features from any current or
+        upcoming release. Check out https://readthedocs.org/projects/xrl/
+        for documentation on released versions.
+
+Overview
+--------
+
+*   **Simple setup** |---| grab the PHAR archive or add ``fpoirotte/xrl``
+    as a dependency in your :file:`composer.json` and you're good to go.
+*   **Very intuitive syntax** |---| write RPC clients & servers like you
+    would any other piece of code.
+*   **Automatic type conversions** |---| use native PHP types without worrying
+    about XML-RPC quirks.
+*   **Support for many extensions** |---| want capabilities? introspection?
+    multicalls?... yep, `we support them <extensions>`_!
 
 
-To get more information about this project, browse to the following websites:
+Setup & Usage
+-------------
 
-*   `XRL on GitHub (code and issue tracker) <https://github.com/fpoirotte/XRL/>`_
-*   `XRL on Packagist (composer repository) <https://packagist.org/packages/fpoirotte/XRL>`_
-*   `XRL on Travis-CI (continuous integration) <https://travis-ci.org/fpoirotte/XRL>`_
-*   `XRL on Readthedocs.org (documentation) <https://readthedocs.org/projects/xrl/>`_
+..  toctree::
+    :maxdepth: 1
+
+    setup
+    quickstart
+    hhvm
+
+
+Features
+--------
+
+..  toctree::
+    :maxdepth: 1
+
+    types
+    extensions
+    cli
+
+
+Contributing
+------------
+
+..  toctree::
+    :maxdepth: 1
+
+    contributing
+    style
+    credits
+
+
+Licence
+-------
+
+XRL is released under the `3-clause BSD licence
+<https://github.com/fpoirotte/XRL/blob/master/LICENSE>`_.
+
+
+Other resources
+---------------
+
 *   `Full API documentation <./apidoc/>`_
+*   `XRL on GitHub <https://github.com/fpoirotte/XRL/>`_ (source code and issue tracker)
+*   `XRL on Packagist <https://packagist.org/packages/fpoirotte/XRL>`_ (composer repository)
+*   `XRL on Travis-CI <https://travis-ci.org/fpoirotte/XRL>`_ (continuous integration)
+*   `XRL on Read The Docs <https://readthedocs.org/projects/xrl/>`_ (documentation)
 
-.. vim: ts=4 et
+
+..  : End of document.
+..  |---| unicode:: U+02014 .. em dash
+    :trim:
+..  : vim: ts=4 et

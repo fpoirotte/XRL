@@ -150,16 +150,6 @@ both copyright information, licensing information and contributor credits:
         // Some code here...
     }
 
-Other resources
----------------
-
-In addition to the information above, you may find the following
-resources useful:
-
-*   http://fpoirotte.github.io/XRL/ |---| Complete documentation for XRL.
-
-*   https://ci.erebot.net/ |---| Our Continuous Integration server.
-
 
 
 ..  : End of page.
