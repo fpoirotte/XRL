@@ -61,6 +61,6 @@ class Output
             $args[] = $format;
             $format = "%s";
         }
-        vfprintf($this->stream, $format.PHP_EOL, $args);
+        vfprintf($this->stream, $format . PHP_EOL, $args);
     }
 }

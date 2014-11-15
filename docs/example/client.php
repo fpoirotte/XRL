@@ -10,10 +10,22 @@
  */
 
 /*
- * This example expects an XML-RPC server providing a "qux"
- * procedure (such as the one in "server.php"). The server
+ * This example expects an XML-RPC server providing a "hello"
+ * procedure and supporting XML-RPC introspection. The server
  * should be served from a file called "server.php" in the
- * same folder as this script on this machine's webserver.
+ * same folder as this script.
+ *
+ * WARNING!
+ *  This script will not run properly when served from PHP's
+ *  built-in web server since the built-in web server
+ *  does not support concurrent requests.
+ *
+ *  When run under the built-in web server, it will just appear
+ *  to hang until it dies with the following warning in the console:
+ *
+ *    PHP Warning:  XMLReader::open(http://xxx/server.php):
+ *    failed to open stream: HTTP request failed!
+ *
  *
  * This script will automatically generate the URL required
  * to query the XML-RPC server by substituting this script's
@@ -26,7 +38,11 @@
  * Server: https://foobar.example.com:4443/tests/xrl/server.php
  */
 
-require_once("src/Autoload.php");
+require_once(
+    dirname(dirname(__DIR__)) .
+    DIRECTORY_SEPARATOR . 'src' .
+    DIRECTORY_SEPARATOR . 'Autoload.php'
+);
 \fpoirotte\XRL\Autoload::register();
 
 // Create the URL that will be used to contact the XML-RPC server.

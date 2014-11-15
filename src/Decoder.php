@@ -113,6 +113,10 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
      */
     protected function getReader($URI, $request)
     {
+        if (!is_string($URI)) {
+            throw new \InvalidArgumentException('Not a string');
+        }
+
         if (!is_bool($request)) {
             throw new \InvalidArgumentException('Not a boolean');
         }

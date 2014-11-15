@@ -9,7 +9,11 @@
  * file that was distributed with this source code.
  */
 
-require_once("src/Autoload.php");
+require_once(
+    dirname(dirname(__DIR__)) .
+    DIRECTORY_SEPARATOR . 'src' .
+    DIRECTORY_SEPARATOR . 'Autoload.php'
+);
 \fpoirotte\XRL\Autoload::register();
 
 // Create a dummy function for the demo.
