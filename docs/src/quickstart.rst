@@ -18,9 +18,9 @@ Writing an XML-RPC client
 
     ..  sourcecode:: inline-php
 
-        $client = new \fpoirotte\XRL\Client("http://server.example.com");
+        $client = new \fpoirotte\XRL\Client("http://xmlrpc.example.com/server");
 
-3.  Call a method provided by that server, like it was just any other code
+3.  Call a method provided by that server, like it were just any other code
 
     ..  sourcecode:: inline-php
 
@@ -96,12 +96,14 @@ Writing an XML-RPC server
         // This is recommended as it avoids potential conflicts
         // with XRL's own attributes and it makes things easier
         // when the method's name is not a valid PHP identifier.
-        $server['hello'] = function ($s) { return "Hello $s!"; }:
-        $server['string.up'] = 'strtoupper':
+        $server['hello'] = function ($s) { return "Hello $s!"; };
+        $server['string.up'] = 'strtoupper';
 
 4.  Handle incoming XML-RPC requests and publish the results
 
-    $server->handle()->publish();
+    ..  sourcecode:: inline-php
+
+        $server->handle()->publish();
 
 
 ..  [#note_composer] Users of the `Composer dependency manager
