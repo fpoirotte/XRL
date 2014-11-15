@@ -63,11 +63,11 @@ def prepare(globs, locs):
 
     # Copy doxygen output to Sphinx's output folder.
     # We use rm/cp instead of shutil to get a more verbose output.
-    call(['/bin/rm', '-rfv', os.path.join(root, 'docs', 'enduser', 'html', 'api')])
+    call(['/bin/rm', '-rfv', os.path.join(root, 'docs', 'src', '_build', 'html', 'api')])
     call([
             '/bin/cp', '-var',
             os.path.join(root, 'docs', 'api', 'html'),
-            os.path.join(root, 'docs', 'enduser', 'html', 'api'),
+            os.path.join(root, 'docs', 'src', '_build', 'html', 'api'),
         ])
 
     # Load the real Sphinx confiruation file

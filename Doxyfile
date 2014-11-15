@@ -1,6 +1,8 @@
 @INCLUDE        = vendor/erebot/buildenv/Doxyfile
 INPUT          += vendor/fpoirotte/natives4doxygen/docs/
 INPUT          += docs/src/
+# readthedocs generates intermediary files into docs/src/_build.
+EXCLUDE        += docs/src/_build
 FILE_PATTERNS  += *.dox
 EXAMPLE_PATH    = docs/example/
 
