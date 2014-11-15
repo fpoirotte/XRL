@@ -42,6 +42,7 @@ def prepare(globs, locs):
     ):
         if not os.path.isdir(path):
             os.makedirs(path)
+        if not os.path.exists(os.path.join(path, '.git')):
             print "Cloning %s into %s..." % (repository, path)
             call([git, 'clone', repository, path])
         else:
@@ -62,7 +63,6 @@ def prepare(globs, locs):
 
     # Copy doxygen output to Sphinx's output folder.
     # We use rm/cp instead of shutil to get a more verbose output.
-    call([git, 'pull'])
     call(['/bin/rm', '-rfv', os.path.join(root, 'docs', 'enduser', 'html', 'api')])
     call([
             '/bin/cp', '-var',
@@ -70,7 +70,7 @@ def prepare(globs, locs):
             os.path.join(root, 'docs', 'enduser', 'html', 'api'),
         ])
 
-    # Load the read Sphinx confiruation file
+    # Load the real Sphinx confiruation file
     os.chdir(cwd)
     real_conf = os.path.join(buildenv, 'sphinx', 'conf.py')
     print "Including real configuration file (%s)..." % (real_conf, )
