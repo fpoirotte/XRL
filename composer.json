@@ -22,13 +22,13 @@
         "ext-XMLReader": "*",
         "ext-XMLWriter": "*",
         "ext-libxml": "*",
-        "ext-SimpleXML": "*",
         "ext-gmp": "*",
         "ext-pcre": "*",
         "ext-SPL": "*"
     },
     "require-dev": {
         "ext-dom": "*",
+        "ext-SimpleXML": "*",
         "erebot/buildenv": "*",
         "erebot/plop": "*",
         "fpoirotte/natives4doxygen": "*",
@@ -40,6 +40,7 @@
     },
     "suggest": {
         "ext-openssl": "For accessing resources requiring an encrypted (SSL/TLS) connection",
+        "ext-SimpleXML": "For sending/receiving XML objects",
         "erebot/plop": "For logging various events"
     },
     "autoload": {
