@@ -10,7 +10,7 @@ You can find more information about this project on the following websites:
 
 *   `XRL on GitHub (code and issue tracker) <https://github.com/fpoirotte/XRL/>`_
 *   `XRL on Packagist (composer repository) <https://packagist.org/packages/fpoirotte/XRL>`_
-*   `XRL on Travis-CI (continuous integration) <http://travis-ci.org/fpoirotte/XRL>`_
+*   `XRL on Travis-CI (continuous integration) <https://travis-ci.org/fpoirotte/XRL>`_
 *   `API documentation for XRL <./api/>`_
 
 .. vim: ts=4 et

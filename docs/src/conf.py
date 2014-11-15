@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import shutil
 from datetime import datetime
 from subprocess import call, Popen, PIPE
 
@@ -42,7 +43,6 @@ def prepare(globs, locs):
     ):
         if not os.path.isdir(path):
             os.makedirs(path)
-        if not os.path.exists(os.path.join(path, '.git')):
             print "Cloning %s into %s..." % (repository, path)
             call([git, 'clone', repository, path])
         else:
@@ -61,14 +61,15 @@ def prepare(globs, locs):
         'COMPONENT_BRIEF': composer.get('description', ''),
     })
 
-    # Copy doxygen output to Sphinx's output folder.
-    # We use rm/cp instead of shutil to get a more verbose output.
-    call(['/bin/rm', '-rfv', os.path.join(root, 'docs', 'src', '_build', 'html', 'api')])
-    call([
-            '/bin/cp', '-var',
-            os.path.join(root, 'docs', 'api', 'html'),
-            os.path.join(root, 'docs', 'src', '_build', 'html', 'api'),
-        ])
+    # Remove extra files/folders.
+    try:
+        shutil.rmtree(os.path.join(root, 'build'))
+    except OSError:
+        pass
+    shutil.move(
+        os.path.join(root, 'docs', 'api', 'html'),
+        os.path.join(root, 'build', 'apidoc'),
+    )
 
     # Load the real Sphinx confiruation file
     os.chdir(cwd)
@@ -78,6 +79,11 @@ def prepare(globs, locs):
 
     locs['copyright'] = u'2012-%d, XRL Team. All rights reserved' % \
             datetime.now().year
+
+    # Copy doxygen output to Sphinx's output folder.
+    if 'html_extra_path' not in locs:
+        locs['html_extra_path'] = []
+    locs['html_extra_path'].append(os.path.join(root, 'build'))
 
 
 prepare(globals(), locals())
