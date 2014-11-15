@@ -71,6 +71,7 @@ def prepare(globs, locs):
     except OSError:
         pass
 
+    os.chdir(cwd)
     real_conf = os.path.join(buildenv, 'sphinx', 'conf.py')
     print "Including real configuration file (%s)..." % (real_conf, )
     execfile(real_conf, globs, locs)
