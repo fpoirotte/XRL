@@ -1,22 +1,13 @@
 # -*- coding: utf-8 -*-
 
 import os
-import shutil
-import logging
 from datetime import datetime
 from subprocess import call, Popen, PIPE
-
-log = logging.getLogger(__name__)
 
 try:
     import simplejson as json
 except ImportError:
     import json
-
-def fake_ignore(cwd, contents):
-    for entry in contents:
-        log.info('Copying %s/%s to its final destination...', cwd, entry)
-    return []
 
 def prepare(globs, locs):
     git = Popen('which git 2> %s' % os.devnull, shell=True, stdout=PIPE
@@ -25,29 +16,29 @@ def prepare(globs, locs):
                 ).stdout.read().strip()
     cwd = os.getcwd()
     root = os.path.abspath(os.path.join(cwd, '..', '..'))
-    print "Running from %s..." % (root, )
     os.chdir(root)
+    print "Running from %s..." % (root, )
 
-    buildenv = os.path.join(root, 'vendor', 'erebot', 'buildenv')
-    generic_doc = os.path.join(root, 'docs', 'src', 'generic')
-
+    # Figure several configuration values from git.
     origin = Popen([git, 'config', '--local', 'remote.origin.url'],
                    stdout=PIPE).stdout.read().strip()
+    git_tag = Popen(['git', 'describe', '--tags', '--exact', '--first-parent'],
+                    stdout=PIPE).communicate()[0].strip()
     project = origin.rpartition('/')[2]
     if project.endswith('.git'):
         project = project[:-4]
     locs['project'] = project
-
-    git_tag = Popen(['git', 'describe', '--tags', '--exact', '--first-parent'],
-                    stdout=PIPE).communicate()[0].strip()
     if git_tag:
         locs['version'] = locs['release'] = git_tag
     else:
         locs['version'] = locs['release'] = 'latest'
 
+    # Clone or update dependencies
+    buildenv = os.path.join(root, 'vendor', 'erebot', 'buildenv')
+    natives = os.path.join(root, 'vendor', 'fpoirotte', 'natives4doxygen')
     for repository, path in (
         ('git://github.com/Erebot/Erebot_Buildenv.git', buildenv),
-        ('git://github.com/Erebot/Erebot_Module_Skeleton_Doc.git', generic_doc)
+        ('git://github.com/fpoirotte/PHPNatives4Doxygen', natives),
     ):
         if not os.path.isdir(path):
             os.makedirs(path)
@@ -69,14 +60,17 @@ def prepare(globs, locs):
         'COMPONENT_BRIEF': composer.get('description', ''),
     })
 
-    # Copy doxygen output to Sphinx's output folder
-    shutil.rmtree(os.path.join(root, 'docs', 'enduser', 'html', 'api'), True)
-    shutil.copytree(
-        os.path.join(root, 'docs', 'api', 'html'),
-        os.path.join(root, 'docs', 'enduser', 'html', 'api'),
-        ignore=fake_ignore,
-    )
+    # Copy doxygen output to Sphinx's output folder.
+    # We use rm/cp instead of shutil to get a more verbose output.
+    call([git, 'pull'])
+    call(['/bin/rm', '-rfv', os.path.join(root, 'docs', 'enduser', 'html', 'api')])
+    call([
+            '/bin/cp', '-var',
+            os.path.join(root, 'docs', 'api', 'html'),
+            os.path.join(root, 'docs', 'enduser', 'html', 'api'),
+        ])
 
+    # Load the read Sphinx confiruation file
     os.chdir(cwd)
     real_conf = os.path.join(buildenv, 'sphinx', 'conf.py')
     print "Including real configuration file (%s)..." % (real_conf, )
