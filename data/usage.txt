@@ -52,4 +52,4 @@ Example:
   ?>
 
 View the LICENSE file that was distributed with this project or run
-%1$s -v for the full copyright and license information.
+%1$s -V for the full copyright and license information.
