@@ -9,7 +9,7 @@
 A simple XML-RPC client and server written in PHP
 =================================================
 
-|travis-ci| |coveralls| |versioneye-updates| |versioneye-refs| |hhvm|
+|travis-ci| |coveralls| |versioneye-updates| |versioneye-refs| |hhvm| |readthedocs|
 
 Features
 --------
@@ -184,6 +184,10 @@ resources useful:
 ..  |hhvm| image:: http://hhvm.h4cc.de/badge/fpoirotte/xrl.png
     :alt: unknown
     :target: http://hhvm.h4cc.de/package/fpoirotte/xrl
+
+..  |readthedocs| image:: https://readthedocs.org/projects/xrl/badge/?version=latest
+    :alt: unknown
+    :target: https://readthedocs.org/projects/xrl/?badge=latest
 
 ..  |---| unicode:: U+02014 .. em dash
     :trim:
