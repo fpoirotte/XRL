@@ -2,14 +2,21 @@
 
 import os
 import shutil
+import logging
 from datetime import datetime
 from subprocess import call, Popen, PIPE
+
+log = logging.getLogger(__name__)
 
 try:
     import simplejson as json
 except ImportError:
     import json
 
+def fake_ignore(cwd, contents):
+    for entry in contents:
+        log.info('Copying %s/%s to its final destination...', cwd, entry)
+    return []
 
 def prepare(globs, locs):
     git = Popen('which git 2> %s' % os.devnull, shell=True, stdout=PIPE
@@ -67,6 +74,7 @@ def prepare(globs, locs):
         shutil.copytree(
             os.path.join(root, 'docs', 'api', 'html'),
             os.path.join(root, 'docs', 'enduser', 'html', 'api'),
+            ignore=fake_ignore,
         )
     except OSError:
         pass
