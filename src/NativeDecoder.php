@@ -38,7 +38,10 @@ class NativeDecoder implements \fpoirotte\XRL\DecoderInterface
     public function decodeRequest($URI)
     {
         $request    = $this->decoder->decodeRequest($URI);
-        $params     = array_map(function ($p) { return $p->get(); }, $request->getParams());
+        $closure    = function ($p) {
+            return $p->get();
+        };
+        $params     = array_map($closure, $request->getParams());
         return new \fpoirotte\XRL\Request($request->getProcedure(), $params);
     }
 
