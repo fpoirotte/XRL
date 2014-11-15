@@ -1,3 +1,5 @@
+..  _types:
+
 XML-RPC Types
 =============
 

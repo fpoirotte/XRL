@@ -95,7 +95,7 @@ is kind of special. It does not define any additional methods,
 but instead focuses on defining additional XML-RPC types.
 
 This extension is always enabled. See also the documentation on
-`supported XML-RPC types <types>`_ for more information on these types
+:ref:`supported XML-RPC types <types>` for more information on these types
 and how they are used in XRL.
 
 

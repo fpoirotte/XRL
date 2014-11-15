@@ -1,13 +1,13 @@
 Quick start
 ===========
 
-Assuming XRL is correctly `installed <setup>`_ on your computer,
+Assuming XRL is correctly :ref:`installed <setup>` on your computer,
 you can now write XML-RPC clients and servers.
 
 Writing an XML-RPC client
 -------------------------
 
-1.  Load and register the autoloader [#composer]_
+1.  Load and register the autoloader [#note_composer]_
 
     ..  sourcecode:: inline-php
 
@@ -40,7 +40,7 @@ Writing an XML-RPC client
 Writing an XML-RPC server
 -------------------------
 
-1.  Load and register the autoloader [#composer]_
+1.  Load and register the autoloader [#note_composer]_
 
     ..  sourcecode:: inline-php
 
@@ -104,8 +104,9 @@ Writing an XML-RPC server
     $server->handle()->publish();
 
 
-..  [#composer] Users of `Composer <https://getcomposer.org/>`_ should load
-    the regular autoloader found in ``vendor/autoload.php`` instead.
+..  [#note_composer] Users of the `Composer dependency manager
+    <https://getcomposer.org/>`_ should load the regular autoloader
+    found in ``vendor/autoload.php`` instead.
 
 ..  : End of document.
 ..  : vim: ts=4 et
