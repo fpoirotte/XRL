@@ -4,7 +4,7 @@ XRL's documentation
 XRL (short for XML-RPC Library) is a collection of PHP classes that ease
 the creation of XML-RPC clients or servers.
 
-..  ifconfig:: version == 'latest'
+..  only:: devel
 
     ..  warning::
 
@@ -12,7 +12,7 @@ the creation of XML-RPC clients or servers.
         in `XRL's code <https://github.com/fpoirotte/XRL/>`_.
         It does not necessarily reflect features from any current or
         upcoming release. Check out https://readthedocs.org/projects/xrl/
-        for documentation on released versions.
+        for documentation on supported versions.
 
 Overview
 --------

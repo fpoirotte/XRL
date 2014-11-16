@@ -33,6 +33,7 @@ def prepare(globs, locs):
         locs['version'] = locs['release'] = git_tag
     else:
         locs['version'] = locs['release'] = 'latest'
+        locs['tags'].add('devel')
 
     # Clone or update dependencies
     buildenv = os.path.join(root, 'vendor', 'erebot', 'buildenv')
