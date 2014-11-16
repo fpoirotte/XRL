@@ -1,0 +1,57 @@
+# French translations for XRL package.
+# Copyright (C) 2011-2014, Erebot
+# This file is distributed under the same license as the XRL package.
+# Automatically generated, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: XRL 2.0.x-dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-16 20:51+0100\n"
+"PO-Revision-Date: 2014-11-16 16:46+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#
+# f9193ce0281f4f5583e6997127c3566b
+# File: ../src/cli.rst, line: 10
+# File: ../src/cli.rst, line: 10
+# File: ../src/cli.rst, line: 10
+msgid "Command-line XML-RPC client"
+msgstr "Client XML-RPC en ligne de commandes"
+#
+# ecf09df255f3403b91050afc10ce0a5b
+# File: ../src/cli.rst, line: 12
+# File: ../src/cli.rst, line: 12
+# File: ../src/cli.rst, line: 12
+msgid ""
+"XRL provides a command-line XML-RPC client that makes it easy to test a "
+"remote XML-RPC server."
+msgstr ""
+"XRL fournit un client XML-RPC en ligne de commandes qui facilite le test d'un "
+"serveur XML-RPC distant."
+#
+# 4fb7cec830b540e59c138f7ed7fb3328
+# File: ../src/cli.rst, line: 15
+# File: ../src/cli.rst, line: 15
+# File: ../src/cli.rst, line: 15
+msgid ""
+"For PHAR installations, this client is embedded with the PHAR archive itself. "
+"To use it, just call the PHP interpreter on the PHAR archive:"
+msgstr ""
+"Pour les installations PHAR, le client est intégré à l'archive elle-même. "
+"Pour l'utiliser, appelez l'interpréteur PHP sur l'archive PHAR :"
+#
+# 93cb06a8fa554f23a935170adc7b9939
+# File: ../src/cli.rst, line: 27
+# File: ../src/cli.rst, line: 27
+# File: ../src/cli.rst, line: 27
+msgid ""
+"For other types of installations, call the PHP interpreter on :file:`bin/xrl`:"
+msgstr ""
+"Pour les autres formes d'installations, appelez l'interpréteur PHP sur :file:"
+"`bin/xrl` :"

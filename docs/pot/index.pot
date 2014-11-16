@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2011-2014, Erebot
+# This file is distributed under the same license as the XRL package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: XRL 2.0.x-dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-16 20:51+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/index.rst:10
+# f849cbc857794371be419e0bab4b7fc6
+msgid "XRL's documentation"
+msgstr ""
+
+#: ../src/index.rst:12
+# e8eca128228d46f48c77ffc37715a6ca
+msgid "XRL (short for XML-RPC Library) is a collection of PHP classes that ease the creation of XML-RPC clients or servers."
+msgstr ""
+
+#: ../src/index.rst:26
+# c240b16963174d29b3955d88e6ff5446
+msgid "Overview"
+msgstr ""
+
+#: ../src/index.rst:28
+# c616dec4175b41a9adbcbabfb4927297
+msgid "**Simple setup** |---| grab the PHAR archive or add ``fpoirotte/xrl`` as a dependency in your :file:`composer.json` and you're good to go."
+msgstr ""
+
+#: ../src/index.rst:30
+# 66a1836a49834130b9f7a4876ed2d709
+msgid "**Very intuitive syntax** |---| write XML-RPC clients & servers like you would any other piece of code."
+msgstr ""
+
+#: ../src/index.rst:32
+# e2014b6b1d3f44e8a615b8bff294ee62
+msgid "**Automatic type conversions** |---| use native PHP types without worrying about XML-RPC quirks."
+msgstr ""
+
+#: ../src/index.rst:34
+# 31513d1407994ceeb4972dfdf6fd83eb
+msgid "**Support for many extensions** |---| want capabilities? introspection? multicalls?... yep, :ref:`we support them <extensions>`!"
+msgstr ""
+
+#: ../src/index.rst:39
+# fc6906f1e18746a8a934bca28538e251
+msgid "Setup & Usage"
+msgstr ""
+
+#: ../src/index.rst:50
+# 52edc5d96ddc4333bd49d0cff3035451
+msgid "Features"
+msgstr ""
+
+#: ../src/index.rst:61
+# f11d62dfeced4af28ffadc5c8021aea1
+msgid "Contributing"
+msgstr ""
+
+#: ../src/index.rst:72
+# 3b761cd1fc18478b999fd52d186da53f
+msgid "Licence"
+msgstr ""
+
+#: ../src/index.rst:74
+# 3ca245236a0045c8a2d1c1458b9beca2
+msgid "XRL is released under the `3-clause BSD licence <https://github.com/fpoirotte/XRL/blob/master/LICENSE>`_."
+msgstr ""
+
+#: ../src/index.rst:79
+# 455f4f69722d4a499bb8fb356dea5214
+msgid "Other resources"
+msgstr ""
+
+#: ../src/index.rst:81
+# 68f27278723f45d78f4211301bcecbaf
+msgid "`Full API documentation <./apidoc/>`_"
+msgstr ""
+
+#: ../src/index.rst:82
+# 691cad2355554130a40e4fc1dd5c59af
+msgid "`XRL on GitHub <https://github.com/fpoirotte/XRL/>`_ (source code and issue tracker)"
+msgstr ""
+
+#: ../src/index.rst:83
+# 31f52e4a172c4a059a9ec19dfc08460b
+msgid "`XRL on Packagist <https://packagist.org/packages/fpoirotte/XRL>`_ (Composer repository)"
+msgstr ""
+
+#: ../src/index.rst:84
+# 0dec05f7acb74cd19dcb09c333e68b4d
+msgid "`XRL on Travis-CI <https://travis-ci.org/fpoirotte/XRL>`_ (continuous integration)"
+msgstr ""
+
+#: ../src/index.rst:85
+# cb23d5a938694b1aa7204fdf5a1946c8
+msgid "`XRL on Read The Docs <https://readthedocs.org/projects/xrl/>`_ (documentation)"
+msgstr ""
+

@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2011-2014, Erebot
+# This file is distributed under the same license as the XRL package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: XRL 2.0.x-dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-16 20:51+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/setup.rst:12
+# fa9510ca8f8e46e38eadcea8caf6a65c
+msgid "Setup"
+msgstr ""
+
+#: ../src/setup.rst:14
+# 6c4ba3fd2d874ff29c34ae9c8355abaf
+msgid "Before you install XRL, make sure you have a working PHP installation."
+msgstr ""
+
+#: ../src/setup.rst:16
+# 90c7312007dc41168ad27dfda5f0bc41
+msgid "XRL requires PHP 5.3.4 or later and the following PHP extensions:"
+msgstr ""
+
+#: ../src/setup.rst:18
+# 8b217417fcd244f68dcbd2bf6516d405
+msgid "XMLReader"
+msgstr ""
+
+#: ../src/setup.rst:19
+# b9a6cf20f9c748c281b59218862efd56
+msgid "XMLWriter"
+msgstr ""
+
+#: ../src/setup.rst:20
+# e61d4640462d4e859fb5e72e45c8114a
+msgid "libxml"
+msgstr ""
+
+#: ../src/setup.rst:21
+# 6cf3db62077843bf86811e24a1f68037
+msgid "GMP"
+msgstr ""
+
+#: ../src/setup.rst:22
+# 0efdd0f0fa0a47e4a9ce82644efbe366
+msgid "PCRE"
+msgstr ""
+
+#: ../src/setup.rst:23
+# 43a41e53f0114e9ebf5b886839aeb772
+msgid "SPL"
+msgstr ""
+
+#: ../src/setup.rst:27
+# 5a9c2bd65eee4a81a02cb52fc3f6a3a5
+msgid "Use ``php -v`` and ``php -m`` to retrieve information about your PHP version and available extensions."
+msgstr ""
+
+#: ../src/setup.rst:30
+# 26c04d9e13ee4a5c8e689c70aafe18bc
+msgid "XRL can be installed using a :ref:`PHAR archive`, :ref:`Composer` or from :ref:`sources`. The PHAR approach is recommended."
+msgstr ""
+
+#: ../src/setup.rst:37
+# ab64531316524d1bbb96a3f8aa1aee89
+msgid "PHAR archive"
+msgstr ""
+
+#: ../src/setup.rst:39
+# 5edbadc62c7348b4a65c475fab6ad6a6
+msgid "Download the latest PHAR available on https://github.com/fpoirotte/XRL/releases and save it to your computer."
+msgstr ""
+
+#: ../src/setup.rst:42
+# 8117774ce5c4497a8c6e847becd31cff
+msgid "(For Unix/Linux users) Optionally, make the file executable."
+msgstr ""
+
+#: ../src/setup.rst:48
+# 2aa4b58cc94b498885e1181cabd8161e
+msgid "Composer"
+msgstr ""
+
+#: ../src/setup.rst:50
+# 3ba0b8ee069d40cc823654fbee160c9e
+msgid "XRL can be installed using the `Composer dependency manager <https://getcomposer.org/>`_. Just add ``fpoirotte/xrl`` to the dependencies in your :file:`composer.json`:"
+msgstr ""
+
+#: ../src/setup.rst:62
+# 5bd6762de0904ab6be87c75bbb89bb25
+msgid "Sources"
+msgstr ""
+
+#: ../src/setup.rst:64
+# 5e809d12f8ab46ff9d49cfec1497efca
+msgid "To install XRL from sources, use :program:`git` to clone the repository:"
+msgstr ""
+

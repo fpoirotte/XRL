@@ -1,0 +1,61 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2011-2014, Erebot
+# This file is distributed under the same license as the XRL package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: XRL 2.0.x-dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-16 20:51+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+#
+# c5ae911095e64b849ae00a5097eb7389
+# File: ../src/hhvm.rst, line: 10
+msgid "HipHop Virtual Machine"
+msgstr "HipHop Virtual Machine"
+#
+# 3b3f444a4d9a41af9d7baa024059901d
+# File: ../src/hhvm.rst, line: 12
+msgid ""
+"HipHop Virtual Machine (HHVM) is a process virtual machine based on just-in-"
+"time (JIT) compilation, serving as an execution engine for PHP."
+msgstr ""
+"HipHop Virtual Machine (HHVM) is a process virtual machine based on just-in-"
+"time (JIT) compilation, serving as an execution engine for PHP."
+#
+# e1f2e903da934f28a112bfc45b581fee
+# File: ../src/hhvm.rst, line: 16
+msgid "Source: http://en.wikipedia.org/wiki/HipHop_Virtual_Machine"
+msgstr "Source: http://en.wikipedia.org/wiki/HipHop_Virtual_Machine"
+#
+# 8362aab0b1d640f79dc8f713155eb6ba
+# File: ../src/hhvm.rst, line: 18
+msgid ""
+"There are currently issues that prevent XRL from running smoothly on HHVM. "
+"Nonetheless, XRL is actively tested against HHVM in our `Continuous "
+"Integration process <https://travis-ci.org/fpoirotte/XRL>`_."
+msgstr ""
+"There are currently issues that prevent XRL from running smoothly on HHVM. "
+"Nonetheless, XRL is actively tested against HHVM in our `Continuous "
+"Integration process <https://travis-ci.org/fpoirotte/XRL>`_."
+#
+# ef13a42fa9fb4159a3fb78147a5bbb75
+# File: ../src/hhvm.rst, line: 22
+msgid ""
+"We plan to write more tests in the future to isolate those problems and to "
+"help make HHVM better. Meanwhile, users are advised to run the stock PHP "
+"interpreter (either from http://php.net/ or from another distributor) when "
+"using XRL."
+msgstr ""
+"We plan to write more tests in the future to isolate those problems and to "
+"help make HHVM better. Meanwhile, users are advised to run the stock PHP "
+"interpreter (either from http://php.net/ or from another distributor) when "
+"using XRL."

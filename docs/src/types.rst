@@ -104,7 +104,7 @@ The following table shows how XRL converts PHP types to XML-RPC types.
         -   namespaced ``dom`` [1]_
 
     *   -   ``\Exception`` object
-        -   fault structure (derived from ``struct``)
+        -   XML-RPC fault (derived from ``struct``)
 
 
 The following table shows how XRL converts XML-RPC types to PHP types.
@@ -135,11 +135,11 @@ The following table shows how XRL converts XML-RPC types to PHP types.
         -   ``string``
 
     *   -   ``array``
-        -   numeric ``array``
+        -   numeric array
 
     *   -   ``struct``
         -   ``\Exception`` object if the structure represents a fault [2]_,
-            associative ``array`` otherwise
+            associative array otherwise
 
     *   -   ``dateTime.iso8601``
         -   ``\DateTime`` (using local timezone information by default)
@@ -204,8 +204,8 @@ to the XML-RPC client or server constructor.
 ..  warning::
 
     XML-RPC faults are handled specially and will always turn into
-    a PHP ``\Exception`` that gets automatically raised, no matter
-    what decoder has been passed to the client/server's constructor.
+    ``\fpoirotte\XRL\Exception`` objects that get raised automatically,
+    no matter what decoder has been passed to the client/server's constructor.
 
 
 ..  : End of document.

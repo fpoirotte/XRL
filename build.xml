@@ -8,6 +8,10 @@
     <!-- XRL uses a custom stub. -->
     <property name="phar.stub" value="bin/xrl"/>
 
+    <!-- Custom copyright. -->
+    
+    <property name="doc_enduser.copyright" value="${doc_enduser.year}, The XRL Team"/>
+
     <fileset dir="." id="phar.files">
         <include name="data/**"/>
     </fileset>
@@ -21,16 +25,6 @@
     </fileset>
 
     <target name="all"/>
-
-    <!-- Force the copyright line to "XRL Team" rather than "Erebot". -->
-    <target name="doc_enduser" description="Generate end-user documentation in HTML format">
-        <property name="doc_release" value=""/>
-        <tstamp prefix="sphinx">
-            <format property="year" pattern="%Y" locale="C"/>
-        </tstamp>
-        <exec command="SPHINX_VERSION=${version} SPHINX_RELEASE=${version}${doc_release} SPHINX_PROJECT=${phing.project.name} sphinx-build -c vendor/erebot/buildenv/sphinx/ -b html -D html_use_opensearch=http://erebot.github.com/${phing.project.name} -D copyright='${sphinx.year}, The XRL Team' -d docs/enduser/doctrees docs/src docs/enduser/html"
-            passthru="true" checkreturn="true" logoutput="true"/>
-    </target>
 
     <import file="vendor/erebot/buildenv/build.xml"/>
 </project>

@@ -19,12 +19,12 @@ Overview
 
 *   **Simple setup** |---| grab the PHAR archive or add ``fpoirotte/xrl``
     as a dependency in your :file:`composer.json` and you're good to go.
-*   **Very intuitive syntax** |---| write RPC clients & servers like you
+*   **Very intuitive syntax** |---| write XML-RPC clients & servers like you
     would any other piece of code.
 *   **Automatic type conversions** |---| use native PHP types without worrying
     about XML-RPC quirks.
 *   **Support for many extensions** |---| want capabilities? introspection?
-    multicalls?... yep, `we support them <extensions>`_!
+    multicalls?... yep, :ref:`we support them <extensions>`!
 
 
 Setup & Usage
@@ -72,7 +72,7 @@ Other resources
 
 *   `Full API documentation <./apidoc/>`_
 *   `XRL on GitHub <https://github.com/fpoirotte/XRL/>`_ (source code and issue tracker)
-*   `XRL on Packagist <https://packagist.org/packages/fpoirotte/XRL>`_ (composer repository)
+*   `XRL on Packagist <https://packagist.org/packages/fpoirotte/XRL>`_ (Composer repository)
 *   `XRL on Travis-CI <https://travis-ci.org/fpoirotte/XRL>`_ (continuous integration)
 *   `XRL on Read The Docs <https://readthedocs.org/projects/xrl/>`_ (documentation)
 

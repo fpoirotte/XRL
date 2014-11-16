@@ -1,11 +1,13 @@
 # Build artifacts.
 /build
 /*.tagfile.xml
+*.mo
 
 # Documentation
 /docs/api
 /docs/enduser
 /docs/coverage
+/docs/pot/.doctrees
 
 # Dependencies
 /vendor

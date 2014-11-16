@@ -1,0 +1,76 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2011-2014, Erebot
+# This file is distributed under the same license as the XRL package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: XRL 2.0.x-dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-16 20:51+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+#
+# 66aa8c8aad814dda8e037582e32d001d
+# File: ../src/style.rst, line: 10
+msgid "Coding style"
+msgstr "Coding style"
+#
+# b76393a3a2dc4551a7c158eb5950d8bd
+# File: ../src/style.rst, line: 12
+msgid ""
+"The XRL team closely follows the `PSR-2 <http://www.php-fig.org/psr/psr-2/>`_ "
+"coding style."
+msgstr ""
+"The XRL team closely follows the `PSR-2 <http://www.php-fig.org/psr/psr-2/>`_ "
+"coding style."
+#
+# 293238e1731743069b8b1c454536ed28
+# File: ../src/style.rst, line: 15
+msgid ""
+"Also, when developing, the following command can be used to check various "
+"aspects of the code quality:"
+msgstr ""
+"Also, when developing, the following command can be used to check various "
+"aspects of the code quality:"
+#
+# 42291dbbd81a4bd986864401b63d16c2
+# File: ../src/style.rst, line: 22
+msgid "It runs the following tools on XRL's code to detect possible issues:"
+msgstr "It runs the following tools on XRL's code to detect possible issues:"
+#
+# d9abe8ebcf854a9eaefa7767d2e99622
+# File: ../src/style.rst, line: 24
+msgid "PHP lint (``php -l``): checks PHP syntax"
+msgstr "PHP lint (``php -l``): checks PHP syntax"
+#
+# 1913c4056b084e78ba3719d2a5c258da
+# File: ../src/style.rst, line: 25
+msgid "PHP_CodeSniffer: checks code compliance with coding standard"
+msgstr "PHP_CodeSniffer: checks code compliance with coding standard"
+#
+# d7918e6775c04e9289d3bb24b126e9fa
+# File: ../src/style.rst, line: 26
+msgid "PDepend: identifies tight coupling between two pieces of code"
+msgstr "PDepend: identifies tight coupling between two pieces of code"
+#
+# fa8c4fa1131e4478ae33c95692c7feac
+# File: ../src/style.rst, line: 27
+msgid "PHPMD (PHP Mess Detector): detects high-risk code structures"
+msgstr "PHPMD (PHP Mess Detector): detects high-risk code structures"
+#
+# e6ce0145001349628baab6b4529c092d
+# File: ../src/style.rst, line: 28
+msgid "PHPCPD (PHP Copy-Paste Detector): detects copy/paste abuse"
+msgstr "PHPCPD (PHP Copy-Paste Detector): detects copy/paste abuse"
+#
+# 16b24e3cf0114089a2e813d685009080
+# File: ../src/style.rst, line: 29
+msgid "PHPUnit: checks unit tests"
+msgstr "PHPUnit: checks unit tests"

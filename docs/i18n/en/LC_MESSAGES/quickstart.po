@@ -1,0 +1,83 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2011-2014, Erebot
+# This file is distributed under the same license as the XRL package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: XRL 2.0.x-dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-16 20:51+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+#
+# 381ca7c6962c4ab39470c1ce1c657339
+# File: ../src/quickstart.rst, line: 10
+msgid "Quick start"
+msgstr "Quick start"
+#
+# 042fb5abb515436a932ecd7c690a0c76
+# File: ../src/quickstart.rst, line: 12
+msgid ""
+"Assuming XRL is correctly :ref:`installed <setup>` on your computer, you can "
+"now write XML-RPC clients and servers."
+msgstr ""
+"Assuming XRL is correctly :ref:`installed <setup>` on your computer, you can "
+"now write XML-RPC clients and servers."
+#
+# f6dccbcf1bb54ef49e18e6376eac0efe
+# File: ../src/quickstart.rst, line: 16
+msgid "Writing an XML-RPC client"
+msgstr "Writing an XML-RPC client"
+#
+# 7f602e36c95e462bb69f4e060aff3ae5
+# 42be0a7f529e4a5e879bc0f0954254ad
+# File: ../src/quickstart.rst, line: 18
+# File: ../src/quickstart.rst, line: 51
+msgid "Load and register the autoloader [#note_composer]_"
+msgstr "Load and register the autoloader [#note_composer]_"
+#
+# 0ab3caf34c3048f1839c56e38cc7cc7f
+# File: ../src/quickstart.rst, line: 25
+msgid "Create a new client configured to query the remote XML-RPC server"
+msgstr "Create a new client configured to query the remote XML-RPC server"
+#
+# b6fa4978ae644c17beae55f490765747
+# File: ../src/quickstart.rst, line: 31
+msgid "Call a method provided by that server, like it were just any other code"
+msgstr "Call a method provided by that server, like it were just any other code"
+#
+# 7147ad9c6a0e410d997a0f28be0f85cd
+# File: ../src/quickstart.rst, line: 49
+msgid "Writing an XML-RPC server"
+msgstr "Writing an XML-RPC server"
+#
+# 20f6a7b17c3648ba92758a093c8fd789
+# File: ../src/quickstart.rst, line: 58
+msgid "Create a new server instance"
+msgstr "Create a new server instance"
+#
+# f7e42ea260c649c7af31cf1381ccd802
+# File: ../src/quickstart.rst, line: 64
+msgid "Attach some methods to that server"
+msgstr "Attach some methods to that server"
+#
+# 107f3cc91a3f4a6a99e8cab3ddf1de3e
+# File: ../src/quickstart.rst, line: 110
+msgid "Handle incoming XML-RPC requests and publish the results"
+msgstr "Handle incoming XML-RPC requests and publish the results"
+#
+# 15e82bd1bc274aeea5724361daabcb1c
+# File: ../src/quickstart.rst, line: 117
+msgid ""
+"Users of the `Composer dependency manager <https://getcomposer.org/>`_ should "
+"load the regular autoloader found in ``vendor/autoload.php`` instead."
+msgstr ""
+"Users of the `Composer dependency manager <https://getcomposer.org/>`_ should "
+"load the regular autoloader found in ``vendor/autoload.php`` instead."

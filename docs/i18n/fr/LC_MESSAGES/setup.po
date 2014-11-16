@@ -1,0 +1,171 @@
+# French translations for XRL package.
+# Copyright (C) 2011-2014, Erebot
+# This file is distributed under the same license as the XRL package.
+# Automatically generated, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: XRL 2.0.x-dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-16 20:51+0100\n"
+"PO-Revision-Date: 2014-11-16 16:46+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#
+# 38e716c5ee154fc8a2138d7460efa770
+# File: ../src/setup.rst, line: 12
+# File: ../src/setup.rst, line: 12
+# File: ../src/setup.rst, line: 12
+msgid "Setup"
+msgstr "Installation"
+#
+# e950267947214cdaa138704596cb4919
+# File: ../src/setup.rst, line: 14
+# File: ../src/setup.rst, line: 14
+# File: ../src/setup.rst, line: 14
+msgid "Before you install XRL, make sure you have a working PHP installation."
+msgstr ""
+"Avant d'installer XRL, assurez-vous de disposer d'une installation de PHP "
+"fonctionnelle."
+#
+# d9e24f09df3e47acafab7df75e0d8c21
+# File: ../src/setup.rst, line: 16
+# File: ../src/setup.rst, line: 16
+# File: ../src/setup.rst, line: 16
+msgid "XRL requires PHP 5.3.4 or later and the following PHP extensions:"
+msgstr ""
+"XRL nécessite PHP 5.3.4 ou plus récent, ainsi que les extensions PHP "
+"suivantes :"
+#
+# d273bcb5512f41d89590375d2476f5fa
+# File: ../src/setup.rst, line: 18
+# File: ../src/setup.rst, line: 18
+# File: ../src/setup.rst, line: 18
+msgid "XMLReader"
+msgstr "XMLReader"
+#
+# 5dc5d77202e94131a3b9065d9a31ef8e
+# File: ../src/setup.rst, line: 19
+# File: ../src/setup.rst, line: 19
+# File: ../src/setup.rst, line: 19
+msgid "XMLWriter"
+msgstr "XMLWriter"
+#
+# f8337168b59d40dcaf27fb9dd73997eb
+# File: ../src/setup.rst, line: 20
+# File: ../src/setup.rst, line: 20
+# File: ../src/setup.rst, line: 20
+msgid "libxml"
+msgstr "libxml"
+#
+# 7ad6d30df6bf4c5eb5c95dbf889551c7
+# File: ../src/setup.rst, line: 21
+# File: ../src/setup.rst, line: 21
+# File: ../src/setup.rst, line: 21
+msgid "GMP"
+msgstr "GMP"
+#
+# 7d3b97ec191549d29dce3fe597de40c5
+# File: ../src/setup.rst, line: 22
+# File: ../src/setup.rst, line: 22
+# File: ../src/setup.rst, line: 22
+msgid "PCRE"
+msgstr "PCRE"
+#
+# 1baab6b1118045e1aa138de8707fd714
+# File: ../src/setup.rst, line: 23
+# File: ../src/setup.rst, line: 23
+# File: ../src/setup.rst, line: 23
+msgid "SPL"
+msgstr "SPL"
+#
+# a58f06351a524888b0eacaa5bec16bec
+# File: ../src/setup.rst, line: 27
+# File: ../src/setup.rst, line: 27
+# File: ../src/setup.rst, line: 27
+msgid ""
+"Use ``php -v`` and ``php -m`` to retrieve information about your PHP version "
+"and available extensions."
+msgstr ""
+"Utilisez ``php -v`` et ``php -m`` pour obtenir des informations sur votre "
+"version de PHP et les extensions disponibles."
+#
+# 787b3e2027ea48d48f7dd7396a774d21
+# File: ../src/setup.rst, line: 30
+# File: ../src/setup.rst, line: 30
+# File: ../src/setup.rst, line: 30
+msgid ""
+"XRL can be installed using a :ref:`PHAR archive`, :ref:`Composer` or from :"
+"ref:`sources`. The PHAR approach is recommended."
+msgstr ""
+"XRL peut être installé en utilisant :ref:`une archive PHAR <PHAR archive>`, "
+":ref:`Composer`, ou depuis les :ref:`sources`. L'utilisation de PHAR est "
+"recommandée."
+#
+# a48322923d634b02a94d3b757c2c3197
+# File: ../src/setup.rst, line: 37
+# File: ../src/setup.rst, line: 37
+# File: ../src/setup.rst, line: 37
+msgid "PHAR archive"
+msgstr "Archive PHAR"
+#
+# ab1bcd01aaa54f8da41a4cc9fe4f7a05
+# File: ../src/setup.rst, line: 39
+# File: ../src/setup.rst, line: 39
+# File: ../src/setup.rst, line: 39
+msgid ""
+"Download the latest PHAR available on https://github.com/fpoirotte/XRL/"
+"releases and save it to your computer."
+msgstr ""
+"Téléchargez la dernière archive PHAR disponible sur https://github.com/"
+"fpoirotte/XRL/releases et sauvegardez la sur votre ordinateur."
+#
+# 04d3bb07f56b411d937b16af2ea9c80d
+# File: ../src/setup.rst, line: 42
+# File: ../src/setup.rst, line: 42
+# File: ../src/setup.rst, line: 42
+msgid "(For Unix/Linux users) Optionally, make the file executable."
+msgstr ""
+"(Pour les utilisateurs d'Unix/Linux) Si vous le souhaitez, rendez le fichier "
+"exécutable."
+#
+# b629ae6ab93e4f8d89b21cba71104e6a
+# File: ../src/setup.rst, line: 48
+# File: ../src/setup.rst, line: 48
+# File: ../src/setup.rst, line: 48
+msgid "Composer"
+msgstr "Composer"
+#
+# 83cf15b77a014593846b2fa2c564fbed
+# File: ../src/setup.rst, line: 50
+# File: ../src/setup.rst, line: 50
+# File: ../src/setup.rst, line: 50
+msgid ""
+"XRL can be installed using the `Composer dependency manager <https://"
+"getcomposer.org/>`_. Just add ``fpoirotte/xrl`` to the dependencies in your :"
+"file:`composer.json`:"
+msgstr ""
+"XRL peut être installé grâce au `gestionnaire de dépendances Composer "
+"<https://getcomposer.org/>`_. Ajoutez simplement ``fpoirotte/xrl`` aux "
+"dépendances  de votre fichier file:`composer.json` :"
+#
+# 534b6072266a4d73b04066563cac85b2
+# File: ../src/setup.rst, line: 62
+# File: ../src/setup.rst, line: 62
+# File: ../src/setup.rst, line: 62
+msgid "Sources"
+msgstr "Sources"
+#
+# 8d896be52b304ff193db5a6d855e54e2
+# File: ../src/setup.rst, line: 64
+# File: ../src/setup.rst, line: 64
+# File: ../src/setup.rst, line: 64
+msgid "To install XRL from sources, use :program:`git` to clone the repository:"
+msgstr ""
+"Pour installer XRL à partir des sources, utilisez :program:`git` afin de "
+"cloner le dépôt :"

@@ -1,0 +1,98 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2011-2014, Erebot
+# This file is distributed under the same license as the XRL package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: XRL 2.0.x-dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-16 20:51+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/contributing.rst:10
+# bdbacaa6a27541f58729ddf6a4f57d8e
+msgid "Contributing to XRL"
+msgstr ""
+
+#: ../src/contributing.rst:12
+# 99caf47340e04ee5b0f7b07917bcab8b
+msgid "There are several ways by which you may contribute to XRL."
+msgstr ""
+
+#: ../src/contributing.rst:15
+# 1d3e8c433aad40fbb347361f30431c9e
+msgid "Try it!"
+msgstr ""
+
+#: ../src/contributing.rst:17
+# 570a9d3ab6d445fcb0c7d9725a7458a4
+msgid "The more people use it, the better, because it means bugs and regressions can be detected more quickly."
+msgstr ""
+
+#: ../src/contributing.rst:22
+# 7996d86914db4aebae1354f768b8a8d1
+msgid "Report Bugs / Suggest Features"
+msgstr ""
+
+#: ../src/contributing.rst:24
+# 2d3071cfbafc45c4bba9c14b848ab7bf
+msgid "If you use XRL and find issues with it, please let us know on `GitHub <https://github.com/fpoirotte/XRL/issues/new>`_. Try to provide as much detail as possible on how to reproduce your issue. As a rule of thumb, the easier it is to reproduce an issue, the quicker it gets fixed."
+msgstr ""
+
+#: ../src/contributing.rst:32
+# 3d72628ecf15421bb874281af582494e
+msgid "Improve the Documentation"
+msgstr ""
+
+#: ../src/contributing.rst:34
+# f5f9b6077ac24b79871499c1c67b5bfb
+msgid "We try to document XRL as much as we can, but acting both as developers and documentation writers, we tend to be biased as to what needs documentation."
+msgstr ""
+
+#: ../src/contributing.rst:37
+# 5af059cead174396810b63e646f49138
+msgid "So if you feel like some parts could be clearer, send us a pull request with your modifications and we'll try to review them as soon as possible. Any help to improve the documentation will be greatly appreciated!"
+msgstr ""
+
+#: ../src/contributing.rst:43
+# 39d6517e1e844e35afc67e869694beec
+msgid "Fork It! And Improve the Code"
+msgstr ""
+
+#: ../src/contributing.rst:45
+# bf384243f66541138c082ef829772ad2
+msgid "If you find a bug and have some PHP knowledge and time to spare, grab a copy of the code and have a go at fixing it."
+msgstr ""
+
+#: ../src/contributing.rst:48
+# 16f15471c6e34e27ad2ea1eb50a222b0
+msgid "If you already have a GitHub account, it's quite simple:"
+msgstr ""
+
+#: ../src/contributing.rst:50
+# 821901ee1f174819b4d54a70add0ce37
+msgid "`Fork the code <https://github.com/fpoirotte/XRL/fork>`_"
+msgstr ""
+
+#: ../src/contributing.rst:51
+# 652122af21174563811653b40689dd5f
+msgid "Hack away"
+msgstr ""
+
+#: ../src/contributing.rst:52
+# 9ca3b4d8c7274cfea0c658011eef1bfb
+msgid "`Send a pull request <https://github.com/fpoirotte/XRL/compare>`_ for review"
+msgstr ""
+
+#: ../src/contributing.rst:54
+# 6bfd82f6364c468e83eee231a19f4582
+msgid "Repeat again starting at step 2"
+msgstr ""
+

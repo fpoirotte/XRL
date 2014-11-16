@@ -1,0 +1,112 @@
+# French translations for XRL package.
+# Copyright (C) 2011-2014, Erebot
+# This file is distributed under the same license as the XRL package.
+# Automatically generated, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: XRL 2.0.x-dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-16 20:51+0100\n"
+"PO-Revision-Date: 2014-11-16 16:46+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#
+# 4fbe63beaf9a4193a527cf9e9ce8bba6
+# File: ../src/quickstart.rst, line: 10
+# File: ../src/quickstart.rst, line: 10
+# File: ../src/quickstart.rst, line: 10
+msgid "Quick start"
+msgstr "Démarrage rapide"
+#
+# 163c27879d5845288f91145432991d6e
+# File: ../src/quickstart.rst, line: 12
+# File: ../src/quickstart.rst, line: 12
+# File: ../src/quickstart.rst, line: 12
+msgid ""
+"Assuming XRL is correctly :ref:`installed <setup>` on your computer, you can "
+"now write XML-RPC clients and servers."
+msgstr ""
+"En supposant que XRL est correctement :ref:`installé <setup>` sur votre "
+"ordinateur, vous pouvez à présent coder des clients et serveurs XML-RPC."
+#
+# 2bb4912ab8c04e44beff13214de01202
+# File: ../src/quickstart.rst, line: 16
+# File: ../src/quickstart.rst, line: 16
+# File: ../src/quickstart.rst, line: 16
+msgid "Writing an XML-RPC client"
+msgstr "Coder un client XML-RPC"
+#
+# ed8e109fc556457b8c56c5e9cbe38c70
+# c7bbb285ba4d4a20be4eaa5a3aed3f76
+# File: ../src/quickstart.rst, line: 18
+# File: ../src/quickstart.rst, line: 51
+# File: ../src/quickstart.rst, line: 18
+# File: ../src/quickstart.rst, line: 51
+# File: ../src/quickstart.rst, line: 18
+# File: ../src/quickstart.rst, line: 51
+msgid "Load and register the autoloader [#note_composer]_"
+msgstr "Chargez et enregistrez le chargeur automatique [#note_composer]_"
+#
+# e9229c1c866f46978515f1ee5a0fe71c
+# File: ../src/quickstart.rst, line: 25
+# File: ../src/quickstart.rst, line: 25
+# File: ../src/quickstart.rst, line: 25
+msgid "Create a new client configured to query the remote XML-RPC server"
+msgstr ""
+"Créez le nouveau client en le configurant pour qu'il interroge le serveur XML-"
+"RPC distant"
+#
+# 8173c3374cf2461a9fff4003505abc0c
+# File: ../src/quickstart.rst, line: 31
+# File: ../src/quickstart.rst, line: 31
+# File: ../src/quickstart.rst, line: 31
+msgid "Call a method provided by that server, like it were just any other code"
+msgstr ""
+"Appelez une méthode fournie par ce serveur, comme vous le feriez avec "
+"n'importe quel autre code"
+#
+# c978767335f74ca985f5edd8fd8f5bb0
+# File: ../src/quickstart.rst, line: 49
+# File: ../src/quickstart.rst, line: 49
+# File: ../src/quickstart.rst, line: 49
+msgid "Writing an XML-RPC server"
+msgstr "Coder un serveur XML-RPC"
+#
+# 64e03aa2f48e4d1c99207187882f7afa
+# File: ../src/quickstart.rst, line: 58
+# File: ../src/quickstart.rst, line: 58
+# File: ../src/quickstart.rst, line: 58
+msgid "Create a new server instance"
+msgstr "Créez une nouvelle instance de serveur"
+#
+# 26a8f83bc99e419e8437c79a9f1bb7f7
+# File: ../src/quickstart.rst, line: 64
+# File: ../src/quickstart.rst, line: 64
+# File: ../src/quickstart.rst, line: 64
+msgid "Attach some methods to that server"
+msgstr "Attachez quelques méthodes à ce serveur"
+#
+# dad831c3300b4644a8ec096b2c3ec7f2
+# File: ../src/quickstart.rst, line: 110
+# File: ../src/quickstart.rst, line: 110
+# File: ../src/quickstart.rst, line: 110
+msgid "Handle incoming XML-RPC requests and publish the results"
+msgstr "Traitez les requêtes XML-RPC qui arrivent et publiez les résultats"
+#
+# a705db451e5a47f4862021745553c0e8
+# File: ../src/quickstart.rst, line: 117
+# File: ../src/quickstart.rst, line: 117
+# File: ../src/quickstart.rst, line: 117
+msgid ""
+"Users of the `Composer dependency manager <https://getcomposer.org/>`_ should "
+"load the regular autoloader found in ``vendor/autoload.php`` instead."
+msgstr ""
+"Les utilisateurs du `gestionnaire de dépendances Composer <https://"
+"getcomposer.org/>`_ doivent utiliser le chargeur automatique habituel se "
+"trouvant dans ``vendor/autoload.php`` à la place."

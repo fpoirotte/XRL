@@ -1,0 +1,212 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2011-2014, Erebot
+# This file is distributed under the same license as the XRL package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: XRL 2.0.x-dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-16 20:51+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/extensions.rst:12
+# b48ec586a6fa404ba6c8634248f67de7
+msgid "Extensions"
+msgstr ""
+
+#: ../src/extensions.rst:14
+# 1932f195f9384aef85e2d1b5c93b9869
+msgid "XRL supports several extensions to the original XML-RPC specification. These extensions are known to be widely supported by other implementations and generally do not conflict with the original specification."
+msgstr ""
+
+#: ../src/extensions.rst:20
+# cce72f93381d491db0a3bec1f95c80f3
+msgid "Supported extensions"
+msgstr ""
+
+#: ../src/extensions.rst:23
+# 52f57d68540e4178ae5d601781e32c04
+msgid "getCapabilities"
+msgstr ""
+
+#: ../src/extensions.rst:25
+# a4b11ff50598489b9021906a164f4d00
+msgid "The `getCapabilities extension <http://tech.groups.yahoo.com/group/xml-rpc/message/2897>`_ has been designed for two reasons:"
+msgstr ""
+
+#: ../src/extensions.rst:29
+# 54de848800ab440ab6b26e2676e1c9b9
+msgid "To let XML-RPC servers announce (non-standard) features they support."
+msgstr ""
+
+#: ../src/extensions.rst:30
+# 5bed814762e84f82b88dc6d6566fc119
+msgid "To provide an easy way for XML-RPC clients to adapt their behaviour depending on the non-standard features supported by a server."
+msgstr ""
+
+#: ../src/extensions.rst:33
+#: ../src/extensions.rst:46
+#: ../src/extensions.rst:61
+# f5a3f13d630f4673b6d1a917604f1f77
+# d816b85bb70b4b3e8acf7f842bf11865
+# 850ec5b70e9f40a6899304ce6ca295b2
+msgid "XRL servers implement the following additional methods when this extension is enabled:"
+msgstr ""
+
+#: ../src/extensions.rst:36
+# f81d4d5a6f1148d6b3181577d7091e90
+msgid "``system.getCapabilities``"
+msgstr ""
+
+#: ../src/extensions.rst:40
+# 20214d321db64a84a44ab0c6604f9374
+msgid "introspection"
+msgstr ""
+
+#: ../src/extensions.rst:42
+# 76ee20027c554fc8ab5873b6aecf99fd
+msgid "The `introspection <http://xmlrpc-c.sourceforge.net/introspection.html>`_ extension makes it possible for a client to retrieve information about a remote method by querying the XML-RPC server providing it."
+msgstr ""
+
+#: ../src/extensions.rst:49
+# f489f92b1a914fb895d22d5110760938
+msgid "``system.listMethods``"
+msgstr ""
+
+#: ../src/extensions.rst:50
+# 71060660dafb4d46a1b85db81a8ddf87
+msgid "``system.methodSignature``"
+msgstr ""
+
+#: ../src/extensions.rst:51
+# d5c6cff7ac254c6780d850b6783a36c9
+msgid "``system.methodHelp``"
+msgstr ""
+
+#: ../src/extensions.rst:55
+# be4069bd33a640abab9a3aec7256a92d
+msgid "multicall"
+msgstr ""
+
+#: ../src/extensions.rst:57
+# dcc7f087209a46bba5cafaacce992afb
+msgid "The `multicall <http://mirrors.talideon.com/articles/multicall.html>`_ extension has been designed to avoid the latency incurred by HTTP round-trips when making several method calls against the same XML-RPC server."
+msgstr ""
+
+#: ../src/extensions.rst:64
+# 31d1d96784164c12944e29f4e4d7c71b
+msgid "``system.multicall``"
+msgstr ""
+
+#: ../src/extensions.rst:68
+# ace55c408c794cfca54c1a70abc46b83
+msgid "faults_interop"
+msgstr ""
+
+#: ../src/extensions.rst:70
+# cad2cd55bd0b463d829293edfc2ce2b3
+msgid "The `faults_interop <http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php>`_ extension contains specifications for a set of standard error conditions (faults), to promote interoperability between XML-RPC implementations."
+msgstr ""
+
+#: ../src/extensions.rst:75
+# 53a03af775ab4ed48e60d4825b1115a7
+msgid "This extension is always enabled and does not add any additional methods to an XML-RPC server. A developer willing to use the interoperability faults defined in this extension can call ``\\fpoirotte\\XRL\\Faults::get()`` with the name of the fault to create."
+msgstr ""
+
+#: ../src/extensions.rst:86
+# 95c885ad9a8e4634b9d0f35182006807
+msgid "The following interoperability fault names are recognized:"
+msgstr ""
+
+#: ../src/extensions.rst:88
+# e3fc83d67b2b49a99ebb9dd6cebfbd39
+msgid "``NOT_WELL_FORMED``"
+msgstr ""
+
+#: ../src/extensions.rst:89
+# 0e261ce911ea430c92e34a351b87dd31
+msgid "``UNSUPPORTED_ENCODING``"
+msgstr ""
+
+#: ../src/extensions.rst:90
+# 55f2f0402c1d4558b548ca9649234a93
+msgid "``INVALID_CHARACTER``"
+msgstr ""
+
+#: ../src/extensions.rst:91
+# 5a4c0be20384481f8b8e447e19e783c8
+msgid "``INVALID_XML_RPC``"
+msgstr ""
+
+#: ../src/extensions.rst:92
+# 71814a69e86e4a54bcbcd3b0adc96cde
+msgid "``METHOD_NOT_FOUND``"
+msgstr ""
+
+#: ../src/extensions.rst:93
+# e30755bc3a3444d28212c501f603e4d5
+msgid "``INVALID_PARAMETERS``"
+msgstr ""
+
+#: ../src/extensions.rst:94
+# 56f31edeb37948ccb7d4daae323ae40d
+msgid "``INTERNAL_ERROR``"
+msgstr ""
+
+#: ../src/extensions.rst:95
+# 23e7fdbfc1c5452e955b2ee3ba359f6d
+msgid "``APPLICATION_ERROR``"
+msgstr ""
+
+#: ../src/extensions.rst:96
+# adb193cbe32b4ca8a9efaeb2369024d0
+msgid "``SYSTEM_ERROR``"
+msgstr ""
+
+#: ../src/extensions.rst:97
+# eebe2cb841a24e489694c3049eaea32c
+msgid "``TRANSPORT_ERROR``"
+msgstr ""
+
+#: ../src/extensions.rst:101
+# c4d1c64c567f4abebb24b19433fa6ee5
+msgid "Apache types"
+msgstr ""
+
+#: ../src/extensions.rst:103
+# 9b5f8bbfc54c43419a57ca3db7fbab4f
+msgid "The `Apache types <http://ws.apache.org/xmlrpc/types.html>`_ extension is kind of special. It does not define any additional methods, but instead focuses on defining additional XML-RPC types."
+msgstr ""
+
+#: ../src/extensions.rst:107
+# cb6438213aeb4959be589aee90d84764
+msgid "This extension is always enabled. See also the documentation on :ref:`supported XML-RPC types <types>` for more information on these types and how they are used in XRL."
+msgstr ""
+
+#: ../src/extensions.rst:113
+# 83d94f160aac4ce9a97a289df4514aa7
+msgid "Enabling the extensions"
+msgstr ""
+
+#: ../src/extensions.rst:115
+# cc404a2d5a6d4810913d93abe9f37227
+msgid "By default, XRL enables only a few extensions (namely, the ``faults_interop`` and ``Apache types`` extensions)."
+msgstr ""
+
+#: ../src/extensions.rst:118
+# 3ef9cd9d087548319c6a3a3eda828f3a
+msgid "To enable the rest of the extensions, you must call ``\\fpoirotte\\XRL\\CapableServer::enable()`` on the server:"
+msgstr ""
+
+#: ../src/extensions.rst:131
+# c5f3fa5c21bb49f98a4ac12181b2169d
+msgid "It is not currently possible to enable each extension separately when using ``\\fpoirotte\\XRL\\CapableServer::enable()``. It's an all-or-nothing kind of situation."
+msgstr ""
+

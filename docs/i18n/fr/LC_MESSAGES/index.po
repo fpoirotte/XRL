@@ -1,0 +1,196 @@
+# French translations for XRL package.
+# Copyright (C) 2011-2014, Erebot
+# This file is distributed under the same license as the XRL package.
+# Automatically generated, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: XRL 2.0.x-dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-16 20:51+0100\n"
+"PO-Revision-Date: 2014-11-16 16:46+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#
+# 57ed08ad7d74460f9cb94876bd6c1a47
+# File: ../src/index.rst, line: 10
+# File: ../src/index.rst, line: 10
+# File: ../src/index.rst, line: 10
+msgid "XRL's documentation"
+msgstr "Documentation de XRL"
+#
+# 70d0a642ff9745a2b177a575d1361fac
+# File: ../src/index.rst, line: 12
+# File: ../src/index.rst, line: 12
+# File: ../src/index.rst, line: 12
+msgid ""
+"XRL (short for XML-RPC Library) is a collection of PHP classes that ease the "
+"creation of XML-RPC clients or servers."
+msgstr ""
+"XRL (abréviation de XML-RPC Library) est un ensemble de classes PHP "
+"facilitant la création de clients et de serveurs XML-RPC."
+#
+# d4c7fb31eb8e4fefa4eafcbde3097a52
+# File: ../src/index.rst, line: 26
+# File: ../src/index.rst, line: 26
+# File: ../src/index.rst, line: 26
+msgid "Overview"
+msgstr "Vue d'ensemble"
+#
+# 33b4c3a56d8e49b598943b98c264a34e
+# File: ../src/index.rst, line: 28
+# File: ../src/index.rst, line: 28
+# File: ../src/index.rst, line: 28
+msgid ""
+"**Simple setup** |---| grab the PHAR archive or add ``fpoirotte/xrl`` as a "
+"dependency in your :file:`composer.json` and you're good to go."
+msgstr ""
+"**Installation facile** |---| récupérez l'archive PHAR ou ajoutez ``fpoirotte/"
+"xrl`` aux dépendances de votre :file:`composer.json` et vous êtes fin prêt."
+#
+# 5f87e6a142ea467f8d738a1e1322b25e
+# File: ../src/index.rst, line: 30
+# File: ../src/index.rst, line: 30
+# File: ../src/index.rst, line: 30
+msgid ""
+"**Very intuitive syntax** |---| write XML-RPC clients & servers like you "
+"would any other piece of code."
+msgstr ""
+"**Syntaxe très intuitive** |---| écrivez des clients et serveurs XML-RPC "
+"comme n'importe quel autre code."
+#
+# 58279f61c9304fa985741a0a2f6911d6
+# File: ../src/index.rst, line: 32
+# File: ../src/index.rst, line: 32
+# File: ../src/index.rst, line: 32
+msgid ""
+"**Automatic type conversions** |---| use native PHP types without worrying "
+"about XML-RPC quirks."
+msgstr ""
+"**Conversion automatique des types** |---| utilisez les types PHP natifs sans "
+"vous préoccuper des particularités liées à XML-RPC."
+#
+# 7d4cec1276af45459e5cc190fb9af719
+# File: ../src/index.rst, line: 34
+# File: ../src/index.rst, line: 34
+# File: ../src/index.rst, line: 34
+msgid ""
+"**Support for many extensions** |---| want capabilities? introspection? "
+"multicalls?... yep, :ref:`we support them <extensions>`!"
+msgstr ""
+"**Support pour de nombreuses extensions** |---| vous utilisez les "
+"*capabilities* ? l'*introspection* ? le *multicall* ? ... oui, :ref:`nous les "
+"supportons <extensions>` !"
+#
+# b330912183884d02acc26125b94f76a3
+# File: ../src/index.rst, line: 39
+# File: ../src/index.rst, line: 39
+# File: ../src/index.rst, line: 39
+msgid "Setup & Usage"
+msgstr "Installation et usage"
+#
+# 692f8342585d47a0a4ccd54eb4d54dff
+# File: ../src/index.rst, line: 50
+# File: ../src/index.rst, line: 50
+# File: ../src/index.rst, line: 50
+msgid "Features"
+msgstr "Fonctionnalités"
+#
+# 663d5db830184a34a7c5c2efa787474f
+# File: ../src/index.rst, line: 61
+# File: ../src/index.rst, line: 61
+# File: ../src/index.rst, line: 61
+msgid "Contributing"
+msgstr "Contributions"
+#
+# 2618d96e457b49a3a033931ce896400a
+# File: ../src/index.rst, line: 72
+# File: ../src/index.rst, line: 72
+# File: ../src/index.rst, line: 72
+msgid "Licence"
+msgstr "Licence"
+#
+# 644e85ffa9ed4d8eaf5aea5d4f10b832
+# File: ../src/index.rst, line: 74
+# File: ../src/index.rst, line: 74
+# File: ../src/index.rst, line: 74
+msgid ""
+"XRL is released under the `3-clause BSD licence <https://github.com/fpoirotte/"
+"XRL/blob/master/LICENSE>`_."
+msgstr ""
+"XRL est distribué selon les termes de la `licence BSD à 3 clauses <https://"
+"github.com/fpoirotte/XRL/blob/master/LICENSE>`_."
+#
+# c2b7ce2c935e42cb9faf3e42b7614ab9
+# File: ../src/index.rst, line: 79
+# File: ../src/index.rst, line: 79
+# File: ../src/index.rst, line: 79
+msgid "Other resources"
+msgstr "Autres ressources"
+#
+# 5bab6fe85db24e7fbf18fcd008eadf84
+# File: ../src/index.rst, line: 81
+# File: ../src/index.rst, line: 81
+# File: ../src/index.rst, line: 81
+msgid "`Full API documentation <./apidoc/>`_"
+msgstr "`Documentation d'API complète <./apidoc/>`_"
+#
+# 656ba28ec93a411db570fe0f76c3a5dc
+# File: ../src/index.rst, line: 82
+# File: ../src/index.rst, line: 82
+# File: ../src/index.rst, line: 82
+msgid ""
+"`XRL on GitHub <https://github.com/fpoirotte/XRL/>`_ (source code and issue "
+"tracker)"
+msgstr ""
+"`XRL sur GitHub <https://github.com/fpoirotte/XRL/>`_ (suivi de code source "
+"et de bugs)"
+#
+# db765746da79444380c8152f873ddc8f
+# File: ../src/index.rst, line: 83
+# File: ../src/index.rst, line: 83
+# File: ../src/index.rst, line: 83
+msgid ""
+"`XRL on Packagist <https://packagist.org/packages/fpoirotte/XRL>`_ (Composer "
+"repository)"
+msgstr ""
+"`XRL sur Packagist <https://packagist.org/packages/fpoirotte/XRL>`_ (dépôt "
+"Composer)"
+#
+# b8d277f7a62d4600a23018d204fe0074
+# File: ../src/index.rst, line: 84
+# File: ../src/index.rst, line: 84
+# File: ../src/index.rst, line: 84
+msgid ""
+"`XRL on Travis-CI <https://travis-ci.org/fpoirotte/XRL>`_ (continuous "
+"integration)"
+msgstr ""
+"`XRL sur Travis-CI <https://travis-ci.org/fpoirotte/XRL>`_ (intégration "
+"continue)"
+#
+# e18b894c238a45b4852d3cab7d52362b
+# File: ../src/index.rst, line: 85
+# File: ../src/index.rst, line: 85
+# File: ../src/index.rst, line: 85
+msgid ""
+"`XRL on Read The Docs <https://readthedocs.org/projects/xrl/>`_ "
+"(documentation)"
+msgstr ""
+"`XRL sur Read The Docs <https://readthedocs.org/projects/xrl/>`_ "
+"(documentation)"
+#
+#
+#
+# 2acda69c400043d89e8897dbb837b922
+#~ msgid ""
+#~ "**Support for many extensions** |---| want capabilities? introspection? "
+#~ "multicalls?... yep, `we support them <extensions>`_!"
+#~ msgstr ""
+#~ "**Support pour de nombreuses extensions** : vous utilisez les capacités ? "
+#~ "l'introspection ? les appels multiples ?... oui, `nous les supportons "
+#~ "<extensions>`_ !"
