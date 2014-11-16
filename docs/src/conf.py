@@ -78,14 +78,16 @@ def prepare(globs, locs):
     print "Including real configuration file (%s)..." % (real_conf, )
     execfile(real_conf, globs, locs)
 
+    # Patch configuration afterwards.
     locs['copyright'] = u'2012-%d, XRL Team. All rights reserved' % \
             datetime.now().year
-
-    # Copy doxygen output to Sphinx's output folder.
     if 'html_extra_path' not in locs:
         locs['html_extra_path'] = []
     locs['html_extra_path'].append(os.path.join(root, 'build'))
     locs['html_theme'] = 'haiku'
+    if 'locale_dirs' not in locs:
+        locs['locale_dirs'] = []
+    locs['locale_dirs'].insert(0, os.path.join(root, 'docs', 'i18n'))
 
 
 prepare(globals(), locals())
