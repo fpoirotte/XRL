@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-16 20:51+0100\n"
+"POT-Creation-Date: 2014-11-16 21:46+0100\n"
 "PO-Revision-Date: 2014-11-16 16:46+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -19,14 +19,10 @@ msgstr ""
 #
 # 61da8eb77f1f43e1a4408e5c7ff0902b
 # File: ../src/style.rst, line: 10
-# File: ../src/style.rst, line: 10
-# File: ../src/style.rst, line: 10
 msgid "Coding style"
 msgstr "Conventions de codage"
 #
 # 33428a919b9d4a0c87666c932f3d14b6
-# File: ../src/style.rst, line: 12
-# File: ../src/style.rst, line: 12
 # File: ../src/style.rst, line: 12
 msgid ""
 "The XRL team closely follows the `PSR-2 <http://www.php-fig.org/psr/psr-2/>`_ "
@@ -37,8 +33,6 @@ msgstr ""
 #
 # 168d1d0b512f4da1be00cd4cfe50e3a8
 # File: ../src/style.rst, line: 15
-# File: ../src/style.rst, line: 15
-# File: ../src/style.rst, line: 15
 msgid ""
 "Also, when developing, the following command can be used to check various "
 "aspects of the code quality:"
@@ -48,8 +42,6 @@ msgstr ""
 #
 # a22d06c0805243328edf3e243e05f230
 # File: ../src/style.rst, line: 22
-# File: ../src/style.rst, line: 22
-# File: ../src/style.rst, line: 22
 msgid "It runs the following tools on XRL's code to detect possible issues:"
 msgstr ""
 "Elle exécute les outils suivants sur le code de XRL pour détecter les "
@@ -57,21 +49,15 @@ msgstr ""
 #
 # b7733fd3a1d04b1ba2beb6b7b8f303e2
 # File: ../src/style.rst, line: 24
-# File: ../src/style.rst, line: 24
-# File: ../src/style.rst, line: 24
 msgid "PHP lint (``php -l``): checks PHP syntax"
 msgstr "PHP lint (``php -l``) : vérification de la syntaxe PHP"
 #
 # e28091b45c244eb5a82c3e45015a4fad
 # File: ../src/style.rst, line: 25
-# File: ../src/style.rst, line: 25
-# File: ../src/style.rst, line: 25
 msgid "PHP_CodeSniffer: checks code compliance with coding standard"
 msgstr "PHP_CodeSniffer : vérification du respect des conventions de codage"
 #
 # 632899e561db406f81387ec75f38f5d0
-# File: ../src/style.rst, line: 26
-# File: ../src/style.rst, line: 26
 # File: ../src/style.rst, line: 26
 msgid "PDepend: identifies tight coupling between two pieces of code"
 msgstr ""
@@ -79,22 +65,16 @@ msgstr ""
 #
 # 147e35afcc594c41b72ba843affa3fef
 # File: ../src/style.rst, line: 27
-# File: ../src/style.rst, line: 27
-# File: ../src/style.rst, line: 27
 msgid "PHPMD (PHP Mess Detector): detects high-risk code structures"
 msgstr ""
 "PHPMD (PHP Mess Detector) : détection des structures de code posant un risque"
 #
 # cf8fcdeee86d4649a0488f248b203a7b
 # File: ../src/style.rst, line: 28
-# File: ../src/style.rst, line: 28
-# File: ../src/style.rst, line: 28
 msgid "PHPCPD (PHP Copy-Paste Detector): detects copy/paste abuse"
 msgstr "PHPCPD (PHP Copy-Paste Detector) : détection des abus de copier/coller"
 #
 # da029fc3f2bc4dd7b5b13a84a9773945
-# File: ../src/style.rst, line: 29
-# File: ../src/style.rst, line: 29
 # File: ../src/style.rst, line: 29
 msgid "PHPUnit: checks unit tests"
 msgstr "PHPUnit : passage des tests unitaires"

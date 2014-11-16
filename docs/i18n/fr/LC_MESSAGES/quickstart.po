@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-16 20:51+0100\n"
+"POT-Creation-Date: 2014-11-16 21:46+0100\n"
 "PO-Revision-Date: 2014-11-16 16:46+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -19,14 +19,10 @@ msgstr ""
 #
 # 4fbe63beaf9a4193a527cf9e9ce8bba6
 # File: ../src/quickstart.rst, line: 10
-# File: ../src/quickstart.rst, line: 10
-# File: ../src/quickstart.rst, line: 10
 msgid "Quick start"
 msgstr "Démarrage rapide"
 #
 # 163c27879d5845288f91145432991d6e
-# File: ../src/quickstart.rst, line: 12
-# File: ../src/quickstart.rst, line: 12
 # File: ../src/quickstart.rst, line: 12
 msgid ""
 "Assuming XRL is correctly :ref:`installed <setup>` on your computer, you can "
@@ -37,8 +33,6 @@ msgstr ""
 #
 # 2bb4912ab8c04e44beff13214de01202
 # File: ../src/quickstart.rst, line: 16
-# File: ../src/quickstart.rst, line: 16
-# File: ../src/quickstart.rst, line: 16
 msgid "Writing an XML-RPC client"
 msgstr "Coder un client XML-RPC"
 #
@@ -46,16 +40,10 @@ msgstr "Coder un client XML-RPC"
 # c7bbb285ba4d4a20be4eaa5a3aed3f76
 # File: ../src/quickstart.rst, line: 18
 # File: ../src/quickstart.rst, line: 51
-# File: ../src/quickstart.rst, line: 18
-# File: ../src/quickstart.rst, line: 51
-# File: ../src/quickstart.rst, line: 18
-# File: ../src/quickstart.rst, line: 51
 msgid "Load and register the autoloader [#note_composer]_"
 msgstr "Chargez et enregistrez le chargeur automatique [#note_composer]_"
 #
 # e9229c1c866f46978515f1ee5a0fe71c
-# File: ../src/quickstart.rst, line: 25
-# File: ../src/quickstart.rst, line: 25
 # File: ../src/quickstart.rst, line: 25
 msgid "Create a new client configured to query the remote XML-RPC server"
 msgstr ""
@@ -64,8 +52,6 @@ msgstr ""
 #
 # 8173c3374cf2461a9fff4003505abc0c
 # File: ../src/quickstart.rst, line: 31
-# File: ../src/quickstart.rst, line: 31
-# File: ../src/quickstart.rst, line: 31
 msgid "Call a method provided by that server, like it were just any other code"
 msgstr ""
 "Appelez une méthode fournie par ce serveur, comme vous le feriez avec "
@@ -73,35 +59,25 @@ msgstr ""
 #
 # c978767335f74ca985f5edd8fd8f5bb0
 # File: ../src/quickstart.rst, line: 49
-# File: ../src/quickstart.rst, line: 49
-# File: ../src/quickstart.rst, line: 49
 msgid "Writing an XML-RPC server"
 msgstr "Coder un serveur XML-RPC"
 #
 # 64e03aa2f48e4d1c99207187882f7afa
-# File: ../src/quickstart.rst, line: 58
-# File: ../src/quickstart.rst, line: 58
 # File: ../src/quickstart.rst, line: 58
 msgid "Create a new server instance"
 msgstr "Créez une nouvelle instance de serveur"
 #
 # 26a8f83bc99e419e8437c79a9f1bb7f7
 # File: ../src/quickstart.rst, line: 64
-# File: ../src/quickstart.rst, line: 64
-# File: ../src/quickstart.rst, line: 64
 msgid "Attach some methods to that server"
 msgstr "Attachez quelques méthodes à ce serveur"
 #
 # dad831c3300b4644a8ec096b2c3ec7f2
 # File: ../src/quickstart.rst, line: 110
-# File: ../src/quickstart.rst, line: 110
-# File: ../src/quickstart.rst, line: 110
 msgid "Handle incoming XML-RPC requests and publish the results"
 msgstr "Traitez les requêtes XML-RPC qui arrivent et publiez les résultats"
 #
 # a705db451e5a47f4862021745553c0e8
-# File: ../src/quickstart.rst, line: 117
-# File: ../src/quickstart.rst, line: 117
 # File: ../src/quickstart.rst, line: 117
 msgid ""
 "Users of the `Composer dependency manager <https://getcomposer.org/>`_ should "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-16 20:51+0100\n"
+"POT-Creation-Date: 2014-11-16 21:46+0100\n"
 "PO-Revision-Date: 2014-11-16 16:46+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -19,21 +19,15 @@ msgstr ""
 #
 # bc94c355f65749349b15efd103615b28
 # File: ../src/types.rst, line: 12
-# File: ../src/types.rst, line: 12
-# File: ../src/types.rst, line: 12
 msgid "XML-RPC Types"
 msgstr "Types XML-RPC"
 #
 # 2ba018c3420d49c68a2040bf84bac68d
 # File: ../src/types.rst, line: 15
-# File: ../src/types.rst, line: 15
-# File: ../src/types.rst, line: 15
 msgid "Supported types"
 msgstr "Types supportés"
 #
 # 3ef50357546d4d109b5b7dad5acef6a8
-# File: ../src/types.rst, line: 17
-# File: ../src/types.rst, line: 17
 # File: ../src/types.rst, line: 17
 msgid ""
 "XRL supports all the datatypes defined in the `official XML-RPC specification "
@@ -44,35 +38,25 @@ msgstr ""
 #
 # c4e65d831c854d2b85415e386fc5ef3e
 # File: ../src/types.rst, line: 20
-# File: ../src/types.rst, line: 20
-# File: ../src/types.rst, line: 20
 msgid "``int`` and ``i4``: 32-bit signed integer value"
 msgstr "``int`` et ``i4`` : entier signé sur 32 bits"
 #
 # db3200381b6e46e7a8888bd4d0d7d961
-# File: ../src/types.rst, line: 21
-# File: ../src/types.rst, line: 21
 # File: ../src/types.rst, line: 21
 msgid "``boolean``: your usual boolean type"
 msgstr "``boolean`` : le type booléen habituel"
 #
 # 6fa7b93541ab408692d7efb7ad3b3cc5
 # File: ../src/types.rst, line: 22
-# File: ../src/types.rst, line: 22
-# File: ../src/types.rst, line: 22
 msgid "``string``: regular string"
 msgstr "``string`` : une simple chaîne de caractères"
 #
 # c3c46b7ddba34acdb169714edd84c37a
 # File: ../src/types.rst, line: 23
-# File: ../src/types.rst, line: 23
-# File: ../src/types.rst, line: 23
 msgid "``double``: double-precision signed floating point number"
 msgstr "``double`` : nombre flottant signé à double précision"
 #
 # 84acec2142a8452f9e121e8d7085932d
-# File: ../src/types.rst, line: 24
-# File: ../src/types.rst, line: 24
 # File: ../src/types.rst, line: 24
 msgid ""
 "``dateTime.iso8601``: date/time (without milliseconds/timezone information)"
@@ -81,28 +65,20 @@ msgstr ""
 #
 # 5a6ed4e4598941afafc9dd7d3b3a165e
 # File: ../src/types.rst, line: 25
-# File: ../src/types.rst, line: 25
-# File: ../src/types.rst, line: 25
 msgid "``base64``: base64-encoded binary string"
 msgstr "``base64`` : données binaires encodées en base64"
 #
 # 8dbe01683e9042fe9700e1a40c2658bf
-# File: ../src/types.rst, line: 26
-# File: ../src/types.rst, line: 26
 # File: ../src/types.rst, line: 26
 msgid "``struct``: associative array"
 msgstr "``struct`` : tableau associatif"
 #
 # f7bc8c3d36854522b9b3fe0d07b868d6
 # File: ../src/types.rst, line: 27
-# File: ../src/types.rst, line: 27
-# File: ../src/types.rst, line: 27
 msgid "``array``: numeric array"
 msgstr "``array``: tableau indexé"
 #
 # 038e33cfd5a54863b5acb043121c7b37
-# File: ../src/types.rst, line: 29
-# File: ../src/types.rst, line: 29
 # File: ../src/types.rst, line: 29
 msgid ""
 "It also accepts the following types, which are pretty common, despite them "
@@ -113,21 +89,15 @@ msgstr ""
 #
 # 9712b3efd34a46d1b39c3c79212cf615
 # File: ../src/types.rst, line: 32
-# File: ../src/types.rst, line: 32
-# File: ../src/types.rst, line: 32
 msgid "``nil``: null value"
 msgstr "``nil`` : valeur null (absence de valeur)"
 #
 # 5c313aecf74e484d8343ce9206e78bb5
 # File: ../src/types.rst, line: 33
-# File: ../src/types.rst, line: 33
-# File: ../src/types.rst, line: 33
 msgid "``i8``: 64-bit signed integer value"
 msgstr "``i8`` : entier signé sur 64 bits"
 #
 # 32bdea729fc843189594a9eb76309670
-# File: ../src/types.rst, line: 35
-# File: ../src/types.rst, line: 35
 # File: ../src/types.rst, line: 35
 msgid ""
 "Last but not least, it supports the following namespaced types, defined by "
@@ -143,8 +113,6 @@ msgstr ""
 #
 # b91be4d1a7d8483ca82bf9c64641aa46
 # File: ../src/types.rst, line: 41
-# File: ../src/types.rst, line: 41
-# File: ../src/types.rst, line: 41
 msgid "``nil``: null value (same as the non-namespaced type)"
 msgstr ""
 "``nil`` : valeur null (absence de valeur); identique au type sans espace de "
@@ -152,21 +120,15 @@ msgstr ""
 #
 # d97809cb24754c4c9861b12a21264405
 # File: ../src/types.rst, line: 42
-# File: ../src/types.rst, line: 42
-# File: ../src/types.rst, line: 42
 msgid "``i1``: 8-bit signed integer value"
 msgstr "``i1`` : entier signé sur 8 bits"
 #
 # 44c08e9795984f2b9b6f782a299c7169
 # File: ../src/types.rst, line: 43
-# File: ../src/types.rst, line: 43
-# File: ../src/types.rst, line: 43
 msgid "``i2``: 16-bit signed integer value"
 msgstr "``i2`` : entier signé sur 16 bits"
 #
 # 5cf3ee95ce6b4af2be6bb166b0826dd9
-# File: ../src/types.rst, line: 44
-# File: ../src/types.rst, line: 44
 # File: ../src/types.rst, line: 44
 msgid "``i8``: 64-bits signed integer value (same as the non-namespaced type)"
 msgstr ""
@@ -174,28 +136,20 @@ msgstr ""
 #
 # 926ac75e5dea48e69cfcf47b35511710
 # File: ../src/types.rst, line: 45
-# File: ../src/types.rst, line: 45
-# File: ../src/types.rst, line: 45
 msgid "``biginteger``: arbitrary-length integer"
 msgstr "``biginteger`` : entier de taille arbitraire"
 #
 # 1405f09061ba4313b065775b4ce1e368
-# File: ../src/types.rst, line: 46
-# File: ../src/types.rst, line: 46
 # File: ../src/types.rst, line: 46
 msgid "``dom``: a DOM node, transmitted as an XML fragment"
 msgstr "``dom`` : élément du DOM, transmis sous forme de fragment XML"
 #
 # 4d05b5d185044381be344ff287a4dbe2
 # File: ../src/types.rst, line: 47
-# File: ../src/types.rst, line: 47
-# File: ../src/types.rst, line: 47
 msgid "``dateTime``: date/time with milliseconds and timezone information"
 msgstr "``dateTime``: date/heure avec milli-secondes et fuseau horaire"
 #
 # 63f5471f699043ef8bc5c6539b50f5e8
-# File: ../src/types.rst, line: 49
-# File: ../src/types.rst, line: 49
 # File: ../src/types.rst, line: 49
 msgid ""
 "When transmitting non-standard types, XRL always uses namespaced types. See "
@@ -207,14 +161,10 @@ msgstr ""
 #
 # 0eac1b57079e4de397c9e8efe2198654
 # File: ../src/types.rst, line: 54
-# File: ../src/types.rst, line: 54
-# File: ../src/types.rst, line: 54
 msgid "Type conversions"
 msgstr "Conversion des types"
 #
 # b824406f0cc2444d97cb4cdb36425254
-# File: ../src/types.rst, line: 56
-# File: ../src/types.rst, line: 56
 # File: ../src/types.rst, line: 56
 msgid ""
 "By default, XRL automatically converts values between PHP & XML-RPC types "
@@ -225,16 +175,12 @@ msgstr ""
 #
 # 385e08803b7b446f85875a9ed712a62d
 # File: ../src/types.rst, line: 59
-# File: ../src/types.rst, line: 59
-# File: ../src/types.rst, line: 59
 msgid "The following table shows how XRL converts PHP types to XML-RPC types."
 msgstr ""
 "Le tableau qui suit montre comment XRL convertit les types PHP vers les types "
 "XML-RPC."
 #
 # 2877b78c01014f34974473f6342fcc5f
-# File: ../src/types.rst, line: 0
-# File: ../src/types.rst, line: 0
 # File: ../src/types.rst, line: 0
 msgid "PHP to XML-RPC conversion"
 msgstr "Conversion de PHP vers XML-RPC"
@@ -243,19 +189,11 @@ msgstr "Conversion de PHP vers XML-RPC"
 # c306b78dc42b4480b25c23ce95c5ff47
 # File: ../src/types.rst, line: 65
 # File: ../src/types.rst, line: 125
-# File: ../src/types.rst, line: 65
-# File: ../src/types.rst, line: 125
-# File: ../src/types.rst, line: 65
-# File: ../src/types.rst, line: 125
 msgid "PHP type"
 msgstr "Type PHP"
 #
 # 66fc4d3200b24e22938968d2c7e4eca7
 # eac78379f4d4484f97a2b890f74d5a59
-# File: ../src/types.rst, line: 66
-# File: ../src/types.rst, line: 124
-# File: ../src/types.rst, line: 66
-# File: ../src/types.rst, line: 124
 # File: ../src/types.rst, line: 66
 # File: ../src/types.rst, line: 124
 msgid "XML-RPC type"
@@ -267,18 +205,10 @@ msgstr "Type XML-RPC"
 # File: ../src/types.rst, line: 68
 # File: ../src/types.rst, line: 156
 # File: ../src/types.rst, line: 159
-# File: ../src/types.rst, line: 68
-# File: ../src/types.rst, line: 156
-# File: ../src/types.rst, line: 159
-# File: ../src/types.rst, line: 68
-# File: ../src/types.rst, line: 156
-# File: ../src/types.rst, line: 159
 msgid "``null``"
 msgstr "``null``"
 #
 # b0875de7e8434c019dc503dd2258f827
-# File: ../src/types.rst, line: 69
-# File: ../src/types.rst, line: 69
 # File: ../src/types.rst, line: 69
 msgid "namespaced ``nil``"
 msgstr "``nil`` dans un espace de noms"
@@ -287,14 +217,6 @@ msgstr "``nil`` dans un espace de noms"
 # 4277fa69283b4db3ada9a5d50c13d290
 # d979aaf8e961431e96eb14ae593a36ec
 # 27370b254781443eb685b15a9271e7a3
-# File: ../src/types.rst, line: 71
-# File: ../src/types.rst, line: 72
-# File: ../src/types.rst, line: 127
-# File: ../src/types.rst, line: 128
-# File: ../src/types.rst, line: 71
-# File: ../src/types.rst, line: 72
-# File: ../src/types.rst, line: 127
-# File: ../src/types.rst, line: 128
 # File: ../src/types.rst, line: 71
 # File: ../src/types.rst, line: 72
 # File: ../src/types.rst, line: 127
@@ -308,18 +230,10 @@ msgstr "``boolean``"
 # File: ../src/types.rst, line: 74
 # File: ../src/types.rst, line: 131
 # File: ../src/types.rst, line: 134
-# File: ../src/types.rst, line: 74
-# File: ../src/types.rst, line: 131
-# File: ../src/types.rst, line: 134
-# File: ../src/types.rst, line: 74
-# File: ../src/types.rst, line: 131
-# File: ../src/types.rst, line: 134
 msgid "``integer``"
 msgstr "``integer``"
 #
 # 31eddeb5d5a241aca2de22cc09869e3f
-# File: ../src/types.rst, line: 75
-# File: ../src/types.rst, line: 75
 # File: ../src/types.rst, line: 75
 msgid "``i4`` if it fits into 32 bits, namespaced ``i8`` [1]_ otherwise"
 msgstr ""
@@ -330,14 +244,6 @@ msgstr ""
 # 4aa26ba68d5f41dbbc87af6171fc7425
 # f4200bff6d1643faa1a6b05986ea82d0
 # 417274f7d7f24274862ee186cadb00e8
-# File: ../src/types.rst, line: 78
-# File: ../src/types.rst, line: 79
-# File: ../src/types.rst, line: 136
-# File: ../src/types.rst, line: 137
-# File: ../src/types.rst, line: 78
-# File: ../src/types.rst, line: 79
-# File: ../src/types.rst, line: 136
-# File: ../src/types.rst, line: 137
 # File: ../src/types.rst, line: 78
 # File: ../src/types.rst, line: 79
 # File: ../src/types.rst, line: 136
@@ -353,20 +259,10 @@ msgstr "``double``"
 # File: ../src/types.rst, line: 139
 # File: ../src/types.rst, line: 140
 # File: ../src/types.rst, line: 143
-# File: ../src/types.rst, line: 81
-# File: ../src/types.rst, line: 139
-# File: ../src/types.rst, line: 140
-# File: ../src/types.rst, line: 143
-# File: ../src/types.rst, line: 81
-# File: ../src/types.rst, line: 139
-# File: ../src/types.rst, line: 140
-# File: ../src/types.rst, line: 143
 msgid "``string``"
 msgstr "``string``"
 #
 # fbe4762a27da4e78bc5ded4fa42377b0
-# File: ../src/types.rst, line: 82
-# File: ../src/types.rst, line: 82
 # File: ../src/types.rst, line: 82
 msgid "``string`` if it is a valid UTF-8 string, ``base64`` otherwise"
 msgstr "``string`` s'il s'agit d'une séquence UTF-8 valide, ``base64`` sinon"
@@ -375,16 +271,10 @@ msgstr "``string`` s'il s'agit d'une séquence UTF-8 valide, ``base64`` sinon"
 # fa3b308a52924f2280ee7c6ba2b4fc14
 # File: ../src/types.rst, line: 85
 # File: ../src/types.rst, line: 145
-# File: ../src/types.rst, line: 85
-# File: ../src/types.rst, line: 145
-# File: ../src/types.rst, line: 85
-# File: ../src/types.rst, line: 145
 msgid "``array``"
 msgstr "``array``"
 #
 # c847d4dc042e4200a0af94a895efc92e
-# File: ../src/types.rst, line: 86
-# File: ../src/types.rst, line: 86
 # File: ../src/types.rst, line: 86
 msgid "``array`` for numeric arrays, ``struct`` for associative arrays"
 msgstr ""
@@ -392,17 +282,11 @@ msgstr ""
 #
 # 8089809a4dcf450db4e63604cac7d743
 # File: ../src/types.rst, line: 89
-# File: ../src/types.rst, line: 89
-# File: ../src/types.rst, line: 89
 msgid "``GMP integer`` resource (PHP < 5.6.0)"
 msgstr "ressource ``GMP integer`` (PHP < 5.6.0)"
 #
 # 208a10ff37194c34bdd899b52e0e9714
 # 8208a69e51ac43d08ba48189471b2e8b
-# File: ../src/types.rst, line: 90
-# File: ../src/types.rst, line: 98
-# File: ../src/types.rst, line: 90
-# File: ../src/types.rst, line: 98
 # File: ../src/types.rst, line: 90
 # File: ../src/types.rst, line: 98
 msgid ""
@@ -414,21 +298,15 @@ msgstr ""
 #
 # de0f311b1e2f4b41b1fcd820c4a53212
 # File: ../src/types.rst, line: 94
-# File: ../src/types.rst, line: 94
-# File: ../src/types.rst, line: 94
 msgid "``\\fpoirotte\\XRL\\Types\\AbstractType`` object"
 msgstr "objet ``\\fpoirotte\\XRL\\Types\\AbstractType``"
 #
 # 8d1f6012b4b64be28c6a46501cefd092
 # File: ../src/types.rst, line: 95
-# File: ../src/types.rst, line: 95
-# File: ../src/types.rst, line: 95
 msgid "XML-RPC type it represents"
 msgstr "Type XML-RPC représenté par l'objet"
 #
 # 6079e87c4ba642f8bd520b29063a10e4
-# File: ../src/types.rst, line: 97
-# File: ../src/types.rst, line: 97
 # File: ../src/types.rst, line: 97
 msgid "``\\GMP`` object (PHP >= 5.6.0)"
 msgstr "objet ``\\GMP`` (PHP >= 5.6.0)"
@@ -437,23 +315,15 @@ msgstr "objet ``\\GMP`` (PHP >= 5.6.0)"
 # d6ffab453b2a4e11b5a6030886ad8123
 # File: ../src/types.rst, line: 102
 # File: ../src/types.rst, line: 183
-# File: ../src/types.rst, line: 102
-# File: ../src/types.rst, line: 183
-# File: ../src/types.rst, line: 102
-# File: ../src/types.rst, line: 183
 msgid "``\\DateTime`` object"
 msgstr "objet ``\\DateTime``"
 #
 # cf6b631f42d649a8b9ac735847667057
 # File: ../src/types.rst, line: 103
-# File: ../src/types.rst, line: 103
-# File: ../src/types.rst, line: 103
 msgid "``dateTime.iso8601`` (using local timezone information by default)"
 msgstr "``dateTime.iso8601`` (en utilisant le fuseau horaire local par défaut)"
 #
 # 41ed1cf459b9451e88745c7c8de83884
-# File: ../src/types.rst, line: 105
-# File: ../src/types.rst, line: 105
 # File: ../src/types.rst, line: 105
 msgid "``\\DOMNode`` object"
 msgstr "objet ``\\DOMNode``"
@@ -466,20 +336,10 @@ msgstr "objet ``\\DOMNode``"
 # File: ../src/types.rst, line: 109
 # File: ../src/types.rst, line: 112
 # File: ../src/types.rst, line: 179
-# File: ../src/types.rst, line: 106
-# File: ../src/types.rst, line: 109
-# File: ../src/types.rst, line: 112
-# File: ../src/types.rst, line: 179
-# File: ../src/types.rst, line: 106
-# File: ../src/types.rst, line: 109
-# File: ../src/types.rst, line: 112
-# File: ../src/types.rst, line: 179
 msgid "namespaced ``dom`` [1]_"
 msgstr "``dom`` dans un espace de noms [1]_"
 #
 # b514d13505694f14b886b4aef4676795
-# File: ../src/types.rst, line: 108
-# File: ../src/types.rst, line: 108
 # File: ../src/types.rst, line: 108
 msgid "``\\XMLWriter`` object"
 msgstr "objet ``\\XMLWriter``"
@@ -488,30 +348,20 @@ msgstr "objet ``\\XMLWriter``"
 # e9b5309d66d74ac795cd75e634c0fa70
 # File: ../src/types.rst, line: 111
 # File: ../src/types.rst, line: 180
-# File: ../src/types.rst, line: 111
-# File: ../src/types.rst, line: 180
-# File: ../src/types.rst, line: 111
-# File: ../src/types.rst, line: 180
 msgid "``\\SimpleXMLElement`` object"
 msgstr "objet ``\\SimpleXMLElement``"
 #
 # d24b733e3e944f27b2119a7cdf177af1
-# File: ../src/types.rst, line: 114
-# File: ../src/types.rst, line: 114
 # File: ../src/types.rst, line: 114
 msgid "``\\Exception`` object"
 msgstr "objet ``\\Exception``"
 #
 # 57c52a3e2dba4160ab5ce0d6e24f59d3
 # File: ../src/types.rst, line: 115
-# File: ../src/types.rst, line: 115
-# File: ../src/types.rst, line: 115
 msgid "XML-RPC fault (derived from ``struct``)"
 msgstr "faute XML-RPC (dérivée de ``struct``)"
 #
 # 4718a8ce6b394d3f9c17d1c2b06e0b8c
-# File: ../src/types.rst, line: 118
-# File: ../src/types.rst, line: 118
 # File: ../src/types.rst, line: 118
 msgid "The following table shows how XRL converts XML-RPC types to PHP types."
 msgstr ""
@@ -520,49 +370,35 @@ msgstr ""
 #
 # a514eae7ec3c45d2b961f3901ef07723
 # File: ../src/types.rst, line: 0
-# File: ../src/types.rst, line: 0
-# File: ../src/types.rst, line: 0
 msgid "XML-RPC to PHP conversion"
 msgstr "Conversion XML-RPC vers PHP"
 #
 # e4805b32b78f4d7caebedde445567f9a
-# File: ../src/types.rst, line: 130
-# File: ../src/types.rst, line: 130
 # File: ../src/types.rst, line: 130
 msgid "``i4``"
 msgstr "``i4``"
 #
 # a8b124cd0f1049b19e76eaa265440241
 # File: ../src/types.rst, line: 133
-# File: ../src/types.rst, line: 133
-# File: ../src/types.rst, line: 133
 msgid "``int``"
 msgstr "``int``"
 #
 # 48c6b93588f04f7387eb3e05b6ccc118
-# File: ../src/types.rst, line: 142
-# File: ../src/types.rst, line: 142
 # File: ../src/types.rst, line: 142
 msgid "``base64``"
 msgstr "``base64``"
 #
 # d2a5e278711f4b93a6542049422dead1
 # File: ../src/types.rst, line: 146
-# File: ../src/types.rst, line: 146
-# File: ../src/types.rst, line: 146
 msgid "numeric array"
 msgstr "tableau indexé"
 #
 # 23b22b7a489542b398ca0e5a0e4abeb9
 # File: ../src/types.rst, line: 148
-# File: ../src/types.rst, line: 148
-# File: ../src/types.rst, line: 148
 msgid "``struct``"
 msgstr "``struct``"
 #
 # 55ed08344d124720b42ec4f6f90ecb23
-# File: ../src/types.rst, line: 149
-# File: ../src/types.rst, line: 149
 # File: ../src/types.rst, line: 149
 msgid ""
 "``\\Exception`` object if the structure represents a fault [2]_, associative "
@@ -573,35 +409,25 @@ msgstr ""
 #
 # 056b72873a9a4434b920922704eb7551
 # File: ../src/types.rst, line: 152
-# File: ../src/types.rst, line: 152
-# File: ../src/types.rst, line: 152
 msgid "``dateTime.iso8601``"
 msgstr "``dateTime.iso8601``"
 #
 # 15be75f172a34abaa7ef4b7b49cee112
-# File: ../src/types.rst, line: 153
-# File: ../src/types.rst, line: 153
 # File: ../src/types.rst, line: 153
 msgid "``\\DateTime`` (using local timezone information by default)"
 msgstr "``\\DateTime`` (en utilisant le fuseau horaire local par défaut)"
 #
 # 1f505f59cf6a4a78a94b08fab71ebf49
 # File: ../src/types.rst, line: 155
-# File: ../src/types.rst, line: 155
-# File: ../src/types.rst, line: 155
 msgid "``nil``"
 msgstr "``nil``"
 #
 # 4141914bdb54473c9457a928400ecd99
 # File: ../src/types.rst, line: 158
-# File: ../src/types.rst, line: 158
-# File: ../src/types.rst, line: 158
 msgid "namespaced ``nil`` [1]_"
 msgstr "``nil`` dans un espace de noms [1]_"
 #
 # 1e86b976c30048f0a1cd6f24ff9ec923
-# File: ../src/types.rst, line: 161
-# File: ../src/types.rst, line: 161
 # File: ../src/types.rst, line: 161
 msgid "namespaced ``i1`` [1]_"
 msgstr "``i1`` dans un espace de noms [1]_"
@@ -610,23 +436,15 @@ msgstr "``i1`` dans un espace de noms [1]_"
 # f5a47f8defc14defb97edf6084ce83d2
 # File: ../src/types.rst, line: 162
 # File: ../src/types.rst, line: 165
-# File: ../src/types.rst, line: 162
-# File: ../src/types.rst, line: 165
-# File: ../src/types.rst, line: 162
-# File: ../src/types.rst, line: 165
 msgid "integer"
 msgstr "entier"
 #
 # 005987e0616d43e98fff8258aa08d0e7
 # File: ../src/types.rst, line: 164
-# File: ../src/types.rst, line: 164
-# File: ../src/types.rst, line: 164
 msgid "namespaced ``i2`` [1]_"
 msgstr "``i2`` dans un espace de noms [1]_"
 #
 # 0314d8f9c8494d42a8c24e9d49055328
-# File: ../src/types.rst, line: 167
-# File: ../src/types.rst, line: 167
 # File: ../src/types.rst, line: 167
 msgid "``i8``"
 msgstr "``i8``"
@@ -637,12 +455,6 @@ msgstr "``i8``"
 # File: ../src/types.rst, line: 168
 # File: ../src/types.rst, line: 172
 # File: ../src/types.rst, line: 176
-# File: ../src/types.rst, line: 168
-# File: ../src/types.rst, line: 172
-# File: ../src/types.rst, line: 176
-# File: ../src/types.rst, line: 168
-# File: ../src/types.rst, line: 172
-# File: ../src/types.rst, line: 176
 msgid ""
 "``GMP integer`` resource (PHP < 5.6.0) or ``\\GMP`` object (PHP >= 5.6.0)"
 msgstr ""
@@ -650,28 +462,20 @@ msgstr ""
 #
 # 005b9d9ee4c74db2b11a273bf16d3fee
 # File: ../src/types.rst, line: 171
-# File: ../src/types.rst, line: 171
-# File: ../src/types.rst, line: 171
 msgid "namespaced ``i8`` [1]_"
 msgstr "``i8`` dans un espace de noms [1]_"
 #
 # 81656898c5354ba2a79e3e03ad59543f
-# File: ../src/types.rst, line: 175
-# File: ../src/types.rst, line: 175
 # File: ../src/types.rst, line: 175
 msgid "namespaced ``biginteger`` [1]_"
 msgstr "``biginteger`` dans un espace de noms [1]_"
 #
 # 4cc4fd3b5bf24bfab4cd982e5eece4dc
 # File: ../src/types.rst, line: 182
-# File: ../src/types.rst, line: 182
-# File: ../src/types.rst, line: 182
 msgid "namespaced ``datetime`` [1]_"
 msgstr "``datetime`` dans un espace de noms [1]_"
 #
 # 48e409808e2547aab7b0944207af0961
-# File: ../src/types.rst, line: 187
-# File: ../src/types.rst, line: 187
 # File: ../src/types.rst, line: 187
 msgid ""
 "Using the namespace URI http://ws.apache.org/xmlrpc/namespaces/extensions for "
@@ -682,8 +486,6 @@ msgstr ""
 #
 # 6b0e08b776aa4201af4b79a8e776bde8
 # File: ../src/types.rst, line: 191
-# File: ../src/types.rst, line: 191
-# File: ../src/types.rst, line: 191
 msgid ""
 "An XML-RPC ``struct`` representing a fault (ie. an error condition) gets "
 "converted to an exception that is automatically thrown."
@@ -693,14 +495,10 @@ msgstr ""
 #
 # 3898e5ea985d4ea48ec03fcde4e97e2e
 # File: ../src/types.rst, line: 196
-# File: ../src/types.rst, line: 196
-# File: ../src/types.rst, line: 196
 msgid "Under the hood"
 msgstr "Sous le capot"
 #
 # 1df87424f7304180a7c68ddabe496f70
-# File: ../src/types.rst, line: 198
-# File: ../src/types.rst, line: 198
 # File: ../src/types.rst, line: 198
 msgid ""
 "Type conversions are handled by the ``\\fpoirotte\\XRL\\NativeEncoder`` class "
@@ -716,8 +514,6 @@ msgstr ""
 #
 # 73029bb0c05e44b190d2ca644ca398a1
 # File: ../src/types.rst, line: 203
-# File: ../src/types.rst, line: 203
-# File: ../src/types.rst, line: 203
 msgid ""
 "You may override or disable the conversion by passing another encoder/decoder "
 "to the XML-RPC client or server constructor."
@@ -726,8 +522,6 @@ msgstr ""
 "encodeur/décodeur au constructeur du client ou du serveur XML-RPC."
 #
 # afc6c2d5a64e4665ae054949ebe08c74
-# File: ../src/types.rst, line: 208
-# File: ../src/types.rst, line: 208
 # File: ../src/types.rst, line: 208
 msgid ""
 "If you change the default encoder/decoder, you will then be responsible for "
@@ -739,8 +533,6 @@ msgstr ""
 "\\AbstractType`` utilisées en interne par XRL."
 #
 # d9a9067ea0ee4468a350930c1bd0b876
-# File: ../src/types.rst, line: 214
-# File: ../src/types.rst, line: 214
 # File: ../src/types.rst, line: 214
 msgid ""
 "XML-RPC faults are handled specially and will always turn into ``\\fpoirotte"

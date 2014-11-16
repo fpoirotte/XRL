@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-16 20:51+0100\n"
+"POT-Creation-Date: 2014-11-16 21:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,6 +30,19 @@ msgid ""
 msgstr ""
 "XRL (short for XML-RPC Library) is a collection of PHP classes that ease the "
 "creation of XML-RPC clients or servers."
+#
+# 865f5ab5d5044d6dbea754579a3f2822
+# File: ../src/index.rst, line: 19
+msgid ""
+"This documentation was built automatically from the latest changes in `XRL's "
+"code <https://github.com/fpoirotte/XRL/>`_. It does not necessarily reflect "
+"features from any current or upcoming release. Check out https://readthedocs."
+"org/projects/xrl/ for documentation on supported versions."
+msgstr ""
+"This documentation was built automatically from the latest changes in `XRL's "
+"code <https://github.com/fpoirotte/XRL/>`_. It does not necessarily reflect "
+"features from any current or upcoming release. Check out https://readthedocs."
+"org/projects/xrl/ for documentation on supported versions."
 #
 # c240b16963174d29b3955d88e6ff5446
 # File: ../src/index.rst, line: 26
