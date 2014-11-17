@@ -16,6 +16,8 @@ def prepare(globs, locs):
                 ).stdout.read().strip()
     doxygen = Popen('which doxygen 2> %s' % os.devnull, shell=True, stdout=PIPE
                 ).stdout.read().strip()
+    msgfmt = Popen('which msgfmt 2> %s' % os.devnull, shell=True, stdout=PIPE
+                ).stdout.read().strip()
     cwd = os.getcwd()
     root = os.path.abspath(os.path.join(cwd, '..', '..'))
     os.chdir(root)
@@ -76,7 +78,7 @@ def prepare(globs, locs):
     # Compile translation catalogs.
     for po in glob.iglob(os.path.join(root, 'docs', 'i18n', '*', 'LC_MESSAGES', '*.po')):
         mo = po[:-3] + '.mo'
-        call(['msgfmt', '--statistics' '-c', '-o', mo, po])
+        call([msgfmt, '--statistics', '-c', '-o', mo, po])
 
     # Load the real Sphinx configuration file.
     os.chdir(cwd)
