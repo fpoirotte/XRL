@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import glob
 import shutil
 from datetime import datetime
 from subprocess import call, Popen, PIPE
@@ -72,7 +73,12 @@ def prepare(globs, locs):
         os.path.join(root, 'build', 'apidoc'),
     )
 
-    # Load the real Sphinx confiruation file
+    # Compile translation catalogs.
+    for po in glob.iglob(os.path.join(root, 'docs', 'i18n', '*', 'LC_MESSAGES', '*.po')):
+        mo = po[:-3] + '.mo'
+        call(['msgfmt', '--statistics' '-c', '-o', mo, po])
+
+    # Load the real Sphinx configuration file.
     os.chdir(cwd)
     real_conf = os.path.join(buildenv, 'sphinx', 'conf.py')
     print "Including real configuration file (%s)..." % (real_conf, )
