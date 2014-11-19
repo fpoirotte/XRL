@@ -12,12 +12,18 @@ except ImportError:
     import json
 
 def prepare(globs, locs):
+    # Where are we?
+    cwd = os.getcwd()
+    root = os.path.abspath(os.path.join(cwd, '..', '..'))
+
     git = Popen('which git 2> %s' % os.devnull, shell=True, stdout=PIPE
                 ).stdout.read().strip()
     doxygen = Popen('which doxygen 2> %s' % os.devnull, shell=True, stdout=PIPE
                 ).stdout.read().strip()
-    pybabel = Popen('which pybabel 2> %s' % os.devnull, shell=True, stdout=PIPE
-                ).stdout.read().strip()
+
+    environment = os.path.basename(root)
+    pybabel = os.path.join(root, '..', '..', 'envs',
+                           environment, 'bin', 'pybabel')
 
     print "git version:"
     call([git, '--version'])
@@ -26,11 +32,8 @@ def prepare(globs, locs):
     print "pybabel version:"
     call([pybabel, '--version'])
 
-    # Where are we?
-    cwd = os.getcwd()
-    root = os.path.abspath(os.path.join(cwd, '..', '..'))
-    os.chdir(root)
     print "Running from %s..." % (root, )
+    os.chdir(root)
 
     # Figure several configuration values from git.
     origin = Popen([git, 'config', '--local', 'remote.origin.url'],
