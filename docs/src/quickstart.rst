@@ -55,49 +55,52 @@ Writing an XML-RPC server
 
 3.  Attach some methods to that server
 
-    ..  sourcecode:: inline-php
+        -   You can register anonymous functions, closures,
+            global functions, public methods on objects, etc.
+            using the attribute access operator ``->``.
+            You may even use invokable objects!
 
-        // You can register anonymous functions, closures,
-        // global functions, public (static) methods on
-        // objects and classes, etc. using the attribute
-        // access operator "->".
-        // You may even register invokable objects!
-        class Simpson
-        {
-            private $speech = array(
-                'Homer'     => 'Doh!',
-                'Marge'     => 'Hmm...',
-                'Bart'      => 'Aie, caramba!',
-                'Lisa'      => M_PI,
-                'Maggie'    => null,
-            );
-            private $character;
+            ..  sourcecode:: inline-php
 
-            public function __construct($character)
-            {
-                if (!array_key_exists($character, $this->speech)) {
-                    throw new InvalidArgumentException("Who's that?");
+                class Simpson
+                {
+                    private $speech = array(
+                        'Homer'     => 'Doh!',
+                        'Marge'     => 'Hmm...',
+                        'Bart'      => 'Aie, caramba!',
+                        'Lisa'      => M_PI,
+                        'Maggie'    => null,
+                    );
+                    private $character;
+
+                    public function __construct($character)
+                    {
+                        if (!array_key_exists($character, $this->speech)) {
+                            throw new InvalidArgumentException("Who's that?");
+                        }
+                        $this->character = $character;
+                    }
+
+                    public function __invoke()
+                    {
+                        return $this->speech[$this->character];
+                    }
                 }
-                $this->character = $character;
-            }
+                $server->homer  = new Simpson('Homer');
+                $server->marge  = new Simpson('Marge');
+                $server->bart   = new Simpson('Bart');
+                $server->lisa   = new Simpson('Lisa');
+                $server->maggie = new Simpson('Maggie');
 
-            public function __invoke()
-            {
-                return $this->speech[$this->character];
-            }
-        }
-        $server->homer  = new Simpson('Homer');
-        $server->marge  = new Simpson('Marge');
-        $server->bart   = new Simpson('Bart');
-        $server->lisa   = new Simpson('Lisa');
-        $server->maggie = new Simpson('Maggie');
+        -   Alternatively, you can use the array syntax ``[]`` instead.
+            This is recommended as it avoids potential conflicts
+            with XRL's own attributes and it makes things easier
+            when the method's name is not a valid PHP identifier.
 
-        // ...or you can use the array syntax "[]" instead.
-        // This is recommended as it avoids potential conflicts
-        // with XRL's own attributes and it makes things easier
-        // when the method's name is not a valid PHP identifier.
-        $server['hello'] = function ($s) { return "Hello $s!"; };
-        $server['string.up'] = 'strtoupper';
+            ..  sourcecode:: inline-php
+
+                $server['hello'] = function ($s) { return "Hello $s!"; };
+                $server['string.up'] = 'strtoupper';
 
 4.  Handle incoming XML-RPC requests and publish the results
 

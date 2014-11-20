@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-16 21:46+0100\n"
+"POT-Creation-Date: 2014-11-20 20:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,13 +68,35 @@ msgstr "Create a new server instance"
 msgid "Attach some methods to that server"
 msgstr "Attach some methods to that server"
 #
+# 84009af406c84a93a77230511dd47755
+# File: ../src/quickstart.rst, line: 66
+msgid ""
+"You can register anonymous functions, closures, global functions, public "
+"methods on objects, etc. using the attribute access operator ``->``. You may "
+"even use invokable objects!"
+msgstr ""
+"You can register anonymous functions, closures, global functions, public "
+"methods on objects, etc. using the attribute access operator ``->``. You may "
+"even use invokable objects!"
+#
+# 67269efe2e4544df91f1e29c92f2efbc
+# File: ../src/quickstart.rst, line: 103
+msgid ""
+"Alternatively, you can use the array syntax ``[]`` instead. This is "
+"recommended as it avoids potential conflicts with XRL's own attributes and it "
+"makes things easier when the method's name is not a valid PHP identifier."
+msgstr ""
+"Alternatively, you can use the array syntax ``[]`` instead. This is "
+"recommended as it avoids potential conflicts with XRL's own attributes and it "
+"makes things easier when the method's name is not a valid PHP identifier."
+#
 # 107f3cc91a3f4a6a99e8cab3ddf1de3e
-# File: ../src/quickstart.rst, line: 110
+# File: ../src/quickstart.rst, line: 113
 msgid "Handle incoming XML-RPC requests and publish the results"
 msgstr "Handle incoming XML-RPC requests and publish the results"
 #
 # 15e82bd1bc274aeea5724361daabcb1c
-# File: ../src/quickstart.rst, line: 117
+# File: ../src/quickstart.rst, line: 120
 msgid ""
 "Users of the `Composer dependency manager <https://getcomposer.org/>`_ should "
 "load the regular autoloader found in ``vendor/autoload.php`` instead."

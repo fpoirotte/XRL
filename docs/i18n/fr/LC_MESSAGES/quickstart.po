@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-16 21:46+0100\n"
+"POT-Creation-Date: 2014-11-20 20:44+0100\n"
 "PO-Revision-Date: 2014-11-16 16:46+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -71,6 +71,28 @@ msgstr "Créez une nouvelle instance de serveur"
 # File: ../src/quickstart.rst, line: 64
 msgid "Attach some methods to that server"
 msgstr "Attachez quelques méthodes à ce serveur"
+#
+# 84009af406c84a93a77230511dd47755
+msgid ""
+"You can register anonymous functions, closures, global functions, public "
+"methods on objects, etc. using the attribute access operator ``->``. You may "
+"even use invokable objects!"
+msgstr ""
+"Vous pouvez attacher des fonctions anonymes, des *closures*, des fonctions "
+"globales, des méthodes publiques d'objets, etc. en utilisant l'opérateur "
+"d'accès aux attributs ``->``. Vous pouvez même utiliser des objets "
+"invocables !"
+#
+# 67269efe2e4544df91f1e29c92f2efbc
+msgid ""
+"Alternatively, you can use the array syntax ``[]`` instead. This is "
+"recommended as it avoids potential conflicts with XRL's own attributes and it "
+"makes things easier when the method's name is not a valid PHP identifier."
+msgstr ""
+"Ou bien, vous pouvez utiliser la syntaxe des tableaux ``[]`` à la place. Il "
+"s'agit de l'approche recommandée car elle évite des conflits potentiels avec "
+"les attributs internes de XRL et simplifie l'utilisation de noms de méthodes "
+"qui ne sont pas des identifiants PHP valides."
 #
 # dad831c3300b4644a8ec096b2c3ec7f2
 # File: ../src/quickstart.rst, line: 110
