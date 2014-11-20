@@ -13,7 +13,7 @@ namespace fpoirotte\XRL\Types;
 
 /**
  * \brief
- *      The XML-RPC "i2" type.
+ *      The XML-RPC "i1" type.
  *
  * The "i1" type extension, as described in
  * http://ws.apache.org/xmlrpc/types.html

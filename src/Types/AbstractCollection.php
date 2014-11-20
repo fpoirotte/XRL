@@ -14,7 +14,7 @@ namespace fpoirotte\XRL\Types;
 /**
  * \brief
  *      An abstract XML-RPC type representing
- *      a collection of value.
+ *      a collection of values.
  *
  * \authors François Poirotte <clicky@erebot.net>
  */

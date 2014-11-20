@@ -14,7 +14,7 @@ namespace fpoirotte\XRL;
 /**
  * \brief
  *      A class that adds various capabilities
- *      to an XML-RPC server.
+ *      to an existing XML-RPC server.
  */
 class CapableServer
 {

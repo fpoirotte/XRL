@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-20 20:52+0100\n"
+"POT-Creation-Date: 2014-11-20 21:05+0100\n"
 "PO-Revision-Date: 2014-11-16 16:46+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -484,7 +484,7 @@ msgid ""
 "converted to an exception that is automatically thrown."
 msgstr ""
 "Un ``struct`` XML-RPC représentant une faute (c'est-à-dire une erreur) est "
-"convertie en une exception qui est automatiquement levée."
+"converti en une exception qui est automatiquement levée."
 #
 # 3898e5ea985d4ea48ec03fcde4e97e2e
 # File: ../src/types.rst, line: 196

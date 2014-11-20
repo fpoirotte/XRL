@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-20 20:52+0100\n"
+"POT-Creation-Date: 2014-11-20 21:05+0100\n"
 "PO-Revision-Date: 2014-11-16 16:46+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -26,10 +26,12 @@ msgstr "HipHop Virtual Machine"
 # File: ../src/hhvm.rst, line: 12
 msgid ""
 "HipHop Virtual Machine (HHVM) is a process virtual machine based on just-in-"
-"time (JIT) compilation, serving as an execution engine for PHP."
+"time (JIT) compilation, serving as an execution engine for PHP and Hack "
+"programming languages."
 msgstr ""
 "HipHop Virtual Machine (HHVM) est une machine virtuelle basée sur la "
-"compilation juste-à-temps (JIT) et servant de moteur d'exécution pour PHP."
+"compilation à la volée (JIT) et servant de moteur d'exécution pour les "
+"langages de programmation PHP et Hack."
 #
 # 05ba78db70264e6e869eede16b29b9c0
 # File: ../src/hhvm.rst, line: 16
