@@ -151,10 +151,10 @@ The following table shows how XRL converts XML-RPC types to PHP types.
         -   ``null``
 
     *   -   namespaced ``i1`` [1]_
-        -   integer
+        -   ``integer``
 
     *   -   namespaced ``i2`` [1]_
-        -   integer
+        -   ``integer``
 
     *   -   ``i8``
         -   ``GMP integer`` resource (PHP < 5.6.0)

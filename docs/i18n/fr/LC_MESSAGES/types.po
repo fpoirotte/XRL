@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-20 20:44+0100\n"
+"POT-Creation-Date: 2014-11-20 20:52+0100\n"
 "PO-Revision-Date: 2014-11-16 16:46+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -432,13 +432,6 @@ msgstr "``nil`` dans un espace de noms [1]_"
 msgid "namespaced ``i1`` [1]_"
 msgstr "``i1`` dans un espace de noms [1]_"
 #
-# 97cd3d68550049e6b241c51a336bcd29
-# f5a47f8defc14defb97edf6084ce83d2
-# File: ../src/types.rst, line: 162
-# File: ../src/types.rst, line: 165
-msgid "integer"
-msgstr "entier"
-#
 # 005987e0616d43e98fff8258aa08d0e7
 # File: ../src/types.rst, line: 164
 msgid "namespaced ``i2`` [1]_"
@@ -528,7 +521,7 @@ msgid ""
 "handling conversions to/from the ``\\fpoirotte\\XRL\\Types\\AbstractType`` "
 "instances XRL uses internally."
 msgstr ""
-"Si vous changez l'encodeur/décodeur par défaut, vous devenez gérer vous-mêmes "
+"Si vous changez l'encodeur/décodeur par défaut, vous devrez gérer vous-même "
 "les conversions depuis/vers les instances de ``\\fpoirotte\\XRL\\Types"
 "\\AbstractType`` utilisées en interne par XRL."
 #

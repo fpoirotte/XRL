@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-20 20:44+0100\n"
+"POT-Creation-Date: 2014-11-20 20:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -220,9 +220,13 @@ msgstr "``boolean``"
 # e3c2afd86f794484a9dc65553a4116da
 # a45ce1c94b4945f8ae5c6304551897db
 # b46025b9456b4e1485fb381b105a9855
+# 2e94eb358525419fafb45539a5a82c4a
+# 2e94eb358525419fafb45539a5a82c4a
 # File: ../src/types.rst, line: 74
 # File: ../src/types.rst, line: 131
 # File: ../src/types.rst, line: 134
+# File: ../src/types.rst, line: 162
+# File: ../src/types.rst, line: 165
 msgid "``integer``"
 msgstr "``integer``"
 #
@@ -419,13 +423,6 @@ msgstr "namespaced ``nil`` [1]_"
 # File: ../src/types.rst, line: 161
 msgid "namespaced ``i1`` [1]_"
 msgstr "namespaced ``i1`` [1]_"
-#
-# efa92ee6211c4521a3a1ab1e0351136c
-# efa92ee6211c4521a3a1ab1e0351136c
-# File: ../src/types.rst, line: 162
-# File: ../src/types.rst, line: 165
-msgid "integer"
-msgstr "integer"
 #
 # 3986e8af75bb4e1891d6e5198c42f818
 # File: ../src/types.rst, line: 164
