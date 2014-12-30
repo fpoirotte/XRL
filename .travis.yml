@@ -10,11 +10,8 @@ php:
 
 matrix:
     allow_failures:
-    -   hhvm
-    -   hhvm-nightly
-
-branches:
-    only: master
+    - hhvm
+    - hhvm-nightly
 
 notifications:
     email: false
