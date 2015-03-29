@@ -9,7 +9,6 @@
     <property name="phar.stub" value="bin/xrl"/>
 
     <!-- Custom copyright. -->
-    
     <property name="doc_enduser.copyright" value="${doc_enduser.year}, The XRL Team"/>
 
     <fileset dir="." id="phar.files">
