@@ -22,7 +22,7 @@ notifications:
 before_script:
     - composer self-update -n
     - composer install --dev -n
-    - pecl install runkit
+    - pecl install runkit || true
     - phpenv config-add tests/php.ini
 
 script:
