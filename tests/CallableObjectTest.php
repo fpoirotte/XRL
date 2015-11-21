@@ -46,7 +46,8 @@ class CallableObject extends \PHPUnit_Framework_TestCase
 {
     public function referenceProvider()
     {
-        if (version_compare(PHP_VERSION, '5.6.0', '<')) {
+        if (version_compare(PHP_VERSION, '5.6.0', '<') ||
+            !function_exists('runkit_method_redefine')) {
             return array();
         }
 

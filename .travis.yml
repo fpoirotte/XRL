@@ -1,5 +1,7 @@
 language: php
 
+sudo: false
+
 php:
     - 5.3
     - 5.4
@@ -20,9 +22,11 @@ notifications:
 before_script:
     - composer self-update -n
     - composer install --dev -n
+    - pecl install runkit
+    - phpenv config-add tests/php.ini
 
 script:
-    - php -c tests/hhvm.ini vendor/bin/phpunit --coverage-clover clover.xml --bootstrap ./tests/bootstrap.php tests/
+    - vendor/bin/phpunit --coverage-clover clover.xml --bootstrap ./tests/bootstrap.php tests/
 
 after_script:
     - composer require --dev "satooshi/php-coveralls dev-master"
