@@ -159,9 +159,9 @@ both copyright information, licensing information and contributor credits:
     :alt: unknown
     :target: http://travis-ci.org/fpoirotte/XRL
 
-..  |coveralls| image:: https://coveralls.io/repos/fpoirotte/XRL/badge.png?branch=master
+..  |coveralls| image:: https://coveralls.io/repos/fpoirotte/XRL/badge.svg?branch=master&service=github
     :alt: unknown
-    :target: https://coveralls.io/r/fpoirotte/XRL?branch=master
+    :target: https://coveralls.io/github/fpoirotte/XRL?branch=master
 
 ..  |versioneye-updates| image:: https://www.versioneye.com/php/fpoirotte:xrl/dev-master/badge.png
     :alt: unknown

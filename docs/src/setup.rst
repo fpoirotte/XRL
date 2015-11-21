@@ -13,6 +13,7 @@ XRL requires PHP 5.3.4 or later and the following PHP extensions:
 *   GMP
 *   PCRE
 *   SPL
+*   Reflection
 
 ..  note::
 

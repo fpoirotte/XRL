@@ -19,8 +19,13 @@ require_once(
     DIRECTORY_SEPARATOR . 'autoload.php'
 );
 
-require_once(
-    __DIR__ .
-    DIRECTORY_SEPARATOR . 'stub' .
-    DIRECTORY_SEPARATOR . 'TestServer.php'
+$stubs = array(
+    'Server',
 );
+foreach ($stubs as $stub) {
+    require_once(
+        __DIR__ .
+        DIRECTORY_SEPARATOR . 'stub' .
+        DIRECTORY_SEPARATOR . 'Test' . $stub . '.php'
+    );
+}

@@ -32,6 +32,10 @@ class Output
      */
     public function __construct($stream)
     {
+        if (@stream_get_meta_data($stream) === null) {
+            throw new \InvalidArgumentException('Not a valid stream');
+        }
+
         $this->stream = $stream;
     }
 

@@ -24,7 +24,8 @@
         "ext-libxml": "*",
         "ext-gmp": "*",
         "ext-pcre": "*",
-        "ext-SPL": "*"
+        "ext-SPL": "*",
+        "ext-Reflection": "*"
     },
     "require-dev": {
         "ext-dom": "*",

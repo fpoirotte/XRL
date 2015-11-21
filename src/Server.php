@@ -20,10 +20,8 @@ namespace fpoirotte\XRL;
  * This class uses dynamic properties to manager
  * XML-RPC procedures:
  * \code
- *      // This registers the procedure "foo"
- *      // on this XML-RPC server. The function
- *      // "bar" will be called to handle calls
- *      // to "foo".
+ *      // This registers the procedure "foo" on the XML-RPC server.
+ *      // The function "bar" will be called to handle calls to "foo".
  *      $server->foo = 'bar';
  *
  *      // This returns the callable used to handle
@@ -33,24 +31,24 @@ namespace fpoirotte\XRL;
  *      $foo = $server->foo;
  *
  *      // This tests whether the "foo" procedure
- *      // has been registered on this server.
+ *      // has been registered on the server.
  *      if (isset($server->foo)) {
  *          ...
  *      }
  *
  *      // This unregisters the "foo" procedure
- *      // from this XML-RPC server.
+ *      // from the XML-RPC server.
  *      unset($server->foo);
  * \endcode
  *
  * You may also count how many XML-RPC procedures
- * are currently registered on this server:
+ * are currently registered on the server:
  * \code
  *      $nbProcedures = count($server);
  * \endcode
  *
  * Last but not least, you may also iterate over
- * this server's registered XML-RPC procedures:
+ * the server's registered XML-RPC procedures:
  * \code
  *      foreach ($server as $procedure) {
  *          ...
@@ -58,7 +56,7 @@ namespace fpoirotte\XRL;
  * \endcode
  *
  * \see
- *      The example in \ref server.php contains a complete example of a working
+ *      The code in \ref server.php contains a complete example of a working
  *      XML-RPC server which may be queried using the corresponding client
  *      (\ref client.php) or XRL's command-line query tool.
  *

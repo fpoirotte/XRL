@@ -80,23 +80,6 @@ interface CallableInterface
 
     /**
      * Invokes the callable object represented by this
-     * instance.
-     *
-     * \retval mixed
-     *      Value returned by the inner callable.
-     *
-     * \note
-     *      Any argument passed to this method will
-     *      be propagated to the inner callable.
-     *
-     * \note
-     *      This method is smart enough to preserve
-     *      references.
-     */
-    public function invoke();
-
-    /**
-     * Invokes the callable object represented by this
      * instance, using the given array as a list of arguments.
      *
      * \param array $args
@@ -105,10 +88,6 @@ interface CallableInterface
      *
      * \retval mixed
      *      Value returned by the inner callable.
-     *
-     * \note
-     *      This method is smart enough to preserve
-     *      references.
      */
     public function invokeArgs(array &$args);
 

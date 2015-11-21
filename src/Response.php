@@ -42,14 +42,45 @@ class Response implements \fpoirotte\XRL\ResponseInterface
     /// \copydoc fpoirotte::XRL::ResponseInterface::__toString()
     public function __toString()
     {
-        return $this->result;
+        return (string) $this->result;
+    }
+
+    /**
+     * Adds an HTTP header to the current response.
+     *
+     * \param string $header
+     *      Header to add.
+     *
+     * \retval fpoirotte::XRL::ResponseInterface
+     *      Returns this response.
+     *
+     * @codeCoverageIgnore
+     */
+    protected function addHeader($header)
+    {
+        header($header);
+        return $this;
+    }
+
+    /**
+     * A function that echoes its input and exits.
+     *
+     * \param string $result
+     *      Some string to echo before exiting.
+     *
+     * @codeCoverageIgnore
+     */
+    protected function finalize($result)
+    {
+        exit($result);
     }
 
     /// \copydoc fpoirotte::XRL::ResponseInterface::publish()
     public function publish()
     {
-        header('Content-Type: text/xml');
-        header('Content-Length: '.strlen($this->result));
-        exit($this->result);
+        $result = (string) $this->result;
+        $this->addHeader('Content-Type: text/xml')
+             ->addHeader('Content-Length: ' . strlen($result))
+             ->finalize($result);
     }
 }
