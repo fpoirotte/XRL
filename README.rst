@@ -77,13 +77,13 @@ Several types of installations are possible:
 
         ..  sourcecode:: console
 
-                $ wget -O XRL-sources.tar.gz https://github.com/fpoirotte/XRL/tarball/master
+                $ wget --content-disposition https://github.com/fpoirotte/XRL/tarball/master
 
     -   As a `.zip archive <https://github.com/fpoirotte/XRL/zipball/master>`_:
 
         ..  sourcecode:: console
 
-                $ wget -O XRL-sources.zip https://github.com/fpoirotte/XRL/zipball/master
+                $ wget --content-disposition https://github.com/fpoirotte/XRL/zipball/master
 
 *   From sources (development version)
 
@@ -97,13 +97,13 @@ Several types of installations are possible:
 
         ..  sourcecode:: console
 
-                $ wget -O XRL-sources.tar.gz https://github.com/fpoirotte/XRL/tarball/develop
+                $ wget --content-disposition https://github.com/fpoirotte/XRL/tarball/develop
 
     -   As a `.zip archive <https://github.com/fpoirotte/XRL/zipball/develop>`_:
 
         ..  sourcecode:: console
 
-                $ wget -O XRL-sources.zip https://github.com/fpoirotte/XRL/zipball/develop
+                $ wget --content-disposition https://github.com/fpoirotte/XRL/zipball/develop
 
 
 Contributions
