@@ -9,6 +9,10 @@ php:
     - 5.6
     - hhvm
 
+cache:
+    directories:
+    - vendor/
+
 matrix:
     allow_failures:
     - hhvm
@@ -21,6 +25,7 @@ notifications:
 before_script:
     - composer self-update -n
     - composer install --dev -n
+    - mkdir -p ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/
     - pecl install runkit || true
     - phpenv config-add tests/php.ini
 
