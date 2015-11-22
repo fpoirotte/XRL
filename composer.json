@@ -1,7 +1,7 @@
 {
     "name": "fpoirotte/xrl",
     "description": "Simple XML-RPC Library (both client and server)",
-    "keywords": ["XML", "RPC"],
+    "keywords": ["XML", "RPC", "server", "client", "xml-rpc", "xmlrpc"],
     "homepage": "https://github.com/fpoirotte/XRL",
     "license": "BSD-3-Clause",
     "authors": [
@@ -40,9 +40,9 @@
         "phpunit/phpunit": "*"
     },
     "suggest": {
-        "ext-openssl": "For accessing resources requiring an encrypted (SSL/TLS) connection",
-        "ext-SimpleXML": "For sending/receiving XML objects",
-        "erebot/plop": "For logging various events"
+        "ext-openssl": "Access resources that require an encrypted (SSL/TLS) connection",
+        "ext-SimpleXML": "Send/receive XML objects",
+        "erebot/plop": "Log various events"
     },
     "autoload": {
         "psr-4": {
@@ -52,7 +52,7 @@
     "bin": ["bin/xrl"],
     "extra": {
         "branch-alias": {
-            "dev-master": "2.0.x-dev"
+            "dev-develop": "2.0.x-dev"
         }
     }
 }

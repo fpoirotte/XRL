@@ -9,7 +9,7 @@
 A simple XML-RPC client and server written in PHP
 =================================================
 
-|travis-ci| |coveralls| |versioneye-updates| |versioneye-refs| |hhvm| |readthedocs|
+|travis-ci| |coveralls| |versioneye-updates| |hhvm| |readthedocs|
 
 Features
 --------
@@ -63,16 +63,15 @@ Several types of installations are possible:
 
         ..  sourcecode:: console
 
-            $ php composer.phar require --no-update fpoirotte/xrl
-            $ php composer.phar update --no-dev
+            $ php composer.phar require fpoirotte/xrl
 
-*   From sources:
+*   From sources (stable version)
 
     -   As a git clone:
 
         ..  sourcecode:: console
 
-                $ git clone git://github.com/fpoirotte/XRL.git
+                $ git clone -b master git://github.com/fpoirotte/XRL.git
 
     -   As a `.tar.gz archive <https://github.com/fpoirotte/XRL/tarball/master>`_:
 
@@ -85,6 +84,26 @@ Several types of installations are possible:
         ..  sourcecode:: console
 
                 $ wget -O XRL-sources.zip https://github.com/fpoirotte/XRL/zipball/master
+
+*   From sources (development version)
+
+    -   As a git clone:
+
+        ..  sourcecode:: console
+
+                $ git clone -b develop git://github.com/fpoirotte/XRL.git
+
+    -   As a `.tar.gz archive <https://github.com/fpoirotte/XRL/tarball/develop>`_:
+
+        ..  sourcecode:: console
+
+                $ wget -O XRL-sources.tar.gz https://github.com/fpoirotte/XRL/tarball/develop
+
+    -   As a `.zip archive <https://github.com/fpoirotte/XRL/zipball/develop>`_:
+
+        ..  sourcecode:: console
+
+                $ wget -O XRL-sources.zip https://github.com/fpoirotte/XRL/zipball/develop
 
 
 Contributions
@@ -103,7 +122,7 @@ Copyright and license
 ---------------------
 
 XRL is released under the 3-clause BSD License. An online copy of the license
-is available at https://raw.github.com/fpoirotte/XRL/master/LICENSE.
+is available at https://raw.github.com/fpoirotte/XRL/develop/LICENSE.
 
 We ask contributors to assign the copyright in their contributions
 to the collective name "XRL Team".
@@ -159,13 +178,13 @@ both copyright information, licensing information and contributor credits:
     :alt: unknown
     :target: http://travis-ci.org/fpoirotte/XRL
 
-..  |coveralls| image:: https://coveralls.io/repos/fpoirotte/XRL/badge.svg?branch=master&service=github
+..  |coveralls| image:: https://coveralls.io/repos/fpoirotte/XRL/badge.svg?branch=develop&service=github
     :alt: unknown
-    :target: https://coveralls.io/github/fpoirotte/XRL?branch=master
+    :target: https://coveralls.io/r/fpoirotte/XRL?branch=develop
 
-..  |versioneye-updates| image:: https://www.versioneye.com/php/fpoirotte:xrl/dev-master/badge.png
+..  |versioneye-updates| image:: https://www.versioneye.com/php/fpoirotte:xrl/dev-develop/badge.png
     :alt: unknown
-    :target: https://www.versioneye.com/php/fpoirotte:xrl/dev-master
+    :target: https://www.versioneye.com/php/fpoirotte:xrl/dev-develop
 
 ..  |versioneye-refs| image:: https://www.versioneye.com/php/fpoirotte:xrl/reference_badge.svg?style=flat
     :alt: unknown
