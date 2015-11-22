@@ -56,6 +56,8 @@ class CallableObject implements \fpoirotte\XRL\CallableInterface
 
         if (!self::$patched) {
             self::$patched = true;
+            // @codeCoverageIgnoreStart
+            // Adds support for references to invoke() on PHP 5.6.0+.
             if (version_compare(PHP_VERSION, '5.6.0', '>=') &&
                 function_exists('runkit_method_redefine')) {
                 runkit_method_redefine(
@@ -65,6 +67,7 @@ class CallableObject implements \fpoirotte\XRL\CallableInterface
                     'return call_user_func_array($this->callableObj, $args);'
                 );
             }
+            // @codeCoverageIgnoreEnd
         }
 
         // This happens for anonymous functions

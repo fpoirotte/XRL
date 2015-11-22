@@ -329,4 +329,14 @@ XML
         $received   = $this->encoder->encodeResponse($response);
         $this->assertSame($content, $received);
     }
+
+    /**
+     * @covers                      \fpoirotte\XRL\Encoder::encodeResponse
+     * @expectedException           \InvalidArgumentException
+     * @expectedExceptionMessage    Invalid response
+     */
+    public function testEncodeGarbage()
+    {
+        $dummy = $this->encoder->encodeResponse(null);
+    }
 }

@@ -103,6 +103,7 @@ class CallableObject extends \PHPUnit_Framework_TestCase
                 'fpoirotte\XRL\tests\strtoupper',
                 __NAMESPACE__ . '\\strtoupper',
                 false,
+                '\\ReflectionFunction',
             ),
 
             // Invokable object
@@ -110,6 +111,7 @@ class CallableObject extends \PHPUnit_Framework_TestCase
                 $instance,
                 __NAMESPACE__ . '\\InstanceByValue::__invoke',
                 false,
+                '\\ReflectionMethod',
             ),
 
             // Object method
@@ -117,6 +119,7 @@ class CallableObject extends \PHPUnit_Framework_TestCase
                 array($instance, '__invoke'),
                 __NAMESPACE__ . '\\InstanceByValue::__invoke',
                 false,
+                '\\ReflectionMethod',
             ),
 
             // Lambda function (anonymous function)
@@ -124,6 +127,7 @@ class CallableObject extends \PHPUnit_Framework_TestCase
                 $lambda,
                 $lambda,
                 false,
+                '\\ReflectionFunction',
             ),
 
             // Closure
@@ -131,6 +135,7 @@ class CallableObject extends \PHPUnit_Framework_TestCase
                 function ($s) { return strtoupper($s); },
                 'Closure::__invoke',
                 false,
+                '\\ReflectionMethod',
             ),
         );
     }
@@ -141,13 +146,18 @@ class CallableObject extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider provider
-     * @covers \fpoirotte\XRL\CallableObject::__construct
-     * @covers \fpoirotte\XRL\CallableObject::getCallable
-     * @covers \fpoirotte\XRL\CallableObject::__toString
-     * @covers \fpoirotte\XRL\CallableObject::getRepresentation
-     * @covers \fpoirotte\XRL\CallableObject::__invoke
-     * @covers \fpoirotte\XRL\CallableObject::invokeArgs
+     * @covers                      \fpoirotte\XRL\CallableObject::__construct
+     * @expectedException           \InvalidArgumentException
+     * @expectedExceptionMessage    Not a valid callable
+     */
+    public function testConstructor()
+    {
+        $dummy = new \fpoirotte\XRL\CallableObject(null);
+    }
+
+    /**
+     * @dataProvider    provider
+     * @covers          \fpoirotte\XRL\CallableObject
      */
     public function testGeneric($callable, $repr, $isRef)
     {
@@ -182,5 +192,15 @@ class CallableObject extends \PHPUnit_Framework_TestCase
         } else {
             $this->assertSame('ABC', $obj->invokeArgs($values));
         }
+    }
+
+    /**
+     * @dataProvider    valueProvider
+     * @covers          \fpoirotte\XRL\CallableObject::getReflector
+     */
+    public function testGetReflector($callable, $repr, $isRef, $cls)
+    {
+        $obj = new \fpoirotte\XRL\CallableObject($callable);
+        $this->assertInstanceOf($cls, $obj->getReflector());
     }
 }

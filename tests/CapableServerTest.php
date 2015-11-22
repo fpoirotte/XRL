@@ -11,6 +11,64 @@
 
 namespace fpoirotte\XRL\tests;
 
+class BadClass
+{
+    public function undocumented()
+    {
+    }
+
+    /**
+     * This method has an incomplete documentation.
+     * More precisely, it lacks documentation about
+     * the "$bar" parameter.
+     *
+     * \param int $foo
+     *      Your regular integer (eg. 42).
+     *
+     * \retval null
+     *      This method does not return any value.
+     */
+    public function incomplete($foo, $bar)
+    {
+    }
+
+    /**
+     * This method's uses a complex return value
+     * which is incompatible with XML-RPC types.
+     *
+     * \retval ComplexType
+     *      A complex return value.
+     */
+    public function badReturnType()
+    {
+    }
+
+    /**
+     * This method's uses a complex parameter
+     * which is incompatible with XML-RPC types.
+     *
+     * \param ComplexType $foo
+     *      A complex parameter.
+     */
+    public function badParamType($foo)
+    {
+    }
+
+    /**
+     * This method uses invalid markup for its documentation
+     * (unterminated "\param" command).
+     *
+     * \param $foo
+     *      Some foo.
+     *
+     * \retval null
+     *      This method does not return any value.
+     */
+    public function invalidMarkup($foo)
+    {
+    }
+}
+
 class CapableServer extends \PHPUnit_Framework_TestCase
 {
     protected $server;
@@ -73,36 +131,124 @@ class CapableServer extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers      \fpoirotte\XRL\CapableServer::methodSignature
+     * @covers      \fpoirotte\XRL\CapableServer::extractTypes
      */
     public function testMethodSignature()
     {
-        $reflector = new \ReflectionMethod($this->capableServer, 'methodSignature');
+        $reflector1 = new \ReflectionMethod($this->capableServer, 'methodSignature');
+        $reflector2 = new \ReflectionMethod(__NAMESPACE__ . '\\BadClass', 'undocumented');
+        $reflector3 = new \ReflectionMethod(__NAMESPACE__ . '\\BadClass', 'incomplete');
+        $reflector4 = new \ReflectionMethod(__NAMESPACE__ . '\\BadClass', 'badReturnType');
+        $reflector5 = new \ReflectionMethod(__NAMESPACE__ . '\\BadClass', 'badParamType');
+        $reflector6 = new \ReflectionMethod(__NAMESPACE__ . '\\BadClass', 'invalidMarkup');
+        $count      = 6;
 
         $this->server
-            ->expects($this->once())
+            ->expects($this->exactly($count))
             ->method('offsetExists')
             ->with($this->equalTo('foo'))
             ->will($this->returnValue(true));
 
         $this->server
-            ->expects($this->once())
+            ->expects($this->exactly($count))
             ->method('offsetGet')
             ->with($this->equalTo('foo'))
             ->will($this->returnValue($this->callableObject));
 
         $this->callableObject
-            ->expects($this->once())
+            ->expects($this->exactly($count))
             ->method('getReflector')
-            ->will($this->returnValue($reflector));
+            ->will($this->onConsecutiveCalls($reflector1, $reflector2,
+                                             $reflector3, $reflector4,
+                                             $reflector5, $reflector6));
 
+        // First pass: return "methodSignature"'s signature.
         $expected   = array(
             // methodSignature expects a string (method name)
             // and returns an array (list of valid signatures
             // for the method).
             array('array', 'string'),
         );
-        $res        = $this->capableServer->methodSignature('foo');
+        $res = $this->capableServer->methodSignature('foo');
         $this->assertSame($expected, $res);
+
+        // Second pass: the method lacks a documentation.
+        $res = $this->capableServer->methodSignature('foo');
+        $this->assertSame('undef', $res);
+
+        // Third pass: the method's documentation is incomplete.
+        $res = $this->capableServer->methodSignature('foo');
+        $this->assertSame('undef', $res);
+
+        // Fourth pass: the method's return value is too complex.
+        $res = $this->capableServer->methodSignature('foo');
+        $this->assertSame('undef', $res);
+
+        // Fifth pass: the method's parameter is too complex.
+        $res = $this->capableServer->methodSignature('foo');
+        $this->assertSame('undef', $res);
+
+        // Sixth pass: the method's documentation uses invalid markup.
+        $res = $this->capableServer->methodSignature('foo');
+        $this->assertSame('undef', $res);
+    }
+
+    /**
+     * @covers                      \fpoirotte\XRL\CapableServer::methodSignature
+     * @expectedException           \InvalidArgumentException
+     * @expectedExceptionMessage    Invalid method
+     */
+    public function testMethodSignature2()
+    {
+        $this->capableServer->methodSignature(42);
+    }
+
+    /**
+     * @covers      \fpoirotte\XRL\CapableServer::methodHelp
+     */
+    public function testMethodHelp()
+    {
+        $reflector1 = new \ReflectionMethod($this->capableServer, 'methodHelp');
+        $reflector2 = new \ReflectionMethod(__NAMESPACE__ . '\\BadClass', 'undocumented');
+
+        $this->server
+            ->expects($this->exactly(2))
+            ->method('offsetExists')
+            ->with($this->equalTo('foo'))
+            ->will($this->returnValue(true));
+
+        $this->server
+            ->expects($this->exactly(2))
+            ->method('offsetGet')
+            ->with($this->equalTo('foo'))
+            ->will($this->returnValue($this->callableObject));
+
+        $this->callableObject
+            ->expects($this->exactly(2))
+            ->method('getReflector')
+            ->will($this->onConsecutiveCalls($reflector1, $reflector2));
+
+        // First pass: help about methodHelp is returned.
+        $expected   =   "Get help about a procedure.\n\n" .
+                        "\\param string \$method\n" .
+                        "     Name of the procedure.\n\n" .
+                        "\\retval string\n" .
+                        "     Human readable help message " .
+                        "for the given procedure.";
+        $this->assertSame("\n$expected\n", $this->capableServer->methodHelp('foo'));
+
+        // Second pass: no help for the given method.
+        $this->assertSame('', $this->capableServer->methodHelp('foo'));
+    }
+
+    /**
+     * @covers                      \fpoirotte\XRL\CapableServer::methodHelp
+     * @expectedException           \InvalidArgumentException
+     * @expectedExceptionMessage    Invalid method
+     */
+    public function testMethodHelp2()
+    {
+        $this->capableServer->methodHelp(42);
     }
 
     /**

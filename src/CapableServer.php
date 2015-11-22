@@ -143,6 +143,8 @@ class CapableServer
      * \retval string
      *      The closest XML-RPC, or \c null if none
      *      could be derived.
+     *
+     * @codeCoverageIgnore
      */
     protected static function adaptType($type)
     {

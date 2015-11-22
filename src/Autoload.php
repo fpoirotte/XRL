@@ -42,8 +42,12 @@ class Autoload
      */
     public static function load($class)
     {
+        // This code only applies to PHP 5.3.7 & 5.3.8.
+        // It prevents a case of remote code execution (CVE 2011-3379).
         if (strpos($class, ':') !== false) {
+            // @codeCoverageIgnoreStart
             throw new \Exception('Possible remote execution attempt');
+            // @codeCoverageIgnoreEnd
         }
 
         $class = ltrim($class, '\\');
@@ -52,13 +56,14 @@ class Autoload
         }
 
         $class = substr($class, 14);
-        $class = str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, $class);
         if (!strncmp($class, 'tests\\', 6)) {
             $path = dirname(__DIR__);
         } else {
             $path = __DIR__;
         }
-        require($path . DIRECTORY_SEPARATOR . $class . '.php');
+
+        $class = str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, $class);
+        include($path . DIRECTORY_SEPARATOR . $class . '.php');
         $res = (class_exists($class, false) || interface_exists($class, false));
         return $res;
     }

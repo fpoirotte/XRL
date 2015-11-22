@@ -24,7 +24,7 @@ class Server extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \fpoirotte\XRL\Server::count
+     * @covers \fpoirotte\XRL\Server
      */
     public function testCountProcedures()
     {
