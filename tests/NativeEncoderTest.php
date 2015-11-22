@@ -11,6 +11,44 @@
 
 namespace fpoirotte\XRL\tests;
 
+class SerialClass1 implements \Serializable
+{
+    private $data;
+
+    public function __construct($data)
+    {
+        $this->data = $data;
+    }
+
+    public function serialize()
+    {
+        return serialize($this->data);
+    }
+
+    public function unserialize($serialized)
+    {
+    }
+}
+
+class SerialClass2
+{
+    private $data;
+
+    public function __construct($data)
+    {
+        $this->data = $data;
+    }
+
+    public function __sleep()
+    {
+        return array('data');
+    }
+}
+
+class NonSerialClass
+{
+}
+
 class NativeEncoder extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
@@ -59,6 +97,10 @@ class NativeEncoder extends \PHPUnit_Framework_TestCase
                 simplexml_load_string('<foo>bar</foo>'),
                 '\\fpoirotte\\XRL\\Types\\Dom'
             ),
+            array(new SerialClass1('test'), '\\fpoirotte\\XRL\\Types\\String'),
+            array(new SerialClass1("\xE8\xE9\xE0"), '\\fpoirotte\\XRL\\Types\\Base64'),
+            array(new SerialClass2('test'), '\\fpoirotte\\XRL\\Types\\String'),
+            array(new SerialClass2("\xE8\xE9\xE0"), '\\fpoirotte\\XRL\\Types\\Base64'),
         );
     }
 
@@ -119,5 +161,16 @@ class NativeEncoder extends \PHPUnit_Framework_TestCase
         $this->assertSame('Exception: foo', $response['faultString']->get());
         $this->assertArrayHasKey('faultCode', $response);
         $this->assertSame(42, $response['faultCode']->get());
+    }
+
+    /**
+     * @covers                      \fpoirotte\XRL\NativeEncoder::convert
+     * @expectedException           \InvalidArgumentException
+     * @expectedExceptionMessage    Unconvertible type
+     */
+    public function testEncodeResponse3()
+    {
+        $encoder    = new \fpoirotte\XRL\NativeEncoder($this->encoder);
+        $response   = $encoder->encodeResponse(new NonSerialClass());
     }
 }

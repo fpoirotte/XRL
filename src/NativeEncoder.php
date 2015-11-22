@@ -138,25 +138,9 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
                 return new \fpoirotte\XRL\Types\Struct($newValue);
 
             case 'object':
+            case 'resource':
                 // A special treatment is applied afterwards.
                 break;
-
-            case 'resource':
-                if (get_resource_type($value) === 'GMP integer') {
-                    try {
-                        return new \fpoirotte\XRL\Types\I4($value);
-                    } catch (\InvalidArgumentException $e) {
-                    }
-                    try {
-                        return new \fpoirotte\XRL\Types\I8($value);
-                    } catch (\InvalidArgumentException $e) {
-                    }
-                    return new \fpoirotte\XRL\Types\BigInteger($value);
-                }
-                // Fall-through intentional.
-
-            default:
-                throw new \InvalidArgumentException('Unconvertible type');
         }
 
         // Only objects remain after this points.
@@ -164,16 +148,19 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
             return $value;
         }
 
-        if ($value instanceof \GMP) {
-            try {
-                return new \fpoirotte\XRL\Types\I4($value);
-            } catch (\InvalidArgumentException $e) {
+        if ($value instanceof \GMP ||
+            (is_resource($value) && get_resource_type($value) === 'GMP integer')) {
+            $candidates = array(
+                '\\fpoirotte\\XRL\\Types\\I4',
+                '\\fpoirotte\\XRL\\Types\\I8',
+                '\\fpoirotte\\XRL\\Types\\BigInteger',
+            );
+            foreach ($candidates as $candidate) {
+                try {
+                    return new $candidate($value);
+                } catch (\InvalidArgumentException $e) {
+                }
             }
-            try {
-                return new \fpoirotte\XRL\Types\I8($value);
-            } catch (\InvalidArgumentException $e) {
-            }
-            return new \fpoirotte\XRL\Types\BigInteger($value);
         }
 
         if ($value instanceof \DateTime) {
@@ -197,9 +184,19 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
             );
         }
 
-        if (!($value instanceof \Serializable) && !method_exists($value, '__sleep')) {
-            throw new \InvalidArgumentException('Could not serialize object');
+        if (is_object($value) && (
+            ($value instanceof \Serializable) ||
+            method_exists($value, '__sleep'))) {
+            $value = serialize($value);
+
+            // Encode as a regular string if possible.
+            if (static::isUTF8($value)) {
+                return new \fpoirotte\XRL\Types\String($value);
+            }
+            return new \fpoirotte\XRL\Types\Base64($value);
         }
+
+        throw new \InvalidArgumentException('Unconvertible type');
     }
 
     /// \copydoc fpoirotte::XRL::EncoderInterface::encodeRequest()

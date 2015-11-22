@@ -23,12 +23,12 @@ class Server extends \PHPUnit_Framework_TestCase
         $this->server->expose($this->cls);
     }
 
-    /// @covers \fpoirotte\XRL\Server::testCountProcedures
+    /**
+     * @covers \fpoirotte\XRL\Server::count
+     */
     public function testCountProcedures()
     {
-        $this->assertEquals(
-            count(get_class_methods($this->cls)),
-            count($this->server)
-        );
+        $count = count(get_class_methods($this->cls));
+        $this->assertEquals($count, count($this->server));
     }
 }

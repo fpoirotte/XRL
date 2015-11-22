@@ -45,7 +45,7 @@ EXPECTED;
         $res = $this->server->handle(
             'data://;base64,' .
             base64_encode(
-                '<?xml version="1.0" encoding="Some-Invalid-Encoding"?><foo/>'
+                '<?xml version="1.0" encoding="Some-Invalid-Encoding"?'.'><foo/>'
             )
         );
         $expected =<<<EXPECTED
@@ -68,7 +68,7 @@ EXPECTED;
         $res = $this->server->handle(
             'data://;base64,' .
             base64_encode(
-                '<?xml version="1.0" encoding="UTF-8"?>' .
+                '<?xml version="1.0" encoding="UTF-8"?'.'>' .
                 "<foo>\xE8\xE9\xE0</foo>"
             )
         );
@@ -92,7 +92,7 @@ EXPECTED;
         $res = $this->server->handle(
             'data://;base64,' .
             base64_encode(
-                '<?xml version="1.0" encoding="UTF-8"?><foo/>'
+                '<?xml version="1.0" encoding="UTF-8"?'.'><foo/>'
             )
         );
         $expected =<<<EXPECTED
@@ -133,6 +133,16 @@ EXPECTED;
             str_replace(array("\r", "\n"), '', $expected),
             (string) $res
         );
+    }
+
+    /**
+     * @covers                      \fpoirotte\XRL\Faults
+     * @expectedException           \InvalidArgumentException
+     * @expectedExceptionMessage    Unknown interoperability fault
+     */
+    public function testInvalidFault()
+    {
+        \fpoirotte\XRL\Faults::get('Not a valid fault name');
     }
 
 #    public function testInvalidParameters()

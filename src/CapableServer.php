@@ -211,7 +211,7 @@ class CapableServer
     {
         $methods = array_keys($this->server->getIterator()->getArrayCopy());
         if ($this->whitelist !== null) {
-            $methods = array_intersect($methods, $this->whitelist);
+            $methods = array_values(array_intersect($methods, $this->whitelist));
         }
         return $methods;
     }
@@ -350,6 +350,9 @@ class CapableServer
                 }
                 if (!isset($request['params'])) {
                     throw new \BadFunctionCallException('Missing params');
+                }
+                if (!is_array($request['params'])) {
+                    throw new \BadFunctionCallException('Invalid params');
                 }
                 if ($request['methodName'] === 'system.multicall') {
                     throw new \BadFunctionCallException('Recursive call');

@@ -412,7 +412,7 @@ class CLI
      *
      * \note
      *      In case of an error, additional messages
-     *      may be sent to STDERR by this script.
+     *      may be sent to \c STDERR by this script.
      */
     public function run(array $args)
     {

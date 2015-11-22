@@ -27,6 +27,14 @@ class Node
     /// Fields that make up this node.
     protected $properties;
 
+    /// Error codes from http://www.xmlsoft.org/html/libxml-xmlerror.html.
+    const XML_ERR_INTERNAL_ERROR        = 1;
+    const XML_ERR_NO_MEMORY             = 2;
+    const XML_ERR_DOCUMENT_EMPTY        = 4;
+    const XML_ERR_DOCUMENT_END          = 5;
+    const XML_ERR_UNKNOWN_ENCODING      = 31;
+    const XML_ERR_UNSUPPORTED_ENCODING  = 32;
+
     /**
      * Create a new XML node.
      *
@@ -50,33 +58,40 @@ class Node
             if (($subtrees && !@$reader->read()) ||
                 (!$subtrees && !@$reader->next())) {
                 $error = libxml_get_last_error();
-                if (!$error) {
-                    // We reached the end of the document.
-                    // This is not an error but it causes
-                    // read() to fail anyway.
-                    // We throw a special error which gets caught
-                    // and dealt with appropriately by the caller.
-                    throw new \InvalidArgumentException('End of document');
-                }
 
-                if ($error->code === 32) {
-                    // 32 = XML_ERR_UNSUPPORTED_ENCODING
-                    throw \fpoirotte\XRL\Faults::get(
-                        \fpoirotte\XRL\Faults::UNSUPPORTED_ENCODING
-                    );
-                } elseif ($error->code === 1 || $error->code === 2) {
-                    // 1 = XML_ERR_INTERNAL_ERROR
-                    // 2 = XML_ERR_NO_MEMORY
-                    throw \fpoirotte\XRL\Faults::get(
-                        \fpoirotte\XRL\Faults::INTERNAL_ERROR
-                    );
-                } else {
+                // We reached the end of the document.
+                // This is not an error per-se,
+                // but it causes read() to fail anyway.
+                // We throw a special error which gets caught
+                // and dealt with appropriately by the caller.
+                if ($error === false)
+                    throw new \InvalidArgumentException('End of document');
+
+                switch ($error->code) {
+                    case self::XML_ERR_UNKNOWN_ENCODING:
+                    case self::XML_ERR_UNSUPPORTED_ENCODING:
+                        throw \fpoirotte\XRL\Faults::get(
+                            \fpoirotte\XRL\Faults::UNSUPPORTED_ENCODING
+                        );
+
+                    // @codeCoverageIgnoreStart
+                    // Internal & memory errors are too hard to recreate
+                    // and are thus excluded from code coverage analysis.
+                    case self::XML_ERR_INTERNAL_ERROR:
+                    case self::XML_ERR_NO_MEMORY:
+                        throw \fpoirotte\XRL\Faults::get(
+                            \fpoirotte\XRL\Faults::INTERNAL_ERROR
+                        );
+                    // @codeCoverageIgnoreEnd
+
                     // Generic error handling.
-                    throw \fpoirotte\XRL\Faults::get(
-                        \fpoirotte\XRL\Faults::NOT_WELL_FORMED
-                    );
+                    default:
+                        throw \fpoirotte\XRL\Faults::get(
+                            \fpoirotte\XRL\Faults::NOT_WELL_FORMED
+                        );
                 }
             }
+
             if ($validate && !$reader->isValid()) {
                 throw \fpoirotte\XRL\Faults::get(
                     \fpoirotte\XRL\Faults::INVALID_XML_RPC
@@ -87,11 +102,11 @@ class Node
         } while ($reader->nodeType === \XMLReader::SIGNIFICANT_WHITESPACE);
 
         $fields = array(
-            'nodeType',
-            'value',
             'isEmptyElement',
             'localName',
             'namespaceURI',
+            'nodeType',
+            'value',
         );
 
         $this->properties = array();
@@ -116,11 +131,13 @@ class Node
      *      Raised when the given field does not exist.
      *
      * \note
-     *      Currently, only those field are valid:
-     *      -   \c name
+     *      Currently, the following fields are valid:
+     *      -   \c isEmptyElement
+     *      -   \c localName
+     *      -   \c name (= "{namespaceURI}localName" or just "localName")
+     *      -   \c namespaceURI
      *      -   \c nodeType
      *      -   \c value
-     *      -   \c isEmptyElement
      */
     public function __get($field)
     {
@@ -137,8 +154,7 @@ class Node
      *
      * \retval bool
      *      \c true if this node was an empty one and it
-     *      has been successfully expanded, or \c false
-     *      otherwise.
+     *      was successfully expanded, \c false otherwise.
      */
     public function emptyNodeExpansionWorked()
     {

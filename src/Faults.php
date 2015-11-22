@@ -98,6 +98,8 @@ class Faults
     /**
      * Dummy constructor that prevents
      * creation of instances.
+     *
+     * @codeCoverageIgnore
      */
     final private function __construct()
     {
