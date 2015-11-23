@@ -471,7 +471,6 @@ class CLI
         }
 
         // Prepare the context.
-        $context    = stream_context_get_default();
         $ctxOptions = array(
             'http' => array(
                 'method'    => 'POST',
@@ -479,7 +478,7 @@ class CLI
                 'header'    => 'Content-Type: text/xml',
             ),
         );
-        stream_context_set_option($context, $ctxOptions);
+        $context = stream_context_create($ctxOptions);
         libxml_set_streams_context($context);
 
         // Send the request and process the response.

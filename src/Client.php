@@ -96,16 +96,8 @@ class Client
         $baseURL,
         \fpoirotte\XRL\EncoderInterface $encoder = null,
         \fpoirotte\XRL\DecoderInterface $decoder = null,
-        $context = null
+        array $options = array()
     ) {
-        if ($context === null) {
-            $context = stream_context_get_default();
-        }
-
-        if (!is_resource($context)) {
-            throw new \InvalidArgumentException('Invalid context');
-        }
-
         if ($encoder === null) {
             $encoder = new \fpoirotte\XRL\NativeEncoder(
                 new \fpoirotte\XRL\Encoder(null, false, true)
@@ -119,7 +111,7 @@ class Client
         }
 
         $this->baseURL      = $baseURL;
-        $this->context      = $context;
+        $this->options      = $options;
         $this->encoder      = $encoder;
         $this->decoder      = $decoder;
     }
@@ -166,8 +158,8 @@ class Client
             ),
         );
 
-        stream_context_set_option($this->context, $options);
-        libxml_set_streams_context($this->context);
+        $context = stream_context_create(array_merge_recursive($this->options, $options));
+        libxml_set_streams_context($context);
         return $this->decoder->decodeResponse($this->baseURL);
     }
 }

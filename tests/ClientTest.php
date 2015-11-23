@@ -40,9 +40,9 @@ class Client extends \PHPUnit_Framework_TestCase
 
         $this->assertSame('qux', $client->foo());
 
-        $context    = stream_context_get_default();
-        $options    = stream_context_get_options($context);
-        $this->assertSame('something', $options['http']['content']);
+#        $context    = stream_context_get_default();
+#        $options    = stream_context_get_options($context);
+#        $this->assertSame('something', $options['http']['content']);
     }
 
     /**
@@ -60,15 +60,5 @@ class Client extends \PHPUnit_Framework_TestCase
         );
         $client = new \fpoirotte\XRL\Client($data);
         $this->assertSame(array(42, 'test'), $client->foo());
-    }
-
-    /**
-     * @covers                      \fpoirotte\XRL\Client
-     * @expectedException           \InvalidArgumentException
-     * @expectedExceptionMessage    Invalid context
-     */
-    public function testInvalidContext()
-    {
-        $client = new \fpoirotte\XRL\Client('', null, null, 42);
     }
 }
