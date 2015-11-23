@@ -180,7 +180,7 @@ both copyright information, licensing information and contributor credits:
 
 ..  |coveralls| image:: https://coveralls.io/repos/fpoirotte/XRL/badge.svg?branch=develop&service=github
     :alt: unknown
-    :target: https://coveralls.io/r/fpoirotte/XRL?branch=develop
+    :target: https://coveralls.io/github/fpoirotte/XRL?branch=develop
 
 ..  |versioneye-updates| image:: https://www.versioneye.com/php/fpoirotte:xrl/dev-develop/badge.png
     :alt: unknown
