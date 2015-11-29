@@ -17,7 +17,7 @@ namespace fpoirotte\XRL\Types;
  *
  * \authors François Poirotte <clicky@erebot.net>
  */
-class Int extends \fpoirotte\XRL\Types\AbstractInteger
+class IntType extends \fpoirotte\XRL\Types\AbstractInteger
 {
     /// XML-RPC type for this class.
     const XMLRPC_TYPE   = 'int';

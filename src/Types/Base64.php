@@ -17,7 +17,7 @@ namespace fpoirotte\XRL\Types;
  *
  * \authors François Poirotte <clicky@erebot.net>
  */
-class Base64 extends \fpoirotte\XRL\Types\String
+class Base64 extends \fpoirotte\XRL\Types\StringType
 {
     /// \copydoc fpoirotte::XRL::Types::AbstractType::write()
     public function write(\XMLWriter $writer, \DateTimeZone $timezone, $stringTag)

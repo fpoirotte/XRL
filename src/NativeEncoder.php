@@ -125,7 +125,7 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
             case 'string':
                 // Encode as a regular string if possible.
                 if (static::isUTF8($value)) {
-                    return new \fpoirotte\XRL\Types\String($value);
+                    return new \fpoirotte\XRL\Types\StringType($value);
                 }
                 return new \fpoirotte\XRL\Types\Base64($value);
 
@@ -176,8 +176,8 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
         if ($value instanceof \Exception) {
             return new \fpoirotte\XRL\Types\Struct(
                 array(
-                    'faultCode'     => new \fpoirotte\XRL\Types\Int($value->getCode()),
-                    'faultString'   => new \fpoirotte\XRL\Types\String(
+                    'faultCode'     => new \fpoirotte\XRL\Types\IntType($value->getCode()),
+                    'faultString'   => new \fpoirotte\XRL\Types\StringType(
                         get_class($value).': '.$value->getMessage()
                     ),
                 )
@@ -191,7 +191,7 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
 
             // Encode as a regular string if possible.
             if (static::isUTF8($value)) {
-                return new \fpoirotte\XRL\Types\String($value);
+                return new \fpoirotte\XRL\Types\StringType($value);
             }
             return new \fpoirotte\XRL\Types\Base64($value);
         }

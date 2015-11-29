@@ -59,7 +59,7 @@ class Encoder extends \PHPUnit_Framework_TestCase
             'multiParams',
             array(
                 new \fpoirotte\XRL\Types\I4(42),
-                new \fpoirotte\XRL\Types\String('test'),
+                new \fpoirotte\XRL\Types\StringType('test'),
             )
         );
         $this->assertEqualsRequest('multi', $this->encoder->encodeRequest($request));
@@ -84,7 +84,7 @@ class Encoder extends \PHPUnit_Framework_TestCase
     {
         $request    = new \fpoirotte\XRL\Request(
             'intParam',
-            array(new \fpoirotte\XRL\Types\Int(2147483647))
+            array(new \fpoirotte\XRL\Types\IntType(2147483647))
         );
         $this->assertEqualsRequest('int', $this->encoder->encodeRequest($request));
     }
@@ -148,7 +148,7 @@ class Encoder extends \PHPUnit_Framework_TestCase
     {
         $request    = new \fpoirotte\XRL\Request(
             'stringParam',
-            array(new \fpoirotte\XRL\Types\String(''))
+            array(new \fpoirotte\XRL\Types\StringType(''))
         );
         $this->assertEqualsRequest('string', $this->encoder->encodeRequest($request));
     }
@@ -160,7 +160,7 @@ class Encoder extends \PHPUnit_Framework_TestCase
     {
         $request    = new \fpoirotte\XRL\Request(
             'stringParam',
-            array(new \fpoirotte\XRL\Types\String('test'))
+            array(new \fpoirotte\XRL\Types\StringType('test'))
         );
         $this->assertEqualsRequest('string2', $this->encoder->encodeRequest($request));
     }
@@ -212,7 +212,7 @@ class Encoder extends \PHPUnit_Framework_TestCase
     {
         $array      = new \fpoirotte\XRL\Types\ArrayType(
             array(
-                new \fpoirotte\XRL\Types\String('test'),
+                new \fpoirotte\XRL\Types\StringType('test'),
                 new \fpoirotte\XRL\Types\I4(42),
             )
         );
@@ -237,7 +237,7 @@ class Encoder extends \PHPUnit_Framework_TestCase
     {
         $array      = new \fpoirotte\XRL\Types\Struct(
             array(
-                'foo' => new \fpoirotte\XRL\Types\String('test'),
+                'foo' => new \fpoirotte\XRL\Types\StringType('test'),
                 'bar' => new \fpoirotte\XRL\Types\I4(42),
             )
         );
@@ -252,8 +252,8 @@ class Encoder extends \PHPUnit_Framework_TestCase
     {
         $array      = new \fpoirotte\XRL\Types\Struct(
             array(
-                new \fpoirotte\XRL\Types\String('foo'),
-                42 => new \fpoirotte\XRL\Types\String('bar'),
+                new \fpoirotte\XRL\Types\StringType('foo'),
+                42 => new \fpoirotte\XRL\Types\StringType('bar'),
             )
         );
         $request    = new \fpoirotte\XRL\Request('assocArray', array($array));
@@ -267,8 +267,8 @@ class Encoder extends \PHPUnit_Framework_TestCase
     {
         $array      = new \fpoirotte\XRL\Types\Struct(
             array(
-                42 => new \fpoirotte\XRL\Types\String('foo'),
-                new \fpoirotte\XRL\Types\String('bar'),
+                42 => new \fpoirotte\XRL\Types\StringType('foo'),
+                new \fpoirotte\XRL\Types\StringType('bar'),
             )
         );
         $request    = new \fpoirotte\XRL\Request('assocArray', array($array));
@@ -325,7 +325,7 @@ XML
         $response   = new \fpoirotte\XRL\Types\ArrayType(
             array(
                 new \fpoirotte\XRL\Types\I4(42),
-                new \fpoirotte\XRL\Types\String('test'),
+                new \fpoirotte\XRL\Types\StringType('test'),
             )
         );
         $received   = $this->encoder->encodeResponse($response);

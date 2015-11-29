@@ -72,7 +72,7 @@ class NativeEncoder extends \PHPUnit_Framework_TestCase
             array(42, '\\fpoirotte\\XRL\\Types\\I4'),
             array(0x8FFFFFFFF, '\\fpoirotte\\XRL\\Types\\I8'),
             array(3.14, '\\fpoirotte\\XRL\\Types\\Double'),
-            array('test', '\\fpoirotte\\XRL\\Types\\String'),
+            array('test', '\\fpoirotte\\XRL\\Types\\StringType'),
             array("\xE8\xE9\xE0", '\\fpoirotte\\XRL\\Types\\Base64'),
             array(array(), '\\fpoirotte\\XRL\\Types\\ArrayType'),
             array(array(1, 2, 3), '\\fpoirotte\\XRL\\Types\\ArrayType'),
@@ -97,9 +97,9 @@ class NativeEncoder extends \PHPUnit_Framework_TestCase
                 simplexml_load_string('<foo>bar</foo>'),
                 '\\fpoirotte\\XRL\\Types\\Dom'
             ),
-            array(new SerialClass1('test'), '\\fpoirotte\\XRL\\Types\\String'),
+            array(new SerialClass1('test'), '\\fpoirotte\\XRL\\Types\\StringType'),
             array(new SerialClass1("\xE8\xE9\xE0"), '\\fpoirotte\\XRL\\Types\\Base64'),
-            array(new SerialClass2('test'), '\\fpoirotte\\XRL\\Types\\String'),
+            array(new SerialClass2('test'), '\\fpoirotte\\XRL\\Types\\StringType'),
             array(new SerialClass2("\xE8\xE9\xE0"), '\\fpoirotte\\XRL\\Types\\Base64'),
         );
     }

@@ -17,7 +17,7 @@ namespace fpoirotte\XRL\Types;
  *
  * \authors François Poirotte <clicky@erebot.net>
  */
-class String extends \fpoirotte\XRL\Types\AbstractType
+class StringType extends \fpoirotte\XRL\Types\AbstractType
 {
     /// \copydoc fpoirotte::XRL::Types::AbstractType::set()
     public function set($value)

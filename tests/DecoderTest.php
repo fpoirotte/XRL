@@ -66,7 +66,7 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params     = $request->getParams();
         $this->assertSame('intParam', $request->getProcedure());
         $this->assertSame(1, count($params));
-        $this->assertInstanceOf('\\fpoirotte\\XRL\\Types\\Int', $params[0]);
+        $this->assertInstanceOf('\\fpoirotte\\XRL\\Types\\IntType', $params[0]);
     }
 
     /**
@@ -179,7 +179,7 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params     = $request->getParams();
         $this->assertSame('stringParam', $request->getProcedure());
         $this->assertSame(1, count($params));
-        $this->assertInstanceOf('\\fpoirotte\\XRL\\Types\\String', $params[0]);
+        $this->assertInstanceOf('\\fpoirotte\\XRL\\Types\\StringType', $params[0]);
     }
 
     /**
@@ -192,7 +192,7 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params     = $request->getParams();
         $this->assertSame('stringParam', $request->getProcedure());
         $this->assertSame(1, count($params));
-        $this->assertInstanceOf('\\fpoirotte\\XRL\\Types\\String', $params[0]);
+        $this->assertInstanceOf('\\fpoirotte\\XRL\\Types\\StringType', $params[0]);
     }
 
     /**
@@ -205,7 +205,7 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $params     = $request->getParams();
         $this->assertSame('stringParam', $request->getProcedure());
         $this->assertSame(1, count($params));
-        $this->assertInstanceOf('\\fpoirotte\\XRL\\Types\\String', $params[0]);
+        $this->assertInstanceOf('\\fpoirotte\\XRL\\Types\\StringType', $params[0]);
     }
 
     /**
@@ -360,6 +360,6 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\\fpoirotte\\XRL\\Types\\ArrayType', $response);
         $this->assertSame(2, count($response));
         $this->assertInstanceOf('\\fpoirotte\\XRL\\Types\\I4', $response[0]);
-        $this->assertInstanceOf('\\fpoirotte\\XRL\\Types\\String', $response[1]);
+        $this->assertInstanceOf('\\fpoirotte\\XRL\\Types\\StringType', $response[1]);
     }
 }

@@ -348,9 +348,9 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
             'nil'               => '\\fpoirotte\\XRL\\Types\\Nil',
             'i4'                => '\\fpoirotte\\XRL\\Types\\I4',
             'i8'                => '\\fpoirotte\\XRL\\Types\\I8',
-            'int'               => '\\fpoirotte\\XRL\\Types\\Int',
+            'int'               => '\\fpoirotte\\XRL\\Types\\IntType',
             'boolean'           => '\\fpoirotte\\XRL\\Types\\Boolean',
-            'string'            => '\\fpoirotte\\XRL\\Types\\String',
+            'string'            => '\\fpoirotte\\XRL\\Types\\StringType',
             'double'            => '\\fpoirotte\\XRL\\Types\\Double',
             'dateTime.iso8601'  => '\\fpoirotte\\XRL\\Types\\DateTimeIso8601',
             'base64'            => '\\fpoirotte\\XRL\\Types\\Base64',
@@ -482,7 +482,7 @@ class Decoder implements \fpoirotte\XRL\DecoderInterface
         } catch (\InvalidArgumentException $e) {
             $value = '';
         }
-        $value = new \fpoirotte\XRL\Types\String($value);
+        $value = new \fpoirotte\XRL\Types\StringType($value);
         return self::checkType($allowedTypes, 'string', $value);
     }
 
