@@ -13,6 +13,8 @@ namespace fpoirotte\XRL\tests;
 
 class Encoder extends \PHPUnit_Framework_TestCase
 {
+    protected $encoder;
+
     public function setUp()
     {
         // Emulate a server located in Ireland that uses
@@ -338,5 +340,43 @@ XML
     public function testEncodeGarbage()
     {
         $dummy = $this->encoder->encodeResponse(null);
+    }
+
+    /**
+     * @covers                      \fpoirotte\XRL\Encoder::__construct
+     * @expectedException           \InvalidArgumentException
+     * @expectedExceptionMessage    $indent must be a boolean
+     */
+    public function testConstructor()
+    {
+        $dummy = new \fpoirotte\XRL\Encoder(null, 42);
+    }
+
+    /**
+     * @covers                      \fpoirotte\XRL\Encoder::__construct
+     * @expectedException           \InvalidArgumentException
+     * @expectedExceptionMessage    $stringTag must be a boolean
+     */
+    public function testConstructor2()
+    {
+        $dummy = new \fpoirotte\XRL\Encoder(null, false, 42);
+    }
+
+    /**
+     * @covers                      \fpoirotte\XRL\Encoder
+    */
+    public function testIndentation()
+    {
+        $response = $this->getMockBuilder('\\fpoirotte\\XRL\\Types\\AbstractType')
+                         ->disableOriginalConstructor()
+                         ->getMock();
+        $response
+            ->expects($this->once())
+            ->method('write');
+
+        $encoder    = new \fpoirotte\XRL\Encoder();
+        $res        = $encoder->encodeResponse($response);
+        $expected   = '<methodResponse><params><param><value/></param></params></methodResponse>';
+        $this->assertSame($expected, $res);
     }
 }

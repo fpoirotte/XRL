@@ -64,11 +64,7 @@ class Encoder implements \fpoirotte\XRL\EncoderInterface
         }
 
         if ($timezone === null) {
-            try {
-                $timezone = new \DateTimeZone(@date_default_timezone_get());
-            } catch (\Exception $e) {
-                throw new \InvalidArgumentException($e->getMessage(), $e->getCode());
-            }
+            $timezone = new \DateTimeZone(@date_default_timezone_get());
         }
 
         $this->indent       = $indent;
