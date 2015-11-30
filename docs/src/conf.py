@@ -21,21 +21,17 @@ def prepare(globs, locs):
                 ).stdout.read().strip()
     doxygen = Popen('which doxygen 2> %s' % os.devnull, shell=True, stdout=PIPE
                 ).stdout.read().strip()
-    php = Popen('which php 2> %s' % os.devnull, shell=True, stdout=PIPE
-                ).stdout.read().strip()
 
     environment = os.path.basename(root)
     pybabel = os.path.join(root, '..', '..', 'envs',
                            environment, 'bin', 'pybabel')
 
-    print "git version (%s):" % git
+    print "git version:"
     call([git, '--version'])
-    print "doxygen version (%s):" % doxygen
+    print "doxygen version:"
     call([doxygen, '--version'])
-    print "pybabel version (%s):" % pybabel
+    print "pybabel version:"
     call([pybabel, '--version'])
-    print "PHP version (%s):" % php
-    call([php, '-v'])
     print "RTD environment:", environment
     print "OS environment:"
     pprint.pprint(os.environ)
@@ -51,11 +47,11 @@ def prepare(globs, locs):
     project = origin.rpartition('/')[2]
     if project.endswith('.git'):
         project = project[:-4]
-    locs['project'] = project
+    os.environ['SPHINX_PROJECT'] = project
     if git_tag:
-        locs['version'] = locs['release'] = git_tag
+        os.environ['SPHINX_VERSION'] = os.environ['SPHINX_RELEASE'] = git_tag
     else:
-        locs['version'] = locs['release'] = 'latest'
+        os.environ['SPHINX_VERSION'] = os.environ['SPHINX_RELEASE'] = 'latest'
         locs['tags'].add('devel')
 
     # Clone or update dependencies
@@ -80,8 +76,8 @@ def prepare(globs, locs):
 
     # Run doxygen
     call([doxygen, os.path.join(root, 'Doxyfile')], env={
-        'COMPONENT_NAME': locs['project'],
-        'COMPONENT_VERSION': locs['version'],
+        'COMPONENT_NAME': os.environ['SPHINX_PROJECT'],
+        'COMPONENT_VERSION': os.environ['SPHINX_VERSION'],
         'COMPONENT_BRIEF': composer.get('description', ''),
     })
 
