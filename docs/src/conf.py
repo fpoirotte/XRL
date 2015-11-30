@@ -28,13 +28,13 @@ def prepare(globs, locs):
     pybabel = os.path.join(root, '..', '..', 'envs',
                            environment, 'bin', 'pybabel')
 
-    print "git version:"
+    print "git version (%s):" % git
     call([git, '--version'])
-    print "doxygen version:"
+    print "doxygen version (%s):" % doxygen
     call([doxygen, '--version'])
-    print "pybabel version:"
+    print "pybabel version (%s):" % pybabel
     call([pybabel, '--version'])
-    print "PHP version:"
+    print "PHP version (%s):" % php
     call([php, '-v'])
     print "RTD environment:", environment
     print "OS environment:"
