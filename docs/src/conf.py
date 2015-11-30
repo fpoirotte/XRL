@@ -21,6 +21,8 @@ def prepare(globs, locs):
                 ).stdout.read().strip()
     doxygen = Popen('which doxygen 2> %s' % os.devnull, shell=True, stdout=PIPE
                 ).stdout.read().strip()
+    php = Popen('which php 2> %s' % os.devnull, shell=True, stdout=PIPE
+                ).stdout.read().strip()
 
     environment = os.path.basename(root)
     pybabel = os.path.join(root, '..', '..', 'envs',
@@ -32,6 +34,8 @@ def prepare(globs, locs):
     call([doxygen, '--version'])
     print "pybabel version:"
     call([pybabel, '--version'])
+    print "PHP version:"
+    call([php, '-v'])
     print "RTD environment:", environment
     print "OS environment:"
     pprint.pprint(os.environ)
