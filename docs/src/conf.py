@@ -42,7 +42,9 @@ def prepare(globs, locs):
     # Figure several configuration values from git.
     origin = Popen([git, 'config', '--local', 'remote.origin.url'],
                    stdout=PIPE).stdout.read().strip()
-    git_tag = Popen(['git', 'describe', '--tags', '--exact', '--first-parent'],
+    git_tag = Popen([git, 'describe', '--tags', '--exact', '--first-parent'],
+                    stdout=PIPE).communicate()[0].strip()
+    git_hash = Popen([git, 'rev-parse', 'HEAD'],
                     stdout=PIPE).communicate()[0].strip()
     project = origin.rpartition('/')[2]
     if project.endswith('.git'):
@@ -112,6 +114,9 @@ def prepare(globs, locs):
     if 'locale_dirs' not in locs:
         locs['locale_dirs'] = []
     locs['locale_dirs'].insert(0, os.path.join(root, 'docs', 'i18n'))
+    if 'rst_prolog' not in locs:
+        locs['rst_prolog'] = ''
+    locs['rst_prolog'] += '\n    .. |git_hash| replace:: %s\n' % git_hash
 
     globs['RTD_NEW_THEME'] = False
     globs['RTD_OLD_THEME'] = False

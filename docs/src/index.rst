@@ -9,10 +9,12 @@ the creation of XML-RPC clients or servers.
     ..  warning::
 
         This documentation was built automatically from the latest changes
-        in `XRL's code <https://github.com/fpoirotte/XRL/>`_.
+        in `XRL's code`_.
         It does not necessarily reflect features from any current or
         upcoming release. Check out https://readthedocs.org/projects/xrl/
         for documentation on supported versions.
+
+..  _`XRL's code`: https://github.com/fpoirotte/XRL/commit/\ |git_hash|
 
 Overview
 --------
