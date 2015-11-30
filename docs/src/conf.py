@@ -2,6 +2,7 @@
 
 import os
 import glob
+import pprint
 import shutil
 from datetime import datetime
 from subprocess import call, Popen, PIPE
@@ -31,6 +32,9 @@ def prepare(globs, locs):
     call([doxygen, '--version'])
     print "pybabel version:"
     call([pybabel, '--version'])
+    print "RTD environment:", environment
+    print "OS environment:"
+    pprint.pprint(os.environ)
 
     print "Running from %s..." % (root, )
     os.chdir(root)
@@ -108,6 +112,9 @@ def prepare(globs, locs):
     if 'locale_dirs' not in locs:
         locs['locale_dirs'] = []
     locs['locale_dirs'].insert(0, os.path.join(root, 'docs', 'i18n'))
+
+    globs['RTD_NEW_THEME'] = False
+    globs['RTD_OLD_THEME'] = False
 
 
 prepare(globals(), locals())
