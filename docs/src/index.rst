@@ -8,13 +8,11 @@ the creation of XML-RPC clients or servers.
 
     ..  warning::
 
-        This documentation was built automatically from the latest changes
-        in `XRL's code`_.
+        This documentation was automatically built from the latest changes
+        in |this_commit|_.
         It does not necessarily reflect features from any current or
         upcoming release. Check out https://readthedocs.org/projects/xrl/
-        for documentation on supported versions.
-
-..  _`XRL's code`: https://github.com/fpoirotte/XRL/commit/\ |git_hash|
+        for documentation on supported versions. 
 
 Overview
 --------
@@ -80,6 +78,7 @@ Other resources
 
 
 ..  : End of document.
+..  |this_commit| replace:: XRL's code
 ..  |---| unicode:: U+02014 .. em dash
     :trim:
 ..  : vim: ts=4 et

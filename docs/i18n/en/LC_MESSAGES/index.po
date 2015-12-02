@@ -31,19 +31,6 @@ msgstr ""
 "XRL (short for XML-RPC Library) is a collection of PHP classes that ease the "
 "creation of XML-RPC clients or servers."
 #
-# 865f5ab5d5044d6dbea754579a3f2822
-# File: ../src/index.rst, line: 19
-msgid ""
-"This documentation was built automatically from the latest changes in `XRL's "
-"code <https://github.com/fpoirotte/XRL/>`_. It does not necessarily reflect "
-"features from any current or upcoming release. Check out https://readthedocs."
-"org/projects/xrl/ for documentation on supported versions."
-msgstr ""
-"This documentation was built automatically from the latest changes in `XRL's "
-"code <https://github.com/fpoirotte/XRL/>`_. It does not necessarily reflect "
-"features from any current or upcoming release. Check out https://readthedocs."
-"org/projects/xrl/ for documentation on supported versions."
-#
 # c240b16963174d29b3955d88e6ff5446
 # File: ../src/index.rst, line: 26
 msgid "Overview"
