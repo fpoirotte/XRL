@@ -15,6 +15,14 @@ namespace fpoirotte\XRL;
  * \brief
  *      A class that adds various capabilities
  *      to an existing XML-RPC server.
+ *
+ * \see
+ *      http://scripts.incutio.com/xmlrpc/introspection.html
+ *      for documentation on introspection-related capabilities.
+ *
+ * \see
+ *      http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php
+ *      for documentation on interoperability faults.
  */
 class CapableServer
 {
@@ -362,7 +370,7 @@ class CapableServer
 
                 $result = $this->server->call($request['methodName'], $request['params']);
                 // Results are wrapped in an array to make it possible
-                // to distinguish faults from regular structs.
+                // to distinguish between faults and regular structs.
                 $responses[] = array($result);
             } catch (\Exception $error) {
                 $responses[] = $error;

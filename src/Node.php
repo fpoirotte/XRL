@@ -32,6 +32,7 @@ class Node
     const XML_ERR_NO_MEMORY             = 2;
     const XML_ERR_DOCUMENT_EMPTY        = 4;
     const XML_ERR_DOCUMENT_END          = 5;
+    const XML_ERR_INVALID_CHAR          = 9;
     const XML_ERR_UNKNOWN_ENCODING      = 31;
     const XML_ERR_UNSUPPORTED_ENCODING  = 32;
 
@@ -70,32 +71,27 @@ class Node
                 switch ($error->code) {
                     case self::XML_ERR_UNKNOWN_ENCODING:
                     case self::XML_ERR_UNSUPPORTED_ENCODING:
-                        throw \fpoirotte\XRL\Faults::get(
-                            \fpoirotte\XRL\Faults::UNSUPPORTED_ENCODING
-                        );
+                        throw new \fpoirotte\XRL\Faults\UnsupportedEncodingException();
 
-                    // @codeCoverageIgnoreStart
                     // Internal & memory errors are too hard to recreate
                     // and are thus excluded from code coverage analysis.
+                    // @codeCoverageIgnoreStart
                     case self::XML_ERR_INTERNAL_ERROR:
                     case self::XML_ERR_NO_MEMORY:
-                        throw \fpoirotte\XRL\Faults::get(
-                            \fpoirotte\XRL\Faults::INTERNAL_ERROR
-                        );
+                        throw new \fpoirotte\XRL\Faults\InternalErrorException();
                     // @codeCoverageIgnoreEnd
+
+                    case self::XML_ERR_INVALID_CHAR:
+                        throw new \fpoirotte\XRL\Faults\InvalidCharacterException();
 
                     // Generic error handling.
                     default:
-                        throw \fpoirotte\XRL\Faults::get(
-                            \fpoirotte\XRL\Faults::NOT_WELL_FORMED
-                        );
+                        throw new \fpoirotte\XRL\Faults\NotWellFormedException();
                 }
             }
 
             if ($validate && !$reader->isValid()) {
-                throw \fpoirotte\XRL\Faults::get(
-                    \fpoirotte\XRL\Faults::INVALID_XML_RPC
-                );
+                throw new \fpoirotte\XRL\Faults\InvalidXmlRpcException();
             }
 
             $subtrees = true;

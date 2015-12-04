@@ -389,7 +389,7 @@ class Server implements \Countable, \IteratorAggregate, \ArrayAccess
         }
 
         if (!isset($this->XRLFunctions[$procedure])) {
-            throw \fpoirotte\XRL\Faults::get(\fpoirotte\XRL\Faults::METHOD_NOT_FOUND);
+            throw new \fpoirotte\XRL\Faults\MethodNotFoundException();
         }
 
         $callable = $this->XRLFunctions[$procedure];
