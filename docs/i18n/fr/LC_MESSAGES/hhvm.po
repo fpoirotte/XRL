@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-05 00:26+0100\n"
+"POT-Creation-Date: 2015-12-05 00:49+0100\n"
 "PO-Revision-Date: 2014-11-16 16:46+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -38,27 +38,12 @@ msgstr ""
 msgid "Source: http://en.wikipedia.org/wiki/HipHop_Virtual_Machine"
 msgstr "Source : http://en.wikipedia.org/wiki/HipHop_Virtual_Machine"
 #
-# 90ff6508a59b43809b61efe090baa218
-# File: ../src/hhvm.rst, line: 18
+# 8362aab0b1d640f79dc8f713155eb6ba
 msgid ""
-"There are currently issues that prevent XRL from running smoothly on HHVM. "
-"Nonetheless, XRL is actively tested against HHVM in our `Continuous "
-"Integration process <https://travis-ci.org/fpoirotte/XRL>`_."
-msgstr ""
-"Certains problèmes empêchent actuellement XRL de fonctionner correctement "
-"avec HHVM. Néanmoins, XRL est activement testé avec HHVM dans le cadre de "
-"notre `Processus d'intégration continue <https://travis-ci.org/fpoirotte/"
+"XRL should be compatible with HHVM. To ensure that, we actively test against "
+"HHVM in our `Continuous Integration process <https://travis-ci.org/fpoirotte/"
 "XRL>`_."
-#
-# 6bc47632dac34a3cb7225ea27ab0e332
-# File: ../src/hhvm.rst, line: 22
-msgid ""
-"We plan to write more tests in the future to isolate those problems and to "
-"help make HHVM better. Meanwhile, users are advised to run the stock PHP "
-"interpreter (either from http://php.net/ or from another distributor) when "
-"using XRL."
 msgstr ""
-"Nous prévoyons d'écrire davantage de tests dans le futur afin d'isoler ces "
-"problèmes et d'améliorer HHVM. En attendant, l'utilisation de l'interpréteur "
-"PHP officiel (venant de http://php.net/ ou d'un autre distributeur) est "
-"recommandée pour utiliser XRL."
+"XRL devrait être compatible avec HHVM. Pour nous assurer de cela, HHVM est "
+"inclus dans les tests de notre
+`processus d'Intégration Continue <https://travis-ci.org/fpoirotte/XRL>`_."
