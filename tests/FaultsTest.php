@@ -20,7 +20,7 @@ class Faults extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers      \fpoirotte\XRL\Faults
+     * @covers      \fpoirotte\XRL\Faults\NotWellFormedException
      */
     public function testIllFormed()
     {
@@ -28,8 +28,9 @@ class Faults extends \PHPUnit_Framework_TestCase
         $expected =<<<EXPECTED
 <methodResponse><fault><value><struct><member><name>faultCode</name><value>
 <int>-32700</int></value></member><member><name>faultString</name><value>
-<string>fpoirotte\XRL\Exception: parse error. not well formed</string></value>
-</member></struct></value></fault></methodResponse>
+<string>fpoirotte\XRL\Faults\NotWellFormedException:
+ parse error. not well formed
+</string></value></member></struct></value></fault></methodResponse>
 EXPECTED;
         $this->assertSame(
             str_replace(array("\r", "\n"), '', $expected),
@@ -38,7 +39,7 @@ EXPECTED;
     }
 
     /**
-     * @covers      \fpoirotte\XRL\Faults
+     * @covers      \fpoirotte\XRL\Faults\UnsupportedEncodingException
      */
     public function testUnsupportedEncoding()
     {
@@ -51,8 +52,9 @@ EXPECTED;
         $expected =<<<EXPECTED
 <methodResponse><fault><value><struct><member><name>faultCode</name><value>
 <int>-32701</int></value></member><member><name>faultString</name><value>
-<string>fpoirotte\XRL\Exception: parse error. unsupported encoding</string>
-</value></member></struct></value></fault></methodResponse>
+<string>fpoirotte\XRL\Faults\UnsupportedEncodingException:
+ parse error. unsupported encoding
+</string></value></member></struct></value></fault></methodResponse>
 EXPECTED;
         $this->assertSame(
             str_replace(array("\r", "\n"), '', $expected),
@@ -61,7 +63,7 @@ EXPECTED;
     }
 
     /**
-     * @covers      \fpoirotte\XRL\Faults
+     * @covers      \fpoirotte\XRL\Faults\InvalidCharacterException
      */
     public function testInvalidCharacter()
     {
@@ -69,14 +71,15 @@ EXPECTED;
             'data://;base64,' .
             base64_encode(
                 '<?xml version="1.0" encoding="UTF-8"?'.'>' .
-                "<foo>\xE8\xE9\xE0</foo>"
+                "<foo>&#x9999999;</foo>"
             )
         );
         $expected =<<<EXPECTED
 <methodResponse><fault><value><struct><member><name>faultCode</name><value>
-<int>-32700</int></value></member><member><name>faultString</name><value>
-<string>fpoirotte\XRL\Exception: parse error. not well formed</string>
-</value></member></struct></value></fault></methodResponse>
+<int>-32702</int></value></member><member><name>faultString</name><value>
+<string>fpoirotte\XRL\Faults\InvalidCharacterException:
+ parse error. invalid character for encoding
+</string></value></member></struct></value></fault></methodResponse>
 EXPECTED;
         $this->assertSame(
             str_replace(array("\r", "\n"), '', $expected),
@@ -85,7 +88,7 @@ EXPECTED;
     }
 
     /**
-     * @covers      \fpoirotte\XRL\Faults
+     * @covers      \fpoirotte\XRL\Faults\InvalidXmlRpcException
      */
     public function testInvalidXmlRpc()
     {
@@ -98,8 +101,9 @@ EXPECTED;
         $expected =<<<EXPECTED
 <methodResponse><fault><value><struct><member><name>faultCode</name><value>
 <int>-32600</int></value></member><member><name>faultString</name><value>
-<string>fpoirotte\XRL\Exception: server error. invalid xml-rpc. not conforming
- to spec</string></value></member></struct></value></fault></methodResponse>
+<string>fpoirotte\XRL\Faults\InvalidXmlRpcException:
+ server error. invalid xml-rpc. not conforming to spec
+</string></value></member></struct></value></fault></methodResponse>
 EXPECTED;
         $this->assertSame(
             str_replace(array("\r", "\n"), '', $expected),
@@ -108,7 +112,7 @@ EXPECTED;
     }
 
     /**
-     * @covers      \fpoirotte\XRL\Faults
+     * @covers      \fpoirotte\XRL\Faults\MethodNotFoundException
      */
     public function testMethodNotFound()
     {
@@ -126,23 +130,14 @@ EXPECTED;
         $expected =<<<EXPECTED
 <methodResponse><fault><value><struct><member><name>faultCode</name><value>
 <int>-32601</int></value></member><member><name>faultString</name><value>
-<string>fpoirotte\XRL\Exception: server error. requested method not found
+<string>fpoirotte\XRL\Faults\MethodNotFoundException:
+ server error. requested method not found
 </string></value></member></struct></value></fault></methodResponse>
 EXPECTED;
         $this->assertSame(
             str_replace(array("\r", "\n"), '', $expected),
             (string) $res
         );
-    }
-
-    /**
-     * @covers                      \fpoirotte\XRL\Faults
-     * @expectedException           \InvalidArgumentException
-     * @expectedExceptionMessage    Unknown interoperability fault
-     */
-    public function testInvalidFault()
-    {
-        \fpoirotte\XRL\Faults::get('Not a valid fault name');
     }
 
 #    public function testInvalidParameters()
