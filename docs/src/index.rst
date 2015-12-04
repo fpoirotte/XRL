@@ -70,11 +70,11 @@ XRL is released under the `3-clause BSD licence
 Other resources
 ---------------
 
-*   `Full API documentation <./apidoc/>`_
 *   `XRL on GitHub <https://github.com/fpoirotte/XRL/>`_ (source code and issue tracker)
 *   `XRL on Packagist <https://packagist.org/packages/fpoirotte/XRL>`_ (Composer repository)
 *   `XRL on Travis-CI <https://travis-ci.org/fpoirotte/XRL>`_ (continuous integration)
-*   `XRL on Read The Docs <https://readthedocs.org/projects/xrl/>`_ (documentation)
+*   `XRL on Read The Docs <https://readthedocs.org/projects/xrl/>`_ (online documentation)
+*   `Full API documentation <./apidoc/>`_ (hosted on Read The Docs)
 
 
 ..  : End of document.

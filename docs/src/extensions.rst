@@ -66,28 +66,41 @@ to promote interoperability between XML-RPC implementations.
 
 This extension is always enabled and does not add any additional methods
 to an XML-RPC server. A developer willing to use the interoperability faults
-defined in this extension can call ``\fpoirotte\XRL\Faults::get()``
-with the name of the fault to create.
+defined in this extension can throw the associated exception from the
+``\fpoirotte\XRL\Faults`` namespace.
 
 ..  sourcecode:: inline-php
 
     $server->error = function () {
-        throw \fpoirotte\XRL\Faults::get(\fpoirotte\XRL\Faults::SYSTEM_ERROR);
+        throw new \fpoirotte\XRL\Faults\SystemErrorException();
     };
 
-The following interoperability fault names are recognized:
+The following exceptions can be used for interoperability faults:
 
-*   ``NOT_WELL_FORMED``
-*   ``UNSUPPORTED_ENCODING``
-*   ``INVALID_CHARACTER``
-*   ``INVALID_XML_RPC``
-*   ``METHOD_NOT_FOUND``
-*   ``INVALID_PARAMETERS``
-*   ``INTERNAL_ERROR``
-*   ``APPLICATION_ERROR``
-*   ``SYSTEM_ERROR``
-*   ``TRANSPORT_ERROR``
+*   ``ApplicationErrorException``
+*   ``InternalErrorException``
+*   ``InvalidCharacterException``
+*   ``InvalidParameterException``
+*   ``InvalidXmlRpcException``
+*   ``MethodNotFoundException``
+*   ``NotWellFormedException``
+*   ``SystemErrorException``
+*   ``TransportErrorException``
+*   ``UnsupportedEncodingException``
 
+Also, the ``ImplementationDefinedErrorException`` exception can be used
+for implementation-defined errors, but please note than an error code
+conforming to the specification must be passed explicitly when creating
+such an error:
+
+..  sourcecode:: inline-php
+
+    $server->error = function () {
+        throw new \fpoirotte\XRL\Faults\ImplementationDefinedErrorException(
+            -32000,                 // Implementation-defined error code
+            "You're out of memory"  // Implementation-defined error message
+        );
+    };
 
 Apache types
 ~~~~~~~~~~~~

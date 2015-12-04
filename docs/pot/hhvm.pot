@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2011-2014, Erebot
+# Copyright (C) 2011-2015, Erebot
 # This file is distributed under the same license as the XRL package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-20 21:05+0100\n"
+"POT-Creation-Date: 2015-12-05 00:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,27 +16,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/hhvm.rst:10
+#: ../src/hhvm.rst:11
 # c5ae911095e64b849ae00a5097eb7389
 msgid "HipHop Virtual Machine"
 msgstr ""
 
-#: ../src/hhvm.rst:12
+#: ../src/hhvm.rst:13
 # 3b3f444a4d9a41af9d7baa024059901d
 msgid "HipHop Virtual Machine (HHVM) is a process virtual machine based on just-in-time (JIT) compilation, serving as an execution engine for PHP and Hack programming languages."
 msgstr ""
 
-#: ../src/hhvm.rst:16
+#: ../src/hhvm.rst:17
 # e1f2e903da934f28a112bfc45b581fee
 msgid "Source: http://en.wikipedia.org/wiki/HipHop_Virtual_Machine"
 msgstr ""
 
-#: ../src/hhvm.rst:18
+#: ../src/hhvm.rst:19
 # 8362aab0b1d640f79dc8f713155eb6ba
 msgid "There are currently issues that prevent XRL from running smoothly on HHVM. Nonetheless, XRL is actively tested against HHVM in our `Continuous Integration process <https://travis-ci.org/fpoirotte/XRL>`_."
 msgstr ""
 
-#: ../src/hhvm.rst:22
+#: ../src/hhvm.rst:23
 # ef13a42fa9fb4159a3fb78147a5bbb75
 msgid "We plan to write more tests in the future to isolate those problems and to help make HHVM better. Meanwhile, users are advised to run the stock PHP interpreter (either from http://php.net/ or from another distributor) when using XRL."
 msgstr ""

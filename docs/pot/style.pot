@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2011-2014, Erebot
+# Copyright (C) 2011-2015, Erebot
 # This file is distributed under the same license as the XRL package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-20 21:05+0100\n"
+"POT-Creation-Date: 2015-12-05 00:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,52 +16,52 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/style.rst:10
+#: ../src/style.rst:11
 # 66aa8c8aad814dda8e037582e32d001d
 msgid "Coding style"
 msgstr ""
 
-#: ../src/style.rst:12
+#: ../src/style.rst:13
 # b76393a3a2dc4551a7c158eb5950d8bd
 msgid "The XRL team closely follows the `PSR-2 <http://www.php-fig.org/psr/psr-2/>`_ coding style."
 msgstr ""
 
-#: ../src/style.rst:15
+#: ../src/style.rst:16
 # 293238e1731743069b8b1c454536ed28
 msgid "Also, when developing, the following command can be used to check various aspects of the code quality:"
 msgstr ""
 
-#: ../src/style.rst:22
+#: ../src/style.rst:23
 # 42291dbbd81a4bd986864401b63d16c2
 msgid "It runs the following tools on XRL's code to detect possible issues:"
 msgstr ""
 
-#: ../src/style.rst:24
+#: ../src/style.rst:25
 # d9abe8ebcf854a9eaefa7767d2e99622
 msgid "PHP lint (``php -l``): checks PHP syntax"
 msgstr ""
 
-#: ../src/style.rst:25
+#: ../src/style.rst:26
 # 1913c4056b084e78ba3719d2a5c258da
 msgid "PHP_CodeSniffer: checks code compliance with coding standard"
 msgstr ""
 
-#: ../src/style.rst:26
+#: ../src/style.rst:27
 # d7918e6775c04e9289d3bb24b126e9fa
 msgid "PDepend: identifies tight coupling between two pieces of code"
 msgstr ""
 
-#: ../src/style.rst:27
+#: ../src/style.rst:28
 # fa8c4fa1131e4478ae33c95692c7feac
 msgid "PHPMD (PHP Mess Detector): detects high-risk code structures"
 msgstr ""
 
-#: ../src/style.rst:28
+#: ../src/style.rst:29
 # e6ce0145001349628baab6b4529c092d
 msgid "PHPCPD (PHP Copy-Paste Detector): detects copy/paste abuse"
 msgstr ""
 
-#: ../src/style.rst:29
+#: ../src/style.rst:30
 # 16b24e3cf0114089a2e813d685009080
 msgid "PHPUnit: checks unit tests"
 msgstr ""

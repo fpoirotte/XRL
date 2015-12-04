@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-20 21:05+0100\n"
+"POT-Creation-Date: 2015-12-05 00:26+0100\n"
 "PO-Revision-Date: 2014-11-16 16:46+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -65,6 +65,10 @@ msgstr "PCRE"
 # File: ../src/setup.rst, line: 23
 msgid "SPL"
 msgstr "SPL"
+#
+# 031798fa9c28446880dd0f407c00717e
+msgid "Reflection"
+msgstr "Reflection"
 #
 # a58f06351a524888b0eacaa5bec16bec
 # File: ../src/setup.rst, line: 27

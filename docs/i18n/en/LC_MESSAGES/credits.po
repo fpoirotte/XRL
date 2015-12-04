@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2011-2014, Erebot
+# Copyright (C) 2011-2015, Erebot
 # This file is distributed under the same license as the XRL package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-20 21:05+0100\n"
+"POT-Creation-Date: 2015-12-05 00:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,17 +18,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 #
 # fff890f565c044f5b1057d58479c619e
-# File: ../src/credits.rst, line: 10
+# File: ../src/credits.rst, line: 11
 msgid "Credits"
 msgstr "Credits"
 #
 # ad00968aec7b4cce8224eafee9a8176e
-# File: ../src/credits.rst, line: 12
+# File: ../src/credits.rst, line: 13
 msgid "Specials thanks to:"
 msgstr "Specials thanks to:"
 #
 # a3c8548c80eb4897bb7ae0389e0a3b6c
-# File: ../src/credits.rst, line: 14
+# File: ../src/credits.rst, line: 15
 msgid ""
 "`Thibaud Rohmer <https://github.com/thibaud-rohmer>`_ for being the first "
 "user of XRL and the very reason this whole project exists"
@@ -37,12 +37,12 @@ msgstr ""
 "user of XRL and the very reason this whole project exists"
 #
 # 4a34296582d04279823754229e6a048f
-# File: ../src/credits.rst, line: 17
+# File: ../src/credits.rst, line: 18
 msgid "Thanks to:"
 msgstr "Thanks to:"
 #
 # f0d7772b3a764641acf69d25562c9f71
-# File: ../src/credits.rst, line: 19
+# File: ../src/credits.rst, line: 20
 msgid ""
 "David Goodger for `Docutils <http://docutils.sourceforge.net/>`_ and "
 "reStructuredText"
@@ -51,16 +51,16 @@ msgstr ""
 "reStructuredText"
 #
 # a5f05e5253914e09b5fd432d37bf053e
-# File: ../src/credits.rst, line: 21
+# File: ../src/credits.rst, line: 22
 msgid "Georg Brandl for `Sphinx <http://sphinx.pocoo.org>`_"
 msgstr "Georg Brandl for `Sphinx <http://sphinx.pocoo.org>`_"
 #
 # 22b39879d1ca4a89b27950734a93a6c9
-# File: ../src/credits.rst, line: 22
+# File: ../src/credits.rst, line: 23
 msgid "Whoever made the ``haiku`` theme for Sphinx"
 msgstr "Whoever made the ``haiku`` theme for Sphinx"
 #
 # 1c37d1a18b514971a908757c7e43ad82
-# File: ../src/credits.rst, line: 24
+# File: ../src/credits.rst, line: 25
 msgid "whose work made it possible to write and publish this documentation."
 msgstr "whose work made it possible to write and publish this documentation."

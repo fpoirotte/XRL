@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2011-2014, Erebot
+# Copyright (C) 2011-2015, Erebot
 # This file is distributed under the same license as the XRL package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-20 21:05+0100\n"
+"POT-Creation-Date: 2015-12-05 00:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,69 +16,69 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/quickstart.rst:10
+#: ../src/quickstart.rst:11
 # 381ca7c6962c4ab39470c1ce1c657339
 msgid "Quick start"
 msgstr ""
 
-#: ../src/quickstart.rst:12
+#: ../src/quickstart.rst:13
 # 042fb5abb515436a932ecd7c690a0c76
 msgid "Assuming XRL is correctly :ref:`installed <setup>` on your computer, you can now write XML-RPC clients and servers."
 msgstr ""
 
-#: ../src/quickstart.rst:16
+#: ../src/quickstart.rst:17
 # f6dccbcf1bb54ef49e18e6376eac0efe
 msgid "Writing an XML-RPC client"
 msgstr ""
 
-#: ../src/quickstart.rst:18
-#: ../src/quickstart.rst:51
+#: ../src/quickstart.rst:19
+#: ../src/quickstart.rst:52
 # 7f602e36c95e462bb69f4e060aff3ae5
-# 42be0a7f529e4a5e879bc0f0954254ad
+# 7f602e36c95e462bb69f4e060aff3ae5
 msgid "Load and register the autoloader [#note_composer]_"
 msgstr ""
 
-#: ../src/quickstart.rst:25
+#: ../src/quickstart.rst:26
 # 0ab3caf34c3048f1839c56e38cc7cc7f
 msgid "Create a new client configured to query the remote XML-RPC server"
 msgstr ""
 
-#: ../src/quickstart.rst:31
+#: ../src/quickstart.rst:32
 # b6fa4978ae644c17beae55f490765747
 msgid "Call a method provided by that server, like it were just any other code"
 msgstr ""
 
-#: ../src/quickstart.rst:49
+#: ../src/quickstart.rst:50
 # 7147ad9c6a0e410d997a0f28be0f85cd
 msgid "Writing an XML-RPC server"
 msgstr ""
 
-#: ../src/quickstart.rst:58
+#: ../src/quickstart.rst:59
 # 20f6a7b17c3648ba92758a093c8fd789
 msgid "Create a new server instance"
 msgstr ""
 
-#: ../src/quickstart.rst:64
+#: ../src/quickstart.rst:65
 # f7e42ea260c649c7af31cf1381ccd802
 msgid "Attach some methods to that server"
 msgstr ""
 
-#: ../src/quickstart.rst:66
+#: ../src/quickstart.rst:67
 # 84009af406c84a93a77230511dd47755
 msgid "You can register anonymous functions, closures, global functions, public methods on objects, etc. using the attribute access operator ``->``. You may even use invokable objects!"
 msgstr ""
 
-#: ../src/quickstart.rst:103
+#: ../src/quickstart.rst:104
 # 67269efe2e4544df91f1e29c92f2efbc
 msgid "Alternatively, you can use the array syntax ``[]`` instead. This is recommended as it avoids potential conflicts with XRL's own attributes and it makes things easier when the method's name is not a valid PHP identifier."
 msgstr ""
 
-#: ../src/quickstart.rst:113
+#: ../src/quickstart.rst:114
 # 107f3cc91a3f4a6a99e8cab3ddf1de3e
 msgid "Handle incoming XML-RPC requests and publish the results"
 msgstr ""
 
-#: ../src/quickstart.rst:120
+#: ../src/quickstart.rst:121
 # 15e82bd1bc274aeea5724361daabcb1c
 msgid "Users of the `Composer dependency manager <https://getcomposer.org/>`_ should load the regular autoloader found in ``vendor/autoload.php`` instead."
 msgstr ""

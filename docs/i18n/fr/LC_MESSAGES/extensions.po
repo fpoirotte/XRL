@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-20 21:05+0100\n"
+"POT-Creation-Date: 2015-12-05 00:26+0100\n"
 "PO-Revision-Date: 2014-11-16 16:46+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -154,77 +154,76 @@ msgid ""
 "implementations."
 msgstr ""
 "L'extension `faults_interop <http://xmlrpc-epi.sourceforge.net/specs/rfc."
-"fault_codes.php>`_ contient les spécifications de codes d'erreurs (fautes) "
-"standards, afin d'encourager l'interopérabilité entre les implémentations XML-"
-"RPC."
+"fault_codes.php>`_ contient les spécifications de codes correspondant à "
+"des cas d'erreurs standards, afin d'encourager l'interopérabilité entre "
+"les implémentations XML-RPC."
 #
-# 03fd0e4d3c9546e8b52b61d04b4126a6
-# File: ../src/extensions.rst, line: 75
+# 53a03af775ab4ed48e60d4825b1115a7
 msgid ""
 "This extension is always enabled and does not add any additional methods to "
 "an XML-RPC server. A developer willing to use the interoperability faults "
-"defined in this extension can call ``\\fpoirotte\\XRL\\Faults::get()`` with "
-"the name of the fault to create."
+"defined in this extension can throw the associated exception from the ``"
+"\\fpoirotte\\XRL\\Faults`` namespace."
 msgstr ""
 "Cette extension est toujouts activée et n'ajoute aucune méthode "
 "supplémentaire aux serveurs XML-RPC. Un développeur désireux d'utiliser les "
-"fautes d'interopérabilité définis dans cette extension peut appeler ``"
-"\\fpoirotte\\XRL\\Faults::get()`` avec le nom de la faute à générer."
+"erreurs interopérables définies dans cette extension peut lever l'exception "
+"associée dans l'espace de noms ``\\fpoirotte\\XRL\\Faults``."
 #
-# 8ea19e97689e45a781e682acaa574d72
-# File: ../src/extensions.rst, line: 86
-msgid "The following interoperability fault names are recognized:"
-msgstr "Les noms de fautes interopérables suivants sont reconnus :"
+# fc7a80caa853415289879ac0763c7942
+msgid "The following exceptions can be used for interoperability faults:"
+msgstr "Les exceptions suivantes peuvent être utilisées pour représenter une erreur interopérable :"
 #
-# c17e6f46bf0f48669055d1b19e3112fa
-# File: ../src/extensions.rst, line: 88
-msgid "``NOT_WELL_FORMED``"
-msgstr "``NOT_WELL_FORMED``"
+# 54eb2d4005e148be9d9083074b49eba3
+msgid "``ApplicationErrorException``"
+msgstr "``ApplicationErrorException``"
 #
-# 0a6a38db9267483987ecc12591057b6a
-# File: ../src/extensions.rst, line: 89
-msgid "``UNSUPPORTED_ENCODING``"
-msgstr "``UNSUPPORTED_ENCODING``"
+# 3373b8d98ada457186976ae71b81c92c
+msgid "``InternalErrorException``"
+msgstr "``InternalErrorException``"
 #
-# 9c1155fb91594f74ba07c774841ea794
-# File: ../src/extensions.rst, line: 90
-msgid "``INVALID_CHARACTER``"
-msgstr "``INVALID_CHARACTER``"
+# f88b3850d5e34f0e8059d97166e9013d
+msgid "``InvalidCharacterException``"
+msgstr "``InvalidCharacterException``"
 #
-# 44d2f7a550aa4a438eb4934e351c86ec
-# File: ../src/extensions.rst, line: 91
-msgid "``INVALID_XML_RPC``"
-msgstr "``INVALID_XML_RPC``"
+# d2f0ef7af25040949b997be59c3efb64
+msgid "``InvalidParameterException``"
+msgstr "``InvalidParameterException``"
 #
-# 6da67d5cd68e4a84a69fa10494143af2
-# File: ../src/extensions.rst, line: 92
-msgid "``METHOD_NOT_FOUND``"
-msgstr "``METHOD_NOT_FOUND``"
+# e3316b6341734302b27199c7bbdca3db
+msgid "``InvalidXmlRpcException``"
+msgstr "``InvalidXmlRpcException``"
 #
-# eaefa0deffe643ffba8593fd3f5933a4
-# File: ../src/extensions.rst, line: 93
-msgid "``INVALID_PARAMETERS``"
-msgstr "``INVALID_PARAMETERS``"
+# 54871753cb9d4b4d8f9959a39a24c094
+msgid "``MethodNotFoundException``"
+msgstr "``MethodNotFoundException``"
 #
-# 2b99aec2acfa4fd5b9aec9c8d732bdd2
-# File: ../src/extensions.rst, line: 94
-msgid "``INTERNAL_ERROR``"
-msgstr "``INTERNAL_ERROR``"
+# 4905316b43de4fc09703f520979fbefe
+msgid "``NotWellFormedException``"
+msgstr "``NotWellFormedException``"
 #
-# 426fad1645504af9b387ea43600419fc
-# File: ../src/extensions.rst, line: 95
-msgid "``APPLICATION_ERROR``"
-msgstr "``APPLICATION_ERROR``"
+# 21d7c3bbc6884adba8e044133d11c306
+msgid "``SystemErrorException``"
+msgstr "``SystemErrorException``"
 #
-# ef4901df71b4405eacc96eb92f6ae3c6
-# File: ../src/extensions.rst, line: 96
-msgid "``SYSTEM_ERROR``"
-msgstr "``SYSTEM_ERROR``"
+# 48c3a9f4049c43f8930a838295276295
+msgid "``TransportErrorException``"
+msgstr "``TransportErrorException``"
 #
-# 926b9e2f18f14d158afb215f5847edee
-# File: ../src/extensions.rst, line: 97
-msgid "``TRANSPORT_ERROR``"
-msgstr "``TRANSPORT_ERROR``"
+# 3ad50875c853400ebfd27ebe31f5d184
+msgid "``UnsupportedEncodingException``"
+msgstr "``UnsupportedEncodingException``"
+#
+# f674e6b12c7046228bd296fe7d302ecf
+msgid ""
+"Also, the ``ImplementationDefinedErrorException`` exception can be used for "
+"implementation-defined errors, but please note than an error code conforming "
+"to the specification must be passed explicitly when creating such an error:"
+msgstr ""
+"Par ailleurs, l'exception ``ImplementationDefinedErrorException`` peut "
+"être utilisée pour les erreurs propres à l'implémentation. Notez cependant "
+"qu'un code d'erreur conforme à la spécification doit être passé explicitement "
+"lors de la création d'une telle erreur."
 #
 # b1a28e5c58e84f1f96f4eb92630f9577
 # File: ../src/extensions.rst, line: 101
@@ -286,3 +285,4 @@ msgstr ""
 "Il n'est pas possible actuellement d'activer séparément chaque extension en "
 "utilisant ``\\fpoirotte\\XRL\\CapableServer::enable()``. C'est une situation "
 "de type « tout ou rien »."
+

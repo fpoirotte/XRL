@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2011-2014, Erebot
+# Copyright (C) 2011-2015, Erebot
 # This file is distributed under the same license as the XRL package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-20 21:05+0100\n"
+"POT-Creation-Date: 2015-12-05 00:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 #
 # 00c8bf1c3f104ef2a05876cc894e8fb4
-# File: ../src/cli.rst, line: 10
+# File: ../src/cli.rst, line: 11
 msgid "Command-line XML-RPC client"
 msgstr "Command-line XML-RPC client"
 #
 # 4448f0efb56b457fac48342b07af35d4
-# File: ../src/cli.rst, line: 12
+# File: ../src/cli.rst, line: 13
 msgid ""
 "XRL provides a command-line XML-RPC client that makes it easy to test a "
 "remote XML-RPC server."
@@ -32,7 +32,7 @@ msgstr ""
 "remote XML-RPC server."
 #
 # 63af1815ebdd447082f23cfa9c5009c8
-# File: ../src/cli.rst, line: 15
+# File: ../src/cli.rst, line: 16
 msgid ""
 "For PHAR installations, this client is embedded with the PHAR archive itself. "
 "To use it, just call the PHP interpreter on the PHAR archive:"
@@ -41,7 +41,7 @@ msgstr ""
 "To use it, just call the PHP interpreter on the PHAR archive:"
 #
 # b87661b3dccd4c128206dbddab76b4cc
-# File: ../src/cli.rst, line: 27
+# File: ../src/cli.rst, line: 28
 msgid ""
 "For other types of installations, call the PHP interpreter on :file:`bin/xrl`:"
 msgstr ""

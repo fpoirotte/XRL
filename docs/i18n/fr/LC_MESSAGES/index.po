@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-20 21:05+0100\n"
+"POT-Creation-Date: 2015-12-05 00:26+0100\n"
 "PO-Revision-Date: 2014-11-16 16:46+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -30,6 +30,19 @@ msgid ""
 msgstr ""
 "XRL (abréviation de XML-RPC Library) est un ensemble de classes PHP "
 "facilitant la création de clients et de serveurs XML-RPC."
+#
+# 865f5ab5d5044d6dbea754579a3f2822
+msgid ""
+"This documentation was automatically built from the latest changes in |"
+"this_commit|_. It does not necessarily reflect features from any current or "
+"upcoming release. Check out https://readthedocs.org/projects/xrl/ for "
+"documentation on supported versions."
+msgstr ""
+"Cette documentation a été construite automatiquement à partir des dernières "
+"modifications apportées par |this_commit|_. Elle ne reflète pas forcément "
+"les fonctionnalités présentes dans une version actuelle ou à venir. "
+"Consultez https://readthedocs.org/projects/xrl/ pour la "
+"documentation des versions supportées."
 #
 # d4c7fb31eb8e4fefa4eafcbde3097a52
 # File: ../src/index.rst, line: 26
@@ -107,11 +120,6 @@ msgstr ""
 msgid "Other resources"
 msgstr "Autres ressources"
 #
-# 5bab6fe85db24e7fbf18fcd008eadf84
-# File: ../src/index.rst, line: 81
-msgid "`Full API documentation <./apidoc/>`_"
-msgstr "`Documentation d'API complète <./apidoc/>`_"
-#
 # 656ba28ec93a411db570fe0f76c3a5dc
 # File: ../src/index.rst, line: 82
 msgid ""
@@ -139,11 +147,13 @@ msgstr ""
 "`XRL sur Travis-CI <https://travis-ci.org/fpoirotte/XRL>`_ (intégration "
 "continue)"
 #
-# e18b894c238a45b4852d3cab7d52362b
-# File: ../src/index.rst, line: 85
+# cb23d5a938694b1aa7204fdf5a1946c8
 msgid ""
-"`XRL on Read The Docs <https://readthedocs.org/projects/xrl/>`_ "
-"(documentation)"
-msgstr ""
-"`XRL sur Read The Docs <https://readthedocs.org/projects/xrl/>`_ "
-"(documentation)"
+"`XRL on Read The Docs <https://readthedocs.org/projects/xrl/>`_ (online "
+"documentation)"
+msgstr "`XRL sur Read The Docs <https://readthedocs.org/projects/xrl/>`_ "
+"(documentation en ligne)"
+#
+# cb4314251b5f4adfb919bce3a0ebcdd0
+msgid "`Full API documentation <./apidoc/>`_ (hosted on Read The Docs)"
+msgstr "`Documentation d'API complète <./apidoc/>`_ (hébergée sur Read The Docs)"

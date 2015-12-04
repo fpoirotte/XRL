@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2011-2014, Erebot
+# Copyright (C) 2011-2015, Erebot
 # This file is distributed under the same license as the XRL package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-20 21:05+0100\n"
+"POT-Creation-Date: 2015-12-05 00:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,42 +16,42 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/credits.rst:10
+#: ../src/credits.rst:11
 # fff890f565c044f5b1057d58479c619e
 msgid "Credits"
 msgstr ""
 
-#: ../src/credits.rst:12
+#: ../src/credits.rst:13
 # ad00968aec7b4cce8224eafee9a8176e
 msgid "Specials thanks to:"
 msgstr ""
 
-#: ../src/credits.rst:14
+#: ../src/credits.rst:15
 # a3c8548c80eb4897bb7ae0389e0a3b6c
 msgid "`Thibaud Rohmer <https://github.com/thibaud-rohmer>`_ for being the first user of XRL and the very reason this whole project exists"
 msgstr ""
 
-#: ../src/credits.rst:17
+#: ../src/credits.rst:18
 # 4a34296582d04279823754229e6a048f
 msgid "Thanks to:"
 msgstr ""
 
-#: ../src/credits.rst:19
+#: ../src/credits.rst:20
 # f0d7772b3a764641acf69d25562c9f71
 msgid "David Goodger for `Docutils <http://docutils.sourceforge.net/>`_ and reStructuredText"
 msgstr ""
 
-#: ../src/credits.rst:21
+#: ../src/credits.rst:22
 # a5f05e5253914e09b5fd432d37bf053e
 msgid "Georg Brandl for `Sphinx <http://sphinx.pocoo.org>`_"
 msgstr ""
 
-#: ../src/credits.rst:22
+#: ../src/credits.rst:23
 # 22b39879d1ca4a89b27950734a93a6c9
 msgid "Whoever made the ``haiku`` theme for Sphinx"
 msgstr ""
 
-#: ../src/credits.rst:24
+#: ../src/credits.rst:25
 # 1c37d1a18b514971a908757c7e43ad82
 msgid "whose work made it possible to write and publish this documentation."
 msgstr ""
