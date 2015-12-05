@@ -335,10 +335,9 @@ class Decoder extends \PHPUnit_Framework_TestCase
         $response = $decoder->decodeResponse(
             'data://;base64,' . base64_encode($content)
         );
-        $this->assertInstanceOf('\\fpoirotte\\XRL\\Types\\Struct', $response);
-        $this->assertInstanceOf('\\fpoirotte\\XRL\\Types\\I4', $response['faultCode']);
-        $this->assertInstanceOf('Exception: Test_failure', $response['faultString']);
-#        $this->assertSame(42);
+        // This code should never be executed because the failure
+        // should be converted back to a PHP exception and thrown.
+        $this->assertTrue(false);
     }
 
     /**

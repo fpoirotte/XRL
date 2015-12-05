@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE methodResponse [
+    <!ELEMENT methodResponse    ANY>
+    <!ELEMENT params        ANY>
+    <!ELEMENT param         ANY>
+    <!ELEMENT value         ANY>
+    <!ELEMENT string        ANY>
+    <!ENTITY xxe SYSTEM "fragment.xml">
+]>
+<methodResponse>
+    &xxe;
+</methodResponse>

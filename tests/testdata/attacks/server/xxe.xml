@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE methodCall [
+    <!ELEMENT methodCall    ANY>
+    <!ELEMENT methodName    ANY>
+    <!ELEMENT params        ANY>
+    <!ELEMENT param         ANY>
+    <!ELEMENT value         ANY>
+    <!ELEMENT double        ANY>
+    <!ENTITY xxe SYSTEM "fragment.xml">
+]>
+<methodCall>
+ <methodName>doubleParam</methodName>
+    &xxe;
+</methodCall>
