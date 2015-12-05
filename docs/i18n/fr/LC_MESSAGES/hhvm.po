@@ -45,5 +45,5 @@ msgid ""
 "XRL>`_."
 msgstr ""
 "XRL devrait être compatible avec HHVM. Pour nous assurer de cela, HHVM est "
-"inclus dans les tests de notre
-`processus d'Intégration Continue <https://travis-ci.org/fpoirotte/XRL>`_."
+"inclus dans les tests de notre "
+"`processus d'Intégration Continue <https://travis-ci.org/fpoirotte/XRL>`_."
