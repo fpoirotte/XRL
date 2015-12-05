@@ -13,10 +13,9 @@ namespace fpoirotte\XRL\Faults;
 
 /**
  * \brief
- *      Definitions of interoperability faults.
+ *      An interoperable fault representing an application error.
  *
- * \see
- *      http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php
+ * \authors François Poirotte <clicky@erebot.net>
  */
 class ApplicationErrorException extends \fpoirotte\XRL\FaultException
 {

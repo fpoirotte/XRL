@@ -13,10 +13,12 @@ namespace fpoirotte\XRL;
 
 /**
  * \brief
- *      Definitions of interoperability faults.
+ *      Abstract definition of an interoperable fault.
  *
  * \see
  *      http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php
+ *
+ * \authors François Poirotte <clicky@erebot.net>
  */
 abstract class FaultException extends \fpoirotte\XRL\Exception
 {

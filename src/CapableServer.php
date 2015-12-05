@@ -23,6 +23,8 @@ namespace fpoirotte\XRL;
  * \see
  *      http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php
  *      for documentation on interoperability faults.
+ *
+ * \authors François Poirotte <clicky@erebot.net>
  */
 class CapableServer
 {
