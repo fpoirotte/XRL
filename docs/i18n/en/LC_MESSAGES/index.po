@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-05 00:26+0100\n"
+"POT-Creation-Date: 2015-12-05 01:01+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,17 +32,12 @@ msgstr ""
 "creation of XML-RPC clients or servers."
 #
 # 865f5ab5d5044d6dbea754579a3f2822
-# File: ../src/index.rst, line: 20
 msgid ""
-"This documentation was automatically built from the latest changes in |"
+"This documentation was automatically built from the latest changes on |"
 "this_commit|_. It does not necessarily reflect features from any current or "
 "upcoming release. Check out https://readthedocs.org/projects/xrl/ for "
 "documentation on supported versions."
 msgstr ""
-"This documentation was automatically built from the latest changes in |"
-"this_commit|_. It does not necessarily reflect features from any current or "
-"upcoming release. Check out https://readthedocs.org/projects/xrl/ for "
-"documentation on supported versions."
 #
 # c240b16963174d29b3955d88e6ff5446
 # File: ../src/index.rst, line: 27
@@ -159,3 +154,17 @@ msgstr ""
 # File: ../src/index.rst, line: 86
 msgid "`Full API documentation <./apidoc/>`_ (hosted on Read The Docs)"
 msgstr "`Full API documentation <./apidoc/>`_ (hosted on Read The Docs)"
+#
+#
+# 865f5ab5d5044d6dbea754579a3f2822
+# File: ../src/index.rst, line: 20
+#~ msgid ""
+#~ "This documentation was automatically built from the latest changes in |"
+#~ "this_commit|_. It does not necessarily reflect features from any current "
+#~ "or upcoming release. Check out https://readthedocs.org/projects/xrl/ for "
+#~ "documentation on supported versions."
+#~ msgstr ""
+#~ "This documentation was automatically built from the latest changes in |"
+#~ "this_commit|_. It does not necessarily reflect features from any current "
+#~ "or upcoming release. Check out https://readthedocs.org/projects/xrl/ for "
+#~ "documentation on supported versions."

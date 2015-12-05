@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XRL 2.0.x-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-05 00:26+0100\n"
+"POT-Creation-Date: 2015-12-05 01:01+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgstr ""
 
 #: ../src/index.rst:20
 # 865f5ab5d5044d6dbea754579a3f2822
-msgid "This documentation was automatically built from the latest changes in |this_commit|_. It does not necessarily reflect features from any current or upcoming release. Check out https://readthedocs.org/projects/xrl/ for documentation on supported versions."
+msgid "This documentation was automatically built from the latest changes on |this_commit|_. It does not necessarily reflect features from any current or upcoming release. Check out https://readthedocs.org/projects/xrl/ for documentation on supported versions."
 msgstr ""
 
 #: ../src/index.rst:27

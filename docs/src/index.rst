@@ -9,7 +9,7 @@ the creation of XML-RPC clients or servers.
     ..  warning::
 
         This documentation was automatically built from the latest changes
-        in |this_commit|_.
+        on |this_commit|_.
         It does not necessarily reflect features from any current or
         upcoming release. Check out https://readthedocs.org/projects/xrl/
         for documentation on supported versions. 
@@ -78,7 +78,7 @@ Other resources
 
 
 ..  : End of document.
-..  |this_commit| replace:: XRL's code
+..  |this_commit| replace:: GitHub
 ..  |---| unicode:: U+02014 .. em dash
     :trim:
 ..  : vim: ts=4 et
