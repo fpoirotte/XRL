@@ -106,6 +106,14 @@ Several types of installations are possible:
                 $ wget --content-disposition https://github.com/fpoirotte/XRL/zipball/develop
 
 
+Usage
+-----
+
+Client: look at the code in `client.php <./docs/example/client.php>`_.
+
+Server: look at the code in `server.php <./docs/example/server.php>`_.
+
+
 Contributions
 -------------
 
