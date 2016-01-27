@@ -19,7 +19,6 @@ matrix:
     fast_finish: true
     allow_failures:
     - php: nightly
-    - php: hhvm
     - php: hhvm-nightly
 
 notifications:
@@ -34,7 +33,7 @@ before_script:
     - phpenv config-add tests/php.ini
 
 script:
-    - vendor/bin/phpunit --coverage-clover clover.xml --bootstrap ./tests/bootstrap.php tests/
+    - vendor/bin/phpunit --coverage-clover clover.xml
 
 after_script:
     - composer require --dev "satooshi/php-coveralls dev-master"
