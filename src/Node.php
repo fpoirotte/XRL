@@ -65,8 +65,9 @@ class Node
                 // but it causes read() to fail anyway.
                 // We throw a special error which gets caught
                 // and dealt with appropriately by the caller.
-                if ($error === false)
+                if ($error === false) {
                     throw new \InvalidArgumentException('End of document');
+                }
 
                 switch ($error->code) {
                     case self::XML_ERR_UNKNOWN_ENCODING:

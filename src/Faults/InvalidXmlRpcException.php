@@ -20,7 +20,10 @@ namespace fpoirotte\XRL\Faults;
  */
 class InvalidXmlRpcException extends \fpoirotte\XRL\FaultException
 {
-    public function __construct($message = 'server error. invalid xml-rpc. not conforming to spec', \Exception $previous = null)
+    const DEFAULT_MSG = 'server error. invalid xml-rpc. not conforming to spec';
+
+
+    public function __construct($message = self::DEFAULT_MSG, \Exception $previous = null)
     {
         parent::__construct($message, -32600, $previous);
     }

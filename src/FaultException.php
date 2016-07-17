@@ -31,4 +31,3 @@ abstract class FaultException extends \fpoirotte\XRL\Exception
         parent::__construct($message, $code, $previous);
     }
 }
-
