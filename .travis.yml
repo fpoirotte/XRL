@@ -27,7 +27,7 @@ notifications:
 before_script:
     - rm composer.lock
     - composer self-update -n
-    - composer install --dev -n
+    - composer install -n
     - mkdir -p ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/
     - pecl install runkit || true
     - phpenv config-add tests/php.ini
