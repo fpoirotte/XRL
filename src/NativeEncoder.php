@@ -84,7 +84,8 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
      * \note
      *      The following PHP types are currently supported:
      *      -   \c null (encoded using the "nil" XML-RPC type).
-     *      -   integer (encoded using the "int" XML-RPC type).
+     *      -   integer (encoded using the "i4" or "i8" XML-RPC type,
+     *          depending on the actual size required to store the value).
      *      -   boolean (encoded using the "boolean" XML-RPC type).
      *      -   string (encoded using either the default type
      *          of XML-RPC [string] or "base64" if the string
@@ -92,13 +93,19 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
      *          encoding binary data).
      *      -   double (encoded using the "double" XML-RPC type).
      *      -   array (encoded using either the "array" or "struct"
-     *          XML-RPC type). "array" is used for numerically-indexed
-     *          arrays where the keys are [0..len(array)-1] (aka "list").
-     *          "struct" is used for all other arrays (aka "hash").
-     *      --  DateTime objects (encoded using the "dateTime.iso8601"
+     *          XML-RPC type):
+     *          -   "array" is used for numerically-indexed arrays
+     *              where the keys are in the range [0..len(array)-1],
+     *              aka "lists".
+     *          -   "struct" is used for all other arrays, aka "hashes".
+     *      -   DateTime objects (encoded using the "dateTime.iso8601"
      *          XML-RPC type).
+     *      -   GMP objects/resources (encoded as "i4", "i8" or "BigInteger",
+     *          depending on their actual storage size).
+     *      -   XML objects (SimpleXML, DOM and XMLWriter objects)
+     *          are encoded as XML DOM fragments.
      *      -   objects that support serialization (encoded as an XML-RPC
-     *          "string", where the content of the string is the object's
+     *          "string" or "base64" type depending on the object's
      *          representation in serialized form).
      */
     public static function convert($value)
@@ -143,7 +150,7 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
                 break;
         }
 
-        // Only objects remain after this points.
+        // Only objects & resources remain after this point.
         if ($value instanceof \fpoirotte\XRL\Types\AbstractType) {
             return $value;
         }
