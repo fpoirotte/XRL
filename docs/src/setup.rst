@@ -42,11 +42,11 @@ Composer
 
 XRL can be installed using the `Composer dependency manager
 <https://getcomposer.org/>`_. Just add ``fpoirotte/xrl``
-to the dependencies in your :file:`composer.json`:
+to the dependencies in your :file:`composer.json` :
 
 ..  sourcecode:: console
 
-    $ php composer.phar require "fpoirotte/xrl:*"
+    $ php composer.phar require fpoirotte/xrl
 
 
 ..  _sources:

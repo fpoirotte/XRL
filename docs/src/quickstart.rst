@@ -14,7 +14,7 @@ Writing an XML-RPC client
         require_once('/path/to/XRL/src/Autoload.php');
         \fpoirotte\XRL\Autoload::register();
 
-2.  Create a new client configured to query the remote XML-RPC server 
+2.  Create a new client configured to query the remote XML-RPC server
 
     ..  sourcecode:: inline-php
 

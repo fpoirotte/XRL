@@ -120,11 +120,11 @@ msgstr "Composer"
 msgid ""
 "XRL can be installed using the `Composer dependency manager <https://"
 "getcomposer.org/>`_. Just add ``fpoirotte/xrl`` to the dependencies in your :"
-"file:`composer.json`:"
+"file:`composer.json` :"
 msgstr ""
 "XRL peut être installé grâce au `gestionnaire de dépendances Composer "
 "<https://getcomposer.org/>`_. Ajoutez simplement ``fpoirotte/xrl`` aux "
-"dépendances  de votre fichier file:`composer.json` :"
+"dépendances de votre fichier file:`composer.json` :"
 #
 # 534b6072266a4d73b04066563cac85b2
 # File: ../src/setup.rst, line: 62

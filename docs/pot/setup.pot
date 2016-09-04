@@ -98,7 +98,7 @@ msgstr ""
 
 #: ../src/setup.rst:52
 # 3ba0b8ee069d40cc823654fbee160c9e
-msgid "XRL can be installed using the `Composer dependency manager <https://getcomposer.org/>`_. Just add ``fpoirotte/xrl`` to the dependencies in your :file:`composer.json`:"
+msgid "XRL can be installed using the `Composer dependency manager <https://getcomposer.org/>`_. Just add ``fpoirotte/xrl`` to the dependencies in your :file:`composer.json` :"
 msgstr ""
 
 #: ../src/setup.rst:64
