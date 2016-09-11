@@ -16,11 +16,6 @@ php:
     - nightly
     - hhvm
 
-matrix:
-    fast_finish: true
-    allow_failures:
-    - php: nightly
-
 notifications:
     email: false
     irc: "irc.iiens.net#Clicky"
