@@ -218,16 +218,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.5.2",
+            "version": "1.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "da8529775f14f4fdae33f916eb0cf65f6afbddbc"
+                "reference": "ea74994a3dc7f8d2f65a06009348f2d63c81e61f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/da8529775f14f4fdae33f916eb0cf65f6afbddbc",
-                "reference": "da8529775f14f4fdae33f916eb0cf65f6afbddbc",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/ea74994a3dc7f8d2f65a06009348f2d63c81e61f",
+                "reference": "ea74994a3dc7f8d2f65a06009348f2d63c81e61f",
                 "shasum": ""
             },
             "require": {
@@ -256,7 +256,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2016-09-06 16:07:05"
+            "time": "2016-09-16 13:37:59"
         },
         {
             "name": "pdepend/pdepend",
@@ -300,16 +300,16 @@
         },
         {
             "name": "phing/phing",
-            "version": "2.14.0",
+            "version": "2.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phingofficial/phing.git",
-                "reference": "7dd73c83c377623def54b58121f46b4dcb35dd61"
+                "reference": "bbfcaee391123220fc54e9c6feffeeea3c8775b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phingofficial/phing/zipball/7dd73c83c377623def54b58121f46b4dcb35dd61",
-                "reference": "7dd73c83c377623def54b58121f46b4dcb35dd61",
+                "url": "https://api.github.com/repos/phingofficial/phing/zipball/bbfcaee391123220fc54e9c6feffeeea3c8775b7",
+                "reference": "bbfcaee391123220fc54e9c6feffeeea3c8775b7",
                 "shasum": ""
             },
             "require": {
@@ -332,6 +332,7 @@
                 "phpunit/phpunit": ">=3.7",
                 "sebastian/git": "~1.0",
                 "sebastian/phpcpd": "2.x",
+                "siad007/versioncontrol_hg": "^1.0",
                 "squizlabs/php_codesniffer": "~2.2",
                 "symfony/yaml": "~2.7"
             },
@@ -346,6 +347,7 @@
                 "phpunit/php-code-coverage": "Library that provides collection, processing, and rendering functionality for PHP code coverage information",
                 "phpunit/phpunit": "The PHP Unit Testing Framework",
                 "sebastian/phpcpd": "Copy/Paste Detector (CPD) for PHP code",
+                "siad007/versioncontrol_hg": "A library for interfacing with Mercurial repositories.",
                 "tedivm/jshrink": "Javascript Minifier built in PHP"
             },
             "bin": [
@@ -354,7 +356,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.14.x-dev"
+                    "dev-master": "2.15.x-dev"
                 }
             },
             "autoload": {
@@ -387,7 +389,7 @@
                 "task",
                 "tool"
             ],
-            "time": "2016-03-10 21:39:23"
+            "time": "2016-09-14 19:38:14"
         },
         {
             "name": "phpdocumentor/reflection-common",
