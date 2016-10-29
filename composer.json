@@ -52,7 +52,7 @@
     "bin": ["bin/xrl"],
     "extra": {
         "branch-alias": {
-            "dev-develop": "2.0.x-dev"
+            "dev-develop": "3.0.x-dev"
         }
     }
 }
