@@ -4,6 +4,8 @@ import os
 import sys
 import glob
 import shutil
+import urllib
+import fnmatch
 from datetime import datetime
 from subprocess import call, Popen, PIPE
 
@@ -17,46 +19,49 @@ def prepare(globs, locs):
     cwd = os.getcwd()
     root = os.path.abspath(os.path.join(cwd, '..', '..'))
 
-    git = Popen('which git 2> %s' % os.devnull, shell=True, stdout=PIPE
-                ).stdout.read().strip()
-    doxygen = Popen('which doxygen 2> %s' % os.devnull, shell=True, stdout=PIPE
-                ).stdout.read().strip()
-    pybabel = Popen('which pybabel 2> %s' % os.devnull, shell=True, stdout=PIPE
-                ).stdout.read().strip()
+    git = Popen('which git 2> %s' % os.devnull, shell=True,
+                stdout=PIPE).stdout.read().strip()
+    doxygen = Popen('which doxygen 2> %s' % os.devnull, shell=True,
+                stdout=PIPE).stdout.read().strip()
 
-    print "git version:",
-    sys.stdout.flush()
+    locs['rtd_slug'] = os.path.basename(os.path.dirname(os.path.dirname(root)))
+    locs['rtd_version'] = os.path.basename(root)
+    pybabel = os.path.join(root, '..', '..', 'envs',
+                           locs['rtd_version'], 'bin', 'pybabel')
+
+    print "git version:"
     call([git, '--version'])
-
-    print "doxygen version:",
-    sys.stdout.flush()
+    print "doxygen version:"
     call([doxygen, '--version'])
-
-    print "pybabel version:",
-    sys.stdout.flush()
+    print "pybabel version:"
     call([pybabel, '--version'])
 
-    print "environment:", repr(os.environ)
-
-    print "Running from %s..." % (root, )
+    print "Building version %s for %s in %s..." % (
+        locs['rtd_version'],
+        locs['rtd_slug'],
+        root
+    )
     os.chdir(root)
 
     # Figure several configuration values from git.
     origin = Popen([git, 'config', '--local', 'remote.origin.url'],
-                   stdout=PIPE).stdout.read().strip()
+                    stdout=PIPE).stdout.read().strip()
     git_tag = Popen([git, 'describe', '--tags', '--exact', '--first-parent'],
                     stdout=PIPE).communicate()[0].strip()
     git_hash = Popen([git, 'rev-parse', 'HEAD'],
                     stdout=PIPE).communicate()[0].strip()
-    gh_project = ('/'.join(origin.split('/')[-2:])).rpartition(':')[2]
-    if gh_project.endswith('.git'):
-        gh_project = gh_project[:-4]
-    project = gh_project.rpartition('/')[2]
+    project = origin.rpartition('/')[2]
+    if project.endswith('.git'):
+        project = project[:-4]
     os.environ['SPHINX_PROJECT'] = project
     if git_tag:
-        os.environ['SPHINX_VERSION'] = os.environ['SPHINX_RELEASE'] = git_tag
+        os.environ['SPHINX_VERSION'] = git_tag
+        os.environ['SPHINX_RELEASE'] = git_tag
     else:
-        os.environ['SPHINX_VERSION'] = os.environ['SPHINX_RELEASE'] = 'latest'
+        commit = Popen([git, 'describe', '--always', '--first-parent'],
+                        stdout=PIPE).communicate()[0].strip()
+        os.environ['SPHINX_VERSION'] = 'latest'
+        os.environ['SPHINX_RELEASE'] = 'latest-%s' % (commit, )
         locs['tags'].add('devel')
 
     # Clone or update dependencies
@@ -91,15 +96,29 @@ def prepare(globs, locs):
         shutil.rmtree(os.path.join(root, 'build'))
     except OSError:
         pass
+    os.mkdir(os.path.join(root, 'build'))
     shutil.move(
         os.path.join(root, 'docs', 'api', 'html'),
         os.path.join(root, 'build', 'apidoc'),
     )
+    try:
+        shutil.move(
+            os.path.join(root, '%s.tagfile.xml' %
+                os.environ['SPHINX_PROJECT']),
+            os.path.join(root, 'build', 'apidoc', '%s.tagfile.xml' %
+                os.environ['SPHINX_PROJECT'])
+        )
+    except OSError:
+        pass
 
     # Compile translation catalogs.
-    for po in glob.iglob(os.path.join(root, 'docs', 'i18n', '*', 'LC_MESSAGES', '*.po')):
-        mo = po[:-3] + '.mo'
-        call([pybabel, 'compile', '-f', '--statistics', '-i', po, '-o', mo])
+    for locale_dir in glob.iglob(os.path.join(root, 'docs', 'i18n', '*')):
+        for base, dirnames, filenames in os.walk(locale_dir):
+            for po in fnmatch.filter(filenames, '*.po'):
+                po = os.path.join(base, po)
+                mo = po[:-3] + '.mo'
+                call([pybabel, 'compile', '-f', '--statistics',
+                      '-i', po, '-o', mo])
 
     # Load the real Sphinx configuration file.
     os.chdir(cwd)
@@ -108,24 +127,35 @@ def prepare(globs, locs):
     execfile(real_conf, globs, locs)
 
     # Patch configuration afterwards.
-    locs['copyright'] = u'2012-%d, XRL Team. All rights reserved' % \
-            datetime.now().year
+    locs['copyright'] = u'2012-%d, XRL Team. All rights reserved' % datetime.now().year
+
+    # - Theme
     if 'html_extra_path' not in locs:
         locs['html_extra_path'] = []
     locs['html_extra_path'].append(os.path.join(root, 'build'))
     locs['html_theme'] = 'haiku'
+
+    # - I18N
     if 'locale_dirs' not in locs:
         locs['locale_dirs'] = []
     locs['locale_dirs'].insert(0, os.path.join(root, 'docs', 'i18n'))
+
     if 'rst_prolog' not in locs:
         locs['rst_prolog'] = ''
     locs['rst_prolog'] += '\n    .. _`this_commit`: https://github.com/%s/commit/%s\n' % (
-        gh_project,
+        project,
         git_hash,
     )
 
-    globs['RTD_NEW_THEME'] = False
-    globs['RTD_OLD_THEME'] = False
+    # - Custom roles
+    if 'doxylinks' in locs and 'api' in locs['doxylinks']:
+        locs['doxylinks']['api'] = (
+            locs['doxylinks']['api'][0],
+            'file://%s' % urllib.quote(
+                os.path.join(root, 'build', 'apidoc', '%s.tagfile.xml' %
+                    os.environ['SPHINX_PROJECT'])
+            )
+        )
 
 
 prepare(globals(), locals())
