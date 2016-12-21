@@ -50,10 +50,15 @@ def prepare(globs, locs):
                     stdout=PIPE).communicate()[0].strip()
     git_hash = Popen([git, 'rev-parse', 'HEAD'],
                     stdout=PIPE).communicate()[0].strip()
-    project = origin.rpartition('/')[2]
+
+    origin = origin.replace(':', '/').split('/')
+    vendor = origin[-2]
+    project = origin[-1]
     if project.endswith('.git'):
         project = project[:-4]
     os.environ['SPHINX_PROJECT'] = project
+    component = project.replace('Module_', 'Erebot_Module_')
+
     if git_tag:
         os.environ['SPHINX_VERSION'] = git_tag
         os.environ['SPHINX_RELEASE'] = git_tag
@@ -103,10 +108,8 @@ def prepare(globs, locs):
     )
     try:
         shutil.move(
-            os.path.join(root, '%s.tagfile.xml' %
-                os.environ['SPHINX_PROJECT']),
-            os.path.join(root, 'build', 'apidoc', '%s.tagfile.xml' %
-                os.environ['SPHINX_PROJECT'])
+            os.path.join(root, '%s.tagfile.xml' % component),
+            os.path.join(root, 'build', 'apidoc', '%s.tagfile.xml' % component)
         )
     except OSError:
         pass
@@ -142,7 +145,8 @@ def prepare(globs, locs):
 
     if 'rst_prolog' not in locs:
         locs['rst_prolog'] = ''
-    locs['rst_prolog'] += '\n    .. _`this_commit`: https://github.com/%s/commit/%s\n' % (
+    locs['rst_prolog'] += '\n    .. _`this_commit`: https://github.com/%s/%s/commit/%s\n' % (
+        vendor,
         project,
         git_hash,
     )
@@ -152,8 +156,7 @@ def prepare(globs, locs):
         locs['doxylinks']['api'] = (
             locs['doxylinks']['api'][0],
             'file://%s' % urllib.quote(
-                os.path.join(root, 'build', 'apidoc', '%s.tagfile.xml' %
-                    os.environ['SPHINX_PROJECT'])
+                os.path.join(root, 'build', 'apidoc', '%s.tagfile.xml' % component)
             )
         )
 
