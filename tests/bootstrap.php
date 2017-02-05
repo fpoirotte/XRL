@@ -29,3 +29,7 @@ foreach ($stubs as $stub) {
         DIRECTORY_SEPARATOR . 'Test' . $stub . '.php'
     );
 }
+
+if (!class_exists('PHPUnit_Framework_TestCase')) {
+    class_alias('\\PHPUnit\\Framework\\TestCase', 'PHPUnit_Framework_TestCase');
+}
