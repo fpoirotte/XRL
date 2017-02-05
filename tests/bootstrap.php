@@ -33,3 +33,7 @@ foreach ($stubs as $stub) {
 if (!class_exists('PHPUnit_Framework_TestCase')) {
     class_alias('\\PHPUnit\\Framework\\TestCase', 'PHPUnit_Framework_TestCase');
 }
+
+if (!class_exists('PHPUnit_Framework_Error')) {
+    class_alias('\\PHPUnit\\Framework\\Error', 'PHPUnit_Framework_Error');
+}
