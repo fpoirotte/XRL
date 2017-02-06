@@ -42,7 +42,7 @@ class InstanceByValue
 }
 
 
-class CallableObject extends \PHPUnit_Framework_TestCase
+class CallableObject extends \PHPUnit\Framework\TestCase
 {
     public function referenceProvider()
     {

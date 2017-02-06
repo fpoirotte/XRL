@@ -11,7 +11,7 @@
 
 namespace fpoirotte\XRL\tests;
 
-class Node extends \PHPUnit_Framework_TestCase
+class Node extends \PHPUnit\Framework\TestCase
 {
     protected $reader;
     protected $data;

@@ -28,7 +28,7 @@ class TestResponse extends \fpoirotte\XRL\Response
     }
 }
 
-class Response extends \PHPUnit_Framework_TestCase
+class Response extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers \fpoirotte\XRL\Response::__construct

@@ -11,7 +11,7 @@
 
 namespace fpoirotte\XRL\tests;
 
-class Autoload extends \PHPUnit_Framework_TestCase
+class Autoload extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {
@@ -35,25 +35,16 @@ class Autoload extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers                      \fpoirotte\XRL\Autoload
-     * @expectedException           \PHPUnit_Framework_Error
-     */
-    public function testAutoload3()
-    {
-        $dummy = class_exists('\\fpoirotte\\XRL\\some_inexistent_class');
-    }
-
-    /**
      * See https://bugs.php.net/bug.php?id=55475
      * for more information about the meaning of this test.
      *
      * @covers                      \fpoirotte\XRL\Autoload
      */
-    public function testAutoload4()
+    public function testAutoload3()
     {
         if (version_compare(PHP_VERSION, '5.3.7', '<') ||
             version_compare(PHP_VERSION, '5.3.8', '>')) {
-            return;
+            return $this->assertTrue(true);
         }
         $this->setExpectedException(
             '\\Exception',

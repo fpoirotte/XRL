@@ -11,7 +11,7 @@
 
 namespace fpoirotte\XRL\tests;
 
-class Request extends \PHPUnit_Framework_TestCase
+class Request extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers                      \fpoirotte\XRL\Request::__construct

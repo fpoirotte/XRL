@@ -11,7 +11,7 @@
 
 namespace fpoirotte\XRL\tests;
 
-class NativeDecoder extends \PHPUnit_Framework_TestCase
+class NativeDecoder extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {

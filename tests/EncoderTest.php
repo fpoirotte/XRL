@@ -11,7 +11,7 @@
 
 namespace fpoirotte\XRL\tests;
 
-class Encoder extends \PHPUnit_Framework_TestCase
+class Encoder extends \PHPUnit\Framework\TestCase
 {
     protected $encoder;
 

@@ -11,7 +11,7 @@
 
 namespace fpoirotte\XRL\tests;
 
-class Faults extends \PHPUnit_Framework_TestCase
+class Faults extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {
