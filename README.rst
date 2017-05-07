@@ -55,9 +55,8 @@ Several types of installations are possible:
 
 *   Using a ``.phar`` archive:
 
-        ..  sourcecode:: console
-
-            $ wget --no-check-certificate https://packages.erebot.net/get/XRL-dev-master.phar
+    Download the PHAR archive for the latest release from
+    https://github.com/fpoirotte/XRL/releases/latest
 
 *   Using composer:
 
