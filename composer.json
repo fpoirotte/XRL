@@ -30,7 +30,7 @@
     "require-dev": {
         "ext-dom": "*",
         "ext-SimpleXML": "*",
-        "erebot/buildenv": "*",
+        "erebot/buildenv": "^1.4.0",
         "erebot/plop": "*",
         "fpoirotte/natives4doxygen": "*",
         "pdepend/pdepend": "*",

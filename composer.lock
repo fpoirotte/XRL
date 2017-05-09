@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3f0e28d7d1c29591bc6def645c0882c6",
+    "content-hash": "2c2219586fe009c28fd899561b539b90",
     "packages": [],
     "packages-dev": [
         {
@@ -63,16 +63,16 @@
         },
         {
             "name": "erebot/buildenv",
-            "version": "1.3.1",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Erebot/Buildenv.git",
-                "reference": "2ce8dfe61ee7e58e9e7bdf6130ac9db7608d3f7b"
+                "reference": "cb89a65bf6ad1175f3c15abc96030ffff46e6915"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Erebot/Buildenv/zipball/2ce8dfe61ee7e58e9e7bdf6130ac9db7608d3f7b",
-                "reference": "2ce8dfe61ee7e58e9e7bdf6130ac9db7608d3f7b",
+                "url": "https://api.github.com/repos/Erebot/Buildenv/zipball/cb89a65bf6ad1175f3c15abc96030ffff46e6915",
+                "reference": "cb89a65bf6ad1175f3c15abc96030ffff46e6915",
                 "shasum": ""
             },
             "require": {
@@ -108,7 +108,7 @@
             "keywords": [
                 "Erebot"
             ],
-            "time": "2017-03-22T21:42:24+00:00"
+            "time": "2017-05-06T13:37:33+00:00"
         },
         {
             "name": "erebot/plop",
