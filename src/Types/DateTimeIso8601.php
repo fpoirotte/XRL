@@ -26,7 +26,7 @@ class DateTimeIso8601 extends \fpoirotte\XRL\Types\AbstractDateTime
      * We can't just use DateTime::ISO8601 (= "Y-m-d\\TH:i:sO")
      * because the XML-RPC specification forbids timezones.
      */
-    const XMLRPC_FORMAT = 'Y-m-d\\TH:i:s';
+    const XMLRPC_FORMAT = 'Ymd\\TH:i:s';
 
     /// XML-RPC type for this class.
     const XMLRPC_TYPE   = 'dateTime.iso8601';
