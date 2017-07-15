@@ -58,7 +58,7 @@ abstract class AbstractDateTime extends \fpoirotte\XRL\Types\AbstractType
 
         $result = \DateTime::createFromFormat(static::XMLRPC_FORMAT, $value, $timezone);
 
-        if (strcasecmp($value, $result->format(static::XMLRPC_FORMAT))) {
+        if (!is_object($result) || strcasecmp($value, $result->format(static::XMLRPC_FORMAT))) {
             throw new \InvalidArgumentException('Invalid date/time');
         }
 

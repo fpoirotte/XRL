@@ -33,7 +33,7 @@ class ArrayType extends \fpoirotte\XRL\Types\AbstractCollection
     public function set($value)
     {
         if (!is_array($value)) {
-            throw new \InvalidArgumentException('Expected array value');
+            throw new \InvalidArgumentException('Expected an array');
         }
 
         $keys       = array_keys($value);
