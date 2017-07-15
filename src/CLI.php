@@ -168,7 +168,7 @@ class CLI
      *      date/time.
      *
      * \note
-     *      See http://php.net/datetime.formats.compound.php
+     *      See http://php.net/datetime.formats.compound
      *      for a list of compound formats PHP supports.
      */
     protected function parseTimestamp($value)
