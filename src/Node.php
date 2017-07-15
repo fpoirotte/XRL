@@ -92,7 +92,21 @@ class Node
             }
 
             if ($validate && !$reader->isValid()) {
-                throw new \fpoirotte\XRL\Faults\InvalidXmlRpcException();
+                $errors = '';
+                foreach (libxml_get_errors() as $error) {
+                    $message    = trim($error->message);
+                    $file       = $error->file;
+                    $line       = $error->line;
+                    $column     = $error->column;
+                    $errors .= "$message in '$file' on line $line, column $column\n";
+                }
+                if ($errors) {
+                    throw new \fpoirotte\XRL\Faults\InvalidXmlRpcException(trim($errors));
+                } else {
+                    // Use a generic error message in case the specific reason
+                    // for the error cannot be pin-pointed.
+                    throw new \fpoirotte\XRL\Faults\InvalidXmlRpcException();
+                }
             }
 
             $subtrees = true;
