@@ -29,3 +29,11 @@ foreach ($stubs as $stub) {
         DIRECTORY_SEPARATOR . 'Test' . $stub . '.php'
     );
 }
+
+// HACK: backward compatibility with PHPUnit releases that lacked namespaces.
+if (!class_exists('PHPUnit\\Framework\\TestResult')) {
+    class_alias('PHPUnit_Framework_TestResult', 'PHPUnit\\Framework\\TestResult');
+}
+if (!class_exists('PHPUnit\\Framework\\TestCase')) {
+    class_alias('PHPUnit_Framework_TestCase', 'PHPUnit\\Framework\\TestCase');
+}

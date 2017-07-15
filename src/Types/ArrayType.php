@@ -33,7 +33,7 @@ class ArrayType extends \fpoirotte\XRL\Types\AbstractCollection
     public function set($value)
     {
         if (!is_array($value)) {
-            throw new \InvalidArgumentException('Expected array value');
+            throw new \InvalidArgumentException('Expected an array');
         }
 
         $keys       = array_keys($value);
@@ -47,9 +47,9 @@ class ArrayType extends \fpoirotte\XRL\Types\AbstractCollection
             sort($keys);
         }
 
-        // Hash / associative array.
-        if ($keys != $numeric) {
-            throw new \InvalidArgumentException('Expected array value2');
+        // Detect associative arrays (which are invalid for this type).
+        if ($keys !== $numeric) {
+            throw new \InvalidArgumentException('Expected an indexed array');
         }
 
         foreach ($value as $val) {

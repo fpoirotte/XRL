@@ -11,7 +11,7 @@
 
 namespace fpoirotte\XRL\tests;
 
-class Decoder extends \PHPUnit_Framework_TestCase
+class Decoder extends \PHPUnit\Framework\TestCase
 {
     public function getRequest($path)
     {

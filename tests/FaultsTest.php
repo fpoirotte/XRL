@@ -11,7 +11,7 @@
 
 namespace fpoirotte\XRL\tests;
 
-class Faults extends \PHPUnit_Framework_TestCase
+class Faults extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {
@@ -92,17 +92,13 @@ EXPECTED;
      */
     public function testInvalidXmlRpc()
     {
-        $res = $this->server->handle(
-            'data://;base64,' .
-            base64_encode(
-                '<?xml version="1.0" encoding="UTF-8"?'.'><foo/>'
-            )
-        );
+        $url = 'data://;base64,' . base64_encode('<?xml version="1.0" encoding="UTF-8"?'.'><foo/>');
+        $res = $this->server->handle($url);
         $expected =<<<EXPECTED
 <methodResponse><fault><value><struct><member><name>faultCode</name><value>
 <int>-32600</int></value></member><member><name>faultString</name><value>
 <string>fpoirotte\XRL\Faults\InvalidXmlRpcException:
- server error. invalid xml-rpc. not conforming to spec
+ Did not expect element foo there in '$url' on line 1, column 0
 </string></value></member></struct></value></fault></methodResponse>
 EXPECTED;
         $this->assertSame(

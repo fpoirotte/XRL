@@ -69,7 +69,7 @@ class BadClass
     }
 }
 
-class CapableServer extends \PHPUnit_Framework_TestCase
+class CapableServer extends \PHPUnit\Framework\TestCase
 {
     protected $server;
     protected $capableServer;

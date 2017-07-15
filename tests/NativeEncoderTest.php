@@ -49,7 +49,7 @@ class NonSerialClass
 {
 }
 
-class NativeEncoder extends \PHPUnit_Framework_TestCase
+class NativeEncoder extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {

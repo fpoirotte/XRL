@@ -11,7 +11,7 @@
 
 namespace fpoirotte\XRL\tests;
 
-class Attacks extends \PHPUnit_Framework_TestCase
+class Attacks extends \PHPUnit\Framework\TestCase
 {
     //
     // Server

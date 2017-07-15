@@ -11,7 +11,7 @@
 
 namespace fpoirotte\XRL\tests;
 
-class Server extends \PHPUnit_Framework_TestCase
+class Server extends \PHPUnit\Framework\TestCase
 {
     protected $server;
     protected $cls;

@@ -11,7 +11,7 @@
 
 namespace fpoirotte\XRL\tests;
 
-class Client extends \PHPUnit_Framework_TestCase
+class Client extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {

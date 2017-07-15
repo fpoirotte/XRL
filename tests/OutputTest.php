@@ -11,7 +11,7 @@
 
 namespace fpoirotte\XRL\tests;
 
-class Output extends \PHPUnit_Framework_TestCase
+class Output extends \PHPUnit\Framework\TestCase
 {
     protected $stream;
 
