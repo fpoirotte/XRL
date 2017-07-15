@@ -150,11 +150,17 @@ class Client
         $newArgs    = array_map('\\fpoirotte\\XRL\\NativeEncoder::convert', $args);
         $request    = new \fpoirotte\XRL\Request($method, $newArgs);
         $xml        = $this->encoder->encodeRequest($request);
+
+        $headers    = array(
+            'Content-Type: text/xml',
+            'User-Agent: XRL/' . \fpoirotte\XRL\CLI::getVersion(),
+        );
+
         $options    = array(
             'http' => array(
-                'method'    => 'POST',
-                'content'   => $xml,
-                'header'    => 'Content-Type: text/xml',
+                'method'        => 'POST',
+                'content'       => $xml,
+                'header'        => $headers,
             ),
         );
 
