@@ -30,25 +30,34 @@ class CLI
      */
     public static function getVersion()
     {
+        static $version = null;
+
+        // Return cached version if possible.
+        if (null !== $version) {
+            return $version;
+        }
+
         // From a phar release.
         if (!strncmp('phar://', __FILE__, 7)) {
             $phar = new \Phar(__FILE__);
             $md = $phar->getMetadata();
-            return $md['version'];
+            $version = $md['version'];
+        } else {
+            // From a composer install.
+            $getver = dirname(__DIR__) .
+                        DIRECTORY_SEPARATOR . 'vendor' .
+                        DIRECTORY_SEPARATOR . 'erebot' .
+                        DIRECTORY_SEPARATOR . 'buildenv' .
+                        DIRECTORY_SEPARATOR . 'get_version.php';
+            if (file_exists($getver)) {
+                $version = trim(shell_exec($getver));
+            } else {
+                // Default guess
+                $version = 'dev';
+            }
         }
 
-        // From a composer install.
-        $getver = dirname(__DIR__) .
-                    DIRECTORY_SEPARATOR . 'vendor' .
-                    DIRECTORY_SEPARATOR . 'erebot' .
-                    DIRECTORY_SEPARATOR . 'buildenv' .
-                    DIRECTORY_SEPARATOR . 'get_version.php';
-        if (file_exists($getver)) {
-            return trim(shell_exec($getver));
-        }
-
-        // Default guess.
-        return 'dev';
+        return $version;
     }
 
     /**
