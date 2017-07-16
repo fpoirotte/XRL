@@ -20,11 +20,8 @@ namespace fpoirotte\XRL\Types;
  *
  * \authors François Poirotte <clicky@erebot.net>
  */
-class I4 extends \fpoirotte\XRL\Types\AbstractInteger
+class I4 extends \fpoirotte\XRL\Types\IntType
 {
     /// XML-RPC type for this class.
     const XMLRPC_TYPE   = 'i4';
-
-    /// Integer size in bits.
-    const INTEGER_BITS  = 32;
 }
