@@ -133,7 +133,10 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
                 if ($byte2 >= 0x90 && $byte2 <= 0xBF &&
                     $byte3 >= 0x80 && $byte3 <= 0xBF &&
                     $byte4 >= 0x80 && $byte4 <= 0xBF) {
-                    $codepoint = (($byte1 & 0x07) << 18) + (($byte2 & 0x3F) << 12) + (($byte3 & 0x3F) << 6) + ($byte4 & 0x3F);
+                    $codepoint = (($byte1 & 0x07) << 18) +
+                                 (($byte2 & 0x3F) << 12) +
+                                 (($byte3 & 0x3F) << 6) +
+                                 ($byte4 & 0x3F);
                     //  Non-characters                                    Reserved range
                     if ($codepoint == 0x1FFFE || $codepoint == 0x1FFFF || $codepoint >= 0x2FFFE) {
                         $res = null;
@@ -148,7 +151,10 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
                 if ($byte2 >= 0x80 && $byte2 <= 0xBF &&
                     $byte3 >= 0x80 && $byte3 <= 0xBF &&
                     $byte4 >= 0x80 && $byte4 <= 0xBF) {
-                    $codepoint = (($byte1 & 0x07) << 18) + (($byte2 & 0x3F) << 12) + (($byte3 & 0x3F) << 6) + ($byte4 & 0x3F);
+                    $codepoint = (($byte1 & 0x07) << 18) +
+                                 (($byte2 & 0x3F) << 12) +
+                                 (($byte3 & 0x3F) << 6) +
+                                 ($byte4 & 0x3F);
                     //  Reserved range           Non characters & private ranges
                     if ($codepoint < 0xE0000 || $codepoint >= 0xEFFFE) {
                         $res = null;
