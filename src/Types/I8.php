@@ -27,4 +27,23 @@ class I8 extends \fpoirotte\XRL\Types\AbstractInteger
 
     /// Integer size in bits.
     const INTEGER_BITS  = 64;
+
+    /// \copydoc fpoirotte::XRL::Types::AbstractType::set()
+    public function set($value)
+    {
+        try {
+            // Try to use PHP's integer type to hold the value.
+            // This will only work on 64-bit versions of PHP.
+            parent::set($value);
+        } catch (\InvalidArgumentException $e) {
+            // Try to use a GMP resource/object instead,
+            // but make sure the value does not overflow/underflow.
+            $value  = new \fpoirotte\XRL\Types\BigInteger($value);
+            $gmp    = $value->get();
+            if (gmp_cmp($gmp, "-9223372036854775808") < 0 || gmp_cmp($gmp, "9223372036854775807") > 0) {
+                throw $e;
+            }
+            $this->value = $value;
+        }
+    }
 }
