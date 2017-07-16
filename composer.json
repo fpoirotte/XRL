@@ -23,7 +23,6 @@
         "ext-XMLWriter": "*",
         "ext-libxml": "*",
         "ext-gmp": "*",
-        "ext-pcre": "*",
         "ext-SPL": "*",
         "ext-Reflection": "*"
     },

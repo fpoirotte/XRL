@@ -35,33 +35,174 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
     }
 
     /**
-     * Can be used to determine if a string contains a sequence
-     * of valid UTF-8 encoded codepoints.
+     * Determine if a string contains a valid sequence of UTF-8 encoded
+     * Unicode codepoints.
      *
      * \param string $text
-     *      Some text to test for UTF-8 correctness.
+     *      Some text to test for UTF-8 validity.
      *
      * \retval bool
-     *      \c true if the $text contains a valid UTF-8 sequence,
-     *      \c false otherwise.
+     *      \c true if the $text contains a valid UTF-8 sequence
+     *      which does not make use of non-characters/reserved characters,
+     *      \c null if it contains a valid UTF-8 containing
+     *      non-characters/reserved characters, or \c false otherwise.
      */
     protected static function isUTF8($text)
     {
-        // From http://w3.org/International/questions/qa-forms-utf-8.html
-        // Pointed out by bitseeker on http://php.net/utf8_encode
-        return (bool) preg_match(
-            '%^(?:
-                  [\x09\x0A\x0D\x20-\x7E]            # ASCII
-                | [\xC2-\xDF][\x80-\xBF]             # non-overlong 2-byte
-                |  \xE0[\xA0-\xBF][\x80-\xBF]        # excluding overlongs
-                | [\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}  # straight 3-byte
-                |  \xED[\x80-\x9F][\x80-\xBF]        # excluding surrogates
-                |  \xF0[\x90-\xBF][\x80-\xBF]{2}     # planes 1-3
-                | [\xF1-\xF3][\x80-\xBF]{3}          # planes 4-15
-                |  \xF4[\x80-\x8F][\x80-\xBF]{2}     # plane 16
-            )*$%SDxs',
-            $text
-        );
+        /*
+            Based on http://w3.org/International/questions/qa-forms-utf-8.html,
+            but rewritten to avoid a dependency on PCRE.
+
+            Also, the regular expression in the post above seems to limit 
+            valid inputs to printable characters (for compatibility reasons?).
+            See also section 2.2 of http://www.w3.org/TR/xml11 and section 2.2
+            of http://www.w3.org/TR/xml/ for a possible explanation.
+
+            The code below does not suffer from such limitations.
+        */
+        $len = strlen($text);
+        $res = true;
+        for ($i = 0; $i < $len; $i++) {
+            // U+0000 - U+007F
+            $byte1 = ord($text[$i]);
+            if ($byte1 >= 0 && $byte1 <= 0x7F) {
+                continue;
+            }
+
+            // Look for 2nd byte
+            if (++$i >= $len) {
+                return false;
+            }
+            $byte2 = ord($text[$i]);
+
+            // U+0080 - U-07FF
+            if ($byte1 >= 0xC2 && $byte1 <= 0xDF) {
+                if ($byte2 >= 0x80 && $byte2 <= 0xBF) {
+                    continue;
+                }
+                return false;
+            }
+
+            // Look for 3nd byte
+            if (++$i >= $len) {
+                return false;
+            }
+            $byte3 = ord($text[$i]);
+
+            // U+0800 - U+0FFF
+            if ($byte1 == 0xE0) {
+                if ($byte2 >= 0xA0 && $byte2 <= 0xBF &&
+                    $byte3 >= 0x80 && $byte3 <= 0xBF) {
+                    continue;
+                }
+                return false;
+            }
+
+            // U+1000 - U+CFFF & U+E000 - U+FFFF
+            if ($byte1 >= 0xE1 && $byte1 <= 0xEF && $byte1 !== 0xED) {
+                if ($byte2 >= 0x80 && $byte2 <= 0xBF &&
+                    $byte3 >= 0x80 && $byte3 <= 0xBF) {
+                    $codepoint = (($byte1 & 0x0F) << 12) + (($byte2 & 0x3F) << 6) + ($byte3 & 0x3F);
+                    if (($codepoint >= 0xE000 && $codepoint <= 0xF8FF) ||   // Private range
+                        ($codepoint >= 0xFDD0 && $codepoint <= 0xFDEF) ||   // Non-characters
+                        $codepoint == 0xFFFE || $codepoint == 0xFFFF) {     // Non-characters
+                        $res = null;
+                    }
+                    continue;
+                }
+                return false;
+            }
+
+            // U+D000 - U+D7FF
+            if ($byte1 == 0xED) {
+                if ($byte2 >= 0x80 && $byte2 <= 0x9F &&
+                    $byte3 >= 0x80 && $byte3 <= 0xBF) {
+                    continue;
+                }
+                return false;
+            }
+
+            // Look for 4nd byte
+            if (++$i >= $len) {
+                return false;
+            }
+            $byte4 = ord($text[$i]);
+
+            // U+10000 - U+3FFFF
+            if ($byte1 == 0xF0) {
+                if ($byte2 >= 0x90 && $byte2 <= 0xBF &&
+                    $byte3 >= 0x80 && $byte3 <= 0xBF &&
+                    $byte4 >= 0x80 && $byte4 <= 0xBF) {
+                    $codepoint = (($byte1 & 0x07) << 18) + (($byte2 & 0x3F) << 12) + (($byte3 & 0x3F) << 6) + ($byte4 & 0x3F);
+                    //  Non-characters                                    Reserved range
+                    if ($codepoint == 0x1FFFE || $codepoint == 0x1FFFF || $codepoint >= 0x2FFFE) {
+                        $res = null;
+                    }
+                    continue;
+                }
+                return false;
+            }
+
+            // U+40000 - U+FFFFF
+            if ($byte1 >= 0xF1 && $byte1 <= 0xF3) {
+                if ($byte2 >= 0x80 && $byte2 <= 0xBF &&
+                    $byte3 >= 0x80 && $byte3 <= 0xBF &&
+                    $byte4 >= 0x80 && $byte4 <= 0xBF) {
+                    $codepoint = (($byte1 & 0x07) << 18) + (($byte2 & 0x3F) << 12) + (($byte3 & 0x3F) << 6) + ($byte4 & 0x3F);
+                    //  Reserved range           Non characters & private ranges
+                    if ($codepoint < 0xE0000 || $codepoint >= 0xEFFFE) {
+                        $res = null;
+                    }
+                    continue;
+                }
+                return false;
+            }
+
+            // U+100000 - U+10FFFF
+            if ($byte1 == 0xF4) {
+                if ($byte2 >= 0x80 && $byte2 <= 0x8F &&
+                    $byte3 >= 0x80 && $byte3 <= 0xBF &&
+                    $byte4 >= 0x80 && $byte4 <= 0xBF) {
+                    // This part contains only non-characters & private ranges.
+                    $res = null;
+                    continue;
+                }
+                return false;
+            }
+
+            // Byte #1 contained an invalid value.
+            return false;
+        }
+
+        // No decoding error detected, but the given input may contain
+        // non-characters/reserved characters, depending on the value of $res.
+        return $res;
+    }
+
+    protected static function isBinaryString($text)
+    {
+        if (!static::isUTF8($text)) {
+            return true;
+        }
+
+        // Based on XML 1.1, section 2.2 (compatibility characters).
+        // We're a bit more lax as long as the whole string forms
+        // a valid UTF-8 codepoints sequence.
+        $restrictedChars =
+            "\x00\x01\x02\x03\x04\x05\x06\x07\x08" .
+            "\x0B\x0C" .
+            "\x0E\x0F\x10" .
+            "\x11\x12\x13\x14\15\x16\x17\x18\x19\x1A\x1B\x1C\x1D\x1E\x1F" .
+            "\x7F";
+
+        // If the text contains restricted characters,
+        // encode it as a binary string.
+        if (strcspn($text, $restrictedChars) !== strlen($text)) {
+            return true;
+        }
+
+        // Otherwise, it is probably safe to encode the string "as is".
+        return false;
     }
 
     /**
@@ -130,11 +271,11 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
                 return new \fpoirotte\XRL\Types\Double($value);
 
             case 'string':
-                // Encode as a regular string if possible.
-                if (static::isUTF8($value)) {
-                    return new \fpoirotte\XRL\Types\StringType($value);
+                // We try to encode it as a regular string if possible.
+                if (static::isBinaryString($value)) {
+                    return new \fpoirotte\XRL\Types\Base64($value);
                 }
-                return new \fpoirotte\XRL\Types\Base64($value);
+                return new \fpoirotte\XRL\Types\StringType($value);
 
             case 'array':
                 $newValue = array_map("static::convert", $value);
@@ -196,11 +337,11 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
             method_exists($value, '__sleep'))) {
             $value = serialize($value);
 
-            // Encode as a regular string if possible.
-            if (static::isUTF8($value)) {
-                return new \fpoirotte\XRL\Types\StringType($value);
+            // We try to encode it as a regular string if possible.
+            if (static::isBinaryString($value)) {
+                return new \fpoirotte\XRL\Types\Base64($value);
             }
-            return new \fpoirotte\XRL\Types\Base64($value);
+            return new \fpoirotte\XRL\Types\StringType($value);
         }
 
         throw new \InvalidArgumentException('Unconvertible type');

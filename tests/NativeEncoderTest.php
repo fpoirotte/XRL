@@ -125,7 +125,6 @@ class NativeEncoder extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider    nativeTypes
      * @covers          \fpoirotte\XRL\NativeEncoder::__construct
-     * @covers          \fpoirotte\XRL\NativeEncoder::isUTF8
      * @covers          \fpoirotte\XRL\NativeEncoder::convert
      * @covers          \fpoirotte\XRL\NativeEncoder::encodeResponse
      */
@@ -142,7 +141,6 @@ class NativeEncoder extends \PHPUnit\Framework\TestCase
 
     /**
      * @covers          \fpoirotte\XRL\NativeEncoder::__construct
-     * @covers          \fpoirotte\XRL\NativeEncoder::isUTF8
      * @covers          \fpoirotte\XRL\NativeEncoder::convert
      * @covers          \fpoirotte\XRL\NativeEncoder::encodeResponse
      */
