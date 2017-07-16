@@ -479,12 +479,17 @@ class CLI
             return 0;
         }
 
+        $headers    = array(
+            'Content-Type: text/xml',
+            'User-Agent: XRL/' . static::getVersion(),
+        );
+
         // Prepare the context.
         $ctxOptions = array(
             'http' => array(
                 'method'    => 'POST',
                 'content'   => $xml,
-                'header'    => 'Content-Type: text/xml',
+                'header'    => $headers,
             ),
         );
         $context = stream_context_create($ctxOptions);
