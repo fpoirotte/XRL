@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "910691235b76d9976f929e4cf6510b96",
+    "content-hash": "185f13769a59b12d5e27acd3ae894a58",
     "packages": [],
     "packages-dev": [
         {
@@ -2565,12 +2565,13 @@
         "ext-xmlreader": "*",
         "ext-xmlwriter": "*",
         "ext-libxml": "*",
-        "ext-gmp": "*",
+        "ext-simplexml": "*",
         "ext-spl": "*",
         "ext-reflection": "*"
     },
     "platform-dev": {
         "ext-dom": "*",
+        "ext-gmp": "*",
         "ext-simplexml": "*"
     }
 }
