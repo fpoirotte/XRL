@@ -83,16 +83,23 @@ The following table shows how XRL converts PHP types to XML-RPC types.
             namespaced ``i8`` [1]_ if it fits into 64 bits,
             namespaced ``biginteger`` [1]_ otherwise
 
-    *   -   ``\fpoirotte\XRL\Types\AbstractType`` object
-        -   XML-RPC type it represents
-
     *   -   ``\GMP`` object (PHP >= 5.6.0)
         -   ``i4`` if it fits into 32 bits,
             namespaced ``i8`` [1]_ if it fits into 64 bits,
             namespaced ``biginteger`` [1]_ otherwise
 
+    *   -   ``\fpoirotte\XRL\Types\AbstractType`` object
+        -   XML-RPC type it represents
+
     *   -   ``\DateTime`` object
-        -   ``dateTime.iso8601`` (using local timezone information by default)
+        -   ``dateTime.iso8601``
+            ..  note::
+
+                The XML-RPC ``dateTime.iso8601`` data type does not support
+                milliseconds, nor passing timezone information.
+                Only use this type when the actual timezone is known beforehand
+                (using contextual information or a pre-established convention),
+                or when potential errors in date/time handling are not an issue.
 
     *   -   ``\DOMNode`` object
         -   namespaced ``dom`` [1]_
@@ -157,22 +164,39 @@ The following table shows how XRL converts XML-RPC types to PHP types.
         -   ``integer``
 
     *   -   ``i8``
-        -   ``GMP integer`` resource (PHP < 5.6.0)
-            or ``\GMP`` object (PHP >= 5.6.0)
+        -   ``integer`` on 64-bit PHP, a ``GMP integer`` resource
+            (on PHP < 5.6.0) or a ``\GMP`` object (on PHP >= 5.6.0)
+            ..  note::
+
+                An exception will be thrown in this case if PHP's native
+                ``integer`` type cannot be used and the GMP extension
+                is not available.
 
     *   -   namespaced ``i8`` [1]_
-        -   ``GMP integer`` resource (PHP < 5.6.0)
-            or ``\GMP`` object (PHP >= 5.6.0)
+        -   ``integer`` on 64-bit PHP, either a ``GMP integer`` resource
+            (on PHP < 5.6.0) or a ``\GMP`` object (on PHP >= 5.6.0)
+            ..  note::
+
+                An exception will be thrown in this case if PHP's native
+                ``integer`` type cannot be used and the GMP extension
+                is not available.
+
+            otherwise (the GMP extension is required in this case)
 
     *   -   namespaced ``biginteger`` [1]_
         -   ``GMP integer`` resource (PHP < 5.6.0)
             or ``\GMP`` object (PHP >= 5.6.0)
+            ..  note::
+
+                An exception will be thrown in this case if the GMP extension
+                is not available.
 
     *   -   namespaced ``dom`` [1]_
         -   ``\SimpleXMLElement`` object
 
     *   -   namespaced ``datetime`` [1]_
-        -   ``\DateTime`` object
+        -   ``\DateTime`` object (using local timezone information by default,
+            but can be configured to use another timezone as well)
 
 
 ..  [1]
