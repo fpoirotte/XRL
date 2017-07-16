@@ -33,7 +33,7 @@ class ArrayType extends \fpoirotte\XRL\Types\AbstractCollection
     public function set($value)
     {
         if (!is_array($value)) {
-            throw new \InvalidArgumentException('Expected an array');
+            throw new \InvalidArgumentException('An indexed array was expected');
         }
 
         $keys       = array_keys($value);
@@ -49,12 +49,12 @@ class ArrayType extends \fpoirotte\XRL\Types\AbstractCollection
 
         // Detect associative arrays (which are invalid for this type).
         if ($keys !== $numeric) {
-            throw new \InvalidArgumentException('Expected an indexed array');
+            throw new \InvalidArgumentException('An indexed array was expected');
         }
 
         foreach ($value as $val) {
             if (!($val instanceof \fpoirotte\XRL\Types\AbstractType)) {
-                throw new \InvalidArgumentException('Expected a valid XML-RPC type');
+                throw new \InvalidArgumentException('A valid XML-RPC type was expected');
             }
         }
 
@@ -99,7 +99,7 @@ class ArrayType extends \fpoirotte\XRL\Types\AbstractCollection
             $this->value[] = $value;
             return;
         } elseif (!is_int($offset)) {
-            throw new \InvalidArgumentException('Expected integer offset');
+            throw new \InvalidArgumentException('An integer offset was expected');
         } elseif (!array_key_exists($offset, $this->value) && $offset !== count($this->value)) {
             throw new \InvalidArgumentException('Cannot set arbitrary offset in array');
         }

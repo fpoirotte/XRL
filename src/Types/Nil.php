@@ -23,7 +23,7 @@ class Nil extends \fpoirotte\XRL\Types\AbstractType
     public function set($value)
     {
         if ($value !== null) {
-            throw new \InvalidArgumentException('Expected null value');
+            throw new \InvalidArgumentException('A null value was expected');
         }
     }
 

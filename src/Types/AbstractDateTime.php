@@ -29,7 +29,7 @@ abstract class AbstractDateTime extends \fpoirotte\XRL\Types\AbstractType
     public function set($value)
     {
         if (!is_object($value) || !($value instanceof \DateTime)) {
-            throw new \InvalidArgumentException('Expected date-time value');
+            throw new \InvalidArgumentException('A date and time value was expected');
         }
         $this->value = $value;
     }

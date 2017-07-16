@@ -33,16 +33,16 @@ class Struct extends \fpoirotte\XRL\Types\AbstractCollection
     public function set($value)
     {
         if (!is_array($value)) {
-            throw new \InvalidArgumentException('Expected struct value');
+            throw new \InvalidArgumentException('A structure was expected');
         }
 
         foreach ($value as $key => $val) {
             if (!is_string($key) && !is_int($key)) {
-                throw new \InvalidArgumentException('Expected struct value');
+                throw new \InvalidArgumentException('A structure was expected');
             }
 
             if (!($val instanceof \fpoirotte\XRL\Types\AbstractType)) {
-                throw new \InvalidArgumentException('Expected a valid XML-RPC type');
+                throw new \InvalidArgumentException('A valid XML-RPC type was expected');
             }
         }
 
@@ -87,7 +87,7 @@ class Struct extends \fpoirotte\XRL\Types\AbstractCollection
     public function offsetSet($offset, $value)
     {
         if (!is_string($offset)) {
-            throw new \InvalidArgumentException('Expected string offset');
+            throw new \InvalidArgumentException('A string offset was expected');
         }
         $this->value[$offset] = $value;
     }

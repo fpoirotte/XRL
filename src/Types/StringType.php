@@ -23,7 +23,7 @@ class StringType extends \fpoirotte\XRL\Types\AbstractType
     public function set($value)
     {
         if (!is_string($value)) {
-            throw new \InvalidArgumentException('Expected string value');
+            throw new \InvalidArgumentException('A string value was expected');
         }
         $this->value = $value;
     }
