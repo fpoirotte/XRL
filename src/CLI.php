@@ -463,7 +463,7 @@ class CLI
         // Change verbosity as necessary.
         if (class_exists('\\Plop\\Plop')) {
             $logging = \Plop\Plop::getInstance();
-            $logging->getLogger()->setLevel(40 - max(4, $options['v']) * 10);
+            $logging->getLogger()->setLevel(40 - min(4, $options['v']) * 10);
         } else {
             $logging = null;
         }
