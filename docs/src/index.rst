@@ -9,7 +9,7 @@ the creation of XML-RPC clients or servers.
     ..  warning::
 
         This documentation was automatically built from the latest changes
-        on |this_commit|_.
+        in |this_commit|_.
         It does not necessarily reflect features from any current or
         upcoming release. Check out https://readthedocs.org/projects/xrl/
         for documentation on supported versions. 
