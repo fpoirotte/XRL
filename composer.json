@@ -30,7 +30,7 @@
         "ext-dom": "*",
         "ext-gmp": "*",
         "ext-SimpleXML": "*",
-        "erebot/buildenv": "^1.4.0",
+        "erebot/buildenv": "^1.5.0",
         "erebot/plop": "*",
         "fpoirotte/natives4doxygen": "*",
         "pdepend/pdepend": "*",
