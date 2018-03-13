@@ -53,7 +53,7 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
             Based on http://w3.org/International/questions/qa-forms-utf-8.html,
             but rewritten to avoid a dependency on PCRE.
 
-            Also, the regular expression in the post above seems to limit 
+            Also, the regular expression in the post above seems to limit
             valid inputs to printable characters (for compatibility reasons?).
             See also section 2.2 of http://www.w3.org/TR/xml11 and section 2.2
             of http://www.w3.org/TR/xml/ for a possible explanation.
