@@ -77,8 +77,8 @@ class Client
      *      converts values to native PHP types is automatically
      *      created using the machine's timezone.
      *
-     * \param resource $context
-     *      (optional) A PHP stream context to use
+     * \param array $options
+     *      (optional) Options to pass to the stream context
      *      when querying the remote XML-RPC server.
      *
      * \note
@@ -164,7 +164,8 @@ class Client
             ),
         );
 
-        $context = stream_context_create(array_merge_recursive($this->options, $options));
+        $options = array_merge_recursive($this->options, $options);
+        $context = stream_context_create($options);
         libxml_set_streams_context($context);
         return $this->decoder->decodeResponse($this->baseURL);
     }
