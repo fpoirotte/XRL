@@ -79,19 +79,6 @@ interface CallableInterface
     public function __invoke();
 
     /**
-     * Invokes the callable object represented by this
-     * instance, using the given array as a list of arguments.
-     *
-     * \param array $args
-     *      An array whose values will become the arguments
-     *      for the inner callable.
-     *
-     * \retval mixed
-     *      Value returned by the inner callable.
-     */
-    public function invokeArgs(array &$args);
-
-    /**
      * Alias for fpoirotte::XRL::CallableInterface::getRepresentation().
      *
      * \retval string

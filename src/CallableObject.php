@@ -28,9 +28,6 @@ class CallableObject implements \fpoirotte\XRL\CallableInterface
     /// Human representation of the inner callable.
     protected $representation;
 
-    /// Work-around for __invoke() with references in PHP 5.6.0+.
-    private static $patched;
-
     /**
      * Constructs a new callable object, abstracting
      * differences between the different constructs
@@ -52,22 +49,6 @@ class CallableObject implements \fpoirotte\XRL\CallableInterface
     {
         if (!is_callable($callable, false, $representation)) {
             throw new \InvalidArgumentException('Not a valid callable');
-        }
-
-        if (!self::$patched) {
-            self::$patched = true;
-            // @codeCoverageIgnoreStart
-            // Adds support for references to invoke() on PHP 5.6.0+.
-            if (version_compare(PHP_VERSION, '5.6.0', '>=') &&
-                function_exists('runkit_method_redefine')) {
-                runkit_method_redefine(
-                    __CLASS__,
-                    '__invoke',
-                    '&...$args',
-                    'return call_user_func_array($this->callableObj, $args);'
-                );
-            }
-            // @codeCoverageIgnoreEnd
         }
 
         // This happens for anonymous functions
@@ -92,20 +73,10 @@ class CallableObject implements \fpoirotte\XRL\CallableInterface
         return $this->representation;
     }
 
-    /// \copydoc fpoirotte::XRL::CallableInterface::invokeArgs()
-    public function invokeArgs(array &$args)
-    {
-        $newArgs = array();
-        foreach ($args as &$arg) {
-            $newArgs[] =& $arg;
-        }
-        return call_user_func_array($this->callableObj, $newArgs);
-    }
-
     /// \copydoc fpoirotte::XRL::CallableInterface::__invoke(...)
-    public function __invoke()
+    public function __invoke(&...$args)
     {
-        return call_user_func_array($this->callableObj, func_get_args());
+        return call_user_func_array($this->callableObj, $args);
     }
 
     /// \copydoc fpoirotte::XRL::CallableInterface::__toString()

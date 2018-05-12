@@ -393,6 +393,6 @@ class Server implements \Countable, \IteratorAggregate, \ArrayAccess
         }
 
         $callable = $this->XRLFunctions[$procedure];
-        return $callable->invokeArgs($params);
+        return $callable(...$params);
     }
 }
