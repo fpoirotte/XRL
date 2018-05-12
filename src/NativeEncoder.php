@@ -302,8 +302,7 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
             return $value;
         }
 
-        if ($value instanceof \GMP ||
-            (is_resource($value) && get_resource_type($value) === 'GMP integer')) {
+        if ($value instanceof \GMP) {
             $candidates = array(
                 '\\fpoirotte\\XRL\\Types\\I4',
                 '\\fpoirotte\\XRL\\Types\\I8',

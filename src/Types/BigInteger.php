@@ -43,9 +43,7 @@ class BigInteger extends \fpoirotte\XRL\Types\AbstractInteger
             throw new \RuntimeException("The GMP extension is required for this operation to work");
         }
 
-        // Versions before PHP 5.6 used resources to represent big numbers
-        // while new versions use objects instead.
-        if ((is_resource($value) && get_resource_type($value) === 'GMP integer') || ($value instanceof \GMP)) {
+        if (is_object($value) && $value instanceof \GMP) {
             // It is already a GMP integer.
         } else {
             $value = @gmp_init($value, 10);

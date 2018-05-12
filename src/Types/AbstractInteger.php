@@ -31,9 +31,7 @@ abstract class AbstractInteger extends \fpoirotte\XRL\Types\AbstractType
     {
         $size = static::INTEGER_BITS;
 
-        // Versions before PHP 5.6 used resources to represent big numbers
-        // while new versions use objects instead.
-        if ((is_resource($value) && get_resource_type($value) === 'GMP integer') || ($value instanceof \GMP)) {
+        if (is_object($value) && $value instanceof \GMP) {
             $value = gmp_strval($value, 10);
         }
 
