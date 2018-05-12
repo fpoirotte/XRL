@@ -39,7 +39,7 @@ class CLI
 
         // From a phar release.
         if (!strncmp('phar://', __FILE__, 7)) {
-            $phar = new \Phar(__FILE__);
+            $phar = new \Phar(dirname(__DIR__));
             $md = $phar->getMetadata();
             $version = $md['version'];
         } else {
