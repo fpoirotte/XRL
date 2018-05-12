@@ -18,19 +18,19 @@
         "source": "https://github.com/fpoirotte/XRL"
     },
     "require": {
-        "php": ">=5.3.4",
+        "php": ">=5.6",
         "ext-XMLReader": "*",
         "ext-XMLWriter": "*",
         "ext-libxml": "*",
-        "ext-gmp": "*",
-        "ext-pcre": "*",
+        "ext-SimpleXML": "*",
         "ext-SPL": "*",
         "ext-Reflection": "*"
     },
     "require-dev": {
         "ext-dom": "*",
+        "ext-gmp": "*",
         "ext-SimpleXML": "*",
-        "erebot/buildenv": "^1.4.0",
+        "erebot/buildenv": "^1.5.0",
         "erebot/plop": "*",
         "fpoirotte/natives4doxygen": "*",
         "pdepend/pdepend": "*",
@@ -41,6 +41,7 @@
     },
     "suggest": {
         "ext-openssl": "Access resources that require an encrypted (SSL/TLS) connection",
+        "ext-gmp": "Add support for the 'i8' (on 32-bit PHP) & 'bitinteger' types",
         "ext-SimpleXML": "Send/receive XML objects",
         "erebot/plop": "Log various events"
     },

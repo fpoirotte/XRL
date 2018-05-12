@@ -23,7 +23,7 @@ abstract class AbstractInteger extends \fpoirotte\XRL\Types\AbstractType
     /// \copydoc fpoirotte::XRL::Types::AbstractType::__toString()
     public function __toString()
     {
-        return gmp_strval($this->value);
+        return (string) $this->value;
     }
 
     /// \copydoc fpoirotte::XRL::Types::AbstractType::set()
@@ -31,28 +31,28 @@ abstract class AbstractInteger extends \fpoirotte\XRL\Types\AbstractType
     {
         $size = static::INTEGER_BITS;
 
-        // Versions before PHP 5.6 used resources to represent big numbers
-        // while new versions use objects instead.
-        if ((is_resource($value) && get_resource_type($value) === 'GMP integer') ||
-            ($value instanceof \GMP)) {
-            // It is already a GMP integer.
+        if (is_object($value) && $value instanceof \GMP) {
+            $value = gmp_strval($value, 10);
+        }
+
+        // If the value is a string, make sure it can be converted
+        // without triggering an overflow/underflow.
+        // This includes values obtained from GMP objects/resources too.
+        if (is_string($value) && $value === (string) (int) $value) {
+            $value = (int) $value;
+        }
+
+        // base_convert() already takes care of the one's complement
+        // for us when dealing with negative values.
+        if (is_int($value) && strlen(base_convert($value, 10, 2)) < $size) {
+            $this->value = $value;
         } else {
-            $value = @gmp_init($value, 10);
+            // Either the value used an incompatible type,
+            // was a string with an invalid value,
+            // or was a string or an integer whose value
+            // could not be held by the given integer size.
+            throw new \InvalidArgumentException("A $size-bit signed integer was expected");
         }
-        if ($value === false) {
-            throw new \InvalidArgumentException("Expected a signed $size-bits integer value");
-        }
-
-        // Check type bounds.
-        $binval = gmp_strval($value, 2);
-        if (!strncmp($binval, '-1', 2)) {
-            $binval = (string) substr($binval, 2);
-        }
-        if (strlen($binval) >= $size) {
-            throw new \InvalidArgumentException("Expected a signed $size-bits integer value");
-        }
-
-        $this->value = ($size <= 32) ? gmp_intval($value) : $value;
     }
 
     /// \copydoc fpoirotte::XRL::Types::AbstractType::write()
@@ -61,8 +61,8 @@ abstract class AbstractInteger extends \fpoirotte\XRL\Types\AbstractType
         if (strpos(static::XMLRPC_TYPE, '}') !== false) {
             list($ns, $tagName) = explode('}', static::XMLRPC_TYPE, 2);
             $ns = (string) substr($ns, 1);
-            return $writer->writeElementNS('ex', $tagName, $ns, gmp_strval($this->value));
+            return $writer->writeElementNS('ex', $tagName, $ns, (string) $this);
         }
-        return $writer->writeElement(static::XMLRPC_TYPE, gmp_strval($this->value));
+        return $writer->writeElement(static::XMLRPC_TYPE, (string) $this);
     }
 }

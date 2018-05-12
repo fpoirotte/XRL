@@ -52,7 +52,7 @@ class CallableObject extends \PHPUnit\Framework\TestCase
         }
 
         $instance   = new InstanceByRef();
-        $lambda     = create_function('&$s', '$s = \strtoupper($s);');
+        $lambda     = @create_function('&$s', '$s = \strtoupper($s);');
 
         return array(
             // Function
@@ -95,7 +95,7 @@ class CallableObject extends \PHPUnit\Framework\TestCase
     public function valueProvider()
     {
         $instance   = new InstanceByValue();
-        $lambda     = create_function('$s', 'return strtoupper($s);');
+        $lambda     = @create_function('&$s', 'return \strtoupper($s);');
 
         return array(
             // Function
@@ -103,7 +103,6 @@ class CallableObject extends \PHPUnit\Framework\TestCase
                 'fpoirotte\XRL\tests\strtoupper',
                 __NAMESPACE__ . '\\strtoupper',
                 false,
-                '\\ReflectionFunction',
             ),
 
             // Invokable object
@@ -111,7 +110,6 @@ class CallableObject extends \PHPUnit\Framework\TestCase
                 $instance,
                 __NAMESPACE__ . '\\InstanceByValue::__invoke',
                 false,
-                '\\ReflectionMethod',
             ),
 
             // Object method
@@ -119,7 +117,6 @@ class CallableObject extends \PHPUnit\Framework\TestCase
                 array($instance, '__invoke'),
                 __NAMESPACE__ . '\\InstanceByValue::__invoke',
                 false,
-                '\\ReflectionMethod',
             ),
 
             // Lambda function (anonymous function)
@@ -127,7 +124,6 @@ class CallableObject extends \PHPUnit\Framework\TestCase
                 $lambda,
                 $lambda,
                 false,
-                '\\ReflectionFunction',
             ),
 
             // Closure
@@ -135,7 +131,6 @@ class CallableObject extends \PHPUnit\Framework\TestCase
                 function ($s) { return strtoupper($s); },
                 'Closure::__invoke',
                 false,
-                '\\ReflectionMethod',
             ),
         );
     }
@@ -183,24 +178,15 @@ class CallableObject extends \PHPUnit\Framework\TestCase
         } else {
             $this->assertSame('ABC', $obj->__invoke($value));
         }
-
-        // invokeArgs
-        $values = array('abc');
-        if ($isRef) {
-            $obj->invokeArgs($values);
-            $this->assertSame('ABC', $values[0]);
-        } else {
-            $this->assertSame('ABC', $obj->invokeArgs($values));
-        }
     }
 
     /**
      * @dataProvider    valueProvider
      * @covers          \fpoirotte\XRL\CallableObject::getReflector
      */
-    public function testGetReflector($callable, $repr, $isRef, $cls)
+    public function testGetReflector($callable, $repr, $isRef)
     {
         $obj = new \fpoirotte\XRL\CallableObject($callable);
-        $this->assertInstanceOf($cls, $obj->getReflector());
+        $this->assertInstanceOf("\\ReflectionFunctionAbstract", $obj->getReflector());
     }
 }

@@ -168,7 +168,7 @@ class CLI
      *      date/time.
      *
      * \note
-     *      See http://php.net/datetime.formats.compound.php
+     *      See http://php.net/datetime.formats.compound
      *      for a list of compound formats PHP supports.
      */
     protected function parseTimestamp($value)
@@ -463,7 +463,7 @@ class CLI
         // Change verbosity as necessary.
         if (class_exists('\\Plop\\Plop')) {
             $logging = \Plop\Plop::getInstance();
-            $logging->getLogger()->setLevel(40 - max(4, $options['v']) * 10);
+            $logging->getLogger()->setLevel(40 - min(4, $options['v']) * 10);
         } else {
             $logging = null;
         }
@@ -479,12 +479,17 @@ class CLI
             return 0;
         }
 
+        $headers    = array(
+            'Content-Type: text/xml',
+            'User-Agent: XRL/' . static::getVersion(),
+        );
+
         // Prepare the context.
         $ctxOptions = array(
             'http' => array(
                 'method'    => 'POST',
                 'content'   => $xml,
-                'header'    => 'Content-Type: text/xml',
+                'header'    => $headers,
             ),
         );
         $context = stream_context_create($ctxOptions);

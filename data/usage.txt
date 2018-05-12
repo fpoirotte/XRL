@@ -19,7 +19,7 @@ bool      The next argument is a boolean.
 datetime  The next argument is a date with time information,
           using one of PHP's compound formats.
           Eg. "@1215282385" for a UNIX timestamp.
-          See also http://php.net/datetime.formats.compound.php
+          See also http://php.net/datetime.formats.compound
 file      Same as "string" but the next argument is a filename
           whose content should be used (useful for binary data).
 float     The next argument is a floating-point number.
@@ -28,7 +28,7 @@ hash      Read all arguments until a matching "endhash" is found,
           Nested constructs are supported.
           Eg. "hash int 42 hash int 23 float 3.14 endhash endhash"
               = array(42 => array(23 => 3.14))
-int       The next argument is a 32 bits signed integer.
+int       The next argument is a 32-bit signed integer.
 list      Read all arguments until a matching "endlist" is found,
           then build a list from the types & values in between.
           Nested constructs are supported.
