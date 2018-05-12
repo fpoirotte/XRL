@@ -10,20 +10,19 @@
  * file that was distributed with this source code.
  */
 
-if (version_compare(phpversion(), '5.3.4', '<')) {
-    echo "XRL requires PHP 5.3.4 or newer." . PHP_EOL;
+if (version_compare(phpversion(), '5.6.0', '<')) {
+    echo "XRL requires PHP 5.6.0 or newer." . PHP_EOL;
     exit -1;
 }
 
 $extensions = array(
     'phar',
-    'spl',
     'xmlreader',
     'xmlwriter',
     'libxml',
     'simplexml',
-    'gmp',
-    'pcre',
+    'spl',
+    'reflection',
 );
 
 foreach ($extensions as $ext) {
