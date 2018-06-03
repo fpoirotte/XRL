@@ -12,7 +12,7 @@ the creation of XML-RPC clients or servers.
         in |this_commit|_.
         It does not necessarily reflect features from any current or
         upcoming release. Check out https://readthedocs.org/projects/xrl/
-        for documentation on supported versions. 
+        for documentation on supported versions.
 
 Overview
 --------
