@@ -9,7 +9,7 @@
 A simple XML-RPC client and server written in PHP
 =================================================
 
-|travis-ci| |coveralls| |hhvm| |readthedocs|
+|travis-ci| |readthedocs|
 
 Features
 --------
@@ -184,14 +184,6 @@ both copyright information, licensing information and contributor credits:
 ..  |travis-ci| image:: https://api.travis-ci.org/fpoirotte/XRL.png
     :alt: unknown
     :target: http://travis-ci.org/fpoirotte/XRL
-
-..  |coveralls| image:: https://coveralls.io/repos/fpoirotte/XRL/badge.svg?branch=develop&service=github
-    :alt: unknown
-    :target: https://coveralls.io/github/fpoirotte/XRL?branch=develop
-
-..  |hhvm| image:: http://hhvm.h4cc.de/badge/fpoirotte/xrl.png
-    :alt: unknown
-    :target: http://hhvm.h4cc.de/package/fpoirotte/xrl
 
 ..  |readthedocs| image:: https://readthedocs.org/projects/xrl/badge/?version=latest
     :alt: unknown
