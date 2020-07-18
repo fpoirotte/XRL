@@ -38,26 +38,25 @@ foreach ($extensions as $ext) {
     DIRECTORY_SEPARATOR . 'autoload.php'
 );
 
-if (!strncasecmp(substr(__FILE__, -5), '.phar', 5)) {
-    try {
-        Phar::mapPhar();
-    } catch (Exception $e) {
-        echo "Cannot process XRL phar:" . PHP_EOL;
-        echo $e->getMessage() . PHP_EOL;
-        exit -1;
-    }
+$error = new \RuntimeException();
+try {
+    Phar::mapPhar();
     $base = 'phar://' . __FILE__;
-} else {
+} catch (\Exception $error) {
     $base = dirname(__DIR__);
 }
 
+$autoload = $base .
+            DIRECTORY_SEPARATOR . 'src' .
+            DIRECTORY_SEPARATOR . 'Autoload.php';
 if (!class_exists('\\fpoirotte\\XRL\\Autoload')) {
-    require_once(
-        $base .
-        DIRECTORY_SEPARATOR . 'src' .
-        DIRECTORY_SEPARATOR . 'Autoload.php'
-    );
-    \fpoirotte\XRL\Autoload::register();
+    if (file_exists($autoload)) {
+        require_once($autoload);
+        \fpoirotte\XRL\Autoload::register();
+    } else {
+        echo "Cannot process the archive: " . $error->getMessage() . PHP_EOL;
+        exit -1;
+    }
 }
 
 $cli = new \fpoirotte\XRL\CLI();
