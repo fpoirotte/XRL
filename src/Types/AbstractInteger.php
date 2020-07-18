@@ -37,14 +37,15 @@ abstract class AbstractInteger extends \fpoirotte\XRL\Types\AbstractType
 
         // If the value is a string, make sure it can be converted
         // without triggering an overflow/underflow.
-        // This includes values obtained from GMP objects/resources too.
+        // This includes values obtained from GMP objects too (see above).
         if (is_string($value) && $value === (string) (int) $value) {
             $value = (int) $value;
         }
 
-        // base_convert() already takes care of the one's complement
-        // for us when dealing with negative values.
-        if (is_int($value) && strlen(base_convert($value, 10, 2)) < $size) {
+        // Detect integer overflows/underflows.
+        if (is_int($value) && (
+            ($value < 0 && strlen(base_convert(-$value, 10, 2)) < $size) ||
+            ($value >= 0 && strlen(base_convert($value, 10, 2)) < ($size - 1)))) {
             $this->value = $value;
         } else {
             // Either the value used an incompatible type,
