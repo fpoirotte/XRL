@@ -13,7 +13,7 @@ namespace fpoirotte\XRL\tests;
 
 class Autoload extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         \fpoirotte\XRL\Autoload::register();
     }

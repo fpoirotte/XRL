@@ -16,7 +16,7 @@ class Server extends \PHPUnit\Framework\TestCase
     protected $server;
     protected $cls;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->server   = new \fpoirotte\XRL\Server();
         $this->cls      = '\\fpoirotte\\XRL\\tests\\stub\\TestServer';

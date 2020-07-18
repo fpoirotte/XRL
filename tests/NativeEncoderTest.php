@@ -51,7 +51,7 @@ class NonSerialClass
 
 class NativeEncoder extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->encoder = $this->getMockBuilder('\\fpoirotte\\XRL\\EncoderInterface')->getMock();
     }

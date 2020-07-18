@@ -15,12 +15,12 @@ class Output extends \PHPUnit\Framework\TestCase
 {
     protected $stream;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->stream = fopen('php://temp', 'w+');
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         fclose($this->stream);
     }

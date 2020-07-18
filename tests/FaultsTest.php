@@ -13,7 +13,7 @@ namespace fpoirotte\XRL\tests;
 
 class Faults extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->server       = new \fpoirotte\XRL\Server();
         $this->server->foo  = function ($s) { return $s; };

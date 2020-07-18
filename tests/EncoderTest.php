@@ -15,7 +15,7 @@ class Encoder extends \PHPUnit\Framework\TestCase
 {
     protected $encoder;
 
-    public function setUp()
+    public function setUp(): void
     {
         // Emulate a server located in Ireland that uses
         // indentation and the <string> tag.

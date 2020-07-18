@@ -16,7 +16,7 @@ class Node extends \PHPUnit\Framework\TestCase
     protected $reader;
     protected $data;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->reader = new \XMLReader();
         $this->data   = 'data://;base64,' .
@@ -28,7 +28,7 @@ class Node extends \PHPUnit\Framework\TestCase
         $this->reader->open($this->data, null, LIBXML_NONET | LIBXML_NOENT);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->reader->close();
     }

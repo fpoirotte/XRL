@@ -13,7 +13,7 @@ namespace fpoirotte\XRL\tests;
 
 class NativeDecoder extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->decoder = $this->getMockBuilder('\\fpoirotte\\XRL\\DecoderInterface')->getMock();
     }

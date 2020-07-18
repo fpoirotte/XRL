@@ -75,7 +75,7 @@ class CapableServer extends \PHPUnit\Framework\TestCase
     protected $capableServer;
     protected $callableObject;
 
-    public function setUp()
+    public function setUp(): void
     {
         $capableServer = null;
         $this->server = $this->getMockBuilder('\\fpoirotte\\XRL\\Server')->getMock();

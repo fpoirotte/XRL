@@ -13,7 +13,7 @@ namespace fpoirotte\XRL\tests;
 
 class Client extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->encoder = $this->getMockBuilder('\\fpoirotte\\XRL\\EncoderInterface')->getMock();
         $this->decoder = $this->getMockBuilder('\\fpoirotte\\XRL\\DecoderInterface')->getMock();
