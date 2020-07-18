@@ -247,7 +247,7 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
      *          -   "struct" is used for all other arrays, aka "hashes".
      *      -   DateTime objects (encoded using the "dateTime.iso8601"
      *          XML-RPC type).
-     *      -   GMP objects/resources (encoded as "i4", "i8" or "BigInteger",
+     *      -   GMP objects (encoded as "i4", "i8" or "BigInteger",
      *          depending on their actual storage size).
      *      -   XML objects (SimpleXML, DOM and XMLWriter objects)
      *          are encoded as XML DOM fragments.
@@ -291,8 +291,10 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
                 }
                 return new \fpoirotte\XRL\Types\Struct($newValue);
 
-            case 'object':
             case 'resource':
+                throw new \InvalidArgument('Cannot encode PHP resource as XML-RPC type');
+
+            case 'object':
                 // A special treatment is applied afterwards.
                 break;
         }
@@ -349,7 +351,7 @@ class NativeEncoder implements \fpoirotte\XRL\EncoderInterface
             return new \fpoirotte\XRL\Types\StringType($value);
         }
 
-        throw new \InvalidArgumentException('Unconvertible type');
+        throw new \InvalidArgumentException('Cannot convert the given object to an XML-RPC type');
     }
 
     /// \copydoc fpoirotte::XRL::EncoderInterface::encodeRequest()
