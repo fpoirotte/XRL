@@ -80,8 +80,8 @@ class NativeEncoder extends \PHPUnit\Framework\TestCase
                 array(23 => 42, 'foo' => 'bar'),
                 '\\fpoirotte\\XRL\\Types\\Struct'
             ),
-            array(gmp_init('42'), '\\fpoirotte\\XRL\\Types\\I4'),
-            array(gmp_init('0x8FFFFFFFF'), '\\fpoirotte\\XRL\\Types\\I8'),
+            array(\gmp_init('42'), '\\fpoirotte\\XRL\\Types\\I4'),
+            array(\gmp_init('0x8FFFFFFFF'), '\\fpoirotte\\XRL\\Types\\I8'),
             array(
                 gmp_init('0x8FFFFFFFFFFFFFFFF'),
                 '\\fpoirotte\\XRL\\Types\\BigInteger'

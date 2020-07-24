@@ -43,9 +43,7 @@ abstract class AbstractInteger extends \fpoirotte\XRL\Types\AbstractType
         }
 
         // Detect integer overflows/underflows.
-        if (is_int($value) && (
-            ($value < 0 && strlen(base_convert(-$value, 10, 2)) < $size) ||
-            ($value >= 0 && strlen(base_convert($value, 10, 2)) < ($size - 1)))) {
+        if (is_int($value) && strlen(base_convert($value < 0 ? -$value : $value, 10, 2)) < $size) {
             $this->value = $value;
         } else {
             // Either the value used an incompatible type,
